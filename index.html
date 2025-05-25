@@ -42,16 +42,23 @@
       color: #ffcc00;
     }
     .hero {
-      background-image: url('https://images.unsplash.com/photo-1581090700227-1e8e19b8500c');
+      background-image: url('http://imgfz.com/i/fJqcdiy.jpeg');
       background-size: cover;
       background-position: center;
       padding: 100px 20px;
       text-align: center;
       color: white;
+      position: relative;
     }
-    .hero h2 {
-      font-size: 2rem;
-      margin-bottom: 10px;
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.4);
+    }
+    .hero h2, .hero p {
+      position: relative;
+      z-index: 1;
     }
     .container {
       max-width: 1100px;
@@ -83,6 +90,13 @@
     .product img {
       width: 100%;
       border-radius: 8px;
+    }
+    .nosotros-img {
+      width: 100%;
+      max-width: 700px;
+      border-radius: 12px;
+      margin-top: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
     }
     footer {
       background-color: #001f4d;
@@ -117,6 +131,7 @@
     <section id="nosotros" class="section">
       <h2>¿Quiénes somos?</h2>
       <p>Somos una empresa de confianza en Sullana, especializada en productos de ferretería y electrónica. Nos comprometemos a brindar atención personalizada y productos de alta calidad a precios justos.</p>
+      <img src="http://imgfz.com/i/fJqcdiy.jpeg" alt="Ferretería HJ" class="nosotros-img" />
     </section>
 
     <section id="productos" class="section">

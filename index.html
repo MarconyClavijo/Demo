@@ -85,6 +85,24 @@
       font-size: 0.9rem;
     }
 
+    .play-btn {
+      background-color: #000;
+      color: #fff;
+      padding: 0.8rem 1.5rem;
+      border: none;
+      border-radius: 30px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 1rem;
+      transition: 0.3s ease;
+    }
+
+    .play-btn:hover {
+      background-color: #fff;
+      color: #000;
+    }
+
     /* Animaciones */
     @keyframes zoomIn {
       0% {
@@ -118,9 +136,10 @@
 
   <div class="player-container">
     <h2>🔊 Escúchanos en vivo</h2>
-    <audio controls>
-  <source src="https://uk25freenew.listen2myradio.com/live.mp3?typeportmount=s1_9112_stream_441899683" type="audio/mpeg">
-  Tu navegador no soporta el reproductor de audio.
+    <button class="play-btn" id="playBtn">▶ Escuchar radio</button>
+    <audio id="radioPlayer" style="display: none;">
+      <source src="https://uk25freenew.listen2myradio.com/live.mp3?typeportmount=s1_9112_stream_441899683" type="audio/mpeg">
+      Tu navegador no soporta el reproductor de audio.
     </audio>
   </div>
 
@@ -133,6 +152,17 @@
   <footer>
     © 2025 Radio Heat Online - Todos los derechos reservados
   </footer>
+
+  <script>
+    const playBtn = document.getElementById('playBtn');
+    const radioPlayer = document.getElementById('radioPlayer');
+
+    playBtn.addEventListener('click', () => {
+      radioPlayer.style.display = 'block';
+      radioPlayer.play();
+      playBtn.style.display = 'none';
+    });
+  </script>
 
 </body>
 </html>

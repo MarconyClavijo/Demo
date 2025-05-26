@@ -48,10 +48,9 @@
       margin: 2rem auto;
     }
 
-    iframe {
+    audio {
       width: 90%;
       max-width: 400px;
-      height: 150px;
       border: 3px solid #fff;
       border-radius: 10px;
     }
@@ -119,8 +118,10 @@
 
   <div class="player-container">
     <h2>🔊 Escúchanos en vivo</h2>
-    <!-- Reproductor embebido de Listen2MyRadio -->
-    <iframe src="https://radiolagigante.radiostream321.com/player.html" allow="autoplay" frameborder="0"></iframe>
+    <audio controls autoplay>
+      <source src="http://uk25freenew.listen2myradio.com:9112/stream" type="audio/mpeg">
+      Tu navegador no soporta el reproductor de audio.
+    </audio>
   </div>
 
   <div class="buttons">

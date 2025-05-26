@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>Radio Heat Online</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://hosted.muses.org/mrp.js"></script>
   <style>
     body {
       margin: 0;
@@ -19,8 +20,8 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 1rem;
       flex-wrap: wrap;
+      gap: 1rem;
     }
 
     .logo-container {
@@ -48,11 +49,10 @@
       margin: 2rem auto;
     }
 
-    audio {
-      width: 90%;
-      max-width: 400px;
-      border: 3px solid #fff;
-      border-radius: 10px;
+    #musesplayer {
+      width: 300px;
+      height: 150px;
+      margin: 0 auto;
     }
 
     .buttons {
@@ -118,10 +118,24 @@
 
   <div class="player-container">
     <h2>🔊 Escúchanos en vivo</h2>
-    <audio controls autoplay>
-      <source src="http://uk25freenew.listen2myradio.com/9112/stream" type="audio/mpeg">
-      Tu navegador no soporta el reproductor de audio.
-    </audio>
+    <div id="musesplayer"></div>
+    <script>
+      MRP.insert({
+        'url': 'http://uk25freenew.listen2myradio.com:9112/stream',
+        'lang': 'es',
+        'codec': 'mp3',
+        'volume': 100,
+        'autoplay': true,
+        'forceHTML5': true,
+        'jsevents': true,
+        'buffering': 0,
+        'title': 'Radio Heat Online',
+        'wmode': 'transparent',
+        'skin': 'faredirfare',
+        'width': 300,
+        'height': 150
+      });
+    </script>
   </div>
 
   <div class="buttons">

@@ -23,10 +23,18 @@
       flex-wrap: wrap;
     }
 
-    header img {
-      max-height: 100px;
+    .logo-container {
+      background-color: #fff;
+      border-radius: 15px;
+      padding: 0.5rem;
+      box-shadow: 0 0 10px #000;
       animation: zoomIn 1s ease-out, bounce 3s infinite;
       transform-origin: center;
+    }
+
+    .logo-container img {
+      max-height: 100px;
+      display: block;
     }
 
     header h1 {
@@ -102,14 +110,16 @@
 <body>
 
   <header>
-    <img src="http://imgfz.com/i/bnoGX8a.png" alt="Logo Radio Heat">
+    <div class="logo-container">
+      <img src="http://imgfz.com/i/bnoGX8a.png" alt="Logo Radio Heat">
+    </div>
     <h1>Radio Heat Online</h1>
   </header>
 
   <div class="player-container">
     <h2>🔊 Escúchanos en vivo</h2>
     <audio controls autoplay>
-      <source src="http://37.157.242.103/9112/stream" type="audio/mpeg">
+      <source src="http://uk25freenew.listen2myradio.com:9112/stream" type="audio/mpeg">
       Tu navegador no soporta el reproductor de audio.
     </audio>
   </div>

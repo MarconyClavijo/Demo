@@ -11,15 +11,39 @@
       background: radial-gradient(circle at top left, #1f1c2c, #928dab);
       color: #fff;
     }
+    .logo-animado {
+      width: 180px;
+      margin: 2rem auto 0;
+      display: block;
+      animation: entradaLogo 2s ease-out forwards, resplandor 3s infinite alternate;
+    }
+    @keyframes entradaLogo {
+      0% {
+        transform: scale(0.2);
+        opacity: 0;
+      }
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+    @keyframes resplandor {
+      0% {
+        filter: drop-shadow(0 0 5px #fff);
+      }
+      100% {
+        filter: drop-shadow(0 0 20px #ff0);
+      }
+    }
     header {
       background: #6f00ff;
       text-align: center;
-      padding: 3rem 1rem;
+      padding: 2rem 1rem 1rem;
       box-shadow: 0 4px 15px rgba(0,0,0,0.6);
     }
     header h1 {
       font-size: 3rem;
-      margin: 0;
+      margin: 1rem 0 0;
       color: #fff;
       text-shadow: 2px 2px 5px #000;
     }
@@ -87,6 +111,7 @@
 </head>
 <body>
   <header>
+    <img src="http://imgfz.com/i/cZaCAFs.jpeg" alt="Logo Corporación La Fuerte" class="logo-animado">
     <h1>Corporación La Fuerte</h1>
   </header>
   <main class="grid">

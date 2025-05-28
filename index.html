@@ -8,11 +8,11 @@
     body {
       margin: 0;
       font-family: 'Montserrat', sans-serif;
-      background: radial-gradient(circle at top left, #1f1c2c, #928dab);
+      background: linear-gradient(135deg, #1a1a2e, #16213e);
       color: #fff;
     }
     .logo-animado {
-      width: 180px;
+      width: 200px;
       margin: 2rem auto 0;
       display: block;
       animation: entradaLogo 2s ease-out forwards, resplandor 3s infinite alternate;
@@ -29,14 +29,14 @@
     }
     @keyframes resplandor {
       0% {
-        filter: drop-shadow(0 0 5px #fff);
+        filter: drop-shadow(0 0 10px #ff6f61);
       }
       100% {
-        filter: drop-shadow(0 0 20px #ff0);
+        filter: drop-shadow(0 0 25px #ffcc00);
       }
     }
     header {
-      background: #6f00ff;
+      background: #0f3460;
       text-align: center;
       padding: 2rem 1rem 1rem;
       box-shadow: 0 4px 15px rgba(0,0,0,0.6);
@@ -44,8 +44,8 @@
     header h1 {
       font-size: 3rem;
       margin: 1rem 0 0;
-      color: #fff;
-      text-shadow: 2px 2px 5px #000;
+      color: #f9f871;
+      text-shadow: 2px 2px 8px #000;
     }
     .grid {
       display: grid;
@@ -56,8 +56,8 @@
       margin: auto;
     }
     .card {
-      background: #2a2d41;
-      border: 2px solid #6f00ff;
+      background: #222831;
+      border: 2px solid #ff6f61;
       border-radius: 20px;
       padding: 1.5rem;
       text-align: center;
@@ -65,7 +65,7 @@
     }
     .card:hover {
       transform: translateY(-5px) scale(1.03);
-      box-shadow: 0 10px 25px rgba(111, 0, 255, 0.5);
+      box-shadow: 0 10px 25px rgba(255, 111, 97, 0.5);
     }
     .logo {
       width: 120px;
@@ -77,7 +77,7 @@
       padding: 5px;
     }
     .card h2 {
-      color: #ffce00;
+      color: #ffcc00;
       margin-bottom: 1rem;
     }
     audio {
@@ -89,12 +89,11 @@
       text-align: center;
       padding: 2rem;
       font-size: 0.9rem;
-      background: #111;
+      background: #0f0f0f;
       color: #aaa;
     }
   </style>
   <script>
-    // Solo un reproductor activo a la vez
     document.addEventListener('DOMContentLoaded', function () {
       const audios = document.querySelectorAll('audio');
       audios.forEach(audio => {
@@ -111,49 +110,49 @@
 </head>
 <body>
   <header>
-    <img src="http://imgfz.com/i/cZaCAFs.jpeg" alt="Logo Corporación La Fuerte" class="logo-animado">
+    <img src="http://imgfz.com/i/bmnsNX4.png" alt="Logo Corporación La Fuerte" class="logo-animado">
     <h1>Corporación La Fuerte</h1>
   </header>
   <main class="grid">
     <div class="card">
       <img src="http://imgfz.com/i/FRicwT8.png" alt="La Jefa" class="logo">
       <h2>La Jefa</h2>
-      <audio controls src="http://panelautodj.innovatestream.pe/7320/;">
+      <audio controls src="http://panelautodj.innovatestream.pe:7320/;">
         Tu navegador no soporta audio HTML5.
       </audio>
     </div>
     <div class="card">
       <img src="http://imgfz.com/i/fmdxHD8.png" alt="La Fuerte" class="logo">
       <h2>La Fuerte</h2>
-      <audio controls src="http://panelautodj.innovatestream.pe/7322/;">
+      <audio controls src="http://panelautodj.innovatestream.pe:7322/;">
         Tu navegador no soporta audio HTML5.
       </audio>
     </div>
     <div class="card">
       <img src="http://imgfz.com/i/bBApQu2.png" alt="San Francisco" class="logo">
       <h2>San Francisco</h2>
-      <audio controls src="http://panelautodj.innovatestream.pe/7324/;">
+      <audio controls src="http://panelautodj.innovatestream.pe:7324/;">
         Tu navegador no soporta audio HTML5.
       </audio>
     </div>
     <div class="card">
       <img src="http://imgfz.com/i/bVMWlXD.png" alt="Máxima" class="logo">
       <h2>Máxima</h2>
-      <audio controls src="http://panelautodj.innovatestream.pe/8342/;">
+      <audio controls src="http://panelautodj.innovatestream.pe:8342/;">
         Tu navegador no soporta audio HTML5.
       </audio>
     </div>
     <div class="card">
       <img src="http://imgfz.com/i/J89AMPT.png" alt="La Cumbiambera" class="logo">
       <h2>La Cumbiambera</h2>
-      <audio controls src="http://panelautodj.innovatestream.pe/8464/;">
+      <audio controls src="http://panelautodj.innovatestream.pe:8464/;">
         Tu navegador no soporta audio HTML5.
       </audio>
     </div>
     <div class="card">
       <img src="https://imgfz.com/i/zauB0Id.png" alt="La Raya" class="logo">
       <h2>La Raya</h2>
-      <audio controls src="http://panelautodj.innovatestream.pe/8466/;">
+      <audio controls src="http://panelautodj.innovatestream.pe:8466/;">
         Tu navegador no soporta audio HTML5.
       </audio>
     </div>

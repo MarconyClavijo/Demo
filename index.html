@@ -8,7 +8,7 @@
     body {
       margin: 0;
       font-family: 'Montserrat', sans-serif;
-      background: linear-gradient(135deg, #0c0f1a, #1c1f2b);
+      background: radial-gradient(circle at top left, #1f1c2c, #928dab);
       color: #fff;
     }
     header {
@@ -32,7 +32,7 @@
       margin: auto;
     }
     .card {
-      background: #22263a;
+      background: #2a2d41;
       border: 2px solid #6f00ff;
       border-radius: 20px;
       padding: 1.5rem;
@@ -69,6 +69,21 @@
       color: #aaa;
     }
   </style>
+  <script>
+    // Solo un reproductor activo a la vez
+    document.addEventListener('DOMContentLoaded', function () {
+      const audios = document.querySelectorAll('audio');
+      audios.forEach(audio => {
+        audio.addEventListener('play', () => {
+          audios.forEach(other => {
+            if (other !== audio) {
+              other.pause();
+            }
+          });
+        });
+      });
+    });
+  </script>
 </head>
 <body>
   <header>

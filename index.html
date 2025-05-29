@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="es">
+<!DOCTYPE html>
+<html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,42 +12,51 @@
       background: linear-gradient(135deg, #1a1a2e, #16213e);
       color: #fff;
     }
+
     .logo-animado {
-      width: 200px;
+      width: 280px;
       margin: 2rem auto 0;
       display: block;
-      animation: entradaLogo 2s ease-out forwards, resplandor 3s infinite alternate;
+      animation: entradaLogo 2.5s ease-out forwards, resplandor 3s infinite alternate;
     }
+
     @keyframes entradaLogo {
       0% {
         transform: scale(0.2);
         opacity: 0;
       }
-      100% {
-        transform: scale(1);
+      70% {
+        transform: scale(1.15);
         opacity: 1;
       }
+      100% {
+        transform: scale(1);
+      }
     }
+
     @keyframes resplandor {
       0% {
-        filter: drop-shadow(0 0 10px #ff6f61);
+        filter: drop-shadow(0 0 12px #ff6f61);
       }
       100% {
         filter: drop-shadow(0 0 25px #ffcc00);
       }
     }
+
     header {
       background: #0f3460;
       text-align: center;
       padding: 2rem 1rem 1rem;
       box-shadow: 0 4px 15px rgba(0,0,0,0.6);
     }
+
     header h1 {
       font-size: 3rem;
       margin: 1rem 0 0;
       color: #f9f871;
       text-shadow: 2px 2px 8px #000;
     }
+
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -55,6 +65,7 @@
       max-width: 1300px;
       margin: auto;
     }
+
     .card {
       background: #222831;
       border: 2px solid #ff6f61;
@@ -63,10 +74,12 @@
       text-align: center;
       transition: transform 0.4s ease, box-shadow 0.4s ease;
     }
+
     .card:hover {
       transform: translateY(-5px) scale(1.03);
       box-shadow: 0 10px 25px rgba(255, 111, 97, 0.5);
     }
+
     .logo {
       width: 120px;
       height: 120px;
@@ -76,15 +89,18 @@
       background: #fff;
       padding: 5px;
     }
+
     .card h2 {
       color: #ffcc00;
       margin-bottom: 1rem;
     }
+
     audio {
       width: 100%;
       border-radius: 10px;
       outline: none;
     }
+
     footer {
       text-align: center;
       padding: 2rem;

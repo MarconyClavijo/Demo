@@ -3,6 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>
+    if (location.protocol === 'http:') {
+      location.href = location.href.replace('http:', 'https:');
+    }
+  </script>
   <title>Corporación La Fuerte</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
   <style>
@@ -76,49 +81,42 @@
       border-radius: 12px;
       background: #fff;
       padding: 5px;
-      cursor: pointer;
     }
     .card h2 {
       color: #ffcc00;
       margin-bottom: 1rem;
     }
-    audio {
-      width: 100%;
-      border-radius: 10px;
-      outline: none;
-    }
-    .social-buttons {
+    .buttons {
       margin-top: 1rem;
       display: flex;
       justify-content: center;
       gap: 1rem;
       flex-wrap: wrap;
     }
-    .social-buttons a {
+    .btn {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: #1877f2;
-      color: white;
+      background: #ff6f61;
+      color: #fff;
       padding: 0.5rem 1rem;
-      border-radius: 25px;
+      border-radius: 30px;
       text-decoration: none;
       font-weight: bold;
       transition: background 0.3s ease;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
     }
-    .social-buttons a:hover {
-      background: #0d5adf;
+    .btn:hover {
+      background: #ffcc00;
+      color: #000;
     }
-    .social-buttons a.whatsapp {
-      background: #25D366;
+    .btn svg {
+      width: 18px;
+      height: 18px;
     }
-    .social-buttons a.whatsapp:hover {
-      background: #1ebe5a;
-    }
-    .social-buttons img {
-      width: 20px;
-      height: 20px;
+    audio {
+      width: 100%;
+      border-radius: 10px;
+      outline: none;
     }
     footer {
       text-align: center;
@@ -140,18 +138,6 @@
           });
         });
       });
-
-      const logos = document.querySelectorAll('.logo');
-      logos.forEach(logo => {
-        logo.addEventListener('click', () => {
-          const audio = logo.closest('.card').querySelector('audio');
-          if (audio.paused) {
-            audio.play();
-          } else {
-            audio.pause();
-          }
-        });
-      });
     });
   </script>
 </head>
@@ -161,20 +147,69 @@
     <h1>Corporación La Fuerte</h1>
   </header>
   <main class="grid">
-    <!-- Ejemplo de emisora: La Raya -->
+    <!-- La Jefa -->
     <div class="card">
-      <img src="https://imgfz.com/i/5bEOgS2.png" alt="La Raya" class="logo" />
+      <img src="https://imgfz.com/i/FRicwT8.png" alt="La Jefa" class="logo" />
+      <h2>La Jefa</h2>
+      <audio controls src="https://panelautodj.innovatestream.pe/7320/;">Tu navegador no soporta audio HTML5.</audio>
+      <div class="buttons">
+        <a href="https://www.facebook.com/share/1Ej5wJMZS6/" class="btn" target="_blank">Facebook</a>
+        <a href="https://wa.me/957947659" class="btn" target="_blank">WhatsApp</a>
+      </div>
+    </div>
+
+    <!-- La Fuerte -->
+    <div class="card">
+      <img src="https://imgfz.com/i/fmdxHD8.png" alt="La Fuerte" class="logo" />
+      <h2>La Fuerte</h2>
+      <audio controls src="https://panelautodj.innovatestream.pe/7322/;">Tu navegador no soporta audio HTML5.</audio>
+      <div class="buttons">
+        <a href="https://www.facebook.com/share/15VXL1LjJb/" class="btn" target="_blank">Facebook</a>
+        <a href="https://wa.me/981603469" class="btn" target="_blank">WhatsApp</a>
+      </div>
+    </div>
+
+    <!-- San Francisco -->
+    <div class="card">
+      <img src="https://imgfz.com/i/bBApQu2.png" alt="San Francisco" class="logo" />
+      <h2>San Francisco</h2>
+      <audio controls src="https://panelautodj.innovatestream.pe/7324/;">Tu navegador no soporta audio HTML5.</audio>
+      <div class="buttons">
+        <a href="https://www.facebook.com/share/1Bs468FUoA/" class="btn" target="_blank">Facebook</a>
+        <a href="https://wa.me/966332309" class="btn" target="_blank">WhatsApp</a>
+      </div>
+    </div>
+
+    <!-- Máxima -->
+    <div class="card">
+      <img src="https://imgfz.com/i/bVMWlXD.png" alt="Máxima" class="logo" />
+      <h2>Máxima</h2>
+      <audio controls src="https://panelautodj.innovatestream.pe/8342/;">Tu navegador no soporta audio HTML5.</audio>
+      <div class="buttons">
+        <a href="https://www.facebook.com/share/1BqFMXcYiR/" class="btn" target="_blank">Facebook</a>
+        <a href="https://wa.me/968059127" class="btn" target="_blank">WhatsApp</a>
+      </div>
+    </div>
+
+    <!-- La Cumbiambera -->
+    <div class="card">
+      <img src="https://imgfz.com/i/J89AMPT.png" alt="La Cumbiambera" class="logo" />
+      <h2>La Cumbiambera</h2>
+      <audio controls src="https://panelautodj.innovatestream.pe/8464/;">Tu navegador no soporta audio HTML5.</audio>
+      <div class="buttons">
+        <a href="https://www.facebook.com/share/1Zi652mGHs/" class="btn" target="_blank">Facebook</a>
+        <a href="https://wa.me/968059127" class="btn" target="_blank">WhatsApp</a>
+      </div>
+    </div>
+
+    <!-- La Raya -->
+    <div class="card">
+      <img src="https://imgfz.com/i/zauB0Id.png" alt="La Raya" class="logo" />
       <h2>La Raya</h2>
-      <audio controls src="https://panelautodj.innovatestream.pe/8352/;"></audio>
-      <div class="social-buttons">
-        <a href="https://www.facebook.com/share/1EkJ4wUcLK/" target="_blank">
-          <img src="https://img.icons8.com/ios-filled/50/ffffff/facebook--v1.png" alt="Facebook" />
-          Facebook
-        </a>
-        <a href="https://wa.me/968059127" class="whatsapp" target="_blank">
-          <img src="https://img.icons8.com/ios-filled/50/ffffff/whatsapp.png" alt="WhatsApp" />
-          WhatsApp
-        </a>
+      <audio controls src="https://panelautodj.innovatestream.pe/8466/;">Tu navegador no soporta audio HTML5.</audio>
+      <div class="buttons">
+        <a href="https://www.facebook.com/share/1EkJ4wUcLK/" class="btn" target="_blank">Facebook</a>
+        <a href="https://wa.me/968059127" class="btn" target="_blank">WhatsApp</a>
       </div>
     </div>
   </main>

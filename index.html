@@ -24,22 +24,12 @@
       animation: entradaLogo 2s ease-out forwards, resplandor 3s infinite alternate;
     }
     @keyframes entradaLogo {
-      0% {
-        transform: scale(0.2);
-        opacity: 0;
-      }
-      100% {
-        transform: scale(1);
-        opacity: 1;
-      }
+      0% { transform: scale(0.2); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
     }
     @keyframes resplandor {
-      0% {
-        filter: drop-shadow(0 0 10px #ff6f61);
-      }
-      100% {
-        filter: drop-shadow(0 0 25px #ffcc00);
-      }
+      0% { filter: drop-shadow(0 0 10px #ff6f61); }
+      100% { filter: drop-shadow(0 0 25px #ffcc00); }
     }
     header {
       background: #0f3460;
@@ -81,42 +71,34 @@
       border-radius: 12px;
       background: #fff;
       padding: 5px;
+      cursor: pointer;
     }
     .card h2 {
       color: #ffcc00;
       margin-bottom: 1rem;
     }
-    .buttons {
+    .redes {
       margin-top: 1rem;
-      display: flex;
-      justify-content: center;
-      gap: 1rem;
-      flex-wrap: wrap;
     }
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: #ff6f61;
-      color: #fff;
-      padding: 0.5rem 1rem;
+    .btn-red {
+      display: inline-block;
+      margin: 5px;
+      padding: 8px 14px;
       border-radius: 30px;
-      text-decoration: none;
       font-weight: bold;
-      transition: background 0.3s ease;
+      text-decoration: none;
+      transition: background 0.3s;
+      font-size: 0.9rem;
     }
-    .btn:hover {
-      background: #ffcc00;
-      color: #000;
-    }
-    .btn svg {
-      width: 18px;
-      height: 18px;
-    }
+    .facebook { background: #3b5998; color: white; }
+    .facebook:hover { background: #2d4373; }
+    .whatsapp { background: #25D366; color: white; }
+    .whatsapp:hover { background: #1ebe5b; }
     audio {
       width: 100%;
       border-radius: 10px;
       outline: none;
+      margin-top: 1rem;
     }
     footer {
       text-align: center;
@@ -132,10 +114,20 @@
       audios.forEach(audio => {
         audio.addEventListener('play', () => {
           audios.forEach(other => {
-            if (other !== audio) {
-              other.pause();
-            }
+            if (other !== audio) other.pause();
           });
+        });
+      });
+
+      const logos = document.querySelectorAll('.logo');
+      logos.forEach(logo => {
+        logo.addEventListener('click', () => {
+          const audio = logo.parentElement.querySelector('audio');
+          if (audio.paused) {
+            audio.play();
+          } else {
+            audio.pause();
+          }
         });
       });
     });
@@ -146,73 +138,77 @@
     <img src="https://imgfz.com/i/bmnsNX4.png" alt="Logo Corporación La Fuerte" class="logo-animado" />
     <h1>Corporación La Fuerte</h1>
   </header>
+
   <main class="grid">
+
     <!-- La Jefa -->
     <div class="card">
       <img src="https://imgfz.com/i/FRicwT8.png" alt="La Jefa" class="logo" />
       <h2>La Jefa</h2>
-      <audio controls src="https://panelautodj.innovatestream.pe/7320/;">Tu navegador no soporta audio HTML5.</audio>
-      <div class="buttons">
-        <a href="https://www.facebook.com/share/1Ej5wJMZS6/" class="btn" target="_blank">Facebook</a>
-        <a href="https://wa.me/957947659" class="btn" target="_blank">WhatsApp</a>
+      <div class="redes">
+        <a href="https://www.facebook.com/share/1Ej5wJMZS6/" class="btn-red facebook" target="_blank">Facebook</a>
+        <a href="https://wa.me/957947659" class="btn-red whatsapp" target="_blank">WhatsApp</a>
       </div>
+      <audio controls src="https://panelautodj.innovatestream.pe/7320/;"></audio>
     </div>
 
     <!-- La Fuerte -->
     <div class="card">
       <img src="https://imgfz.com/i/fmdxHD8.png" alt="La Fuerte" class="logo" />
       <h2>La Fuerte</h2>
-      <audio controls src="https://panelautodj.innovatestream.pe/7322/;">Tu navegador no soporta audio HTML5.</audio>
-      <div class="buttons">
-        <a href="https://www.facebook.com/share/15VXL1LjJb/" class="btn" target="_blank">Facebook</a>
-        <a href="https://wa.me/981603469" class="btn" target="_blank">WhatsApp</a>
+      <div class="redes">
+        <a href="https://www.facebook.com/share/15VXL1LjJb/" class="btn-red facebook" target="_blank">Facebook</a>
+        <a href="https://wa.me/981603469" class="btn-red whatsapp" target="_blank">WhatsApp</a>
       </div>
+      <audio controls src="https://panelautodj.innovatestream.pe/7322/;"></audio>
     </div>
 
     <!-- San Francisco -->
     <div class="card">
       <img src="https://imgfz.com/i/bBApQu2.png" alt="San Francisco" class="logo" />
       <h2>San Francisco</h2>
-      <audio controls src="https://panelautodj.innovatestream.pe/7324/;">Tu navegador no soporta audio HTML5.</audio>
-      <div class="buttons">
-        <a href="https://www.facebook.com/share/1Bs468FUoA/" class="btn" target="_blank">Facebook</a>
-        <a href="https://wa.me/966332309" class="btn" target="_blank">WhatsApp</a>
+      <div class="redes">
+        <a href="https://www.facebook.com/share/1Bs468FUoA/" class="btn-red facebook" target="_blank">Facebook</a>
+        <a href="https://wa.me/966332309" class="btn-red whatsapp" target="_blank">WhatsApp</a>
       </div>
+      <audio controls src="https://panelautodj.innovatestream.pe/7324/;"></audio>
     </div>
 
     <!-- Máxima -->
     <div class="card">
       <img src="https://imgfz.com/i/bVMWlXD.png" alt="Máxima" class="logo" />
       <h2>Máxima</h2>
-      <audio controls src="https://panelautodj.innovatestream.pe/8342/;">Tu navegador no soporta audio HTML5.</audio>
-      <div class="buttons">
-        <a href="https://www.facebook.com/share/1BqFMXcYiR/" class="btn" target="_blank">Facebook</a>
-        <a href="https://wa.me/968059127" class="btn" target="_blank">WhatsApp</a>
+      <div class="redes">
+        <a href="https://www.facebook.com/share/1BqFMXcYiR/" class="btn-red facebook" target="_blank">Facebook</a>
+        <a href="https://wa.me/968059127" class="btn-red whatsapp" target="_blank">WhatsApp</a>
       </div>
+      <audio controls src="https://panelautodj.innovatestream.pe/8342/;"></audio>
     </div>
 
     <!-- La Cumbiambera -->
     <div class="card">
       <img src="https://imgfz.com/i/J89AMPT.png" alt="La Cumbiambera" class="logo" />
       <h2>La Cumbiambera</h2>
-      <audio controls src="https://panelautodj.innovatestream.pe/8464/;">Tu navegador no soporta audio HTML5.</audio>
-      <div class="buttons">
-        <a href="https://www.facebook.com/share/1Zi652mGHs/" class="btn" target="_blank">Facebook</a>
-        <a href="https://wa.me/968059127" class="btn" target="_blank">WhatsApp</a>
+      <div class="redes">
+        <a href="https://www.facebook.com/share/1Zi652mGHs/" class="btn-red facebook" target="_blank">Facebook</a>
+        <a href="https://wa.me/968059127" class="btn-red whatsapp" target="_blank">WhatsApp</a>
       </div>
+      <audio controls src="https://panelautodj.innovatestream.pe/8464/;"></audio>
     </div>
 
     <!-- La Raya -->
     <div class="card">
       <img src="https://imgfz.com/i/zauB0Id.png" alt="La Raya" class="logo" />
       <h2>La Raya</h2>
-      <audio controls src="https://panelautodj.innovatestream.pe/8466/;">Tu navegador no soporta audio HTML5.</audio>
-      <div class="buttons">
-        <a href="https://www.facebook.com/share/1EkJ4wUcLK/" class="btn" target="_blank">Facebook</a>
-        <a href="https://wa.me/968059127" class="btn" target="_blank">WhatsApp</a>
+      <div class="redes">
+        <a href="https://www.facebook.com/share/1EkJ4wUcLK/" class="btn-red facebook" target="_blank">Facebook</a>
+        <a href="https://wa.me/968059127" class="btn-red whatsapp" target="_blank">WhatsApp</a>
       </div>
+      <audio controls src="https://panelautodj.innovatestream.pe/8466/;"></audio>
     </div>
+
   </main>
+
   <footer>
     © 2025 Corporación La Fuerte. Todos los derechos reservados.
   </footer>

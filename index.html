@@ -2,48 +2,99 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Radios en Facebook y WhatsApp</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Corporación La Fuerte</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background: #f8f9fa;
-      color: #333;
       margin: 0;
+      font-family: 'Montserrat', sans-serif;
+      background: linear-gradient(135deg, #1a1a2e, #16213e);
+      color: #fff;
+    }
+    .logo-animado {
+      width: 300px;
+      margin: 2rem auto 0;
+      display: block;
+      animation: entradaLogo 2s ease-out forwards, resplandor 3s infinite alternate;
+    }
+    @keyframes entradaLogo {
+      0% {
+        transform: scale(0.2);
+        opacity: 0;
+      }
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+    @keyframes resplandor {
+      0% {
+        filter: drop-shadow(0 0 10px #ff6f61);
+      }
+      100% {
+        filter: drop-shadow(0 0 25px #ffcc00);
+      }
+    }
+    header {
+      background: #0f3460;
+      text-align: center;
+      padding: 2rem 1rem 1rem;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.6);
+    }
+    header h1 {
+      font-size: 3rem;
+      margin: 1rem 0 0;
+      color: #f9f871;
+      text-shadow: 2px 2px 8px #000;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
       padding: 2rem;
+      max-width: 1300px;
+      margin: auto;
     }
-
-    h1 {
+    .card {
+      background: #222831;
+      border: 2px solid #ff6f61;
+      border-radius: 20px;
+      padding: 1.5rem;
       text-align: center;
-      margin-bottom: 2rem;
-      color: #222;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
     }
-
-    .radio {
-      background: white;
+    .card:hover {
+      transform: translateY(-5px) scale(1.03);
+      box-shadow: 0 10px 25px rgba(255, 111, 97, 0.5);
+    }
+    .logo {
+      width: 120px;
+      height: 120px;
+      object-fit: contain;
+      margin-bottom: 1rem;
       border-radius: 12px;
-      padding: 1rem 1.5rem;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      margin-bottom: 2rem;
-      max-width: 500px;
-      margin-left: auto;
-      margin-right: auto;
+      background: #fff;
+      padding: 5px;
+      cursor: pointer;
     }
-
-    .radio h2 {
-      text-align: center;
-      color: #444;
+    .card h2 {
+      color: #ffcc00;
       margin-bottom: 1rem;
     }
-
-    .red-social {
+    audio {
+      width: 100%;
+      border-radius: 10px;
+      outline: none;
+    }
+    .social-buttons {
+      margin-top: 1rem;
       display: flex;
       justify-content: center;
       gap: 1rem;
       flex-wrap: wrap;
     }
-
-    .red-social a {
+    .social-buttons a {
       display: inline-flex;
       align-items: center;
       gap: 8px;
@@ -56,108 +107,132 @@
       transition: background 0.3s ease;
       box-shadow: 0 4px 12px rgba(0,0,0,0.2);
     }
-
-    .red-social a:hover {
+    .social-buttons a:hover {
       background: #0d5adf;
     }
-
-    .red-social a.whatsapp {
+    .social-buttons a.whatsapp {
       background: #25D366;
     }
-
-    .red-social a.whatsapp:hover {
+    .social-buttons a.whatsapp:hover {
       background: #1ebe5a;
     }
-
-    .red-social img {
+    .social-buttons img {
       width: 20px;
       height: 20px;
     }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+      background: #0f0f0f;
+      color: #aaa;
+    }
   </style>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const audios = document.querySelectorAll('audio');
+      audios.forEach(audio => {
+        audio.addEventListener('play', () => {
+          audios.forEach(other => {
+            if (other !== audio) {
+              other.pause();
+            }
+          });
+        });
+      });
+
+      const logos = document.querySelectorAll('.logo');
+      logos.forEach(logo => {
+        logo.addEventListener('click', () => {
+          const audio = logo.closest('.card').querySelector('audio');
+          if (audio.paused) {
+            audio.play();
+          } else {
+            audio.pause();
+          }
+        });
+      });
+    });
+  </script>
 </head>
 <body>
-
-  <h1>Radios en Facebook y WhatsApp</h1>
-
-  <div class="radio">
-    <h2>📻 Radio La Raya</h2>
-    <div class="red-social">
-      <a href="https://www.facebook.com/share/1EkJ4wUcLK/" target="_blank">
-        <img src="https://img.icons8.com/ios-filled/50/ffffff/facebook--v1.png" alt="Facebook" />
-        Facebook
-      </a>
-      <a href="https://wa.me/968059127" class="whatsapp" target="_blank">
-        <img src="https://img.icons8.com/ios-filled/50/ffffff/whatsapp.png" alt="WhatsApp" />
-        WhatsApp
-      </a>
+  <header>
+    <img src="https://imgfz.com/i/bmnsNX4.png" alt="Logo Corporación La Fuerte" class="logo-animado" />
+    <h1>Corporación La Fuerte</h1>
+  </header>
+  <main class="grid">
+    <div class="card">
+      <img src="https://imgfz.com/i/FRicwT8.png" alt="La Jefa" class="logo" />
+      <h2>La Jefa</h2>
+      <audio controls src="https://panelautodj.innovatestream.pe/7320/;">
+        Tu navegador no soporta audio HTML5.
+      </audio>
+      <div class="social-buttons">
+        <a href="https://www.facebook.com/share/1Ej5wJMZS6/" target="_blank">
+          <img src="https://img.icons8.com/ios-filled/50/ffffff/facebook--v1.png" alt="Facebook" />
+          Facebook
+        </a>
+        <a href="https://wa.me/957947659" class="whatsapp" target="_blank">
+          <img src="https://img.icons8.com/ios-filled/50/ffffff/whatsapp.png" alt="WhatsApp" />
+          WhatsApp
+        </a>
+      </div>
     </div>
-  </div>
-
-  <div class="radio">
-    <h2>🎶 La Cumbiambera</h2>
-    <div class="red-social">
-      <a href="https://www.facebook.com/share/1Zi652mGHs/" target="_blank">
-        <img src="https://img.icons8.com/ios-filled/50/ffffff/facebook--v1.png" alt="Facebook" />
-        Facebook
-      </a>
+    <div class="card">
+      <img src="https://imgfz.com/i/fmdxHD8.png" alt="La Fuerte" class="logo" />
+      <h2>La Fuerte</h2>
+      <audio controls src="https://panelautodj.innovatestream.pe/7322/;">
+        Tu navegador no soporta audio HTML5.
+      </audio>
+      <div class="social-buttons">
+        <a href="https://www.facebook.com/share/15VXL1LjJb/" target="_blank">
+          <img src="https://img.icons8.com/ios-filled/50/ffffff/facebook--v1.png" alt="Facebook" />
+          Facebook
+        </a>
+        <a href="https://wa.me/981603469" class="whatsapp" target="_blank">
+          <img src="https://img.icons8.com/ios-filled/50/ffffff/whatsapp.png" alt="WhatsApp" />
+          WhatsApp
+        </a>
+      </div>
     </div>
-  </div>
-
-  <div class="radio">
-    <h2>🔊 Radio Máxima</h2>
-    <div class="red-social">
-      <a href="https://www.facebook.com/share/1BqFMXcYiR/" target="_blank">
-        <img src="https://img.icons8.com/ios-filled/50/ffffff/facebook--v1.png" alt="Facebook" />
-        Facebook
-      </a>
-      <a href="https://wa.me/968059127" class="whatsapp" target="_blank">
-        <img src="https://img.icons8.com/ios-filled/50/ffffff/whatsapp.png" alt="WhatsApp" />
-        WhatsApp
-      </a>
+    <div class="card">
+      <img src="https://imgfz.com/i/bBApQu2.png" alt="San Francisco" class="logo" />
+      <h2>San Francisco</h2>
+      <audio controls src="https://panelautodj.innovatestream.pe/7324/;">
+        Tu navegador no soporta audio HTML5.
+      </audio>
+      <div class="social-buttons">
+        <a href="https://www.facebook.com/share/1Bs468FUoA/" target="_blank">
+          <img src="https://img.icons8.com/ios-filled/50/ffffff/facebook--v1.png" alt="Facebook" />
+          Facebook
+        </a>
+        <a href="https://wa.me/966332309" class="whatsapp" target="_blank">
+          <img src="https://img.icons8.com/ios-filled/50/ffffff/whatsapp.png" alt="WhatsApp" />
+          WhatsApp
+        </a>
+      </div>
     </div>
-  </div>
-
-  <div class="radio">
-    <h2>👑 Radio La Jefa</h2>
-    <div class="red-social">
-      <a href="https://www.facebook.com/share/1Ej5wJMZS6/" target="_blank">
-        <img src="https://img.icons8.com/ios-filled/50/ffffff/facebook--v1.png" alt="Facebook" />
-        Facebook
-      </a>
-      <a href="https://wa.me/957947659" class="whatsapp" target="_blank">
-        <img src="https://img.icons8.com/ios-filled/50/ffffff/whatsapp.png" alt="WhatsApp" />
-        WhatsApp
-      </a>
+    <div class="card">
+      <img src="https://imgfz.com/i/bVMWlXD.png" alt="Máxima" class="logo" />
+      <h2>Máxima</h2>
+      <audio controls src="https://panelautodj.innovatestream.pe/8342/;">
+        Tu navegador no soporta audio HTML5.
+      </audio>
+      <div class="social-buttons">
+        <a href="https://www.facebook.com/share/1BqFMXcYiR/" target="_blank">
+          <img src="https://img.icons8.com/ios-filled/50/ffffff/facebook--v1.png" alt="Facebook" />
+          Facebook
+        </a>
+        <a href="https://wa.me/968059127" class="whatsapp" target="_blank">
+          <img src="https://img.icons8.com/ios-filled/50/ffffff/whatsapp.png" alt="WhatsApp" />
+          WhatsApp
+        </a>
+      </div>
     </div>
-  </div>
-
-  <div class="radio">
-    <h2>🔥 Radio La Fuerte</h2>
-    <div class="red-social">
-      <a href="https://www.facebook.com/share/15VXL1LjJb/" target="_blank">
-        <img src="https://img.icons8.com/ios-filled/50/ffffff/facebook--v1.png" alt="Facebook" />
-        Facebook
-      </a>
-      <a href="https://wa.me/981603469" class="whatsapp" target="_blank">
-        <img src="https://img.icons8.com/ios-filled/50/ffffff/whatsapp.png" alt="WhatsApp" />
-        WhatsApp
-      </a>
-    </div>
-  </div>
-
-  <div class="radio">
-    <h2>✝️ Radio San Francisco</h2>
-    <div class="red-social">
-      <a href="https://www.facebook.com/share/1Bs468FUoA/" target="_blank">
-        <img src="https://img.icons8.com/ios-filled/50/ffffff/facebook--v1.png" alt="Facebook" />
-        Facebook
-      </a>
-      <a href="https://wa.me/966332309" class="whatsapp" target="_blank">
-        <img src="https://img.icons8.com/ios-filled/50/ffffff/whatsapp.png" alt="WhatsApp" />
-        WhatsApp
-      </a>
-    </div>
-  </div>
-
-</body>
-</html>
+    <div class="card">
+      <img src="https://imgfz.com/i/J89AMPT.png" alt="La Cumbiambera" class="logo" />
+      <h2>La Cumbiambera</h2>
+      <audio controls src="https://panelautodj.innovatestream.pe/8464/;">
+        Tu navegador no soporta audio HTML5.
+      </audio>
+      <div class="17

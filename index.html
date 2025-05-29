@@ -1,165 +1,125 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Corporación La Fuerte</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Exportación Fernando</title>
   <style>
+    /* Reset y estilos base */
     body {
+      font-family: Arial, sans-serif;
       margin: 0;
-      font-family: 'Montserrat', sans-serif;
-      background: linear-gradient(135deg, #1a1a2e, #16213e);
-      color: #fff;
-    }
-    .logo-animado {
-      width: 300px;
-      margin: 2rem auto 0;
-      display: block;
-      animation: entradaLogo 2s ease-out forwards, resplandor 3s infinite alternate;
-    }
-    @keyframes entradaLogo {
-      0% {
-        transform: scale(0.2);
-        opacity: 0;
-      }
-      100% {
-        transform: scale(1);
-        opacity: 1;
-      }
-    }
-    @keyframes resplandor {
-      0% {
-        filter: drop-shadow(0 0 10px #ff6f61);
-      }
-      100% {
-        filter: drop-shadow(0 0 25px #ffcc00);
-      }
+      background: #f9f9f9;
+      color: #333;
+      line-height: 1.6;
     }
     header {
-      background: #0f3460;
-      text-align: center;
-      padding: 2rem 1rem 1rem;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.6);
+      background: #0a7e07; /* Verde similar a agricultura */
+      color: white;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
     header h1 {
-      font-size: 3rem;
-      margin: 1rem 0 0;
-      color: #f9f871;
-      text-shadow: 2px 2px 8px #000;
+      margin: 0;
+      font-size: 1.8rem;
     }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-      padding: 2rem;
-      max-width: 1300px;
-      margin: auto;
+    header .contact {
+      font-size: 1rem;
+      text-align: right;
     }
-    .card {
-      background: #222831;
-      border: 2px solid #ff6f61;
-      border-radius: 20px;
-      padding: 1.5rem;
-      text-align: center;
-      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    main {
+      max-width: 960px;
+      margin: 40px auto;
+      padding: 0 20px;
     }
-    .card:hover {
-      transform: translateY(-5px) scale(1.03);
-      box-shadow: 0 10px 25px rgba(255, 111, 97, 0.5);
+    section {
+      margin-bottom: 40px;
     }
-    .logo {
-      width: 120px;
-      height: 120px;
-      object-fit: contain;
-      margin-bottom: 1rem;
-      border-radius: 12px;
-      background: #fff;
-      padding: 5px;
+    h2 {
+      color: #0a7e07;
+      margin-bottom: 10px;
+      border-bottom: 3px solid #0a7e07;
+      display: inline-block;
+      padding-bottom: 5px;
     }
-    .card h2 {
-      color: #ffcc00;
-      margin-bottom: 1rem;
-    }
-    audio {
-      width: 100%;
-      border-radius: 10px;
-      outline: none;
+    ul {
+      list-style-type: disc;
+      margin-left: 20px;
     }
     footer {
+      background: #eee;
       text-align: center;
-      padding: 2rem;
+      padding: 20px;
       font-size: 0.9rem;
-      background: #0f0f0f;
-      color: #aaa;
+      color: #555;
+    }
+    @media (max-width: 600px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      header .contact {
+        margin-top: 10px;
+        text-align: left;
+      }
     }
   </style>
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      const audios = document.querySelectorAll('audio');
-      audios.forEach(audio => {
-        audio.addEventListener('play', () => {
-          audios.forEach(other => {
-            if (other !== audio) {
-              other.pause();
-            }
-          });
-        });
-      });
-    });
-  </script>
 </head>
 <body>
-  <header>
-    <img src="https://imgfz.com/i/bmnsNX4.png" alt="Logo Corporación La Fuerte" class="logo-animado">
-    <h1>Corporación La Fuerte</h1>
-  </header>
-  <main class="grid">
-    <div class="card">
-      <img src="https://imgfz.com/i/FRicwT8.png" alt="La Jefa" class="logo">
-      <h2>La Jefa</h2>
-      <audio controls src="https://panelautodj.innovatestream.pe/7320/;">
-        Tu navegador no soporta audio HTML5.
-      </audio>
-    </div>
-    <div class="card">
-      <img src="https://imgfz.com/i/fmdxHD8.png" alt="La Fuerte" class="logo">
-      <h2>La Fuerte</h2>
-      <audio controls src="https://panelautodj.innovatestream.pe/7322/;">
-        Tu navegador no soporta audio HTML5.
-      </audio>
-    </div>
-    <div class="card">
-      <img src="https://imgfz.com/i/bBApQu2.png" alt="San Francisco" class="logo">
-      <h2>San Francisco</h2>
-      <audio controls src="https://panelautodj.innovatestream.pe/7324/;">
-        Tu navegador no soporta audio HTML5.
-      </audio>
-    </div>
-    <div class="card">
-      <img src="https://imgfz.com/i/bVMWlXD.png" alt="Máxima" class="logo">
-      <h2>Máxima</h2>
-      <audio controls src="https://panelautodj.innovatestream.pe/8342/;">
-        Tu navegador no soporta audio HTML5.
-      </audio>
-    </div>
-    <div class="card">
-      <img src="https://imgfz.com/i/J89AMPT.png" alt="La Cumbiambera" class="logo">
-      <h2>La Cumbiambera</h2>
-      <audio controls src="https://panelautodj.innovatestream.pe/8464/;">
-        Tu navegador no soporta audio HTML5.
-      </audio>
-    </div>
-    <div class="card">
-      <img src="https://imgfz.com/i/zauB0Id.png" alt="La Raya" class="logo">
-      <h2>La Raya</h2>
-      <audio controls src="https://panelautodj.innovatestream.pe/8466/;">
-        Tu navegador no soporta audio HTML5.
-      </audio>
-    </div>
-  </main>
-  <footer>
-    &copy; 2025 Corporación La Fuerte. Todos los derechos reservados.
-  </footer>
+
+<header>
+  <h1>Exportación Fernando</h1>
+  <div class="contact">
+    <div><strong>Fernando Clavijo Álvarez</strong></div>
+    <div>Contacto: +51 959 502 183</div>
+  </div>
+</header>
+
+<main>
+  <section id="sobre-nosotros">
+    <h2>Sobre Nosotros</h2>
+    <p>En Exportación Fernando, nos dedicamos a la exportación de productos agrícolas de alta calidad, comprometidos con prácticas sostenibles y el desarrollo de nuestras comunidades locales.</p>
+  </section>
+
+  <section id="productos">
+    <h2>Nuestros Productos</h2>
+    <ul>
+      <li>Uvas de mesa</li>
+      <li>Palta (aguacate)</li>
+      <li>Arilos de granada</li>
+    </ul>
+  </section>
+
+  <section id="instalaciones">
+    <h2>Nuestras Instalaciones</h2>
+    <p><strong>Campos:</strong> Ubicados en las regiones de Ica y Nazca, nuestros campos combinan tecnología avanzada y tradición para cultivar frutas de la mejor calidad.</p>
+    <p><strong>Empacadora:</strong> Nuestra planta empacadora está equipada con tecnología de vanguardia, garantizando que cada producto mantenga su frescura y calidad hasta llegar a nuestros clientes.</p>
+  </section>
+
+  <section id="mercados">
+    <h2>Mercados</h2>
+    <p>Exportamos nuestros productos a diversos mercados internacionales, cumpliendo con los más altos estándares de calidad y sostenibilidad.</p>
+  </section>
+
+  <section id="certificaciones">
+    <h2>Certificaciones</h2>
+    <p>Contamos con certificaciones que respaldan nuestro compromiso con la calidad y las prácticas sostenibles en la producción y exportación de nuestros productos.</p>
+  </section>
+
+  <section id="contacto">
+    <h2>Contáctanos</h2>
+    <p>¿Tienes alguna consulta o deseas más información? No dudes en comunicarte con nosotros.</p>
+    <p><strong>Teléfono:</strong> +51 959 502 183</p>
+    <p><strong>Email:</strong> exportacionfernando@example.com</p>
+    <p><strong>Ubicación:</strong> Piura, Perú</p>
+  </section>
+</main>
+
+<footer>
+  &copy; 2025 Exportación Fernando. Todos los derechos reservados.
+</footer>
+
 </body>
 </html>

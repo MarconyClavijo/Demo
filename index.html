@@ -1,22 +1,257 @@
-<script>
-  function abrirModal() {
-    document.getElementById('modalPublicidad').style.display = 'flex';
-  }
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>
+    if (location.protocol === 'http:') {
+      location.href = location.href.replace('http:', 'https:');
+    }
+  </script>
+  <title>Corporación La Fuerte</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Montserrat', sans-serif;
+      background: linear-gradient(135deg, #1a1a2e, #16213e);
+      color: #fff;
+    }
+    .logo-animado {
+      width: 300px;
+      margin: 2rem auto 0;
+      display: block;
+      animation: entradaLogo 2s ease-out forwards, resplandor 3s infinite alternate;
+    }
+    @keyframes entradaLogo {
+      0% { transform: scale(0.2); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    @keyframes resplandor {
+      0% { filter: drop-shadow(0 0 10px #ff6f61); }
+      100% { filter: drop-shadow(0 0 25px #ffcc00); }
+    }
+    header {
+      background: #0f3460;
+      text-align: center;
+      padding: 2rem 1rem 1rem;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.6);
+    }
+    header h1 {
+      font-size: 3rem;
+      margin: 1rem 0 0;
+      color: #f9f871;
+      text-shadow: 2px 2px 8px #000;
+    }
+    .publicidad-btn {
+      display: inline-block;
+      margin: 2rem auto;
+      padding: 12px 24px;
+      background-color: #25D366;
+      color: white;
+      font-size: 1.2rem;
+      font-weight: bold;
+      border-radius: 50px;
+      text-decoration: none;
+      transition: background 0.3s;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+      text-align: center;
+    }
+    .publicidad-btn:hover {
+      background-color: #1ebe5b;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      padding: 2rem;
+      max-width: 1300px;
+      margin: auto;
+    }
+    .card {
+      background: #222831;
+      border: 2px solid #ff6f61;
+      border-radius: 20px;
+      padding: 1.5rem;
+      text-align: center;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+    .card:hover {
+      transform: translateY(-5px) scale(1.03);
+      box-shadow: 0 10px 25px rgba(255, 111, 97, 0.5);
+    }
+    .logo {
+      width: 120px;
+      height: 120px;
+      object-fit: contain;
+      margin-bottom: 1rem;
+      border-radius: 12px;
+      background: #fff;
+      padding: 5px;
+      cursor: pointer;
+    }
+    .card h2 {
+      color: #ffcc00;
+      margin-bottom: 1rem;
+    }
+    .redes {
+      margin-top: 1rem;
+    }
+    .btn-red {
+      display: inline-block;
+      margin: 5px;
+      padding: 8px 14px;
+      border-radius: 30px;
+      font-weight: bold;
+      text-decoration: none;
+      transition: background 0.3s;
+      font-size: 0.9rem;
+    }
+    .facebook { background: #3b5998; color: white; }
+    .facebook:hover { background: #2d4373; }
+    .whatsapp { background: #25D366; color: white; }
+    .whatsapp:hover { background: #1ebe5b; }
+    audio {
+      width: 100%;
+      border-radius: 10px;
+      outline: none;
+      margin-top: 1rem;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+      background: #0f0f0f;
+      color: #aaa;
+    }
+  </style>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const audios = document.querySelectorAll('audio');
+      audios.forEach(audio => {
+        audio.addEventListener('play', () => {
+          audios.forEach(other => {
+            if (other !== audio) other.pause();
+          });
+        });
+      });
 
-  function cerrarModal() {
-    document.getElementById('modalPublicidad').style.display = 'none';
-  }
+      const logos = document.querySelectorAll('.logo');
+      logos.forEach(logo => {
+        logo.addEventListener('click', () => {
+          const audio = logo.parentElement.querySelector('audio');
+          if (audio.paused) {
+            audio.play();
+          } else {
+            audio.pause();
+          }
+        });
+      });
+    });
+  </script>
+</head>
+<body>
+  <header>
+    <img src="https://imgfz.com/i/bmnsNX4.png" alt="Logo Corporación La Fuerte" class="logo-animado" />
+    <h1>Corporación La Fuerte</h1>
+  </header>
 
-  function enviarFormulario(e) {
-    e.preventDefault();
-    const form = e.target;
-    const nombre = form.querySelector('input[type="text"]').value;
-    const telefono = form.querySelector('input[type="tel"]').value;
-    const mensaje = form.querySelector('textarea').value;
+  <!-- Botón de publicidad general -->
+  <div style="text-align: center;">
+    <a 
+      href="https://wa.me/51968093779?text=Hola%2C%20quiero%20información%20para%20contratar%20publicidad%20en%20Corporación%20La%20Fuerte"
+      class="publicidad-btn" 
+      target="_blank">
+      📢 Contrata publicidad aquí
+    </a>
+  </div>
 
-    const texto = `Hola, soy ${nombre}. Me gustaría contratar publicidad. Mi número es ${telefono}. Mensaje: ${mensaje}`;
-    const url = `https://wa.me/51968093779?text=${encodeURIComponent(texto)}`;
-    window.open(url, '_blank');
-    cerrarModal();
-  }
-</script>
+  <main class="grid">
+
+    <!-- La Jefa -->
+    <div class="card">
+      <img src="https://imgfz.com/i/FRicwT8.png" alt="La Jefa" class="logo" />
+      <h2>La Jefa</h2>
+      <div class="redes">
+        <a href="https://www.facebook.com/share/1Ej5wJMZS6/" class="btn-red facebook" target="_blank">Facebook</a>
+        <a href="https://wa.me/51957947659" class="btn-red whatsapp" target="_blank">WhatsApp</a>
+      </div>
+      <audio controls src="https://panelautodj.innovatestream.pe/7320/;"></audio>
+    </div>
+
+    <!-- La Fuerte -->
+    <div class="card">
+      <img src="https://imgfz.com/i/fmdxHD8.png" alt="La Fuerte" class="logo" />
+      <h2>La Fuerte</h2>
+      <div class="redes">
+        <a href="https://www.facebook.com/share/15VXL1LjJb/" class="btn-red facebook" target="_blank">Facebook</a>
+        <a href="https://wa.me/51981603469" class="btn-red whatsapp" target="_blank">WhatsApp</a>
+      </div>
+      <audio controls src="https://panelautodj.innovatestream.pe/7322/;"></audio>
+    </div>
+
+    <!-- San Francisco -->
+    <div class="card">
+      <img src="https://imgfz.com/i/bBApQu2.png" alt="San Francisco" class="logo" />
+      <h2>San Francisco</h2>
+      <div class="redes">
+        <a href="https://www.facebook.com/share/1Bs468FUoA/" class="btn-red facebook" target="_blank">Facebook</a>
+        <a href="https://wa.me/51966332309" class="btn-red whatsapp" target="_blank">WhatsApp</a>
+      </div>
+      <audio controls src="https://panelautodj.innovatestream.pe/7324/;"></audio>
+    </div>
+
+    <!-- Máxima -->
+    <div class="card">
+      <img src="https://imgfz.com/i/bVMWlXD.png" alt="Máxima" class="logo" />
+      <h2>Máxima</h2>
+      <div class="redes">
+        <a href="https://www.facebook.com/share/1BqFMXcYiR/" class="btn-red facebook" target="_blank">Facebook</a>
+        <a href="https://wa.me/51968059127" class="btn-red whatsapp" target="_blank">WhatsApp</a>
+      </div>
+      <audio controls src="https://panelautodj.innovatestream.pe/8342/;"></audio>
+    </div>
+
+    <!-- La Cumbiambera -->
+    <div class="card">
+      <img src="https://imgfz.com/i/J89AMPT.png" alt="La Cumbiambera" class="logo" />
+      <h2>La Cumbiambera</h2>
+      <div class="redes">
+        <a href="https://www.facebook.com/share/1Zi652mGHs/" class="btn-red facebook" target="_blank">Facebook</a>
+        <a href="https://wa.me/51968059127" class="btn-red whatsapp" target="_blank">WhatsApp</a>
+      </div>
+      <audio controls src="https://panelautodj.innovatestream.pe/8464/;"></audio>
+    </div>
+
+    <!-- La Raya -->
+    <div class="card">
+      <img src="https://imgfz.com/i/zauB0Id.png" alt="La Raya" class="logo" />
+      <h2>La Raya</h2>
+      <div class="redes">
+        <a href="https://www.facebook.com/share/1EkJ4wUcLK/" class="btn-red facebook" target="_blank">Facebook</a>
+        <a href="https://wa.me/51968059127" class="btn-red whatsapp" target="_blank">WhatsApp</a>
+      </div>
+      <audio controls src="https://panelautodj.innovatestream.pe/8466/;"></audio>
+    </div>
+
+    <!-- Radio La Fuerte Tambogrande -->
+    <div class="card">
+      <h2 style="font-size: 2rem; color: #f9f871; margin-top: 1rem;">Radio La Fuerte Tambogrande</h2>
+      <audio controls src="https://panelautodj.innovatestream.pe/7828/;"></audio>
+      <div class="redes" style="margin-top: 1.5rem;">
+        <a 
+          href="https://wa.me/51968093779?text=Hola%2C%20quiero%20información%20para%20contratar%20publicidad%20en%20Radio%20La%20Fuerte%20Tambogrande"
+          target="_blank"
+          style="display: inline-block; font-size: 1rem; padding: 10px 18px; background: #25D366; color: white; border-radius: 8px; text-decoration: none;">
+          📢 Contrata publicidad aquí
+        </a>
+      </div>
+    </div>
+
+  </main>
+
+  <footer>
+    © 2025 Corporación La Fuerte. Todos los derechos reservados.
+  </footer>
+</body>
+</html>

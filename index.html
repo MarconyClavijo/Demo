@@ -17,15 +17,25 @@
       background: linear-gradient(135deg, #1a1a2e, #16213e);
       color: #fff;
     }
+    /* Logo principal */
     .logo-animado {
-      width: 300px;
+      width: 400px; /* Más grande */
       margin: 2rem auto 0;
       display: block;
-      animation: entradaLogo 2s ease-out forwards, resplandor 3s infinite alternate;
+      animation: entradaLogo 2s ease-out forwards, giroLogo 6s linear infinite, resplandor 3s infinite alternate;
+      cursor: pointer;
+      filter: drop-shadow(0 0 15px #ffcc00);
+      border-radius: 15px;
+      background: #000a;
+      padding: 10px;
     }
     @keyframes entradaLogo {
-      0% { transform: scale(0.2); opacity: 0; }
-      100% { transform: scale(1); opacity: 1; }
+      0% { transform: scale(0.2) rotate(0deg); opacity: 0; }
+      100% { transform: scale(1) rotate(0deg); opacity: 1; }
+    }
+    @keyframes giroLogo {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
     }
     @keyframes resplandor {
       0% { filter: drop-shadow(0 0 10px #ff6f61); }
@@ -95,6 +105,7 @@
     }
     .logo.reproduciendo {
       animation: bordeNeon 1.5s infinite alternate;
+      box-shadow: 0 0 15px 6px #00f0ff, 0 0 30px 12px #00ffa3;
     }
     @keyframes bordeNeon {
       from {
@@ -143,6 +154,7 @@
     document.addEventListener('DOMContentLoaded', function () {
       const audios = document.querySelectorAll('audio');
       const logos = document.querySelectorAll('.logo');
+      const logoPrincipal = document.querySelector('.logo-animado');
 
       audios.forEach((audio, index) => {
         const logo = logos[index];
@@ -154,9 +166,17 @@
             }
           });
           logo.classList.add('reproduciendo');
+          // Detener animación logo principal mientras se reproduce cualquiera de los streams
+          logoPrincipal.style.animationPlayState = 'paused';
+          logoPrincipal.style.filter = 'drop-shadow(0 0 10px #555)';
         });
         audio.addEventListener('pause', () => {
           logo.classList.remove('reproduciendo');
+          // Si ningún audio está reproduciéndose, reanudar animación logo principal
+          if (![...audios].some(a => !a.paused)) {
+            logoPrincipal.style.animationPlayState = 'running';
+            logoPrincipal.style.filter = 'drop-shadow(0 0 15px #ffcc00)';
+          }
         });
       });
 
@@ -169,6 +189,17 @@
             audio.pause();
           }
         });
+      });
+
+      // Hacer clic en logo principal para pausar/reproducir todos los streams
+      logoPrincipal.addEventListener('click', () => {
+        const anyPlaying = [...audios].some(audio => !audio.paused);
+        if (anyPlaying) {
+          audios.forEach(audio => audio.pause());
+        } else {
+          // Reproducir el primer stream por defecto
+          if (audios[0]) audios[0].play();
+        }
       });
     });
   </script>
@@ -245,15 +276,4 @@
       <img src="https://imgfz.com/i/zauB0Id.png" alt="La Raya" class="logo" />
       <h2>La Raya</h2>
       <div class="redes">
-        <a href="https://www.facebook.com/share/1EkJ4wUcLK/" class="btn-red facebook" target="_blank">Facebook</a>
-        <a href="https://wa.me/51968059127" class="btn-red whatsapp" target="_blank">WhatsApp</a>
-      </div>
-      <audio controls src="https://panelautodj.innovatestream.pe/8466/;"></audio>
-    </div>
-  </main>
-
-  <footer>
-    © 2025 Corporación La Fuerte. Todos los derechos reservados.
-  </footer>
-</body>
-</html>
+        <a href="https://www.facebook.com/share/1EkJ4

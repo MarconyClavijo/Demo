@@ -1,265 +1,106 @@
-<!DOCTYPE html>
-<html lang="es">
+<!DOCTYPE html><html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Corporación La Fuerte</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
   <style>
-    /* Reset básico */
-    * {
-      box-sizing: border-box;
-    }
     body {
       margin: 0;
-      font-family: 'Montserrat', sans-serif;
-      background: linear-gradient(135deg, #1a1a2e, #16213e);
+      font-family: Arial, sans-serif;
+      background-color: #111;
       color: #fff;
-      min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
     }
     header {
-      background: #0f3460;
-      width: 100%;
-      padding: 2rem 1rem 1rem;
       text-align: center;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.6);
-    }
-    header h1 {
-      font-size: 3rem;
-      margin: 1rem 0 0;
-      color: #f9f871;
-      text-shadow: 2px 2px 8px #000;
-    }
-    .logo-animado {
-      width: 360px;
-      margin: 0 auto 1rem;
-      display: block;
-      animation: entradaLogo 2s ease-out forwards, girar 20s linear infinite;
-    }
-    @keyframes entradaLogo {
-      0% { transform: scale(0.2); opacity: 0; }
-      100% { transform: scale(1); opacity: 1; }
-    }
-    @keyframes girar {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-    .contacto {
-      margin-top: 1rem;
-    }
-    .btn-contacto {
-      background: #25D366;
-      color: #fff;
-      padding: 0.7rem 1.4rem;
-      border-radius: 30px;
-      text-decoration: none;
-      font-weight: bold;
-      display: inline-block;
-      transition: background 0.3s ease;
-    }
-    .btn-contacto:hover {
-      background: #1ebe5b;
-    }
-    main.grid {
-      max-width: 1300px;
-      width: 95%;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 2rem;
-      padding: 2rem 0 4rem;
-      justify-items: center;
-    }
-    .card {
-      background: #222831;
-      border: 2px solid #ff6f61;
-      border-radius: 20px;
-      padding: 2rem 1.5rem;
-      max-width: 320px;
+      padding: 1rem;
+      background-color: #222;
       width: 100%;
+    }
+    header img {
+      width: 200px;
+      animation: spin 5s linear infinite;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    .emisoras {
       display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.4);
-    }
-    .card:hover {
-      transform: translateY(-6px) scale(1.04);
-      box-shadow: 0 12px 24px rgba(255, 111, 97, 0.6);
-    }
-    .logo {
-      width: 120px;
-      height: 120px;
-      object-fit: contain;
-      margin-bottom: 1rem;
-      border-radius: 12px;
-      background: #fff;
-      padding: 5px;
-      cursor: pointer;
-      user-select: none;
-      transition: transform 0.2s ease;
-    }
-    .logo:hover {
-      transform: scale(1.05);
-    }
-    .card h2 {
-      color: #ffcc00;
-      margin-bottom: 1rem;
-      font-size: 1.5rem;
-    }
-    .redes {
-      margin-bottom: 1rem;
-      display: flex;
+      flex-wrap: wrap;
       justify-content: center;
-      gap: 12px;
-      width: 100%;
+      margin: 2rem auto;
+      gap: 2rem;
     }
-    .btn-red {
-      flex: 1;
-      padding: 8px 0;
-      border-radius: 30px;
-      font-weight: 700;
-      text-decoration: none;
-      font-size: 0.9rem;
-      color: white;
-      transition: background 0.3s ease;
+    .emisora {
+      background-color: #222;
+      border-radius: 12px;
+      padding: 1rem;
       text-align: center;
+      width: 300px;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
     }
-    .facebook {
-      background: #3b5998;
-    }
-    .facebook:hover {
-      background: #2d4373;
-    }
-    .whatsapp {
-      background: #25D366;
-    }
-    .whatsapp:hover {
-      background: #1ebe5b;
+    .emisora img {
+      width: 100px;
+      height: auto;
+      margin-bottom: 1rem;
     }
     audio {
       width: 100%;
-      border-radius: 10px;
-      outline: none;
-      margin-top: 0.5rem;
-      background: #000;
+      margin-top: 1rem;
     }
-    footer {
-      width: 100%;
-      text-align: center;
-      padding: 1rem 0 2rem;
+    .titulo-cancion {
       font-size: 0.9rem;
-      background: #0f0f0f;
-      color: #aaa;
-      margin-top: auto;
+      color: #f0f0f0;
+      margin-top: 0.5rem;
     }
   </style>
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const audios = document.querySelectorAll('audio');
-      const logos = document.querySelectorAll('.logo');
-      audios.forEach(audio => {
-        audio.addEventListener('play', () => {
-          audios.forEach(other => {
-            if (other !== audio) other.pause();
-          });
-        });
-      });
-      logos.forEach(logo => {
-        logo.addEventListener('click', () => {
-          const audio = logo.parentElement.querySelector('audio');
-          if (audio.paused) {
-            audio.play();
-          } else {
-            audio.pause();
-          }
-        });
-      });
-    });
-  </script>
 </head>
 <body>
   <header>
-    <img src="https://imgfz.com/i/bmnsNX4.png" alt="Logo Corporación La Fuerte" class="logo-animado" />
+    <img src="logo-la-fuerte.png" alt="Logo Corporación La Fuerte" />
     <h1>Corporación La Fuerte</h1>
-    <div class="contacto">
-      <a href="https://wa.me/51968093770" class="btn-contacto" target="_blank" rel="noopener noreferrer">📢 Contrata publicidad aquí</a>
-    </div>
-  </header>
+  </header>  <div class="emisoras">
+    <div class="emisora">
+      <img src="logo-stereo-m.png" alt="Stereo M" />
+      <h2>Stereo M</h2>
+      <p class="titulo-cancion" id="cancion-stereo">Cargando canción...</p>
+      <audio controls src="https://stream-52.zeno.fm/yquwqq92a0hvv"></audio>
+    </div><div class="emisora">
+  <img src="logo-la-raya.png" alt="La Raya" />
+  <h2>La Raya</h2>
+  <p class="titulo-cancion" id="cancion-raya">Cargando canción...</p>
+  <audio controls src="https://stream-44.zeno.fm/7s6nz4y2fchvv"></audio>
+</div>
 
-  <main class="grid">
-    <!-- La Jefa -->
-    <div class="card">
-      <img src="https://imgfz.com/i/FRicwT8.png" alt="La Jefa" class="logo" />
-      <h2>La Jefa</h2>
-      <div class="redes">
-        <a href="https://www.facebook.com/share/1Ej5wJMZS6/" class="btn-red facebook" target="_blank" rel="noopener noreferrer">Facebook</a>
-        <a href="https://wa.me/51957947659" class="btn-red whatsapp" target="_blank" rel="noopener noreferrer">WhatsApp</a>
-      </div>
-      <audio controls src="https://panelautodj.innovatestream.pe/7320/;"></audio>
-    </div>
+<div class="emisora">
+  <img src="logo-tambogrande.png" alt="Radio La Fuerte - Tambogrande" />
+  <h2>Radio La Fuerte - Tambogrande</h2>
+  <p class="titulo-cancion" id="cancion-tambogrande">Cargando canción...</p>
+  <audio controls src="https://stream-44.zeno.fm/qe14z2n75rhvv"></audio>
+</div>
 
-    <!-- La Fuerte -->
-    <div class="card">
-      <img src="https://imgfz.com/i/fmdxHD8.png" alt="La Fuerte" class="logo" />
-      <h2>La Fuerte</h2>
-      <div class="redes">
-        <a href="https://www.facebook.com/share/15VXL1LjJb/" class="btn-red facebook" target="_blank" rel="noopener noreferrer">Facebook</a>
-        <a href="https://wa.me/51981603469" class="btn-red whatsapp" target="_blank" rel="noopener noreferrer">WhatsApp</a>
-      </div>
-      <audio controls src="https://panelautodj.innovatestream.pe/7322/;"></audio>
-    </div>
+  </div>  <script>
+    async function obtenerTitulo(emisoraId, urlApi) {
+      try {
+        const res = await fetch(urlApi);
+        const data = await res.json();
+        const titulo = data.nowplaying ? data.nowplaying.title : 'Sin datos';
+        document.getElementById(emisoraId).textContent = titulo;
+      } catch (error) {
+        document.getElementById(emisoraId).textContent = 'No disponible';
+      }
+    }
 
-    <!-- San Francisco -->
-    <div class="card">
-      <img src="https://imgfz.com/i/bBApQu2.png" alt="San Francisco" class="logo" />
-      <h2>San Francisco</h2>
-      <div class="redes">
-        <a href="https://www.facebook.com/share/1Bs468FUoA/" class="btn-red facebook" target="_blank" rel="noopener noreferrer">Facebook</a>
-        <a href="https://wa.me/51966332309" class="btn-red whatsapp" target="_blank" rel="noopener noreferrer">WhatsApp</a>
-      </div>
-      <audio controls src="https://panelautodj.innovatestream.pe/7324/;"></audio>
-    </div>
+    function actualizarTitulos() {
+      obtenerTitulo("cancion-stereo", "https://zeno.fm/radio/yquwqq92a0hvv/nowplaying.json");
+      obtenerTitulo("cancion-raya", "https://zeno.fm/radio/7s6nz4y2fchvv/nowplaying.json");
+      obtenerTitulo("cancion-tambogrande", "https://zeno.fm/radio/qe14z2n75rhvv/nowplaying.json");
+    }
 
-    <!-- Máxima -->
-    <div class="card">
-      <img src="https://imgfz.com/i/bVMWlXD.png" alt="Máxima" class="logo" />
-      <h2>Máxima</h2>
-      <div class="redes">
-        <a href="https://www.facebook.com/share/1BqFMXcYiR/" class="btn-red facebook" target="_blank" rel="noopener noreferrer">Facebook</a>
-        <a href="https://wa.me/51968059127" class="btn-red whatsapp" target="_blank" rel="noopener noreferrer">WhatsApp</a>
-      </div>
-      <audio controls src="https://panelautodj.innovatestream.pe/8342/;"></audio>
-    </div>
-
-    <!-- La Cumbiambera -->
-    <div class="card">
-      <img src="https://imgfz.com/i/J89AMPT.png" alt="La Cumbiambera" class="logo" />
-      <h2>La Cumbiambera</h2>
-      <div class="redes">
-        <a href="https://www.facebook.com/share/1Zi652mGHs/" class="btn-red facebook" target="_blank" rel="noopener noreferrer">Facebook</a>
-        <a href="https://wa.me/51968059127" class="btn-red whatsapp" target="_blank" rel="noopener noreferrer">WhatsApp</a>
-      </div>
-      <audio controls src="https://panelautodj.innovatestream.pe/8464/;"></audio>
-    </div>
-
-    <!-- La Raya -->
-    <div class="card">
-      <img src="https://imgfz.com/i/zauB0Id.png" alt="La Raya" class="logo" />
-      <h2>La Raya</h2>
-      <div class="redes">
-        <a href="https://www.facebook.com/share/1EkJ4wUcLK/" class="btn-red facebook" target="_blank" rel="noopener noreferrer">Facebook</a>
-        <a href="https://wa.me/51968059127" class="btn-red whatsapp" target="_blank" rel="noopener noreferrer">WhatsApp</a>
-      </div>
-      <audio controls src="https://panelautodj.innovatestream.pe/8528/;"></audio>
-    </div>
-  </main>
-
-  <footer>
-    © 2025 Corporación La Fuerte. Todos los derechos reservados.
-  </footer>
-</body>
+    actualizarTitulos();
+    setInterval(actualizarTitulos, 30000);
+  </script></body>
 </html>

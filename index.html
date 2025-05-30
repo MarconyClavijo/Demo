@@ -6,7 +6,6 @@
   <title>Corporación La Fuerte</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
   <style>
-    /* Reset básico */
     * {
       box-sizing: border-box;
     }
@@ -147,6 +146,13 @@
       margin-top: 0.5rem;
       background: #000;
     }
+    .song-info {
+      margin-top: 0.5rem;
+      font-style: italic;
+      font-size: 0.9rem;
+      color: #ddd;
+      min-height: 1.3em;
+    }
     footer {
       width: 100%;
       text-align: center;
@@ -157,29 +163,6 @@
       margin-top: auto;
     }
   </style>
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const audios = document.querySelectorAll('audio');
-      const logos = document.querySelectorAll('.logo');
-      audios.forEach(audio => {
-        audio.addEventListener('play', () => {
-          audios.forEach(other => {
-            if (other !== audio) other.pause();
-          });
-        });
-      });
-      logos.forEach(logo => {
-        logo.addEventListener('click', () => {
-          const audio = logo.parentElement.querySelector('audio');
-          if (audio.paused) {
-            audio.play();
-          } else {
-            audio.pause();
-          }
-        });
-      });
-    });
-  </script>
 </head>
 <body>
   <header>
@@ -199,7 +182,8 @@
         <a href="https://www.facebook.com/share/1Ej5wJMZS6/" class="btn-red facebook" target="_blank" rel="noopener noreferrer">Facebook</a>
         <a href="https://wa.me/51957947659" class="btn-red whatsapp" target="_blank" rel="noopener noreferrer">WhatsApp</a>
       </div>
-      <audio controls src="https://panelautodj.innovatestream.pe/7320/;"></audio>
+      <audio controls src="https://panelautodj.innovatestream.pe:7320/;"></audio>
+      <div class="song-info">Cargando canción...</div>
     </div>
 
     <!-- La Fuerte -->
@@ -210,56 +194,87 @@
         <a href="https://www.facebook.com/share/15VXL1LjJb/" class="btn-red facebook" target="_blank" rel="noopener noreferrer">Facebook</a>
         <a href="https://wa.me/51981603469" class="btn-red whatsapp" target="_blank" rel="noopener noreferrer">WhatsApp</a>
       </div>
-      <audio controls src="https://panelautodj.innovatestream.pe/7322/;"></audio>
+      <audio controls src="https://panelautodj.innovatestream.pe:7322/;"></audio>
+      <div class="song-info">Cargando canción...</div>
     </div>
 
     <!-- San Francisco -->
     <div class="card">
-      <img src="https://imgfz.com/i/bBApQu2.png" alt="San Francisco" class="logo" />
+      <img src="https://imgfz.com/i/8GVc0QM.png" alt="San Francisco" class="logo" />
       <h2>San Francisco</h2>
       <div class="redes">
-        <a href="https://www.facebook.com/share/1Bs468FUoA/" class="btn-red facebook" target="_blank" rel="noopener noreferrer">Facebook</a>
-        <a href="https://wa.me/51966332309" class="btn-red whatsapp" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+        <a href="https://www.facebook.com/sanfrancisco" class="btn-red facebook" target="_blank" rel="noopener noreferrer">Facebook</a>
+        <a href="https://wa.me/51987654321" class="btn-red whatsapp" target="_blank" rel="noopener noreferrer">WhatsApp</a>
       </div>
-      <audio controls src="https://panelautodj.innovatestream.pe/7324/;"></audio>
+      <audio controls src="https://panelautodj.innovatestream.pe:7324/;"></audio>
+      <div class="song-info">Cargando canción...</div>
     </div>
 
     <!-- Máxima -->
     <div class="card">
-      <img src="https://imgfz.com/i/bVMWlXD.png" alt="Máxima" class="logo" />
+      <img src="https://imgfz.com/i/9lDlSnV.png" alt="Máxima" class="logo" />
       <h2>Máxima</h2>
       <div class="redes">
-        <a href="https://www.facebook.com/share/1BqFMXcYiR/" class="btn-red facebook" target="_blank" rel="noopener noreferrer">Facebook</a>
-        <a href="https://wa.me/51968059127" class="btn-red whatsapp" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+        <a href="https://www.facebook.com/maxima" class="btn-red facebook" target="_blank" rel="noopener noreferrer">Facebook</a>
+        <a href="https://wa.me/51981234567" class="btn-red whatsapp" target="_blank" rel="noopener noreferrer">WhatsApp</a>
       </div>
-      <audio controls src="https://panelautodj.innovatestream.pe/8342/;"></audio>
+      <audio controls src="https://panelautodj.innovatestream.pe:8342/;"></audio>
+      <div class="song-info">Cargando canción...</div>
     </div>
 
     <!-- La Cumbiambera -->
     <div class="card">
-      <img src="https://imgfz.com/i/J89AMPT.png" alt="La Cumbiambera" class="logo" />
+      <img src="https://imgfz.com/i/LCumbiamberaLogo.png" alt="La Cumbiambera" class="logo" />
       <h2>La Cumbiambera</h2>
       <div class="redes">
-        <a href="https://www.facebook.com/share/1Zi652mGHs/" class="btn-red facebook" target="_blank" rel="noopener noreferrer">Facebook</a>
-        <a href="https://wa.me/51968059127" class="btn-red whatsapp" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+        <a href="https://www.facebook.com/lacumbiambera" class="btn-red facebook" target="_blank" rel="noopener noreferrer">Facebook</a>
+        <a href="https://wa.me/51987651234" class="btn-red whatsapp" target="_blank" rel="noopener noreferrer">WhatsApp</a>
       </div>
-      <audio controls src="https://panelautodj.innovatestream.pe/8464/;"></audio>
+      <audio controls src="https://panelautodj.innovatestream.pe:8464/;"></audio>
+      <div class="song-info">Cargando canción...</div>
     </div>
 
     <!-- La Raya -->
     <div class="card">
-      <img src="https://imgfz.com/i/zauB0Id.png" alt="La Raya" class="logo" />
+      <img src="https://imgfz.com/i/LaRayaLogo.png" alt="La Raya" class="logo" />
       <h2>La Raya</h2>
       <div class="redes">
-        <a href="https://www.facebook.com/share/1EkJ4wUcLK/" class="btn-red facebook" target="_blank" rel="noopener noreferrer">Facebook</a>
-        <a href="https://wa.me/51968059127" class="btn-red whatsapp" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+        <a href="https://www.facebook.com/laraya" class="btn-red facebook" target="_blank" rel="noopener noreferrer">Facebook</a>
+        <a href="https://wa.me/51987659876" class="btn-red whatsapp" target="_blank" rel="noopener noreferrer">WhatsApp</a>
       </div>
-      <audio controls src="https://panelautodj.innovatestream.pe/8466/;"></audio>
+      <audio controls src="https://panelautodj.innovatestream.pe:8466/;"></audio>
+      <div class="song-info">Cargando canción...</div>
     </div>
   </main>
 
   <footer>
-    © 2025 Corporación La Fuerte. Todos los derechos reservados.
+    &copy; 2025 Corporación La Fuerte - Todos los derechos reservados
   </footer>
-</body>
-</html>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const audios = document.querySelectorAll('audio');
+      const logos = document.querySelectorAll('.logo');
+
+      // Pausar otros audios al reproducir uno
+      audios.forEach(audio => {
+        audio.addEventListener('play', () => {
+          audios.forEach(other => {
+            if (other !== audio) other.pause();
+          });
+        });
+      });
+
+      // Click en logo para reproducir/pausar audio
+      logos.forEach(logo => {
+        logo.addEventListener('click', () => {
+          const audio = logo.parentElement.querySelector('audio');
+          if (audio.paused) {
+            audio.play();
+          } else {
+            audio.pause();
+          }
+        });
+      });
+
+      // Datos para las emisoras con su puerto y

@@ -2,24 +2,40 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Corporación La Fuerte</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
-  <script>
-    if (location.protocol === 'http:') {
-      location.href = location.href.replace('http:', 'https:');
-    }
-  </script>
   <style>
+    /* Reset básico */
+    * {
+      box-sizing: border-box;
+    }
     body {
       margin: 0;
       font-family: 'Montserrat', sans-serif;
       background: linear-gradient(135deg, #1a1a2e, #16213e);
       color: #fff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    header {
+      background: #0f3460;
+      width: 100%;
+      padding: 2rem 1rem 1rem;
+      text-align: center;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.6);
+    }
+    header h1 {
+      font-size: 3rem;
+      margin: 1rem 0 0;
+      color: #f9f871;
+      text-shadow: 2px 2px 8px #000;
     }
     .logo-animado {
       width: 360px;
-      margin: 2rem auto 1rem;
+      margin: 0 auto 1rem;
       display: block;
       animation: entradaLogo 2s ease-out forwards, girar 20s linear infinite;
     }
@@ -31,20 +47,7 @@
       from { transform: rotate(0deg); }
       to { transform: rotate(360deg); }
     }
-    header {
-      background: #0f3460;
-      text-align: center;
-      padding: 2rem 1rem 1rem;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.6);
-    }
-    header h1 {
-      font-size: 3rem;
-      margin: 1rem 0 0;
-      color: #f9f871;
-      text-shadow: 2px 2px 8px #000;
-    }
     .contacto {
-      text-align: center;
       margin-top: 1rem;
     }
     .btn-contacto {
@@ -55,27 +58,37 @@
       text-decoration: none;
       font-weight: bold;
       display: inline-block;
-      margin: 1rem auto;
+      transition: background 0.3s ease;
     }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-      padding: 2rem;
+    .btn-contacto:hover {
+      background: #1ebe5b;
+    }
+    main.grid {
       max-width: 1300px;
-      margin: auto;
+      width: 95%;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+      padding: 2rem 0 4rem;
+      justify-items: center;
     }
     .card {
       background: #222831;
       border: 2px solid #ff6f61;
       border-radius: 20px;
-      padding: 1.5rem;
+      padding: 2rem 1.5rem;
+      max-width: 320px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       text-align: center;
-      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.4);
     }
     .card:hover {
-      transform: translateY(-5px) scale(1.03);
-      box-shadow: 0 10px 25px rgba(255, 111, 97, 0.5);
+      transform: translateY(-6px) scale(1.04);
+      box-shadow: 0 12px 24px rgba(255, 111, 97, 0.6);
     }
     .logo {
       width: 120px;
@@ -86,40 +99,62 @@
       background: #fff;
       padding: 5px;
       cursor: pointer;
+      user-select: none;
+      transition: transform 0.2s ease;
+    }
+    .logo:hover {
+      transform: scale(1.05);
     }
     .card h2 {
       color: #ffcc00;
       margin-bottom: 1rem;
+      font-size: 1.5rem;
     }
     .redes {
-      margin-top: 1rem;
+      margin-bottom: 1rem;
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      width: 100%;
     }
     .btn-red {
-      display: inline-block;
-      margin: 5px;
-      padding: 8px 14px;
+      flex: 1;
+      padding: 8px 0;
       border-radius: 30px;
-      font-weight: bold;
+      font-weight: 700;
       text-decoration: none;
-      transition: background 0.3s;
       font-size: 0.9rem;
+      color: white;
+      transition: background 0.3s ease;
+      text-align: center;
     }
-    .facebook { background: #3b5998; color: white; }
-    .facebook:hover { background: #2d4373; }
-    .whatsapp { background: #25D366; color: white; }
-    .whatsapp:hover { background: #1ebe5b; }
+    .facebook {
+      background: #3b5998;
+    }
+    .facebook:hover {
+      background: #2d4373;
+    }
+    .whatsapp {
+      background: #25D366;
+    }
+    .whatsapp:hover {
+      background: #1ebe5b;
+    }
     audio {
       width: 100%;
       border-radius: 10px;
       outline: none;
-      margin-top: 1rem;
+      margin-top: 0.5rem;
+      background: #000;
     }
     footer {
+      width: 100%;
       text-align: center;
-      padding: 2rem;
+      padding: 1rem 0 2rem;
       font-size: 0.9rem;
       background: #0f0f0f;
       color: #aaa;
+      margin-top: auto;
     }
   </style>
   <script>
@@ -151,19 +186,18 @@
     <img src="https://imgfz.com/i/bmnsNX4.png" alt="Logo Corporación La Fuerte" class="logo-animado" />
     <h1>Corporación La Fuerte</h1>
     <div class="contacto">
-      <a href="https://wa.me/51968093770" class="btn-contacto" target="_blank">📢 Contrata publicidad aquí</a>
+      <a href="https://wa.me/51968093770" class="btn-contacto" target="_blank" rel="noopener noreferrer">📢 Contrata publicidad aquí</a>
     </div>
   </header>
 
   <main class="grid">
-    <!-- Radios -->
     <!-- La Jefa -->
     <div class="card">
       <img src="https://imgfz.com/i/FRicwT8.png" alt="La Jefa" class="logo" />
       <h2>La Jefa</h2>
       <div class="redes">
-        <a href="https://www.facebook.com/share/1Ej5wJMZS6/" class="btn-red facebook" target="_blank">Facebook</a>
-        <a href="https://wa.me/51957947659" class="btn-red whatsapp" target="_blank">WhatsApp</a>
+        <a href="https://www.facebook.com/share/1Ej5wJMZS6/" class="btn-red facebook" target="_blank" rel="noopener noreferrer">Facebook</a>
+        <a href="https://wa.me/51957947659" class="btn-red whatsapp" target="_blank" rel="noopener noreferrer">WhatsApp</a>
       </div>
       <audio controls src="https://panelautodj.innovatestream.pe/7320/;"></audio>
     </div>
@@ -173,8 +207,8 @@
       <img src="https://imgfz.com/i/fmdxHD8.png" alt="La Fuerte" class="logo" />
       <h2>La Fuerte</h2>
       <div class="redes">
-        <a href="https://www.facebook.com/share/15VXL1LjJb/" class="btn-red facebook" target="_blank">Facebook</a>
-        <a href="https://wa.me/51981603469" class="btn-red whatsapp" target="_blank">WhatsApp</a>
+        <a href="https://www.facebook.com/share/15VXL1LjJb/" class="btn-red facebook" target="_blank" rel="noopener noreferrer">Facebook</a>
+        <a href="https://wa.me/51981603469" class="btn-red whatsapp" target="_blank" rel="noopener noreferrer">WhatsApp</a>
       </div>
       <audio controls src="https://panelautodj.innovatestream.pe/7322/;"></audio>
     </div>
@@ -184,8 +218,8 @@
       <img src="https://imgfz.com/i/bBApQu2.png" alt="San Francisco" class="logo" />
       <h2>San Francisco</h2>
       <div class="redes">
-        <a href="https://www.facebook.com/share/1Bs468FUoA/" class="btn-red facebook" target="_blank">Facebook</a>
-        <a href="https://wa.me/51966332309" class="btn-red whatsapp" target="_blank">WhatsApp</a>
+        <a href="https://www.facebook.com/share/1Bs468FUoA/" class="btn-red facebook" target="_blank" rel="noopener noreferrer">Facebook</a>
+        <a href="https://wa.me/51966332309" class="btn-red whatsapp" target="_blank" rel="noopener noreferrer">WhatsApp</a>
       </div>
       <audio controls src="https://panelautodj.innovatestream.pe/7324/;"></audio>
     </div>
@@ -195,8 +229,8 @@
       <img src="https://imgfz.com/i/bVMWlXD.png" alt="Máxima" class="logo" />
       <h2>Máxima</h2>
       <div class="redes">
-        <a href="https://www.facebook.com/share/1BqFMXcYiR/" class="btn-red facebook" target="_blank">Facebook</a>
-        <a href="https://wa.me/51968059127" class="btn-red whatsapp" target="_blank">WhatsApp</a>
+        <a href="https://www.facebook.com/share/1BqFMXcYiR/" class="btn-red facebook" target="_blank" rel="noopener noreferrer">Facebook</a>
+        <a href="https://wa.me/51968059127" class="btn-red whatsapp" target="_blank" rel="noopener noreferrer">WhatsApp</a>
       </div>
       <audio controls src="https://panelautodj.innovatestream.pe/8342/;"></audio>
     </div>
@@ -206,8 +240,8 @@
       <img src="https://imgfz.com/i/J89AMPT.png" alt="La Cumbiambera" class="logo" />
       <h2>La Cumbiambera</h2>
       <div class="redes">
-        <a href="https://www.facebook.com/share/1Zi652mGHs/" class="btn-red facebook" target="_blank">Facebook</a>
-        <a href="https://wa.me/51968059127" class="btn-red whatsapp" target="_blank">WhatsApp</a>
+        <a href="https://www.facebook.com/share/1Zi652mGHs/" class="btn-red facebook" target="_blank" rel="noopener noreferrer">Facebook</a>
+        <a href="https://wa.me/51968059127" class="btn-red whatsapp" target="_blank" rel="noopener noreferrer">WhatsApp</a>
       </div>
       <audio controls src="https://panelautodj.innovatestream.pe/8464/;"></audio>
     </div>
@@ -217,20 +251,10 @@
       <img src="https://imgfz.com/i/zauB0Id.png" alt="La Raya" class="logo" />
       <h2>La Raya</h2>
       <div class="redes">
-        <a href="https://www.facebook.com/share/1EkJ4wUcLK/" class="btn-red facebook" target="_blank">Facebook</a>
-        <a href="https://wa.me/51968059127" class="btn-red whatsapp" target="_blank">WhatsApp</a>
+        <a href="https://www.facebook.com/share/1EkJ4wUcLK/" class="btn-red facebook" target="_blank" rel="noopener noreferrer">Facebook</a>
+        <a href="https://wa.me/51968059127" class="btn-red whatsapp" target="_blank" rel="noopener noreferrer">WhatsApp</a>
       </div>
-      <audio controls src="https://panelautodj.innovatestream.pe/8466/;"></audio>
-    </div>
-
-    <!-- Tambogrande -->
-    <div class="card">
-      <img src="https://imgfz.com/i/fmdxHD8.png" alt="La Fuerte - Tambogrande" class="logo" />
-      <h2>Radio La Fuerte - Tambogrande</h2>
-      <div class="redes">
-        <!-- Puedes agregar enlaces aquí si quieres -->
-      </div>
-      <audio controls src="http://panelautodj.innovatestream.pe/7828/;"></audio>
+      <audio controls src="https://panelautodj.innovatestream.pe/8528/;"></audio>
     </div>
   </main>
 

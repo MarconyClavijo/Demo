@@ -7,86 +7,93 @@
   <style>
     body {
       margin: 0;
-      background-color: #000;
-      color: white;
-      font-family: sans-serif;
+      background-color: black;
       display: flex;
       flex-direction: column;
       align-items: center;
-      text-align: center;
+      justify-content: center;
+      font-family: Arial, sans-serif;
+      color: white;
     }
 
-    .logo-principal {
+    .logo {
       width: 300px;
-      margin: 30px 0;
-      animation: entrada 1.5s ease-out, giro 8s linear infinite 1.5s;
+      margin-top: 30px;
+      animation: entrada 2s ease-out, giro 10s linear infinite 2s;
     }
 
     @keyframes entrada {
-      0% { transform: scale(0.3) rotate(-360deg); opacity: 0; }
-      100% { transform: scale(1) rotate(0deg); opacity: 1; }
+      0% {
+        transform: scale(0.5) rotate(-360deg);
+        opacity: 0;
+      }
+      100% {
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+      }
     }
 
     @keyframes giro {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
     }
 
-    .emisoras {
+    .logos {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
       gap: 20px;
-      margin-bottom: 30px;
+      margin: 30px 0;
     }
 
     .logo-emisora {
       width: 120px;
       height: 120px;
+      transition: transform 0.3s ease;
       cursor: pointer;
-      transition: transform 0.4s ease, box-shadow 0.4s ease;
-      border-radius: 10px;
     }
 
     .logo-emisora:hover {
-      transform: scale(1.2) rotate(5deg);
-      box-shadow: 0 0 15px #00f7ff;
-    }
-
-    audio {
-      margin-top: 10px;
+      transform: scale(1.2) rotate(10deg);
     }
 
     .player {
       display: none;
-    }
-
-    .visible {
-      display: block;
+      margin-bottom: 20px;
     }
 
     .contacto {
-      margin-top: 40px;
-      font-size: 1rem;
+      text-align: center;
+      margin-bottom: 30px;
     }
 
-    .contacto a {
-      color: #00ffc8;
+    .contacto h3 {
+      margin: 10px 0 5px;
+      color: #00ffcc;
+    }
+
+    .contacto p {
+      margin: 0;
+    }
+
+    a {
+      color: #00ffcc;
       text-decoration: none;
     }
 
-    .contacto a:hover {
+    a:hover {
       text-decoration: underline;
     }
   </style>
 </head>
 <body>
+  <img src="logo.png" alt="Corporación La Fuerte" class="logo"/>
 
-  <!-- Logo principal -->
-  <img src="logo.png" alt="Corporación La Fuerte" class="logo-principal" />
-
-  <!-- Logos de emisoras -->
-  <div class="emisoras">
+  <div class="logos">
     <img src="radio1.png" alt="Radio La Fuerte" class="logo-emisora" onclick="play('player1')" />
     <img src="radio2.png" alt="Radio La Fuertecita" class="logo-emisora" onclick="play('player2')" />
     <img src="radio3.png" alt="Radio Stereo M" class="logo-emisora" onclick="play('player3')" />
@@ -95,56 +102,48 @@
     <img src="radio6.png" alt="Tambogrande TV" class="logo-emisora" onclick="play('player6')" />
   </div>
 
-  <!-- Reproductores -->
   <div id="player1" class="player">
-    <audio controls autoplay src="https://panelautodj.innovatestream.pe/7322/;"></audio>
+    <audio controls preload="none" playsinline src="https://panelautodj.innovatestream.pe/7322/;"></audio>
   </div>
-
   <div id="player2" class="player">
-    <audio controls autoplay src="https://panelautodj.innovatestream.pe/8004/;"></audio>
+    <audio controls preload="none" playsinline src="https://panelautodj.innovatestream.pe/8004/;"></audio>
   </div>
-
   <div id="player3" class="player">
-    <audio controls autoplay src="https://radio30.virtualtronics.com/proxy/stereom?mp=/stream;"></audio>
+    <audio controls preload="none" playsinline src="https://radio30.virtualtronics.com/proxy/stereom?mp=/stream;"></audio>
   </div>
-
   <div id="player4" class="player">
-    <audio controls autoplay src="https://stream.zeno.fm/n0u5f95bgxhvv"></audio>
+    <audio controls preload="none" playsinline src="https://stream.zeno.fm/n0u5f95bgxhvv"></audio>
   </div>
-
-  <!-- Reproductor adicional (Radio La Fuerte - Tambogrande) -->
   <div id="player5" class="player">
-    <audio controls autoplay src="https://stream.zeno.fm/er4vc5my6f9uv"></audio>
+    <audio controls preload="none" playsinline src="https://stream.zeno.fm/er4vc5my6f9uv"></audio>
   </div>
-
   <div id="player6" class="player">
-    <audio controls autoplay src="https://stream.zeno.fm/mhehchx7yzzuv"></audio>
+    <audio controls preload="none" playsinline src="https://stream.zeno.fm/mhehchx7yzzuv"></audio>
   </div>
 
-  <!-- Contacto -->
   <div class="contacto">
     <h3>Contactos para publicidad:</h3>
     <p>Celular: 951367444</p>
-    <p>WhatsApp: <a href="https://wa.me/51951367444" target="_blank">Envíanos un mensaje</a></p>
+    <p>WhatsApp: <a href="https://wa.me/51951367444" target="_blank">Enlace Directo</a></p>
   </div>
 
-  <!-- Script para controlar los reproductores -->
   <script>
     function play(id) {
       const players = document.querySelectorAll('.player');
       players.forEach(p => {
         const audio = p.querySelector('audio');
         if (p.id === id) {
-          p.classList.add('visible');
-          audio.play();
+          p.style.display = 'block';
+          if (audio.paused) {
+            audio.play();
+          }
         } else {
-          p.classList.remove('visible');
+          p.style.display = 'none';
           audio.pause();
           audio.currentTime = 0;
         }
       });
     }
   </script>
-
 </body>
 </html>

@@ -1,78 +1,314 @@
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    const beep = document.getElementById('beep');
-    const audioPlayers = Array.from(document.querySelectorAll('audio[controls]')).filter(a => a !== beep);
-
-    // URLs con proxy CORS (para pruebas)
-    const proxies = {
-      "La Fuerte": "https://cors-anywhere.herokuapp.com/http://panelautodj.innovatestream.pe:7322/statistics?json=1&nocache=",
-      "La Jefa": "https://cors-anywhere.herokuapp.com/http://panelautodj.innovatestream.pe:7320/statistics?json=1&nocache=",
-      "San Francisco": "https://cors-anywhere.herokuapp.com/http://panelautodj.innovatestream.pe:7324/statistics?json=1&nocache=",
-      "Máxima": "https://cors-anywhere.herokuapp.com/http://panelautodj.innovatestream.pe:8342/statistics?json=1&nocache=",
-      "La Cumbiambera": "https://cors-anywhere.herokuapp.com/http://panelautodj.innovatestream.pe:8464/statistics?json=1&nocache=",
-      "La Raya": "https://cors-anywhere.herokuapp.com/http://panelautodj.innovatestream.pe:8466/statistics?json=1&nocache="
-    };
-
-    // Mapeo de radios con su card DOM y su URL
-    const cards = Array.from(document.querySelectorAll('.card')).map(card => {
-      const nombre = card.querySelector('h2').textContent.trim();
-      return {
-        card,
-        nombre,
-        url: proxies[nombre],
-        tituloElem: document.createElement('p')
-      };
-    });
-
-    // Agregar elemento para mostrar la canción debajo del título
-    cards.forEach(({ card, tituloElem }) => {
-      tituloElem.style.color = '#fff';
-      tituloElem.style.fontWeight = '600';
-      tituloElem.style.fontSize = '1rem';
-      tituloElem.style.marginTop = '0.5rem';
-      tituloElem.textContent = 'Cargando canción...';
-      card.querySelector('h2').after(tituloElem);
-    });
-
-    // Función para actualizar títulos
-    async function actualizarCanciones() {
-      for (const { url, tituloElem } of cards) {
-        try {
-          const res = await fetch(url);
-          if (!res.ok) throw new Error('Error en respuesta');
-
-          const data = await res.json();
-
-          // Dependiendo del formato JSON, buscar el nombre de la canción
-          // Según el servidor Icecast, el título suele estar en data.source.title o data.icestats.source.title
-          // Ajustamos según estructura (verifica que coincida)
-          let titulo = '';
-          if (data.icestats && data.icestats.source && data.icestats.source.title) {
-            titulo = data.icestats.source.title;
-          } else if (data.source && data.source.title) {
-            titulo = data.source.title;
-          } else {
-            titulo = 'No disponible';
-          }
-
-          tituloElem.textContent = titulo || 'No disponible';
-
-        } catch (error) {
-          tituloElem.textContent = 'Error al cargar canción';
-          console.error('Error al obtener canción:', error);
-        }
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Corporación La Fuerte</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Montserrat', sans-serif;
+      background: linear-gradient(135deg, #1a1a2e, #16213e);
+      color: #fff;
+    }
+    .logo-animado {
+      width: 300px;
+      margin: 1rem auto 1rem;
+      display: block;
+      animation: entradaLogo 2s ease-out forwards, resplandor 3s infinite alternate;
+    }
+    @keyframes entradaLogo {
+      0% { transform: scale(0.2); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    @keyframes resplandor {
+      0% { filter: drop-shadow(0 0 10px #ff6f61); }
+      100% { filter: drop-shadow(0 0 25px #ffcc00); }
+    }
+    header {
+      background: #0f3460;
+      text-align: center;
+      padding: 2rem 1rem 1rem;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.6);
+    }
+    header h1 {
+      font-size: 3rem;
+      margin: 1rem 0 0;
+      color: #f9f871;
+      text-shadow: 2px 2px 8px #000;
+    }
+    .btn-contacto {
+      display: inline-block;
+      background: #ffcc00;
+      color: #000;
+      font-weight: bold;
+      padding: 12px 24px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-size: 1.1rem;
+      margin-top: 1rem;
+      box-shadow: 0 4px 15px rgba(255, 204, 0, 0.6);
+      transition: all 0.3s ease;
+    }
+    .btn-contacto:hover {
+      background: #ff6f61;
+      color: #fff;
+      box-shadow: 0 6px 20px rgba(255, 111, 97, 0.7);
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      padding: 2rem;
+      max-width: 1300px;
+      margin: auto;
+    }
+    .card {
+      background: #222831;
+      border: 2px solid #ff6f61;
+      border-radius: 20px;
+      padding: 1.5rem;
+      text-align: center;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      position: relative;
+    }
+    .card:hover {
+      transform: translateY(-5px) scale(1.03);
+      box-shadow: 0 10px 25px rgba(255, 111, 97, 0.5);
+    }
+    .card.activa {
+      animation: brilloPulsante 2.5s ease-in-out infinite;
+      box-shadow:
+        0 0 15px 3px rgba(255, 111, 97, 0.8),
+        0 0 30px 6px rgba(255, 204, 0, 0.6),
+        inset 0 0 15px 2px rgba(255, 111, 97, 0.9);
+      border-color: #ffcc00;
+    }
+    @keyframes brilloPulsante {
+      0%, 100% {
+        box-shadow:
+          0 0 15px 3px rgba(255, 111, 97, 0.8),
+          0 0 30px 6px rgba(255, 204, 0, 0.6),
+          inset 0 0 15px 2px rgba(255, 111, 97, 0.9);
+        transform: scale(1);
+      }
+      50% {
+        box-shadow:
+          0 0 25px 6px rgba(255, 111, 97, 1),
+          0 0 40px 8px rgba(255, 204, 0, 0.9),
+          inset 0 0 25px 4px rgba(255, 111, 97, 1);
+        transform: scale(1.02);
       }
     }
+    .card.activa::before {
+      content: "🔴 EN VIVO";
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background: #ff3b3b;
+      padding: 3px 8px;
+      border-radius: 15px;
+      font-weight: bold;
+      font-size: 0.8rem;
+      animation: parpadeo 1.2s infinite;
+      box-shadow: 0 0 6px #ff3b3b;
+      pointer-events: none;
+      user-select: none;
+      z-index: 10;
+      white-space: nowrap;
+    }
+    @keyframes parpadeo {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+    .logo {
+      width: 120px;
+      height: 120px;
+      object-fit: contain;
+      margin-bottom: 1rem;
+      border-radius: 12px;
+      background: #fff;
+      padding: 5px;
+      cursor: pointer;
+    }
+    .card h2 {
+      color: #ffcc00;
+      margin-bottom: 1rem;
+    }
+    .redes {
+      margin-top: 1rem;
+    }
+    .btn-red {
+      display: inline-block;
+      margin: 5px;
+      padding: 8px 14px;
+      border-radius: 30px;
+      font-weight: bold;
+      text-decoration: none;
+      transition: background 0.3s;
+      font-size: 0.9rem;
+    }
+    .facebook { background: #3b5998; color: white; }
+    .facebook:hover { background: #2d4373; }
+    .whatsapp { background: #25D366; color: white; }
+    .whatsapp:hover { background: #1ebe5b; }
+    audio {
+      width: 100%;
+      border-radius: 10px;
+      outline: none;
+      margin-top: 1rem;
+    }
+    .cancion-activa {
+      margin-top: 0.5rem;
+      font-weight: 600;
+      font-size: 1rem;
+      color: #ffcc00;
+      min-height: 1.4em;
+      font-style: italic;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+      background: #0f0f0f;
+      color: #aaa;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="https://imgfz.com/i/bmnsNX4.png" alt="Logo Corporación La Fuerte" class="logo-animado" />
+    <h1>Corporación La Fuerte</h1>
+    <p>
+      <a href="https://wa.me/51968093770" class="btn-contacto" target="_blank" rel="noopener noreferrer">
+        📞 Contrata publicidad aquí: 51968093770
+      </a>
+    </p>
+  </header>
 
-    // Actualizar inicialmente y luego cada 10 segundos
-    actualizarCanciones();
-    setInterval(actualizarCanciones, 10000);
+  <main class="grid">
 
-    // Código original para play/pause y animación activa
-    audioPlayers.forEach(audio => {
-      audio.addEventListener('play', () => {
-        audioPlayers.forEach(other => {
-          if (other !== audio) other.pause();
+    <!-- La Fuerte -->
+    <div class="card" data-url="http://panelautodj.innovatestream.pe:7322/statistics?json=1&nocache=">
+      <img src="https://imgfz.com/i/fmdxHD8.png" alt="La Fuerte" class="logo" />
+      <h2>La Fuerte</h2>
+      <div class="redes">
+        <a href="https://www.facebook.com/share/15VXL1LjJb/" class="btn-red facebook" target="_blank" rel="noopener noreferrer">Facebook</a>
+        <a href="https://wa.me/51981603469" class="btn-red whatsapp" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+      </div>
+      <audio controls src="https://panelautodj.innovatestream.pe/7322/;"></audio>
+      <div class="cancion-activa">Cargando canción...</div>
+    </div>
+
+    <!-- La Jefa -->
+    <div class="card" data-url="http://panelautodj.innovatestream.pe:7320/statistics?json=1&nocache=">
+      <img src="https://imgfz.com/i/FRicwT8.png" alt="La Jefa" class="logo" />
+      <h2>La Jefa</h2>
+      <div class="redes">
+        <a href="https://www.facebook.com/share/1Ej5wJMZS6/" class="btn-red facebook" target="_blank" rel="noopener noreferrer">Facebook</a>
+        <a href="https://wa.me/51957947659" class="btn-red whatsapp" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+      </div>
+      <audio controls src="https://panelautodj.innovatestream.pe/7320/;"></audio>
+      <div class="cancion-activa">Cargando canción...</div>
+    </div>
+
+    <!-- San Francisco -->
+    <div class="card" data-url="http://panelautodj.innovatestream.pe:7324/statistics?json=1&nocache=">
+      <img src="https://imgfz.com/i/bBApQu2.png" alt="San Francisco" class="logo" />
+      <h2>San Francisco</h2>
+      <div class="redes">
+        <a href="https://www.facebook.com/share/1Bs468FUoA/" class="btn-red facebook" target="_blank" rel="noopener noreferrer">Facebook</a>
+        <a href="https://wa.me/51966332309" class="btn-red whatsapp" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+      </div>
+      <audio controls src="https://panelautodj.innovatestream.pe/7324/;"></audio>
+      <div class="cancion-activa">Cargando canción...</div>
+    </div>
+
+    <!-- Máxima -->
+    <div class="card" data-url="http://panelautodj.innovatestream.pe:8342/statistics?json=1&nocache=">
+      <img src="https://imgfz.com/i/bVMWlXD.png" alt="Máxima" class="logo" />
+      <h2>Máxima</h2>
+      <div class="redes">
+        <a href="https://www.facebook.com/share/1BqFMXcYiR/" class="btn-red facebook" target="_blank" rel="noopener noreferrer">Facebook</a>
+        <a href="https://wa.me/51968059127" class="btn-red whatsapp" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+      </div>
+      <audio controls src="https://panelautodj.innovatestream.pe/8342/;"></audio>
+      <div class="cancion-activa">Cargando canción...</div>
+    </div>
+
+    <!-- La Cumbiambera -->
+    <div class="card" data-url="http://panelautodj.innovatestream.pe:8464/statistics?json=1&nocache=">
+      <img src="https://imgfz.com/i/J89AMPT.png" alt="La Cumbiambera" class="logo" />
+      <h2>La Cumbiambera</h2>
+      <div class="redes">
+        <a href="https://www.facebook.com/share/1Zi652mGHs/" class="btn-red facebook" target="_blank" rel="noopener noreferrer">Facebook</a>
+        <a href="https://wa.me/51968059127" class="btn-red whatsapp" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+      </div>
+      <audio controls src="https://panelautodj.innovatestream.pe/8464/;"></audio>
+      <div class="cancion-activa">Cargando canción...</div>
+    </div>
+
+    <!-- La Raya -->
+    <div class="card" data-url="http://panelautodj.innovatestream.pe:8510/statistics?json=1&nocache=">
+      <img src="https://imgfz.com/i/MDzpyhe.png" alt="La Raya" class="logo" />
+      <h2>La Raya</h2>
+      <div class="redes">
+        <a href="https://www.facebook.com/share/1Xx0rzAmwt/" class="btn-red facebook" target="_blank" rel="noopener noreferrer">Facebook</a>
+        <a href="https://wa.me/51968059127" class="btn-red whatsapp" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+      </div>
+      <audio controls src="https://panelautodj.innovatestream.pe/8510/;"></audio>
+      <div class="cancion-activa">Cargando canción...</div>
+    </div>
+
+  </main>
+
+  <footer>
+    &copy; 2025 Corporación La Fuerte - Todos los derechos reservados
+  </footer>
+
+<script>
+  // Proxy para evitar CORS en GitHub Pages (usar solo para pruebas)
+  const proxy = 'https://cors-anywhere.herokuapp.com/';
+
+  // Función para actualizar canción y activar la card correspondiente
+  function actualizarCanciones() {
+    const cards = document.querySelectorAll('.card');
+
+    cards.forEach(card => {
+      const urlOriginal = card.getAttribute('data-url');
+      const url = proxy + urlOriginal + Date.now(); // agrego timestamp para evitar caché
+
+      fetch(url)
+        .then(response => {
+          if (!response.ok) throw new Error('Error en respuesta');
+          return response.json();
+        })
+        .then(data => {
+          const titulo = data && data.songtitle ? data.songtitle : 'No disponible';
+          const cancionElem = card.querySelector('.cancion-activa');
+          cancionElem.textContent = titulo;
+
+          // Marca la card como activa si hay canción
+          if (titulo && titulo.toLowerCase() !== 'no disponible') {
+            card.classList.add('activa');
+          } else {
+            card.classList.remove('activa');
+          }
+        })
+        .catch(err => {
+          const cancionElem = card.querySelector('.cancion-activa');
+          cancionElem.textContent = 'Error al cargar';
+          card.classList.remove('activa');
+          console.error('Error al cargar la canción:', err);
         });
+    });
+  }
 
-        docum
+  // Ejecutar la función al cargar y actualizar cada 30 segundos
+  actualizarCanciones();
+  setInterval(actualizarCanciones, 30000);
+</script>
+
+</body>
+</html>

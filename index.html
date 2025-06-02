@@ -71,17 +71,36 @@
     }
     .card {
       background: #222831;
-      border: 2px solid #444;
+      border: 2px solid #ff6f61;
       border-radius: 20px;
       padding: 1.5rem;
       text-align: center;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
       position: relative;
-      transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
-      cursor: default;
     }
     .card:hover {
       transform: translateY(-5px) scale(1.03);
       box-shadow: 0 10px 25px rgba(255, 111, 97, 0.5);
+    }
+    .card.activa::before {
+      content: "🔴 EN VIVO";
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: #ff3b3b;
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-weight: bold;
+      font-size: 1rem;
+      animation: parpadeo 1.2s infinite;
+      box-shadow: 0 0 8px #ff3b3b;
+      pointer-events: none;
+      user-select: none;
+      z-index: 10;
+    }
+    @keyframes parpadeo {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
     }
     .logo {
       width: 120px;
@@ -119,7 +138,6 @@
       border-radius: 10px;
       outline: none;
       margin-top: 1rem;
-      cursor: pointer;
     }
     footer {
       text-align: center;
@@ -128,156 +146,135 @@
       background: #0f0f0f;
       color: #aaa;
     }
-
-    /* Indicador EN VIVO mejorado */
-    .card.activa {
-      border-color: #ff3b3b;
-      box-shadow: 0 0 15px 3px rgba(255, 59, 59, 0.7);
-      z-index: 10;
-    }
-
-    .card.activa .live-indicator {
-      position: absolute;
-      top: 15px;
-      right: 15px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      user-select: none;
-      pointer-events: none;
-      z-index: 20;
-      font-family: 'Montserrat', sans-serif;
-    }
-
-    .live-circle {
-      width: 16px;
-      height: 16px;
-      background: #ff3b3b;
-      border-radius: 50%;
-      animation: pulse 1.5s infinite ease-in-out;
-      position: relative;
-      z-index: 10;
-    }
-
-    .live-waves {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 40px;
-      height: 40px;
-      pointer-events: none;
-      z-index: 5;
-    }
-
-    .live-wave {
-      position: absolute;
-      border: 2px solid #ff3b3b;
-      border-radius: 50%;
-      width: 100%;
-      height: 100%;
-      top: 0;
-      left: 0;
-      animation: waveAnim 2s infinite ease-out;
-      opacity: 0;
-    }
-
-    .live-wave:nth-child(1) {
-      animation-delay: 0s;
-    }
-
-    .live-wave:nth-child(2) {
-      animation-delay: 0.7s;
-    }
-
-    .live-wave:nth-child(3) {
-      animation-delay: 1.4s;
-    }
-
-    .live-text {
-      margin-top: 6px;
-      font-size: 0.8rem;
-      font-weight: 700;
-      color: #ff3b3b;
-      text-shadow: 0 0 6px #ff3b3b;
-      user-select: none;
-    }
-
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); opacity: 1; }
-      50% { transform: scale(1.3); opacity: 0.7; }
-    }
-
-    @keyframes waveAnim {
-      0% {
-        transform: scale(0.5);
-        opacity: 0.8;
-      }
-      100% {
-        transform: scale(2.5);
-        opacity: 0;
-      }
-    }
   </style>
+</head>
+<body>
+  <header>
+    <img src="https://imgfz.com/i/bmnsNX4.png" alt="Logo Corporación La Fuerte" class="logo-animado" />
+    <h1>Corporación La Fuerte</h1>
+    <p>
+      <a href="https://wa.me/51968093770" class="btn-contacto" target="_blank" rel="noopener noreferrer">
+        📞 Contrata publicidad aquí: 51968093770
+      </a>
+    </p>
+  </header>
+
+  <main class="grid">
+
+    <!-- La Fuerte (ahora primero) -->
+    <div class="card">
+      <img src="https://imgfz.com/i/fmdxHD8.png" alt="La Fuerte" class="logo" />
+      <h2>La Fuerte</h2>
+      <div class="redes">
+        <a href="https://www.facebook.com/share/15VXL1LjJb/" class="btn-red facebook" target="_blank" rel="noopener noreferrer">Facebook</a>
+        <a href="https://wa.me/51981603469" class="btn-red whatsapp" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+      </div>
+      <audio controls src="https://panelautodj.innovatestream.pe/7322/;"></audio>
+    </div>
+
+    <!-- La Jefa -->
+    <div class="card">
+      <img src="https://imgfz.com/i/FRicwT8.png" alt="La Jefa" class="logo" />
+      <h2>La Jefa</h2>
+      <div class="redes">
+        <a href="https://www.facebook.com/share/1Ej5wJMZS6/" class="btn-red facebook" target="_blank" rel="noopener noreferrer">Facebook</a>
+        <a href="https://wa.me/51957947659" class="btn-red whatsapp" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+      </div>
+      <audio controls src="https://panelautodj.innovatestream.pe/7320/;"></audio>
+    </div>
+
+    <!-- San Francisco -->
+    <div class="card">
+      <img src="https://imgfz.com/i/bBApQu2.png" alt="San Francisco" class="logo" />
+      <h2>San Francisco</h2>
+      <div class="redes">
+        <a href="https://www.facebook.com/share/1Bs468FUoA/" class="btn-red facebook" target="_blank" rel="noopener noreferrer">Facebook</a>
+        <a href="https://wa.me/51966332309" class="btn-red whatsapp" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+      </div>
+      <audio controls src="https://panelautodj.innovatestream.pe/7324/;"></audio>
+    </div>
+
+    <!-- Máxima -->
+    <div class="card">
+      <img src="https://imgfz.com/i/bVMWlXD.png" alt="Máxima" class="logo" />
+      <h2>Máxima</h2>
+      <div class="redes">
+        <a href="https://www.facebook.com/share/1BqFMXcYiR/" class="btn-red facebook" target="_blank" rel="noopener noreferrer">Facebook</a>
+        <a href="https://wa.me/51968059127" class="btn-red whatsapp" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+      </div>
+      <audio controls src="https://panelautodj.innovatestream.pe/8342/;"></audio>
+    </div>
+
+    <!-- La Cumbiambera -->
+    <div class="card">
+      <img src="https://imgfz.com/i/J89AMPT.png" alt="La Cumbiambera" class="logo" />
+      <h2>La Cumbiambera</h2>
+      <div class="redes">
+        <a href="https://www.facebook.com/share/1Zi652mGHs/" class="btn-red facebook" target="_blank" rel="noopener noreferrer">Facebook</a>
+        <a href="https://wa.me/51968059127" class="btn-red whatsapp" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+      </div>
+      <audio controls src="https://panelautodj.innovatestream.pe/8464/;"></audio>
+    </div>
+
+    <!-- La Raya -->
+    <div class="card">
+      <img src="https://imgfz.com/i/zauB0Id.png" alt="La Raya" class="logo" />
+      <h2>La Raya</h2>
+      <div class="redes">
+        <a href="https://www.facebook.com/share/1EkJ4wUcLK/" class="btn-red facebook" target="_blank" rel="noopener noreferrer">Facebook</a>
+        <a href="https://wa.me/51968059127" class="btn-red whatsapp" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+      </div>
+      <audio controls src="https://panelautodj.innovatestream.pe/8466/;"></audio>
+    </div>
+  </main>
+
+  <footer>
+    © 2025 Corporación La Fuerte. Todos los derechos reservados.
+  </footer>
+
+  <!-- Sonido beep oculto para reproducir al iniciar -->
+  <audio id="beep" src="https://www.soundjay.com/buttons/sounds/beep-07.mp3" preload="auto" style="display:none;"></audio>
+
   <script>
     document.addEventListener('DOMContentLoaded', function () {
-      const audios = document.querySelectorAll('audio');
+      const audios = document.querySelectorAll('audio.controls');
+      const beep = document.getElementById('beep');
 
-      // Función para crear el indicador EN VIVO si no existe
-      function addLiveIndicator(card) {
-        if (!card.querySelector('.live-indicator')) {
-          const indicator = document.createElement('div');
-          indicator.className = 'live-indicator';
-          indicator.innerHTML = `
-            <div class="live-circle"></div>
-            <div class="live-waves">
-              <div class="live-wave"></div>
-              <div class="live-wave"></div>
-              <div class="live-wave"></div>
-            </div>
-            <div class="live-text">EN VIVO</div>
-          `;
-          card.appendChild(indicator);
-        }
-      }
+      // Cambié selector para solo controles de audio (evitar el beep)
+      const audioPlayers = Array.from(document.querySelectorAll('audio[controls]')).filter(a => a !== beep);
 
-      // Función para quitar el indicador EN VIVO si existe
-      function removeLiveIndicator(card) {
-        const indicator = card.querySelector('.live-indicator');
-        if (indicator) {
-          indicator.remove();
-        }
-      }
-
-      audios.forEach(audio => {
+      audioPlayers.forEach(audio => {
         audio.addEventListener('play', () => {
-          audios.forEach(other => {
-            if (other !== audio) {
-              other.pause();
-              other.parentElement.classList.remove('activa');
-              removeLiveIndicator(other.parentElement);
-            }
+          // Pausar otros audios
+          audioPlayers.forEach(other => {
+            if (other !== audio) other.pause();
           });
 
-          const card = audio.parentElement;
-          card.classList.add('activa');
-          addLiveIndicator(card);
+          // Marcar la tarjeta activa y remover de otras
+          document.querySelectorAll('.card').forEach(card => {
+            card.classList.remove('activa');
+          });
 
-          // Desplazamiento suave al centro de la tarjeta activa
-          card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          const card = audio.closest('.card');
+          if (card) {
+            card.classList.add('activa');
+            card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
 
-          // Beep al iniciar reproducción (frecuencia y duración ajustables)
-          playBeep();
+          // Reproducir beep
+          beep.currentTime = 0;
+          beep.play();
         });
 
         audio.addEventListener('pause', () => {
-          const card = audio.parentElement;
-          card.classList.remove('activa');
-          removeLiveIndicator(card);
+          const card = audio.closest('.card');
+          if (card) {
+            card.classList.remove('activa');
+          }
         });
       });
 
-      // Control click en logo para play/pausa
+      // Play/Pause con clic en el logo
       const logos = document.querySelectorAll('.logo');
       logos.forEach(logo => {
         logo.addEventListener('click', () => {
@@ -289,109 +286,7 @@
           }
         });
       });
-
-      // Función beep usando Web Audio API
-      function playBeep() {
-        const context = new (window.AudioContext || window.webkitAudioContext)();
-        const oscillator = context.createOscillator();
-        const gainNode = context.createGain();
-
-        oscillator.type = 'sine';
-        oscillator.frequency.setValueAtTime(1000, context.currentTime); // Frecuencia 1000 Hz
-        gainNode.gain.setValueAtTime(0.1, context.currentTime); // Volumen bajo
-
-        oscillator.connect(gainNode);
-        gainNode.connect(context.destination);
-
-        oscillator.start();
-        oscillator.stop(context.currentTime + 0.1); // Duración 0.1 segundos
-      }
     });
   </script>
-</head>
-<body>
-  <header>
-    <img src="https://imgfz.com/i/bmnsNX4.png" alt="Logo Corporación La Fuerte" class="logo-animado" />
-    <h1>Corporación La Fuerte</h1>
-    <p>
-      <a href="https://wa.me/51968093770" class="btn-contacto" target="_blank">
-        📞 Contrata publicidad aquí: 51968093770
-      </a>
-    </p>
-  </header>
-
-  <main class="grid">
-
-    <!-- La Fuerte -->
-    <div class="card">
-      <img src="https://imgfz.com/i/fmdxHD8.png" alt="La Fuerte" class="logo" />
-      <h2>La Fuerte</h2>
-      <div class="redes">
-        <a href="https://www.facebook.com/share/15VXL1LjJb/" class="btn-red facebook" target="_blank">Facebook</a>
-        <a href="https://wa.me/51981603469" class="btn-red whatsapp" target="_blank">WhatsApp</a>
-      </div>
-      <audio controls src="https://panelautodj.innovatestream.pe/7322/;"></audio>
-    </div>
-
-    <!-- La Jefa -->
-    <div class="card">
-      <img src="https://imgfz.com/i/FRicwT8.png" alt="La Jefa" class="logo" />
-      <h2>La Jefa</h2>
-      <div class="redes">
-        <a href="https://www.facebook.com/share/1Ej5wJMZS6/" class="btn-red facebook" target="_blank">Facebook</a>
-        <a href="https://wa.me/51957947659" class="btn-red whatsapp" target="_blank">WhatsApp</a>
-      </div>
-      <audio controls src="https://panelautodj.innovatestream.pe/7320/;"></audio>
-    </div>
-
-    <!-- San Francisco -->
-    <div class="card">
-      <img src="https://imgfz.com/i/bBApQu2.png" alt="San Francisco" class="logo" />
-      <h2>San Francisco</h2>
-      <div class="redes">
-        <a href="https://www.facebook.com/share/1Bs468FUoA/" class="btn-red facebook" target="_blank">Facebook</a>
-        <a href="https://wa.me/51966332309" class="btn-red whatsapp" target="_blank">WhatsApp</a>
-      </div>
-      <audio controls src="https://panelautodj.innovatestream.pe/7324/;"></audio>
-    </div>
-
-    <!-- Máxima -->
-    <div class="card">
-      <img src="https://imgfz.com/i/bVMWlXD.png" alt="Máxima" class="logo" />
-      <h2>Máxima</h2>
-      <div class="redes">
-        <a href="https://www.facebook.com/share/1BqFMXcYiR/" class="btn-red facebook" target="_blank">Facebook</a>
-        <a href="https://wa.me/51968059127" class="btn-red whatsapp" target="_blank">WhatsApp</a>
-      </div>
-      <audio controls src="https://panelautodj.innovatestream.pe/8342/;"></audio>
-    </div>
-
-    <!-- La Cumbiambera -->
-    <div class="card">
-      <img src="https://imgfz.com/i/J89AMPT.png" alt="La Cumbiambera" class="logo" />
-      <h2>La Cumbiambera</h2>
-      <div class="redes">
-        <a href="https://www.facebook.com/share/1Zi652mGHs/" class="btn-red facebook" target="_blank">Facebook</a>
-        <a href="https://wa.me/51968059127" class="btn-red whatsapp" target="_blank">WhatsApp</a>
-      </div>
-      <audio controls src="https://panelautodj.innovatestream.pe/8464/;"></audio>
-    </div>
-
-    <!-- La Raya -->
-    <div class="card">
-      <img src="https://imgfz.com/i/zauB0Id.png" alt="La Raya" class="logo" />
-      <h2>La Raya</h2>
-      <div class="redes">
-        <a href="https://www.facebook.com/share/1MCs2Z9m51/" class="btn-red facebook" target="_blank">Facebook</a>
-        <a href="https://wa.me/51968059127" class="btn-red whatsapp" target="_blank">WhatsApp</a>
-      </div>
-      <audio controls src="https://panelautodj.innovatestream.pe/8466/;"></audio>
-    </div>
-
-  </main>
-
-  <footer>
-    Corporación La Fuerte © 2025. Todos los derechos reservados.
-  </footer>
 </body>
 </html>

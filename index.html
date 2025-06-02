@@ -1,8 +1,14 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>
+    if (location.protocol === 'http:') {
+      location.href = location.href.replace('http:', 'https:');
+    }
+  </script>
   <title>Corporación La Fuerte</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
   <style>
@@ -14,7 +20,7 @@
     }
     .logo-animado {
       width: 300px;
-      margin: 1rem auto 1rem;
+      margin: 1rem auto 1rem; /* margen arriba y abajo reducido */
       display: block;
       animation: entradaLogo 2s ease-out forwards, resplandor 3s infinite alternate;
     }
@@ -77,6 +83,8 @@
       transform: translateY(-5px) scale(1.03);
       box-shadow: 0 10px 25px rgba(255, 111, 97, 0.5);
     }
+
+    /* Nueva animación para la tarjeta activa */
     .card.activa {
       animation: brilloPulsante 2.5s ease-in-out infinite;
       box-shadow:
@@ -85,6 +93,7 @@
         inset 0 0 15px 2px rgba(255, 111, 97, 0.9);
       border-color: #ffcc00;
     }
+
     @keyframes brilloPulsante {
       0%, 100% {
         box-shadow:
@@ -101,6 +110,7 @@
         transform: scale(1.02);
       }
     }
+
     .card.activa::before {
       content: "🔴 EN VIVO";
       position: absolute;
@@ -159,14 +169,6 @@
       outline: none;
       margin-top: 1rem;
     }
-    .cancion-activa {
-      margin-top: 0.5rem;
-      font-weight: 600;
-      font-size: 1rem;
-      color: #ffcc00;
-      min-height: 1.4em;
-      font-style: italic;
-    }
     footer {
       text-align: center;
       padding: 2rem;
@@ -190,7 +192,7 @@
   <main class="grid">
 
     <!-- La Fuerte -->
-    <div class="card" data-url="http://panelautodj.innovatestream.pe:7322/statistics?json=1&nocache=">
+    <div class="card">
       <img src="https://imgfz.com/i/fmdxHD8.png" alt="La Fuerte" class="logo" />
       <h2>La Fuerte</h2>
       <div class="redes">
@@ -198,11 +200,10 @@
         <a href="https://wa.me/51981603469" class="btn-red whatsapp" target="_blank" rel="noopener noreferrer">WhatsApp</a>
       </div>
       <audio controls src="https://panelautodj.innovatestream.pe/7322/;"></audio>
-      <div class="cancion-activa">Cargando canción...</div>
     </div>
 
     <!-- La Jefa -->
-    <div class="card" data-url="http://panelautodj.innovatestream.pe:7320/statistics?json=1&nocache=">
+    <div class="card">
       <img src="https://imgfz.com/i/FRicwT8.png" alt="La Jefa" class="logo" />
       <h2>La Jefa</h2>
       <div class="redes">
@@ -210,11 +211,10 @@
         <a href="https://wa.me/51957947659" class="btn-red whatsapp" target="_blank" rel="noopener noreferrer">WhatsApp</a>
       </div>
       <audio controls src="https://panelautodj.innovatestream.pe/7320/;"></audio>
-      <div class="cancion-activa">Cargando canción...</div>
     </div>
 
     <!-- San Francisco -->
-    <div class="card" data-url="http://panelautodj.innovatestream.pe:7324/statistics?json=1&nocache=">
+    <div class="card">
       <img src="https://imgfz.com/i/bBApQu2.png" alt="San Francisco" class="logo" />
       <h2>San Francisco</h2>
       <div class="redes">
@@ -222,11 +222,10 @@
         <a href="https://wa.me/51966332309" class="btn-red whatsapp" target="_blank" rel="noopener noreferrer">WhatsApp</a>
       </div>
       <audio controls src="https://panelautodj.innovatestream.pe/7324/;"></audio>
-      <div class="cancion-activa">Cargando canción...</div>
     </div>
 
     <!-- Máxima -->
-    <div class="card" data-url="http://panelautodj.innovatestream.pe:8342/statistics?json=1&nocache=">
+    <div class="card">
       <img src="https://imgfz.com/i/bVMWlXD.png" alt="Máxima" class="logo" />
       <h2>Máxima</h2>
       <div class="redes">
@@ -234,11 +233,10 @@
         <a href="https://wa.me/51968059127" class="btn-red whatsapp" target="_blank" rel="noopener noreferrer">WhatsApp</a>
       </div>
       <audio controls src="https://panelautodj.innovatestream.pe/8342/;"></audio>
-      <div class="cancion-activa">Cargando canción...</div>
     </div>
 
     <!-- La Cumbiambera -->
-    <div class="card" data-url="http://panelautodj.innovatestream.pe:8464/statistics?json=1&nocache=">
+    <div class="card">
       <img src="https://imgfz.com/i/J89AMPT.png" alt="La Cumbiambera" class="logo" />
       <h2>La Cumbiambera</h2>
       <div class="redes">
@@ -246,69 +244,71 @@
         <a href="https://wa.me/51968059127" class="btn-red whatsapp" target="_blank" rel="noopener noreferrer">WhatsApp</a>
       </div>
       <audio controls src="https://panelautodj.innovatestream.pe/8464/;"></audio>
-      <div class="cancion-activa">Cargando canción...</div>
     </div>
 
     <!-- La Raya -->
-    <div class="card" data-url="http://panelautodj.innovatestream.pe:8510/statistics?json=1&nocache=">
-      <img src="https://imgfz.com/i/MDzpyhe.png" alt="La Raya" class="logo" />
+    <div class="card">
+      <img src="https://imgfz.com/i/zauB0Id.png" alt="La Raya" class="logo" />
       <h2>La Raya</h2>
       <div class="redes">
-        <a href="https://www.facebook.com/share/1Xx0rzAmwt/" class="btn-red facebook" target="_blank" rel="noopener noreferrer">Facebook</a>
+        <a href="https://www.facebook.com/share/1EkJ4wUcLK/" class="btn-red facebook" target="_blank" rel="noopener noreferrer">Facebook</a>
         <a href="https://wa.me/51968059127" class="btn-red whatsapp" target="_blank" rel="noopener noreferrer">WhatsApp</a>
       </div>
-      <audio controls src="https://panelautodj.innovatestream.pe/8510/;"></audio>
-      <div class="cancion-activa">Cargando canción...</div>
+      <audio controls src="https://panelautodj.innovatestream.pe/8466/;"></audio>
     </div>
-
   </main>
 
   <footer>
-    &copy; 2025 Corporación La Fuerte - Todos los derechos reservados
+    © 2025 Corporación La Fuerte. Todos los derechos reservados.
   </footer>
 
-<script>
-  // Proxy para evitar CORS en GitHub Pages (usar solo para pruebas)
-  const proxy = 'https://cors-anywhere.herokuapp.com/';
+  <audio id="beep" src="https://www.soundjay.com/buttons/sounds/beep-07.mp3" preload="auto" style="display:none;"></audio>
 
-  // Función para actualizar canción y activar la card correspondiente
-  function actualizarCanciones() {
-    const cards = document.querySelectorAll('.card');
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const beep = document.getElementById('beep');
+      const audioPlayers = Array.from(document.querySelectorAll('audio[controls]')).filter(a => a !== beep);
 
-    cards.forEach(card => {
-      const urlOriginal = card.getAttribute('data-url');
-      const url = proxy + urlOriginal + Date.now(); // agrego timestamp para evitar caché
+      audioPlayers.forEach(audio => {
+        audio.addEventListener('play', () => {
+          audioPlayers.forEach(other => {
+            if (other !== audio) other.pause();
+          });
 
-      fetch(url)
-        .then(response => {
-          if (!response.ok) throw new Error('Error en respuesta');
-          return response.json();
-        })
-        .then(data => {
-          const titulo = data && data.songtitle ? data.songtitle : 'No disponible';
-          const cancionElem = card.querySelector('.cancion-activa');
-          cancionElem.textContent = titulo;
+          document.querySelectorAll('.card').forEach(card => {
+            card.classList.remove('activa');
+          });
 
-          // Marca la card como activa si hay canción
-          if (titulo && titulo.toLowerCase() !== 'no disponible') {
+          const card = audio.closest('.card');
+          if (card) {
             card.classList.add('activa');
-          } else {
+            card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+
+          beep.currentTime = 0;
+          beep.play();
+        });
+
+        audio.addEventListener('pause', () => {
+          const card = audio.closest('.card');
+          if (card) {
             card.classList.remove('activa');
           }
-        })
-        .catch(err => {
-          const cancionElem = card.querySelector('.cancion-activa');
-          cancionElem.textContent = 'Error al cargar';
-          card.classList.remove('activa');
-          console.error('Error al cargar la canción:', err);
         });
+      });
+
+      const logos = document.querySelectorAll('.logo');
+      logos.forEach(logo => {
+        logo.addEventListener('click', () => {
+          const audio = logo.parentElement.querySelector('audio');
+          if (audio.paused) {
+            audio.play();
+          } else {
+            audio.pause();
+          }
+        });
+      });
     });
-  }
-
-  // Ejecutar la función al cargar y actualizar cada 30 segundos
-  actualizarCanciones();
-  setInterval(actualizarCanciones, 30000);
-</script>
-
+  </script>
 </body>
 </html>

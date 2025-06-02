@@ -76,7 +76,6 @@
       padding: 1.5rem;
       text-align: center;
       transition: transform 0.4s ease, box-shadow 0.4s ease;
-      position: relative;
     }
     .card:hover {
       transform: translateY(-5px) scale(1.03);
@@ -96,8 +95,15 @@
       color: #ffcc00;
       margin-bottom: 0.5rem;
     }
+    .titulo-cancion {
+      font-style: italic;
+      color: #ffa500;
+      min-height: 1.4rem;
+      margin-bottom: 1rem;
+    }
     .redes {
-      margin-top: 1rem;
+      margin-top: 0.5rem;
+      margin-bottom: 0.5rem;
     }
     .btn-red {
       display: inline-block;
@@ -119,13 +125,6 @@
       outline: none;
       margin-top: 1rem;
     }
-    .song-title {
-      margin-top: 0.5rem;
-      font-style: italic;
-      font-size: 0.95rem;
-      color: #ffcc00;
-      min-height: 1.4em;
-    }
     footer {
       text-align: center;
       padding: 2rem;
@@ -136,7 +135,7 @@
   </style>
   <script>
     document.addEventListener('DOMContentLoaded', function () {
-      // Solo un audio a la vez
+      // Control para que solo se reproduzca un audio a la vez
       const audios = document.querySelectorAll('audio');
       audios.forEach(audio => {
         audio.addEventListener('play', () => {
@@ -146,7 +145,7 @@
         });
       });
 
-      // Play/Pause al click en logo
+      // Play/Pausa al hacer clic en logo
       const logos = document.querySelectorAll('.logo');
       logos.forEach(logo => {
         logo.addEventListener('click', () => {
@@ -159,86 +158,51 @@
         });
       });
 
-      // Función para obtener y mostrar títulos
-      const stations = [
-        {
-          name: "La Fuerte",
-          endpoint: "https://panelautodj.innovatestream.pe:7322/statistics?json=1",
-          elemId: "song-title-lafuerte"
-        },
-        {
-          name: "La Jefa",
-          endpoint: "https://panelautodj.innovatestream.pe:7320/statistics?json=1",
-          elemId: "song-title-lajefa"
-        },
-        {
-          name: "San Francisco",
-          endpoint: "https://panelautodj.innovatestream.pe:7324/statistics?json=1",
-          elemId: "song-title-sanfrancisco"
-        },
-        {
-          name: "Máxima",
-          endpoint: "https://panelautodj.innovatestream.pe:8342/statistics?json=1",
-          elemId: "song-title-maxima"
-        },
-        {
-          name: "La Cumbiambera",
-          endpoint: "https://panelautodj.innovatestream.pe:8464/statistics?json=1",
-          elemId: "song-title-lacumbiambera"
-        },
-        {
-          name: "La Raya",
-          endpoint: "https://panelautodj.innovatestream.pe:8466/statistics?json=1",
-          elemId: "song-title-laraya"
-        },
-      ];
+      // Función para obtener y mostrar título de canción
+      async function actualizarTitulos() {
+        const emisoras = [
+          {id: 'la-fuerte', url: 'https://panelautodj.innovatestream.pe:7322/statistics?json=1'},
+          {id: 'la-jefa', url: 'https://panelautodj.innovatestream.pe:7320/statistics?json=1'},
+          {id: 'san-francisco', url: 'https://panelautodj.innovatestream.pe:7324/statistics?json=1'},
+          {id: 'maxima', url: 'https://panelautodj.innovatestream.pe:8342/statistics?json=1'},
+          {id: 'la-cumbiambera', url: 'https://panelautodj.innovatestream.pe:8464/statistics?json=1'},
+          {id: 'la-raya', url: 'https://panelautodj.innovatestream.pe:8466/statistics?json=1'}
+        ];
 
-      function updateSongTitle(station) {
-        fetch(station.endpoint)
-          .then(response => response.json())
-          .then(data => {
-            // El título de la canción suele estar en data.songtitle o similar según el shoutcast
-            // Vamos a intentar extraerlo desde data.songtitle, data.streamtitle, data.currentSong, o data.source.title
-            // Si no está, mostrar "No disponible"
-            let title = "No disponible";
+        emisoras.forEach(async emisora => {
+          try {
+            const res = await fetch(emisora.url);
+            if (!res.ok) throw new Error(`Error HTTP ${res.status}`);
+            const data = await res.json();
 
-            // Explorar posibles rutas para el título
-            if (data && data.songtitle) {
-              title = data.songtitle;
-            } else if (data && data.streamtitle) {
-              title = data.streamtitle;
-            } else if (data && data.currentSong) {
-              title = data.currentSong;
-            } else if (data && data.source && data.source.title) {
-              title = data.source.title;
-            } else if (data && data.icestats && data.icestats.songtitle) {
-              title = data.icestats.songtitle;
+            // Según Shoutcast v2, el título está en data.songtitle o en data.song.title
+            // Ajusta según tu JSON real
+            let titulo = '';
+
+            if (data.songtitle) {
+              titulo = data.songtitle;
+            } else if (data.song && data.song.title) {
+              titulo = data.song.title;
+            } else if (data.currentSong) {
+              titulo = data.currentSong;
+            } else {
+              titulo = 'No disponible';
             }
 
-            // A veces es un string vacío o "0"
-            if (!title || title.trim() === "" || title.trim() === "0") {
-              title = "No disponible";
-            }
+            const elem = document.querySelector(`#${emisora.id} .titulo-cancion`);
+            if (elem) elem.textContent = titulo;
 
-            const elem = document.getElementById(station.elemId);
-            if (elem) {
-              elem.textContent = title;
-            }
-          })
-          .catch(err => {
-            const elem = document.getElementById(station.elemId);
-            if (elem) {
-              elem.textContent = "Error al cargar título";
-            }
-            // console.error("Error fetching song title for", station.name, err);
-          });
+          } catch (error) {
+            console.error('Error cargando título:', emisora.id, error);
+            const elem = document.querySelector(`#${emisora.id} .titulo-cancion`);
+            if (elem) elem.textContent = 'Error cargando título';
+          }
+        });
       }
 
-      // Actualizar al cargar y luego cada 10 segundos
-      stations.forEach(station => {
-        updateSongTitle(station);
-        setInterval(() => updateSongTitle(station), 10000);
-      });
+      // Actualizar títulos cada 15 segundos
+      actualizarTitulos();
+      setInterval(actualizarTitulos, 15000);
     });
   </script>
 </head>
@@ -256,75 +220,75 @@
   <main class="grid">
 
     <!-- La Fuerte -->
-    <div class="card">
+    <div class="card" id="la-fuerte">
       <img src="https://imgfz.com/i/fmdxHD8.png" alt="La Fuerte" class="logo" />
       <h2>La Fuerte</h2>
+      <div class="titulo-cancion">Cargando título...</div>
       <div class="redes">
         <a href="https://www.facebook.com/share/15VXL1LjJb/" class="btn-red facebook" target="_blank">Facebook</a>
         <a href="https://wa.me/51981603469" class="btn-red whatsapp" target="_blank">WhatsApp</a>
       </div>
       <audio controls src="https://panelautodj.innovatestream.pe/7322/;"></audio>
-      <div id="song-title-lafuerte" class="song-title">Cargando título...</div>
     </div>
 
     <!-- La Jefa -->
-    <div class="card">
+    <div class="card" id="la-jefa">
       <img src="https://imgfz.com/i/FRicwT8.png" alt="La Jefa" class="logo" />
       <h2>La Jefa</h2>
+      <div class="titulo-cancion">Cargando título...</div>
       <div class="redes">
         <a href="https://www.facebook.com/share/1Ej5wJMZS6/" class="btn-red facebook" target="_blank">Facebook</a>
         <a href="https://wa.me/51957947659" class="btn-red whatsapp" target="_blank">WhatsApp</a>
       </div>
       <audio controls src="https://panelautodj.innovatestream.pe/7320/;"></audio>
-      <div id="song-title-lajefa" class="song-title">Cargando título...</div>
     </div>
 
     <!-- San Francisco -->
-    <div class="card">
+    <div class="card" id="san-francisco">
       <img src="https://imgfz.com/i/bBApQu2.png" alt="San Francisco" class="logo" />
       <h2>San Francisco</h2>
+      <div class="titulo-cancion">Cargando título...</div>
       <div class="redes">
         <a href="https://www.facebook.com/share/1Bs468FUoA/" class="btn-red facebook" target="_blank">Facebook</a>
         <a href="https://wa.me/51966332309" class="btn-red whatsapp" target="_blank">WhatsApp</a>
       </div>
       <audio controls src="https://panelautodj.innovatestream.pe/7324/;"></audio>
-      <div id="song-title-sanfrancisco" class="song-title">Cargando título...</div>
     </div>
 
     <!-- Máxima -->
-    <div class="card">
+    <div class="card" id="maxima">
       <img src="https://imgfz.com/i/bVMWlXD.png" alt="Máxima" class="logo" />
       <h2>Máxima</h2>
+      <div class="titulo-cancion">Cargando título...</div>
       <div class="redes">
         <a href="https://www.facebook.com/share/1BqFMXcYiR/" class="btn-red facebook" target="_blank">Facebook</a>
         <a href="https://wa.me/51968059127" class="btn-red whatsapp" target="_blank">WhatsApp</a>
       </div>
       <audio controls src="https://panelautodj.innovatestream.pe/8342/;"></audio>
-      <div id="song-title-maxima" class="song-title">Cargando título...</div>
     </div>
 
     <!-- La Cumbiambera -->
-    <div class="card">
+    <div class="card" id="la-cumbiambera">
       <img src="https://imgfz.com/i/J89AMPT.png" alt="La Cumbiambera" class="logo" />
       <h2>La Cumbiambera</h2>
+      <div class="titulo-cancion">Cargando título...</div>
       <div class="redes">
         <a href="https://www.facebook.com/share/1Zi652mGHs/" class="btn-red facebook" target="_blank">Facebook</a>
         <a href="https://wa.me/51968059127" class="btn-red whatsapp" target="_blank">WhatsApp</a>
       </div>
       <audio controls src="https://panelautodj.innovatestream.pe/8464/;"></audio>
-      <div id="song-title-lacumbiambera" class="song-title">Cargando título...</div>
     </div>
 
     <!-- La Raya -->
-    <div class="card">
+    <div class="card" id="la-raya">
       <img src="https://imgfz.com/i/zauB0Id.png" alt="La Raya" class="logo" />
       <h2>La Raya</h2>
+      <div class="titulo-cancion">Cargando título...</div>
       <div class="redes">
         <a href="https://www.facebook.com/share/1EkJ4wUcLK/" class="btn-red facebook" target="_blank">Facebook</a>
         <a href="https://wa.me/51968059127" class="btn-red whatsapp" target="_blank">WhatsApp</a>
       </div>
       <audio controls src="https://panelautodj.innovatestream.pe/8466/;"></audio>
-      <div id="song-title-laraya" class="song-title">Cargando título...</div>
     </div>
   </main>
 

@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -20,7 +19,7 @@
     }
     .logo-animado {
       width: 300px;
-      margin: 1rem auto 1rem; /* margen arriba y abajo reducido */
+      margin: 1rem auto;
       display: block;
       animation: entradaLogo 2s ease-out forwards, resplandor 3s infinite alternate;
     }
@@ -83,8 +82,6 @@
       transform: translateY(-5px) scale(1.03);
       box-shadow: 0 10px 25px rgba(255, 111, 97, 0.5);
     }
-
-    /* Nueva animación para la tarjeta activa */
     .card.activa {
       animation: brilloPulsante 2.5s ease-in-out infinite;
       box-shadow:
@@ -93,24 +90,14 @@
         inset 0 0 15px 2px rgba(255, 111, 97, 0.9);
       border-color: #ffcc00;
     }
-
     @keyframes brilloPulsante {
       0%, 100% {
-        box-shadow:
-          0 0 15px 3px rgba(255, 111, 97, 0.8),
-          0 0 30px 6px rgba(255, 204, 0, 0.6),
-          inset 0 0 15px 2px rgba(255, 111, 97, 0.9);
         transform: scale(1);
       }
       50% {
-        box-shadow:
-          0 0 25px 6px rgba(255, 111, 97, 1),
-          0 0 40px 8px rgba(255, 204, 0, 0.9),
-          inset 0 0 25px 4px rgba(255, 111, 97, 1);
         transform: scale(1.02);
       }
     }
-
     .card.activa::before {
       content: "🔴 EN VIVO";
       position: absolute;
@@ -126,7 +113,6 @@
       pointer-events: none;
       user-select: none;
       z-index: 10;
-      white-space: nowrap;
     }
     @keyframes parpadeo {
       0%, 100% { opacity: 1; }
@@ -166,8 +152,13 @@
     audio {
       width: 100%;
       border-radius: 10px;
-      outline: none;
       margin-top: 1rem;
+    }
+    .song-title {
+      margin-top: 0.5rem;
+      font-size: 0.95rem;
+      font-weight: bold;
+      color: #f9f871;
     }
     footer {
       text-align: center;
@@ -191,88 +182,71 @@
 
   <main class="grid">
 
-    <!-- La Fuerte -->
-    <div class="card">
+    <!-- Cada emisora -->
+    <div class="card" data-api="http://panelautodj.innovatestream.pe:7322/stats?sid=1&json=1">
       <img src="https://imgfz.com/i/fmdxHD8.png" alt="La Fuerte" class="logo" />
       <h2>La Fuerte</h2>
       <div class="redes">
-        <a href="https://www.facebook.com/share/15VXL1LjJb/" class="btn-red facebook" target="_blank" rel="noopener noreferrer">Facebook</a>
-        <a href="https://wa.me/51981603469" class="btn-red whatsapp" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+        <a href="https://www.facebook.com/share/15VXL1LjJb/" class="btn-red facebook" target="_blank">Facebook</a>
+        <a href="https://wa.me/51981603469" class="btn-red whatsapp" target="_blank">WhatsApp</a>
       </div>
       <audio controls src="https://panelautodj.innovatestream.pe/7322/;"></audio>
-        <div class="song-title" id="song-title">Cargando canción...</div>
-       <script>
-          async function fetchSongTitle() {
-            try {
-              const proxyUrl = "https://api.allorigins.win/get?url=";
-              const targetUrl = encodeURIComponent("http://panelautodj.innovatestream.pe:7322/stats?sid=1&json=1&nocache=" + Date.now());
-              const response = await fetch(proxyUrl + targetUrl);
-              const data = await response.json();
-              const parsedData = JSON.parse(data.contents);
-              const title = parsedData.songtitle || "Sin título";
-              document.getElementById("song-title").textContent = title;
-            } catch (error) {
-              document.getElementById("song-title").textContent = "Error al cargar canción";
-            }
-          }
-          fetchSongTitle();
-          setInterval(fetchSongTitle, 5000);
-        </script>
+      <div class="song-title">Cargando canción...</div>
     </div>
 
-    <!-- La Jefa -->
-    <div class="card">
+    <div class="card" data-api="http://panelautodj.innovatestream.pe:7320/statistics?json=1">
       <img src="https://imgfz.com/i/FRicwT8.png" alt="La Jefa" class="logo" />
       <h2>La Jefa</h2>
       <div class="redes">
-        <a href="https://www.facebook.com/share/1Ej5wJMZS6/" class="btn-red facebook" target="_blank" rel="noopener noreferrer">Facebook</a>
-        <a href="https://wa.me/51957947659" class="btn-red whatsapp" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+        <a href="https://www.facebook.com/share/1Ej5wJMZS6/" class="btn-red facebook" target="_blank">Facebook</a>
+        <a href="https://wa.me/51957947659" class="btn-red whatsapp" target="_blank">WhatsApp</a>
       </div>
       <audio controls src="https://panelautodj.innovatestream.pe/7320/;"></audio>
+      <div class="song-title">Cargando canción...</div>
     </div>
 
-    <!-- San Francisco -->
-    <div class="card">
+    <div class="card" data-api="http://panelautodj.innovatestream.pe:7324/statistics?json=1">
       <img src="https://imgfz.com/i/bBApQu2.png" alt="San Francisco" class="logo" />
       <h2>San Francisco</h2>
       <div class="redes">
-        <a href="https://www.facebook.com/share/1Bs468FUoA/" class="btn-red facebook" target="_blank" rel="noopener noreferrer">Facebook</a>
-        <a href="https://wa.me/51966332309" class="btn-red whatsapp" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+        <a href="https://www.facebook.com/share/1Bs468FUoA/" class="btn-red facebook" target="_blank">Facebook</a>
+        <a href="https://wa.me/51966332309" class="btn-red whatsapp" target="_blank">WhatsApp</a>
       </div>
       <audio controls src="https://panelautodj.innovatestream.pe/7324/;"></audio>
+      <div class="song-title">Cargando canción...</div>
     </div>
 
-    <!-- Máxima -->
-    <div class="card">
+    <div class="card" data-api="http://panelautodj.innovatestream.pe:8342/statistics?json=1">
       <img src="https://imgfz.com/i/bVMWlXD.png" alt="Máxima" class="logo" />
       <h2>Máxima</h2>
       <div class="redes">
-        <a href="https://www.facebook.com/share/1BqFMXcYiR/" class="btn-red facebook" target="_blank" rel="noopener noreferrer">Facebook</a>
-        <a href="https://wa.me/51968059127" class="btn-red whatsapp" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+        <a href="https://www.facebook.com/share/1BqFMXcYiR/" class="btn-red facebook" target="_blank">Facebook</a>
+        <a href="https://wa.me/51968059127" class="btn-red whatsapp" target="_blank">WhatsApp</a>
       </div>
       <audio controls src="https://panelautodj.innovatestream.pe/8342/;"></audio>
+      <div class="song-title">Cargando canción...</div>
     </div>
 
-    <!-- La Cumbiambera -->
-    <div class="card">
+    <div class="card" data-api="http://panelautodj.innovatestream.pe:8464/statistics?json=1">
       <img src="https://imgfz.com/i/J89AMPT.png" alt="La Cumbiambera" class="logo" />
       <h2>La Cumbiambera</h2>
       <div class="redes">
-        <a href="https://www.facebook.com/share/1Zi652mGHs/" class="btn-red facebook" target="_blank" rel="noopener noreferrer">Facebook</a>
-        <a href="https://wa.me/51968059127" class="btn-red whatsapp" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+        <a href="https://www.facebook.com/share/1Zi652mGHs/" class="btn-red facebook" target="_blank">Facebook</a>
+        <a href="https://wa.me/51968059127" class="btn-red whatsapp" target="_blank">WhatsApp</a>
       </div>
       <audio controls src="https://panelautodj.innovatestream.pe/8464/;"></audio>
+      <div class="song-title">Cargando canción...</div>
     </div>
 
-    <!-- La Raya -->
-    <div class="card">
+    <div class="card" data-api="http://panelautodj.innovatestream.pe:8466/statistics?json=1">
       <img src="https://imgfz.com/i/zauB0Id.png" alt="La Raya" class="logo" />
       <h2>La Raya</h2>
       <div class="redes">
-        <a href="https://www.facebook.com/share/1EkJ4wUcLK/" class="btn-red facebook" target="_blank" rel="noopener noreferrer">Facebook</a>
-        <a href="https://wa.me/51968059127" class="btn-red whatsapp" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+        <a href="https://www.facebook.com/share/1EkJ4wUcLK/" class="btn-red facebook" target="_blank">Facebook</a>
+        <a href="https://wa.me/51968059127" class="btn-red whatsapp" target="_blank">WhatsApp</a>
       </div>
       <audio controls src="https://panelautodj.innovatestream.pe/8466/;"></audio>
+      <div class="song-title">Cargando canción...</div>
     </div>
   </main>
 
@@ -309,23 +283,38 @@
 
         audio.addEventListener('pause', () => {
           const card = audio.closest('.card');
-          if (card) {
-            card.classList.remove('activa');
-          }
+          if (card) card.classList.remove('activa');
         });
       });
 
-      const logos = document.querySelectorAll('.logo');
-      logos.forEach(logo => {
+      document.querySelectorAll('.logo').forEach(logo => {
         logo.addEventListener('click', () => {
           const audio = logo.parentElement.querySelector('audio');
-          if (audio.paused) {
-            audio.play();
-          } else {
-            audio.pause();
-          }
+          if (audio.paused) audio.play();
+          else audio.pause();
         });
       });
+
+      async function actualizarTitulos() {
+        const cards = document.querySelectorAll('.card');
+        for (const card of cards) {
+          const apiUrl = card.dataset.api;
+          const titleElement = card.querySelector('.song-title');
+          try {
+            const proxy = 'https://api.allorigins.win/get?url=' + encodeURIComponent(apiUrl + '&nocache=' + Date.now());
+            const response = await fetch(proxy);
+            const json = await response.json();
+            const data = JSON.parse(json.contents);
+            const title = data.songtitle || data.icestats?.source?.title || "Sin título";
+            titleElement.textContent = title;
+          } catch (e) {
+            titleElement.textContent = "Error al cargar canción";
+          }
+        }
+      }
+
+      actualizarTitulos();
+      setInterval(actualizarTitulos, 5000);
     });
   </script>
 </body>

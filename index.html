@@ -93,7 +93,13 @@
     }
     .card h2 {
       color: #ffcc00;
+      margin-bottom: 0.5rem;
+    }
+    .titulo-cancion {
+      font-size: 0.95rem;
+      color: #aaa;
       margin-bottom: 1rem;
+      min-height: 1.5rem;
     }
     .redes {
       margin-top: 1rem;
@@ -148,6 +154,37 @@
           }
         });
       });
+
+      // Cargar títulos de canciones
+      const emisoras = [
+        { id: "7322", nombre: "La Fuerte" },
+        { id: "7320", nombre: "La Jefa" },
+        { id: "7324", nombre: "San Francisco" },
+        { id: "8342", nombre: "Máxima" },
+        { id: "8464", nombre: "La Cumbiambera" },
+        { id: "8466", nombre: "La Raya" },
+      ];
+
+      function actualizarTitulos() {
+        emisoras.forEach(({ id }) => {
+          fetch(`https://panelautodj.innovatestream.pe:${id}/statistics?json=1`)
+            .then(res => res.json())
+            .then(data => {
+              const titulo = data?.songtitle || "Título no disponible";
+              const contenedor = document.querySelector(`[data-emisora="${id}"]`);
+              if (contenedor) {
+                contenedor.textContent = titulo;
+              }
+            })
+            .catch(err => {
+              const contenedor = document.querySelector(`[data-emisora="${id}"]`);
+              if (contenedor) contenedor.textContent = "No disponible";
+            });
+        });
+      }
+
+      actualizarTitulos();
+      setInterval(actualizarTitulos, 15000); // cada 15 segundos
     });
   </script>
 </head>
@@ -164,10 +201,11 @@
 
   <main class="grid">
 
-    <!-- La Fuerte (ahora primero) -->
+    <!-- La Fuerte -->
     <div class="card">
       <img src="https://imgfz.com/i/fmdxHD8.png" alt="La Fuerte" class="logo" />
       <h2>La Fuerte</h2>
+      <div class="titulo-cancion" data-emisora="7322"></div>
       <div class="redes">
         <a href="https://www.facebook.com/share/15VXL1LjJb/" class="btn-red facebook" target="_blank">Facebook</a>
         <a href="https://wa.me/51981603469" class="btn-red whatsapp" target="_blank">WhatsApp</a>
@@ -179,6 +217,7 @@
     <div class="card">
       <img src="https://imgfz.com/i/FRicwT8.png" alt="La Jefa" class="logo" />
       <h2>La Jefa</h2>
+      <div class="titulo-cancion" data-emisora="7320"></div>
       <div class="redes">
         <a href="https://www.facebook.com/share/1Ej5wJMZS6/" class="btn-red facebook" target="_blank">Facebook</a>
         <a href="https://wa.me/51957947659" class="btn-red whatsapp" target="_blank">WhatsApp</a>
@@ -190,6 +229,7 @@
     <div class="card">
       <img src="https://imgfz.com/i/bBApQu2.png" alt="San Francisco" class="logo" />
       <h2>San Francisco</h2>
+      <div class="titulo-cancion" data-emisora="7324"></div>
       <div class="redes">
         <a href="https://www.facebook.com/share/1Bs468FUoA/" class="btn-red facebook" target="_blank">Facebook</a>
         <a href="https://wa.me/51966332309" class="btn-red whatsapp" target="_blank">WhatsApp</a>
@@ -201,6 +241,7 @@
     <div class="card">
       <img src="https://imgfz.com/i/bVMWlXD.png" alt="Máxima" class="logo" />
       <h2>Máxima</h2>
+      <div class="titulo-cancion" data-emisora="8342"></div>
       <div class="redes">
         <a href="https://www.facebook.com/share/1BqFMXcYiR/" class="btn-red facebook" target="_blank">Facebook</a>
         <a href="https://wa.me/51968059127" class="btn-red whatsapp" target="_blank">WhatsApp</a>
@@ -212,6 +253,7 @@
     <div class="card">
       <img src="https://imgfz.com/i/J89AMPT.png" alt="La Cumbiambera" class="logo" />
       <h2>La Cumbiambera</h2>
+      <div class="titulo-cancion" data-emisora="8464"></div>
       <div class="redes">
         <a href="https://www.facebook.com/share/1Zi652mGHs/" class="btn-red facebook" target="_blank">Facebook</a>
         <a href="https://wa.me/51968059127" class="btn-red whatsapp" target="_blank">WhatsApp</a>
@@ -223,6 +265,7 @@
     <div class="card">
       <img src="https://imgfz.com/i/zauB0Id.png" alt="La Raya" class="logo" />
       <h2>La Raya</h2>
+      <div class="titulo-cancion" data-emisora="8466"></div>
       <div class="redes">
         <a href="https://www.facebook.com/share/1EkJ4wUcLK/" class="btn-red facebook" target="_blank">Facebook</a>
         <a href="https://wa.me/51968059127" class="btn-red whatsapp" target="_blank">WhatsApp</a>

@@ -19,7 +19,7 @@
     }
     .logo-animado {
       width: 300px;
-      margin: 0.3rem auto 0.3rem; /* margen reducido */
+      margin: 1rem auto 1rem; /* margen arriba y abajo reducido */
       display: block;
       animation: entradaLogo 2s ease-out forwards, resplandor 3s infinite alternate;
     }
@@ -82,6 +82,7 @@
       transform: translateY(-5px) scale(1.03);
       box-shadow: 0 10px 25px rgba(255, 111, 97, 0.5);
     }
+
     /* Nueva animación para la tarjeta activa */
     .card.activa {
       animation: brilloPulsante 2.5s ease-in-out infinite;
@@ -91,6 +92,7 @@
         inset 0 0 15px 2px rgba(255, 111, 97, 0.9);
       border-color: #ffcc00;
     }
+
     @keyframes brilloPulsante {
       0%, 100% {
         box-shadow:
@@ -107,6 +109,7 @@
         transform: scale(1.02);
       }
     }
+
     .card.activa::before {
       content: "🔴 EN VIVO";
       position: absolute;
@@ -296,7 +299,12 @@
       const logos = document.querySelectorAll('.logo');
       logos.forEach(logo => {
         logo.addEventListener('click', () => {
-          alert('Has hecho clic en el logo de ' + logo.alt);
+          const audio = logo.parentElement.querySelector('audio');
+          if (audio.paused) {
+            audio.play();
+          } else {
+            audio.pause();
+          }
         });
       });
     });

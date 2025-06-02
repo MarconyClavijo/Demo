@@ -76,7 +76,6 @@
       padding: 1.5rem;
       text-align: center;
       transition: transform 0.4s ease, box-shadow 0.4s ease;
-      position: relative;
     }
     .card:hover {
       transform: translateY(-5px) scale(1.03);
@@ -94,16 +93,10 @@
     }
     .card h2 {
       color: #ffcc00;
-      margin-bottom: 0.3rem;
-    }
-    .titulo-cancion {
-      color: #ffcc00;
-      font-style: italic;
       margin-bottom: 1rem;
-      min-height: 1.2em;
     }
     .redes {
-      margin-top: 0.5rem;
+      margin-top: 1rem;
     }
     .btn-red {
       display: inline-block;
@@ -131,7 +124,6 @@
       font-size: 0.9rem;
       background: #0f0f0f;
       color: #aaa;
-      margin-top: 3rem;
     }
   </style>
   <script>
@@ -157,39 +149,6 @@
         });
       });
     });
-
-    // Función genérica para actualizar título canción
-    async function actualizarTitulo(id, puerto) {
-      try {
-        const proxyUrl = "https://api.allorigins.win/get?url=";
-        const targetUrl = encodeURIComponent(`http://panelautodj.innovatestream.pe:${puerto}/statistics?json=1&nocache=${Date.now()}`);
-        const response = await fetch(proxyUrl + targetUrl);
-        const data = await response.json();
-        const parsed = JSON.parse(data.contents);
-        const titulo = parsed.songtitle || "Sin título";
-        document.querySelector(`#${id} .titulo-cancion`).textContent = titulo;
-      } catch (error) {
-        document.querySelector(`#${id} .titulo-cancion`).textContent = "Error al cargar título";
-        console.error(`Error al actualizar ${id}:`, error);
-      }
-    }
-
-    // Ejecutar actualización para todas las emisoras periódicamente
-    function iniciarActualizacion() {
-      const emisoras = [
-        {id: 'la-fuerte', puerto: 7322},
-        {id: 'la-jefa', puerto: 7320},
-        {id: 'san-francisco', puerto: 7324},
-        {id: 'maxima', puerto: 8342},
-        {id: 'la-cumbiambera', puerto: 8464},
-        {id: 'la-raya', puerto: 8466}
-      ];
-      emisoras.forEach(({id, puerto}) => actualizarTitulo(id, puerto));
-      setInterval(() => {
-        emisoras.forEach(({id, puerto}) => actualizarTitulo(id, puerto));
-      }, 5000);
-    }
-    document.addEventListener('DOMContentLoaded', iniciarActualizacion);
   </script>
 </head>
 <body>
@@ -205,21 +164,32 @@
 
   <main class="grid">
 
-    <div class="card" id="la-fuerte">
-      <img src="https://imgfz.com/i/fmdxHD8.png" alt="La Fuerte" class="logo" />
-      <h2>La Fuerte</h2>
-      <p class="titulo-cancion">Cargando título...</p>
-      <div class="redes">
-        <a href="https://www.facebook.com/share/15VXL1LjJb/" class="btn-red facebook" target="_blank">Facebook</a>
-        <a href="https://wa.me/51981603469" class="btn-red whatsapp" target="_blank">WhatsApp</a>
-      </div>
-      <audio controls src="https://panelautodj.innovatestream.pe/7322/;"></audio>
-    </div>
-
-    <div class="card" id="la-jefa">
+     <!-- La Fuerte -->
+  <div class="player-box">
+    <h2>📻 La Fuerte</h2>
+    <audio controls autoplay>
+      <source src="https://panelautodj.innovatestream.pe/7322/;" type="audio/mpeg">
+    </audio>
+    <div class="song-title" id="titulo-fuerte">Cargando canción...</div>
+    <script>
+      async function fetchFuerte() {
+        try {
+          const url = encodeURIComponent("http://panelautodj.innovatestream.pe:7322/statistics?json=1&nocache=" + Date.now());
+          const res = await fetch("https://api.allorigins.win/get?url=" + url);
+          const data = await res.json();
+          const parsed = JSON.parse(data.contents);
+          document.getElementById("titulo-fuerte").textContent = parsed.songtitle || "Sin título";
+        } catch {
+          document.getElementById("titulo-fuerte").textContent = "Error al cargar canción";
+        }
+      }
+      fetchFuerte(); setInterval(fetchFuerte, 5000);
+    </script>
+  </div>
+    <!-- La Jefa -->
+    <div class="card">
       <img src="https://imgfz.com/i/FRicwT8.png" alt="La Jefa" class="logo" />
       <h2>La Jefa</h2>
-      <p class="titulo-cancion">Cargando título...</p>
       <div class="redes">
         <a href="https://www.facebook.com/share/1Ej5wJMZS6/" class="btn-red facebook" target="_blank">Facebook</a>
         <a href="https://wa.me/51957947659" class="btn-red whatsapp" target="_blank">WhatsApp</a>
@@ -227,10 +197,10 @@
       <audio controls src="https://panelautodj.innovatestream.pe/7320/;"></audio>
     </div>
 
-    <div class="card" id="san-francisco">
+    <!-- San Francisco -->
+    <div class="card">
       <img src="https://imgfz.com/i/bBApQu2.png" alt="San Francisco" class="logo" />
       <h2>San Francisco</h2>
-      <p class="titulo-cancion">Cargando título...</p>
       <div class="redes">
         <a href="https://www.facebook.com/share/1Bs468FUoA/" class="btn-red facebook" target="_blank">Facebook</a>
         <a href="https://wa.me/51966332309" class="btn-red whatsapp" target="_blank">WhatsApp</a>
@@ -238,10 +208,10 @@
       <audio controls src="https://panelautodj.innovatestream.pe/7324/;"></audio>
     </div>
 
-    <div class="card" id="maxima">
+    <!-- Máxima -->
+    <div class="card">
       <img src="https://imgfz.com/i/bVMWlXD.png" alt="Máxima" class="logo" />
       <h2>Máxima</h2>
-      <p class="titulo-cancion">Cargando título...</p>
       <div class="redes">
         <a href="https://www.facebook.com/share/1BqFMXcYiR/" class="btn-red facebook" target="_blank">Facebook</a>
         <a href="https://wa.me/51968059127" class="btn-red whatsapp" target="_blank">WhatsApp</a>
@@ -249,10 +219,10 @@
       <audio controls src="https://panelautodj.innovatestream.pe/8342/;"></audio>
     </div>
 
-    <div class="card" id="la-cumbiambera">
+    <!-- La Cumbiambera -->
+    <div class="card">
       <img src="https://imgfz.com/i/J89AMPT.png" alt="La Cumbiambera" class="logo" />
       <h2>La Cumbiambera</h2>
-      <p class="titulo-cancion">Cargando título...</p>
       <div class="redes">
         <a href="https://www.facebook.com/share/1Zi652mGHs/" class="btn-red facebook" target="_blank">Facebook</a>
         <a href="https://wa.me/51968059127" class="btn-red whatsapp" target="_blank">WhatsApp</a>
@@ -260,21 +230,20 @@
       <audio controls src="https://panelautodj.innovatestream.pe/8464/;"></audio>
     </div>
 
-    <div class="card" id="la-raya">
+    <!-- La Raya -->
+    <div class="card">
       <img src="https://imgfz.com/i/zauB0Id.png" alt="La Raya" class="logo" />
       <h2>La Raya</h2>
-      <p class="titulo-cancion">Cargando título...</p>
       <div class="redes">
-        <a href="https://www.facebook.com/share/1PPX0zmsxa/" class="btn-red facebook" target="_blank">Facebook</a>
-        <a href="https://wa.me/51968093770" class="btn-red whatsapp" target="_blank">WhatsApp</a>
+        <a href="https://www.facebook.com/share/1EkJ4wUcLK/" class="btn-red facebook" target="_blank">Facebook</a>
+        <a href="https://wa.me/51968059127" class="btn-red whatsapp" target="_blank">WhatsApp</a>
       </div>
       <audio controls src="https://panelautodj.innovatestream.pe/8466/;"></audio>
     </div>
-
   </main>
 
   <footer>
-    © 2025 Corporación La Fuerte - Todos los derechos reservados
+    © 2025 Corporación La Fuerte. Todos los derechos reservados.
   </footer>
 </body>
 </html>

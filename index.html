@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script>
     if (location.protocol === 'http:') {
       location.href = location.href.replace('http:', 'https:');
@@ -70,60 +70,62 @@
       margin: auto;
     }
     .card {
-      position: relative;
-      overflow: hidden;
       background: #222831;
       border: 2px solid #ff6f61;
       border-radius: 20px;
       padding: 1.5rem;
       text-align: center;
       transition: transform 0.4s ease, box-shadow 0.4s ease;
-      cursor: default;
-      box-shadow: inset 0 0 20px rgba(255, 111, 97, 0.2);
+      position: relative;
     }
     .card:hover {
       transform: translateY(-5px) scale(1.03);
       box-shadow: 0 10px 25px rgba(255, 111, 97, 0.5);
     }
 
-    /* Fondo animado silueta bailando */
-    .card::before {
-      content: "";
-      position: absolute;
-      bottom: 15px;
-      right: 15px;
-      width: 100px;
-      height: 100px;
-      background: url('data:image/svg+xml;utf8,<svg fill="rgba(255,111,97,0.3)" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><path d="M32 2c-1 0-2 1-2 2v8c0 1 1 2 2 2s2-1 2-2V4c0-1-1-2-2-2zm0 16c-4 0-6 3-6 6v12c0 3 2 6 6 6s6-3 6-6V24c0-3-2-6-6-6zm-4 18h8v4h-8v-4z"/></svg>') no-repeat center center / contain;
-      animation: bailando 2s ease-in-out infinite alternate;
-      pointer-events: none;
-      z-index: 0;
-      border-radius: 12px;
-    }
-    @keyframes bailando {
-      0% { transform: translateY(0) scale(1); }
-      100% { transform: translateY(-10px) scale(1.05); }
+    /* Nueva animación para la tarjeta activa */
+    .card.activa {
+      animation: brilloPulsante 2.5s ease-in-out infinite;
+      box-shadow:
+        0 0 15px 3px rgba(255, 111, 97, 0.8),
+        0 0 30px 6px rgba(255, 204, 0, 0.6),
+        inset 0 0 15px 2px rgba(255, 111, 97, 0.9);
+      border-color: #ffcc00;
     }
 
-    .card > * {
-      position: relative;
-      z-index: 1;
+    @keyframes brilloPulsante {
+      0%, 100% {
+        box-shadow:
+          0 0 15px 3px rgba(255, 111, 97, 0.8),
+          0 0 30px 6px rgba(255, 204, 0, 0.6),
+          inset 0 0 15px 2px rgba(255, 111, 97, 0.9);
+        transform: scale(1);
+      }
+      50% {
+        box-shadow:
+          0 0 25px 6px rgba(255, 111, 97, 1),
+          0 0 40px 8px rgba(255, 204, 0, 0.9),
+          inset 0 0 25px 4px rgba(255, 111, 97, 1);
+        transform: scale(1.02);
+      }
     }
-    .card.activa::after {
+
+    .card.activa::before {
       content: "🔴 EN VIVO";
       position: absolute;
-      top: 12px;
-      right: 12px;
+      top: 8px;
+      right: 8px;
       background: #ff3b3b;
-      padding: 4px 10px;
+      padding: 3px 8px;
       border-radius: 15px;
       font-weight: bold;
-      font-size: 0.9rem;
+      font-size: 0.8rem;
       animation: parpadeo 1.2s infinite;
-      box-shadow: 0 0 8px #ff3b3b;
+      box-shadow: 0 0 6px #ff3b3b;
       pointer-events: none;
       user-select: none;
       z-index: 10;
+      white-space: nowrap;
     }
     @keyframes parpadeo {
       0%, 100% { opacity: 1; }
@@ -138,11 +140,6 @@
       background: #fff;
       padding: 5px;
       cursor: pointer;
-      user-select: none;
-      transition: transform 0.3s ease;
-    }
-    .logo:hover {
-      transform: scale(1.1);
     }
     .card h2 {
       color: #ffcc00;
@@ -160,7 +157,6 @@
       text-decoration: none;
       transition: background 0.3s;
       font-size: 0.9rem;
-      user-select: none;
     }
     .facebook { background: #3b5998; color: white; }
     .facebook:hover { background: #2d4373; }
@@ -178,7 +174,6 @@
       font-size: 0.9rem;
       background: #0f0f0f;
       color: #aaa;
-      user-select: none;
     }
   </style>
 </head>
@@ -195,7 +190,7 @@
 
   <main class="grid">
 
-    <!-- La Fuerte (ahora primero) -->
+    <!-- La Fuerte -->
     <div class="card">
       <img src="https://imgfz.com/i/fmdxHD8.png" alt="La Fuerte" class="logo" />
       <h2>La Fuerte</h2>
@@ -265,5 +260,54 @@
   <footer>
     © 2025 Corporación La Fuerte. Todos los derechos reservados.
   </footer>
+
+  <audio id="beep" src="https://www.soundjay.com/buttons/sounds/beep-07.mp3" preload="auto" style="display:none;"></audio>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const beep = document.getElementById('beep');
+      const audioPlayers = Array.from(document.querySelectorAll('audio[controls]')).filter(a => a !== beep);
+
+      audioPlayers.forEach(audio => {
+        audio.addEventListener('play', () => {
+          audioPlayers.forEach(other => {
+            if (other !== audio) other.pause();
+          });
+
+          document.querySelectorAll('.card').forEach(card => {
+            card.classList.remove('activa');
+          });
+
+          const card = audio.closest('.card');
+          if (card) {
+            card.classList.add('activa');
+            card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+
+          beep.currentTime = 0;
+          beep.play();
+        });
+
+        audio.addEventListener('pause', () => {
+          const card = audio.closest('.card');
+          if (card) {
+            card.classList.remove('activa');
+          }
+        });
+      });
+
+      const logos = document.querySelectorAll('.logo');
+      logos.forEach(logo => {
+        logo.addEventListener('click', () => {
+          const audio = logo.parentElement.querySelector('audio');
+          if (audio.paused) {
+            audio.play();
+          } else {
+            audio.pause();
+          }
+        });
+      });
+    });
+  </script>
 </body>
 </html>

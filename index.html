@@ -93,13 +93,7 @@
     }
     .card h2 {
       color: #ffcc00;
-      margin-bottom: 0.5rem;
-    }
-    .titulo-cancion {
-      font-size: 0.95rem;
-      color: #aaa;
       margin-bottom: 1rem;
-      min-height: 1.5rem;
     }
     .redes {
       margin-top: 1rem;
@@ -123,6 +117,11 @@
       border-radius: 10px;
       outline: none;
       margin-top: 1rem;
+    }
+    .song-title {
+      margin-top: 1rem;
+      font-size: 0.95rem;
+      color: #f9f871;
     }
     footer {
       text-align: center;
@@ -155,36 +154,23 @@
         });
       });
 
-      // Cargar títulos de canciones
-      const emisoras = [
-        { id: "7322", nombre: "La Fuerte" },
-        { id: "7320", nombre: "La Jefa" },
-        { id: "7324", nombre: "San Francisco" },
-        { id: "8342", nombre: "Máxima" },
-        { id: "8464", nombre: "La Cumbiambera" },
-        { id: "8466", nombre: "La Raya" },
-      ];
-
-      function actualizarTitulos() {
-        emisoras.forEach(({ id }) => {
-          fetch(`https://panelautodj.innovatestream.pe:${id}/statistics?json=1`)
-            .then(res => res.json())
-            .then(data => {
-              const titulo = data?.songtitle || "Título no disponible";
-              const contenedor = document.querySelector(`[data-emisora="${id}"]`);
-              if (contenedor) {
-                contenedor.textContent = titulo;
-              }
-            })
-            .catch(err => {
-              const contenedor = document.querySelector(`[data-emisora="${id}"]`);
-              if (contenedor) contenedor.textContent = "No disponible";
-            });
+      const cards = document.querySelectorAll('.card');
+      async function updateSongTitles() {
+        cards.forEach(async card => {
+          const port = card.getAttribute('data-port');
+          const titleElement = card.querySelector('.song-title');
+          try {
+            const response = await fetch(`https://panelautodj.innovatestream.pe:${port}/statistics?json=1`);
+            const data = await response.json();
+            titleElement.textContent = data.current_song || 'No disponible';
+          } catch (e) {
+            titleElement.textContent = 'No disponible';
+          }
         });
       }
 
-      actualizarTitulos();
-      setInterval(actualizarTitulos, 15000); // cada 15 segundos
+      updateSongTitles();
+      setInterval(updateSongTitles, 30000); // Actualiza cada 30 segundos
     });
   </script>
 </head>
@@ -202,80 +188,81 @@
   <main class="grid">
 
     <!-- La Fuerte -->
-    <div class="card">
+    <div class="card" data-port="7322">
       <img src="https://imgfz.com/i/fmdxHD8.png" alt="La Fuerte" class="logo" />
       <h2>La Fuerte</h2>
-      <div class="titulo-cancion" data-emisora="7322"></div>
       <div class="redes">
         <a href="https://www.facebook.com/share/15VXL1LjJb/" class="btn-red facebook" target="_blank">Facebook</a>
         <a href="https://wa.me/51981603469" class="btn-red whatsapp" target="_blank">WhatsApp</a>
       </div>
       <audio controls src="https://panelautodj.innovatestream.pe/7322/;"></audio>
+      <div class="song-title">Cargando...</div>
     </div>
 
     <!-- La Jefa -->
-    <div class="card">
+    <div class="card" data-port="7320">
       <img src="https://imgfz.com/i/FRicwT8.png" alt="La Jefa" class="logo" />
       <h2>La Jefa</h2>
-      <div class="titulo-cancion" data-emisora="7320"></div>
       <div class="redes">
         <a href="https://www.facebook.com/share/1Ej5wJMZS6/" class="btn-red facebook" target="_blank">Facebook</a>
         <a href="https://wa.me/51957947659" class="btn-red whatsapp" target="_blank">WhatsApp</a>
       </div>
       <audio controls src="https://panelautodj.innovatestream.pe/7320/;"></audio>
+      <div class="song-title">Cargando...</div>
     </div>
 
     <!-- San Francisco -->
-    <div class="card">
+    <div class="card" data-port="7324">
       <img src="https://imgfz.com/i/bBApQu2.png" alt="San Francisco" class="logo" />
       <h2>San Francisco</h2>
-      <div class="titulo-cancion" data-emisora="7324"></div>
       <div class="redes">
         <a href="https://www.facebook.com/share/1Bs468FUoA/" class="btn-red facebook" target="_blank">Facebook</a>
         <a href="https://wa.me/51966332309" class="btn-red whatsapp" target="_blank">WhatsApp</a>
       </div>
       <audio controls src="https://panelautodj.innovatestream.pe/7324/;"></audio>
+      <div class="song-title">Cargando...</div>
     </div>
 
     <!-- Máxima -->
-    <div class="card">
+    <div class="card" data-port="8342">
       <img src="https://imgfz.com/i/bVMWlXD.png" alt="Máxima" class="logo" />
       <h2>Máxima</h2>
-      <div class="titulo-cancion" data-emisora="8342"></div>
       <div class="redes">
         <a href="https://www.facebook.com/share/1BqFMXcYiR/" class="btn-red facebook" target="_blank">Facebook</a>
         <a href="https://wa.me/51968059127" class="btn-red whatsapp" target="_blank">WhatsApp</a>
       </div>
       <audio controls src="https://panelautodj.innovatestream.pe/8342/;"></audio>
+      <div class="song-title">Cargando...</div>
     </div>
 
     <!-- La Cumbiambera -->
-    <div class="card">
+    <div class="card" data-port="8464">
       <img src="https://imgfz.com/i/J89AMPT.png" alt="La Cumbiambera" class="logo" />
       <h2>La Cumbiambera</h2>
-      <div class="titulo-cancion" data-emisora="8464"></div>
       <div class="redes">
         <a href="https://www.facebook.com/share/1Zi652mGHs/" class="btn-red facebook" target="_blank">Facebook</a>
         <a href="https://wa.me/51968059127" class="btn-red whatsapp" target="_blank">WhatsApp</a>
       </div>
       <audio controls src="https://panelautodj.innovatestream.pe/8464/;"></audio>
+      <div class="song-title">Cargando...</div>
     </div>
 
     <!-- La Raya -->
-    <div class="card">
+    <div class="card" data-port="8466">
       <img src="https://imgfz.com/i/zauB0Id.png" alt="La Raya" class="logo" />
       <h2>La Raya</h2>
-      <div class="titulo-cancion" data-emisora="8466"></div>
       <div class="redes">
         <a href="https://www.facebook.com/share/1EkJ4wUcLK/" class="btn-red facebook" target="_blank">Facebook</a>
         <a href="https://wa.me/51968059127" class="btn-red whatsapp" target="_blank">WhatsApp</a>
       </div>
       <audio controls src="https://panelautodj.innovatestream.pe/8466/;"></audio>
+      <div class="song-title">Cargando...</div>
     </div>
+
   </main>
 
   <footer>
-    © 2025 Corporación La Fuerte. Todos los derechos reservados.
+    &copy; 2025 Corporación La Fuerte. Todos los derechos reservados.
   </footer>
 </body>
 </html>

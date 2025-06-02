@@ -1,198 +1,78 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <script>
-    if (location.protocol === 'http:') {
-      location.href = location.href.replace('http:', 'https:');
-    }
-  </script>
-  <title>Corporación La Fuerte</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
-  <style>
-    /* (igual que antes, no lo repito para ahorrar espacio) */
-  </style>
-</head>
-<body>
-  <header>
-    <img src="https://imgfz.com/i/bmnsNX4.png" alt="Logo Corporación La Fuerte" class="logo-animado" />
-    <h1>Corporación La Fuerte</h1>
-    <p>
-      <a href="https://wa.me/51968093770" class="btn-contacto" target="_blank" rel="noopener noreferrer">
-        📞 Contrata publicidad aquí: 51968093770
-      </a>
-    </p>
-  </header>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const beep = document.getElementById('beep');
+    const audioPlayers = Array.from(document.querySelectorAll('audio[controls]')).filter(a => a !== beep);
 
-  <main class="grid">
+    // URLs con proxy CORS (para pruebas)
+    const proxies = {
+      "La Fuerte": "https://cors-anywhere.herokuapp.com/http://panelautodj.innovatestream.pe:7322/statistics?json=1&nocache=",
+      "La Jefa": "https://cors-anywhere.herokuapp.com/http://panelautodj.innovatestream.pe:7320/statistics?json=1&nocache=",
+      "San Francisco": "https://cors-anywhere.herokuapp.com/http://panelautodj.innovatestream.pe:7324/statistics?json=1&nocache=",
+      "Máxima": "https://cors-anywhere.herokuapp.com/http://panelautodj.innovatestream.pe:8342/statistics?json=1&nocache=",
+      "La Cumbiambera": "https://cors-anywhere.herokuapp.com/http://panelautodj.innovatestream.pe:8464/statistics?json=1&nocache=",
+      "La Raya": "https://cors-anywhere.herokuapp.com/http://panelautodj.innovatestream.pe:8466/statistics?json=1&nocache="
+    };
 
-    <!-- La Fuerte -->
-    <div class="card" data-stats-url="http://panelautodj.innovatestream.pe:7322/statistics?json=1&nocache=">
-      <img src="https://imgfz.com/i/fmdxHD8.png" alt="La Fuerte" class="logo" />
-      <h2>La Fuerte</h2>
-      <div class="redes">
-        <a href="https://www.facebook.com/share/15VXL1LjJb/" class="btn-red facebook" target="_blank" rel="noopener noreferrer">Facebook</a>
-        <a href="https://wa.me/51981603469" class="btn-red whatsapp" target="_blank" rel="noopener noreferrer">WhatsApp</a>
-      </div>
-      <audio controls src="https://panelautodj.innovatestream.pe/7322/;"></audio>
-      <p class="cancion-actual" style="margin-top: 0.8rem; font-style: italic; color: #ffcc00;">Cargando canción...</p>
-    </div>
+    // Mapeo de radios con su card DOM y su URL
+    const cards = Array.from(document.querySelectorAll('.card')).map(card => {
+      const nombre = card.querySelector('h2').textContent.trim();
+      return {
+        card,
+        nombre,
+        url: proxies[nombre],
+        tituloElem: document.createElement('p')
+      };
+    });
 
-    <!-- La Jefa -->
-    <div class="card" data-stats-url="http://panelautodj.innovatestream.pe:7320/statistics?json=1&nocache=">
-      <img src="https://imgfz.com/i/FRicwT8.png" alt="La Jefa" class="logo" />
-      <h2>La Jefa</h2>
-      <div class="redes">
-        <a href="https://www.facebook.com/share/1Ej5wJMZS6/" class="btn-red facebook" target="_blank" rel="noopener noreferrer">Facebook</a>
-        <a href="https://wa.me/51957947659" class="btn-red whatsapp" target="_blank" rel="noopener noreferrer">WhatsApp</a>
-      </div>
-      <audio controls src="https://panelautodj.innovatestream.pe/7320/;"></audio>
-      <p class="cancion-actual" style="margin-top: 0.8rem; font-style: italic; color: #ffcc00;">Cargando canción...</p>
-    </div>
+    // Agregar elemento para mostrar la canción debajo del título
+    cards.forEach(({ card, tituloElem }) => {
+      tituloElem.style.color = '#fff';
+      tituloElem.style.fontWeight = '600';
+      tituloElem.style.fontSize = '1rem';
+      tituloElem.style.marginTop = '0.5rem';
+      tituloElem.textContent = 'Cargando canción...';
+      card.querySelector('h2').after(tituloElem);
+    });
 
-    <!-- San Francisco -->
-    <div class="card" data-stats-url="http://panelautodj.innovatestream.pe:7324/statistics?json=1&nocache=">
-      <img src="https://imgfz.com/i/bBApQu2.png" alt="San Francisco" class="logo" />
-      <h2>San Francisco</h2>
-      <div class="redes">
-        <a href="https://www.facebook.com/share/1Bs468FUoA/" class="btn-red facebook" target="_blank" rel="noopener noreferrer">Facebook</a>
-        <a href="https://wa.me/51966332309" class="btn-red whatsapp" target="_blank" rel="noopener noreferrer">WhatsApp</a>
-      </div>
-      <audio controls src="https://panelautodj.innovatestream.pe/7324/;"></audio>
-      <p class="cancion-actual" style="margin-top: 0.8rem; font-style: italic; color: #ffcc00;">Cargando canción...</p>
-    </div>
+    // Función para actualizar títulos
+    async function actualizarCanciones() {
+      for (const { url, tituloElem } of cards) {
+        try {
+          const res = await fetch(url);
+          if (!res.ok) throw new Error('Error en respuesta');
 
-    <!-- Máxima -->
-    <div class="card" data-stats-url="http://panelautodj.innovatestream.pe:8342/statistics?json=1&nocache=">
-      <img src="https://imgfz.com/i/bVMWlXD.png" alt="Máxima" class="logo" />
-      <h2>Máxima</h2>
-      <div class="redes">
-        <a href="https://www.facebook.com/share/1BqFMXcYiR/" class="btn-red facebook" target="_blank" rel="noopener noreferrer">Facebook</a>
-        <a href="https://wa.me/51968059127" class="btn-red whatsapp" target="_blank" rel="noopener noreferrer">WhatsApp</a>
-      </div>
-      <audio controls src="https://panelautodj.innovatestream.pe/8342/;"></audio>
-      <p class="cancion-actual" style="margin-top: 0.8rem; font-style: italic; color: #ffcc00;">Cargando canción...</p>
-    </div>
+          const data = await res.json();
 
-    <!-- La Cumbiambera -->
-    <div class="card" data-stats-url="http://panelautodj.innovatestream.pe:8464/statistics?json=1&nocache=">
-      <img src="https://imgfz.com/i/J89AMPT.png" alt="La Cumbiambera" class="logo" />
-      <h2>La Cumbiambera</h2>
-      <div class="redes">
-        <a href="https://www.facebook.com/share/1Zi652mGHs/" class="btn-red facebook" target="_blank" rel="noopener noreferrer">Facebook</a>
-        <a href="https://wa.me/51968059127" class="btn-red whatsapp" target="_blank" rel="noopener noreferrer">WhatsApp</a>
-      </div>
-      <audio controls src="https://panelautodj.innovatestream.pe/8464/;"></audio>
-      <p class="cancion-actual" style="margin-top: 0.8rem; font-style: italic; color: #ffcc00;">Cargando canción...</p>
-    </div>
+          // Dependiendo del formato JSON, buscar el nombre de la canción
+          // Según el servidor Icecast, el título suele estar en data.source.title o data.icestats.source.title
+          // Ajustamos según estructura (verifica que coincida)
+          let titulo = '';
+          if (data.icestats && data.icestats.source && data.icestats.source.title) {
+            titulo = data.icestats.source.title;
+          } else if (data.source && data.source.title) {
+            titulo = data.source.title;
+          } else {
+            titulo = 'No disponible';
+          }
 
-    <!-- La Raya -->
-    <div class="card" data-stats-url="http://panelautodj.innovatestream.pe:8466/statistics?json=1&nocache=">
-      <img src="https://imgfz.com/i/zauB0Id.png" alt="La Raya" class="logo" />
-      <h2>La Raya</h2>
-      <div class="redes">
-        <a href="https://www.facebook.com/share/1EkJ4wUcLK/" class="btn-red facebook" target="_blank" rel="noopener noreferrer">Facebook</a>
-        <a href="https://wa.me/51968059127" class="btn-red whatsapp" target="_blank" rel="noopener noreferrer">WhatsApp</a>
-      </div>
-      <audio controls src="https://panelautodj.innovatestream.pe/8466/;"></audio>
-      <p class="cancion-actual" style="margin-top: 0.8rem; font-style: italic; color: #ffcc00;">Cargando canción...</p>
-    </div>
-  </main>
+          tituloElem.textContent = titulo || 'No disponible';
 
-  <footer>
-    © 2025 Corporación La Fuerte. Todos los derechos reservados.
-  </footer>
-
-  <audio id="beep" src="https://www.soundjay.com/buttons/sounds/beep-07.mp3" preload="auto" style="display:none;"></audio>
-
-  <script>
-    async function actualizarCancion(card) {
-      const url = card.getAttribute('data-stats-url');
-      const cancionElem = card.querySelector('.cancion-actual');
-
-      try {
-        const response = await fetch(url);
-        if (!response.ok) throw new Error('No se pudo obtener datos');
-
-        const data = await response.json();
-        // La estructura de datos suele tener "current_song" o algo similar, probamos:
-
-        let tituloCancion = 'No disponible';
-
-        if (data && data.song && data.song.title) {
-          tituloCancion = data.song.title;
-        } else if (data && data.songtitle) {
-          tituloCancion = data.songtitle;
-        } else if (data && data.current_song && data.current_song.title) {
-          tituloCancion = data.current_song.title;
-        } else if (data && data.source && data.source.title) {
-          tituloCancion = data.source.title;
-        } else {
-          // Probar la estructura del JSON para tu panel:
-          // Según tu url, es probable que la estructura sea data.song.title
-          // Si no funciona, avísame y ajustamos.
-          tituloCancion = "No se pudo detectar";
+        } catch (error) {
+          tituloElem.textContent = 'Error al cargar canción';
+          console.error('Error al obtener canción:', error);
         }
-
-        cancionElem.textContent = `🎵 Ahora sonando: ${tituloCancion}`;
-      } catch (error) {
-        cancionElem.textContent = 'Error al cargar canción';
-        console.error('Error cargando canción:', error);
       }
     }
 
-    document.addEventListener('DOMContentLoaded', function () {
-      const beep = document.getElementById('beep');
-      const audioPlayers = Array.from(document.querySelectorAll('audio[controls]')).filter(a => a !== beep);
+    // Actualizar inicialmente y luego cada 10 segundos
+    actualizarCanciones();
+    setInterval(actualizarCanciones, 10000);
 
-      audioPlayers.forEach(audio => {
-        audio.addEventListener('play', () => {
-          audioPlayers.forEach(other => {
-            if (other !== audio) other.pause();
-          });
-
-          document.querySelectorAll('.card').forEach(card => {
-            card.classList.remove('activa');
-          });
-
-          const card = audio.closest('.card');
-          if (card) {
-            card.classList.add('activa');
-            card.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          }
-
-          beep.currentTime = 0;
-          beep.play();
+    // Código original para play/pause y animación activa
+    audioPlayers.forEach(audio => {
+      audio.addEventListener('play', () => {
+        audioPlayers.forEach(other => {
+          if (other !== audio) other.pause();
         });
 
-        audio.addEventListener('pause', () => {
-          const card = audio.closest('.card');
-          if (card) {
-            card.classList.remove('activa');
-          }
-        });
-      });
-
-      const logos = document.querySelectorAll('.logo');
-      logos.forEach(logo => {
-        logo.addEventListener('click', () => {
-          const audio = logo.parentElement.querySelector('audio');
-          if (audio.paused) {
-            audio.play();
-          } else {
-            audio.pause();
-          }
-        });
-      });
-
-      // Actualizar canciones inicialmente y cada 30 segundos
-      const cards = document.querySelectorAll('.card[data-stats-url]');
-      cards.forEach(card => {
-        actualizarCancion(card);
-        setInterval(() => actualizarCancion(card), 30000);
-      });
-    });
-  </script>
-</body>
-</html>
+        docum

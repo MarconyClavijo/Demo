@@ -76,7 +76,6 @@
       padding: 1.5rem;
       text-align: center;
       transition: transform 0.4s ease, box-shadow 0.4s ease;
-      position: relative;
     }
     .card:hover {
       transform: translateY(-5px) scale(1.03);
@@ -91,18 +90,6 @@
       background: #fff;
       padding: 5px;
       cursor: pointer;
-      transition: all 0.3s ease;
-    }
-    .logo.reproduciendo {
-      animation: bordeNeon 1.5s infinite alternate;
-    }
-    @keyframes bordeNeon {
-      from {
-        box-shadow: 0 0 10px 4px #ff6f61, 0 0 20px 8px #ffcc00;
-      }
-      to {
-        box-shadow: 0 0 15px 6px #00f0ff, 0 0 30px 12px #00ffa3;
-      }
     }
     .card h2 {
       color: #ffcc00;
@@ -142,27 +129,18 @@
   <script>
     document.addEventListener('DOMContentLoaded', function () {
       const audios = document.querySelectorAll('audio');
-      const logos = document.querySelectorAll('.logo');
-
-      audios.forEach((audio, index) => {
-        const logo = logos[index];
+      audios.forEach(audio => {
         audio.addEventListener('play', () => {
-          audios.forEach((other, i) => {
-            if (other !== audio) {
-              other.pause();
-              logos[i].classList.remove('reproduciendo');
-            }
+          audios.forEach(other => {
+            if (other !== audio) other.pause();
           });
-          logo.classList.add('reproduciendo');
-        });
-        audio.addEventListener('pause', () => {
-          logo.classList.remove('reproduciendo');
         });
       });
 
-      logos.forEach((logo, index) => {
+      const logos = document.querySelectorAll('.logo');
+      logos.forEach(logo => {
         logo.addEventListener('click', () => {
-          const audio = audios[index];
+          const audio = logo.parentElement.querySelector('audio');
           if (audio.paused) {
             audio.play();
           } else {
@@ -183,8 +161,10 @@
       </a>
     </p>
   </header>
+
   <main class="grid">
-    <!-- La Fuerte -->
+
+    <!-- La Fuerte (ahora primero) -->
     <div class="card">
       <img src="https://imgfz.com/i/fmdxHD8.png" alt="La Fuerte" class="logo" />
       <h2>La Fuerte</h2>
@@ -192,7 +172,7 @@
         <a href="https://www.facebook.com/share/15VXL1LjJb/" class="btn-red facebook" target="_blank">Facebook</a>
         <a href="https://wa.me/51981603469" class="btn-red whatsapp" target="_blank">WhatsApp</a>
       </div>
-      <audio controls preload="none" src="https://panelautodj.innovatestream.pe/7322/"></audio>
+      <audio controls src="https://panelautodj.innovatestream.pe/7322/;"></audio>
     </div>
 
     <!-- La Jefa -->
@@ -203,7 +183,7 @@
         <a href="https://www.facebook.com/share/1Ej5wJMZS6/" class="btn-red facebook" target="_blank">Facebook</a>
         <a href="https://wa.me/51957947659" class="btn-red whatsapp" target="_blank">WhatsApp</a>
       </div>
-      <audio controls preload="none" src="https://panelautodj.innovatestream.pe/7320/"></audio>
+      <audio controls src="https://panelautodj.innovatestream.pe/7320/;"></audio>
     </div>
 
     <!-- San Francisco -->
@@ -214,7 +194,7 @@
         <a href="https://www.facebook.com/share/1Bs468FUoA/" class="btn-red facebook" target="_blank">Facebook</a>
         <a href="https://wa.me/51966332309" class="btn-red whatsapp" target="_blank">WhatsApp</a>
       </div>
-      <audio controls preload="none" src="https://panelautodj.innovatestream.pe/7324/"></audio>
+      <audio controls src="https://panelautodj.innovatestream.pe/7324/;"></audio>
     </div>
 
     <!-- Máxima -->
@@ -225,7 +205,7 @@
         <a href="https://www.facebook.com/share/1BqFMXcYiR/" class="btn-red facebook" target="_blank">Facebook</a>
         <a href="https://wa.me/51968059127" class="btn-red whatsapp" target="_blank">WhatsApp</a>
       </div>
-      <audio controls preload="none" src="https://panelautodj.innovatestream.pe/8342/"></audio>
+      <audio controls src="https://panelautodj.innovatestream.pe/8342/;"></audio>
     </div>
 
     <!-- La Cumbiambera -->
@@ -236,7 +216,7 @@
         <a href="https://www.facebook.com/share/1Zi652mGHs/" class="btn-red facebook" target="_blank">Facebook</a>
         <a href="https://wa.me/51968059127" class="btn-red whatsapp" target="_blank">WhatsApp</a>
       </div>
-      <audio controls preload="none" src="https://panelautodj.innovatestream.pe/8464/"></audio>
+      <audio controls src="https://panelautodj.innovatestream.pe/8464/;"></audio>
     </div>
 
     <!-- La Raya -->
@@ -247,4 +227,12 @@
         <a href="https://www.facebook.com/share/1EkJ4wUcLK/" class="btn-red facebook" target="_blank">Facebook</a>
         <a href="https://wa.me/51968059127" class="btn-red whatsapp" target="_blank">WhatsApp</a>
       </div>
-      <audio controls preload="none" src="https://panelautodj.innov
+      <audio controls src="https://panelautodj.innovatestream.pe/8466/;"></audio>
+    </div>
+  </main>
+
+  <footer>
+    © 2025 Corporación La Fuerte. Todos los derechos reservados.
+  </footer>
+</body>
+</html>

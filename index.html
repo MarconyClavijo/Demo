@@ -1,8 +1,15 @@
+
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>
+    if (location.protocol === 'http:') {
+      location.href = location.href.replace('http:', 'https:');
+    }
+  </script>
   <title>Corporación La Fuerte</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
   <style>
@@ -14,7 +21,7 @@
     }
     .logo-animado {
       width: 300px;
-      margin: 1rem auto;
+      margin: 1rem auto 1rem; /* margen arriba y abajo reducido */
       display: block;
       animation: entradaLogo 2s ease-out forwards, resplandor 3s infinite alternate;
     }
@@ -77,6 +84,8 @@
       transform: translateY(-5px) scale(1.03);
       box-shadow: 0 10px 25px rgba(255, 111, 97, 0.5);
     }
+
+    /* Nueva animación para la tarjeta activa */
     .card.activa {
       animation: brilloPulsante 2.5s ease-in-out infinite;
       box-shadow:
@@ -85,6 +94,7 @@
         inset 0 0 15px 2px rgba(255, 111, 97, 0.9);
       border-color: #ffcc00;
     }
+
     @keyframes brilloPulsante {
       0%, 100% {
         box-shadow:
@@ -101,6 +111,7 @@
         transform: scale(1.02);
       }
     }
+
     .card.activa::before {
       content: "🔴 EN VIVO";
       position: absolute;
@@ -166,11 +177,6 @@
       background: #0f0f0f;
       color: #aaa;
     }
-    .song-title {
-      margin-top: 0.5rem;
-      font-style: italic;
-      color: #f9f871;
-    }
   </style>
 </head>
 <body>
@@ -185,8 +191,9 @@
   </header>
 
   <main class="grid">
-    <!-- Emisoras -->
-    <div class="card" data-url="http://panelautodj.innovatestream.pe:7322/statistics?json=1&nocache=">
+
+    <!-- La Fuerte -->
+    <div class="card">
       <img src="https://imgfz.com/i/fmdxHD8.png" alt="La Fuerte" class="logo" />
       <h2>La Fuerte</h2>
       <div class="redes">
@@ -194,10 +201,28 @@
         <a href="https://wa.me/51981603469" class="btn-red whatsapp" target="_blank" rel="noopener noreferrer">WhatsApp</a>
       </div>
       <audio controls src="https://panelautodj.innovatestream.pe/7322/;"></audio>
-      <div class="song-title">Cargando canción...</div>
+        <div class="song-title" id="song-title">Cargando canción...</div>
+       <script>
+          async function fetchSongTitle() {
+            try {
+              const proxyUrl = "https://api.allorigins.win/get?url=";
+              const targetUrl = encodeURIComponent("http://panelautodj.innovatestream.pe:7322/stats?sid=1&json=1&nocache=" + Date.now());
+              const response = await fetch(proxyUrl + targetUrl);
+              const data = await response.json();
+              const parsedData = JSON.parse(data.contents);
+              const title = parsedData.songtitle || "Sin título";
+              document.getElementById("song-title").textContent = title;
+            } catch (error) {
+              document.getElementById("song-title").textContent = "Error al cargar canción";
+            }
+          }
+          fetchSongTitle();
+          setInterval(fetchSongTitle, 5000);
+        </script>
     </div>
 
-    <div class="card" data-url="http://panelautodj.innovatestream.pe:7320/statistics?json=1&nocache=">
+    <!-- La Jefa -->
+    <div class="card">
       <img src="https://imgfz.com/i/FRicwT8.png" alt="La Jefa" class="logo" />
       <h2>La Jefa</h2>
       <div class="redes">
@@ -205,9 +230,104 @@
         <a href="https://wa.me/51957947659" class="btn-red whatsapp" target="_blank" rel="noopener noreferrer">WhatsApp</a>
       </div>
       <audio controls src="https://panelautodj.innovatestream.pe/7320/;"></audio>
-      <div class="song-title">Cargando canción...</div>
     </div>
 
-    <div class="card" data-url="http://panelautodj.innovatestream.pe:7324/statistics?json=1
-::contentReference[oaicite:11]{index=11}
- 
+    <!-- San Francisco -->
+    <div class="card">
+      <img src="https://imgfz.com/i/bBApQu2.png" alt="San Francisco" class="logo" />
+      <h2>San Francisco</h2>
+      <div class="redes">
+        <a href="https://www.facebook.com/share/1Bs468FUoA/" class="btn-red facebook" target="_blank" rel="noopener noreferrer">Facebook</a>
+        <a href="https://wa.me/51966332309" class="btn-red whatsapp" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+      </div>
+      <audio controls src="https://panelautodj.innovatestream.pe/7324/;"></audio>
+    </div>
+
+    <!-- Máxima -->
+    <div class="card">
+      <img src="https://imgfz.com/i/bVMWlXD.png" alt="Máxima" class="logo" />
+      <h2>Máxima</h2>
+      <div class="redes">
+        <a href="https://www.facebook.com/share/1BqFMXcYiR/" class="btn-red facebook" target="_blank" rel="noopener noreferrer">Facebook</a>
+        <a href="https://wa.me/51968059127" class="btn-red whatsapp" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+      </div>
+      <audio controls src="https://panelautodj.innovatestream.pe/8342/;"></audio>
+    </div>
+
+    <!-- La Cumbiambera -->
+    <div class="card">
+      <img src="https://imgfz.com/i/J89AMPT.png" alt="La Cumbiambera" class="logo" />
+      <h2>La Cumbiambera</h2>
+      <div class="redes">
+        <a href="https://www.facebook.com/share/1Zi652mGHs/" class="btn-red facebook" target="_blank" rel="noopener noreferrer">Facebook</a>
+        <a href="https://wa.me/51968059127" class="btn-red whatsapp" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+      </div>
+      <audio controls src="https://panelautodj.innovatestream.pe/8464/;"></audio>
+    </div>
+
+    <!-- La Raya -->
+    <div class="card">
+      <img src="https://imgfz.com/i/zauB0Id.png" alt="La Raya" class="logo" />
+      <h2>La Raya</h2>
+      <div class="redes">
+        <a href="https://www.facebook.com/share/1EkJ4wUcLK/" class="btn-red facebook" target="_blank" rel="noopener noreferrer">Facebook</a>
+        <a href="https://wa.me/51968059127" class="btn-red whatsapp" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+      </div>
+      <audio controls src="https://panelautodj.innovatestream.pe/8466/;"></audio>
+    </div>
+  </main>
+
+  <footer>
+    © 2025 Corporación La Fuerte. Todos los derechos reservados.
+  </footer>
+
+  <audio id="beep" src="https://www.soundjay.com/buttons/sounds/beep-07.mp3" preload="auto" style="display:none;"></audio>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const beep = document.getElementById('beep');
+      const audioPlayers = Array.from(document.querySelectorAll('audio[controls]')).filter(a => a !== beep);
+
+      audioPlayers.forEach(audio => {
+        audio.addEventListener('play', () => {
+          audioPlayers.forEach(other => {
+            if (other !== audio) other.pause();
+          });
+
+          document.querySelectorAll('.card').forEach(card => {
+            card.classList.remove('activa');
+          });
+
+          const card = audio.closest('.card');
+          if (card) {
+            card.classList.add('activa');
+            card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+
+          beep.currentTime = 0;
+          beep.play();
+        });
+
+        audio.addEventListener('pause', () => {
+          const card = audio.closest('.card');
+          if (card) {
+            card.classList.remove('activa');
+          }
+        });
+      });
+
+      const logos = document.querySelectorAll('.logo');
+      logos.forEach(logo => {
+        logo.addEventListener('click', () => {
+          const audio = logo.parentElement.querySelector('audio');
+          if (audio.paused) {
+            audio.play();
+          } else {
+            audio.pause();
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>

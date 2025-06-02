@@ -247,6 +247,23 @@
       </div>
       <audio controls src="https://panelautodj.innovatestream.pe/7324/;"></audio>
       <div class="song-title">Cargando canción...</div>
+      <script>
+          async function fetchSongTitle() {
+            try {
+              const proxyUrl = "https://api.allorigins.win/get?url=";
+              const targetUrl = encodeURIComponent("http://panelautodj.innovatestream.pe:7324/statistics?json=1&nocache=" + Date.now());
+              const response = await fetch(proxyUrl + targetUrl);
+              const data = await response.json();
+              const parsedData = JSON.parse(data.contents);
+              const title = parsedData.songtitle || "Sin título";
+              document.getElementById("song-title").textContent = title;
+            } catch (error) {
+              document.getElementById("song-title").textContent = "Error al cargar canción";
+            }
+          }
+          fetchSongTitle();
+          setInterval(fetchSongTitle, 5000);
+        </script>
     </div>
 
     <div class="card" data-api="http://panelautodj.innovatestream.pe:8342/statistics?json=1">

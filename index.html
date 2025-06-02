@@ -82,6 +82,34 @@
       transform: translateY(-5px) scale(1.03);
       box-shadow: 0 10px 25px rgba(255, 111, 97, 0.5);
     }
+
+    /* Nueva animación para la tarjeta activa */
+    .card.activa {
+      animation: brilloPulsante 2.5s ease-in-out infinite;
+      box-shadow:
+        0 0 15px 3px rgba(255, 111, 97, 0.8),
+        0 0 30px 6px rgba(255, 204, 0, 0.6),
+        inset 0 0 15px 2px rgba(255, 111, 97, 0.9);
+      border-color: #ffcc00;
+    }
+
+    @keyframes brilloPulsante {
+      0%, 100% {
+        box-shadow:
+          0 0 15px 3px rgba(255, 111, 97, 0.8),
+          0 0 30px 6px rgba(255, 204, 0, 0.6),
+          inset 0 0 15px 2px rgba(255, 111, 97, 0.9);
+        transform: scale(1);
+      }
+      50% {
+        box-shadow:
+          0 0 25px 6px rgba(255, 111, 97, 1),
+          0 0 40px 8px rgba(255, 204, 0, 0.9),
+          inset 0 0 25px 4px rgba(255, 111, 97, 1);
+        transform: scale(1.02);
+      }
+    }
+
     .card.activa::before {
       content: "🔴 EN VIVO";
       position: absolute;
@@ -162,7 +190,7 @@
 
   <main class="grid">
 
-    <!-- La Fuerte (ahora primero) -->
+    <!-- La Fuerte -->
     <div class="card">
       <img src="https://imgfz.com/i/fmdxHD8.png" alt="La Fuerte" class="logo" />
       <h2>La Fuerte</h2>
@@ -233,7 +261,6 @@
     © 2025 Corporación La Fuerte. Todos los derechos reservados.
   </footer>
 
-  <!-- Sonido beep oculto para reproducir al iniciar -->
   <audio id="beep" src="https://www.soundjay.com/buttons/sounds/beep-07.mp3" preload="auto" style="display:none;"></audio>
 
   <script>
@@ -243,12 +270,10 @@
 
       audioPlayers.forEach(audio => {
         audio.addEventListener('play', () => {
-          // Pausar otros audios
           audioPlayers.forEach(other => {
             if (other !== audio) other.pause();
           });
 
-          // Marcar la tarjeta activa y remover de otras
           document.querySelectorAll('.card').forEach(card => {
             card.classList.remove('activa');
           });
@@ -259,7 +284,6 @@
             card.scrollIntoView({ behavior: 'smooth', block: 'center' });
           }
 
-          // Reproducir beep
           beep.currentTime = 0;
           beep.play();
         });
@@ -272,7 +296,6 @@
         });
       });
 
-      // Play/Pause con clic en el logo
       const logos = document.querySelectorAll('.logo');
       logos.forEach(logo => {
         logo.addEventListener('click', () => {

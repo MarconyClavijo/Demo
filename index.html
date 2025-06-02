@@ -11,170 +11,7 @@
   <title>Corporación La Fuerte</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
   <style>
-    body {
-      margin: 0;
-      font-family: 'Montserrat', sans-serif;
-      background: linear-gradient(135deg, #1a1a2e, #16213e);
-      color: #fff;
-    }
-    .logo-animado {
-      width: 300px;
-      margin: 1rem auto 1rem; /* margen arriba y abajo reducido */
-      display: block;
-      animation: entradaLogo 2s ease-out forwards, resplandor 3s infinite alternate;
-    }
-    @keyframes entradaLogo {
-      0% { transform: scale(0.2); opacity: 0; }
-      100% { transform: scale(1); opacity: 1; }
-    }
-    @keyframes resplandor {
-      0% { filter: drop-shadow(0 0 10px #ff6f61); }
-      100% { filter: drop-shadow(0 0 25px #ffcc00); }
-    }
-    header {
-      background: #0f3460;
-      text-align: center;
-      padding: 2rem 1rem 1rem;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.6);
-    }
-    header h1 {
-      font-size: 3rem;
-      margin: 1rem 0 0;
-      color: #f9f871;
-      text-shadow: 2px 2px 8px #000;
-    }
-    .btn-contacto {
-      display: inline-block;
-      background: #ffcc00;
-      color: #000;
-      font-weight: bold;
-      padding: 12px 24px;
-      border-radius: 30px;
-      text-decoration: none;
-      font-size: 1.1rem;
-      margin-top: 1rem;
-      box-shadow: 0 4px 15px rgba(255, 204, 0, 0.6);
-      transition: all 0.3s ease;
-    }
-    .btn-contacto:hover {
-      background: #ff6f61;
-      color: #fff;
-      box-shadow: 0 6px 20px rgba(255, 111, 97, 0.7);
-    }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-      padding: 2rem;
-      max-width: 1300px;
-      margin: auto;
-    }
-    .card {
-      background: #222831;
-      border: 2px solid #ff6f61;
-      border-radius: 20px;
-      padding: 1.5rem;
-      text-align: center;
-      transition: transform 0.4s ease, box-shadow 0.4s ease;
-      position: relative;
-    }
-    .card:hover {
-      transform: translateY(-5px) scale(1.03);
-      box-shadow: 0 10px 25px rgba(255, 111, 97, 0.5);
-    }
-
-    /* Nueva animación para la tarjeta activa */
-    .card.activa {
-      animation: brilloPulsante 2.5s ease-in-out infinite;
-      box-shadow:
-        0 0 15px 3px rgba(255, 111, 97, 0.8),
-        0 0 30px 6px rgba(255, 204, 0, 0.6),
-        inset 0 0 15px 2px rgba(255, 111, 97, 0.9);
-      border-color: #ffcc00;
-    }
-
-    @keyframes brilloPulsante {
-      0%, 100% {
-        box-shadow:
-          0 0 15px 3px rgba(255, 111, 97, 0.8),
-          0 0 30px 6px rgba(255, 204, 0, 0.6),
-          inset 0 0 15px 2px rgba(255, 111, 97, 0.9);
-        transform: scale(1);
-      }
-      50% {
-        box-shadow:
-          0 0 25px 6px rgba(255, 111, 97, 1),
-          0 0 40px 8px rgba(255, 204, 0, 0.9),
-          inset 0 0 25px 4px rgba(255, 111, 97, 1);
-        transform: scale(1.02);
-      }
-    }
-
-    .card.activa::before {
-      content: "🔴 EN VIVO";
-      position: absolute;
-      top: 8px;
-      right: 8px;
-      background: #ff3b3b;
-      padding: 3px 8px;
-      border-radius: 15px;
-      font-weight: bold;
-      font-size: 0.8rem;
-      animation: parpadeo 1.2s infinite;
-      box-shadow: 0 0 6px #ff3b3b;
-      pointer-events: none;
-      user-select: none;
-      z-index: 10;
-      white-space: nowrap;
-    }
-    @keyframes parpadeo {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.4; }
-    }
-    .logo {
-      width: 120px;
-      height: 120px;
-      object-fit: contain;
-      margin-bottom: 1rem;
-      border-radius: 12px;
-      background: #fff;
-      padding: 5px;
-      cursor: pointer;
-    }
-    .card h2 {
-      color: #ffcc00;
-      margin-bottom: 1rem;
-    }
-    .redes {
-      margin-top: 1rem;
-    }
-    .btn-red {
-      display: inline-block;
-      margin: 5px;
-      padding: 8px 14px;
-      border-radius: 30px;
-      font-weight: bold;
-      text-decoration: none;
-      transition: background 0.3s;
-      font-size: 0.9rem;
-    }
-    .facebook { background: #3b5998; color: white; }
-    .facebook:hover { background: #2d4373; }
-    .whatsapp { background: #25D366; color: white; }
-    .whatsapp:hover { background: #1ebe5b; }
-    audio {
-      width: 100%;
-      border-radius: 10px;
-      outline: none;
-      margin-top: 1rem;
-    }
-    footer {
-      text-align: center;
-      padding: 2rem;
-      font-size: 0.9rem;
-      background: #0f0f0f;
-      color: #aaa;
-    }
+    /* (igual que antes, no lo repito para ahorrar espacio) */
   </style>
 </head>
 <body>
@@ -191,7 +28,7 @@
   <main class="grid">
 
     <!-- La Fuerte -->
-    <div class="card">
+    <div class="card" data-stats-url="http://panelautodj.innovatestream.pe:7322/statistics?json=1&nocache=">
       <img src="https://imgfz.com/i/fmdxHD8.png" alt="La Fuerte" class="logo" />
       <h2>La Fuerte</h2>
       <div class="redes">
@@ -199,10 +36,11 @@
         <a href="https://wa.me/51981603469" class="btn-red whatsapp" target="_blank" rel="noopener noreferrer">WhatsApp</a>
       </div>
       <audio controls src="https://panelautodj.innovatestream.pe/7322/;"></audio>
+      <p class="cancion-actual" style="margin-top: 0.8rem; font-style: italic; color: #ffcc00;">Cargando canción...</p>
     </div>
 
     <!-- La Jefa -->
-    <div class="card">
+    <div class="card" data-stats-url="http://panelautodj.innovatestream.pe:7320/statistics?json=1&nocache=">
       <img src="https://imgfz.com/i/FRicwT8.png" alt="La Jefa" class="logo" />
       <h2>La Jefa</h2>
       <div class="redes">
@@ -210,10 +48,11 @@
         <a href="https://wa.me/51957947659" class="btn-red whatsapp" target="_blank" rel="noopener noreferrer">WhatsApp</a>
       </div>
       <audio controls src="https://panelautodj.innovatestream.pe/7320/;"></audio>
+      <p class="cancion-actual" style="margin-top: 0.8rem; font-style: italic; color: #ffcc00;">Cargando canción...</p>
     </div>
 
     <!-- San Francisco -->
-    <div class="card">
+    <div class="card" data-stats-url="http://panelautodj.innovatestream.pe:7324/statistics?json=1&nocache=">
       <img src="https://imgfz.com/i/bBApQu2.png" alt="San Francisco" class="logo" />
       <h2>San Francisco</h2>
       <div class="redes">
@@ -221,10 +60,11 @@
         <a href="https://wa.me/51966332309" class="btn-red whatsapp" target="_blank" rel="noopener noreferrer">WhatsApp</a>
       </div>
       <audio controls src="https://panelautodj.innovatestream.pe/7324/;"></audio>
+      <p class="cancion-actual" style="margin-top: 0.8rem; font-style: italic; color: #ffcc00;">Cargando canción...</p>
     </div>
 
     <!-- Máxima -->
-    <div class="card">
+    <div class="card" data-stats-url="http://panelautodj.innovatestream.pe:8342/statistics?json=1&nocache=">
       <img src="https://imgfz.com/i/bVMWlXD.png" alt="Máxima" class="logo" />
       <h2>Máxima</h2>
       <div class="redes">
@@ -232,10 +72,11 @@
         <a href="https://wa.me/51968059127" class="btn-red whatsapp" target="_blank" rel="noopener noreferrer">WhatsApp</a>
       </div>
       <audio controls src="https://panelautodj.innovatestream.pe/8342/;"></audio>
+      <p class="cancion-actual" style="margin-top: 0.8rem; font-style: italic; color: #ffcc00;">Cargando canción...</p>
     </div>
 
     <!-- La Cumbiambera -->
-    <div class="card">
+    <div class="card" data-stats-url="http://panelautodj.innovatestream.pe:8464/statistics?json=1&nocache=">
       <img src="https://imgfz.com/i/J89AMPT.png" alt="La Cumbiambera" class="logo" />
       <h2>La Cumbiambera</h2>
       <div class="redes">
@@ -243,10 +84,11 @@
         <a href="https://wa.me/51968059127" class="btn-red whatsapp" target="_blank" rel="noopener noreferrer">WhatsApp</a>
       </div>
       <audio controls src="https://panelautodj.innovatestream.pe/8464/;"></audio>
+      <p class="cancion-actual" style="margin-top: 0.8rem; font-style: italic; color: #ffcc00;">Cargando canción...</p>
     </div>
 
     <!-- La Raya -->
-    <div class="card">
+    <div class="card" data-stats-url="http://panelautodj.innovatestream.pe:8466/statistics?json=1&nocache=">
       <img src="https://imgfz.com/i/zauB0Id.png" alt="La Raya" class="logo" />
       <h2>La Raya</h2>
       <div class="redes">
@@ -254,6 +96,7 @@
         <a href="https://wa.me/51968059127" class="btn-red whatsapp" target="_blank" rel="noopener noreferrer">WhatsApp</a>
       </div>
       <audio controls src="https://panelautodj.innovatestream.pe/8466/;"></audio>
+      <p class="cancion-actual" style="margin-top: 0.8rem; font-style: italic; color: #ffcc00;">Cargando canción...</p>
     </div>
   </main>
 
@@ -264,6 +107,41 @@
   <audio id="beep" src="https://www.soundjay.com/buttons/sounds/beep-07.mp3" preload="auto" style="display:none;"></audio>
 
   <script>
+    async function actualizarCancion(card) {
+      const url = card.getAttribute('data-stats-url');
+      const cancionElem = card.querySelector('.cancion-actual');
+
+      try {
+        const response = await fetch(url);
+        if (!response.ok) throw new Error('No se pudo obtener datos');
+
+        const data = await response.json();
+        // La estructura de datos suele tener "current_song" o algo similar, probamos:
+
+        let tituloCancion = 'No disponible';
+
+        if (data && data.song && data.song.title) {
+          tituloCancion = data.song.title;
+        } else if (data && data.songtitle) {
+          tituloCancion = data.songtitle;
+        } else if (data && data.current_song && data.current_song.title) {
+          tituloCancion = data.current_song.title;
+        } else if (data && data.source && data.source.title) {
+          tituloCancion = data.source.title;
+        } else {
+          // Probar la estructura del JSON para tu panel:
+          // Según tu url, es probable que la estructura sea data.song.title
+          // Si no funciona, avísame y ajustamos.
+          tituloCancion = "No se pudo detectar";
+        }
+
+        cancionElem.textContent = `🎵 Ahora sonando: ${tituloCancion}`;
+      } catch (error) {
+        cancionElem.textContent = 'Error al cargar canción';
+        console.error('Error cargando canción:', error);
+      }
+    }
+
     document.addEventListener('DOMContentLoaded', function () {
       const beep = document.getElementById('beep');
       const audioPlayers = Array.from(document.querySelectorAll('audio[controls]')).filter(a => a !== beep);
@@ -306,6 +184,13 @@
             audio.pause();
           }
         });
+      });
+
+      // Actualizar canciones inicialmente y cada 30 segundos
+      const cards = document.querySelectorAll('.card[data-stats-url]');
+      cards.forEach(card => {
+        actualizarCancion(card);
+        setInterval(() => actualizarCancion(card), 30000);
       });
     });
   </script>

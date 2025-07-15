@@ -60,12 +60,23 @@
       margin-bottom: 15px;
     }
 
-    audio {
-      width: 85%;
-      max-width: 400px;
-      height: 40px;
-      border-radius: 10px;
+    #controles button {
+      background-color: #ffcc00;
+      color: #002244;
       border: none;
+      padding: 12px 24px;
+      margin: 0 10px;
+      border-radius: 8px;
+      font-size: 1em;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    #controles button:hover {
+      background-color: #002244;
+      color: #ffcc00;
+      border: 2px solid #ffcc00;
     }
 
     .botones {
@@ -126,14 +137,34 @@
     <h2>La radio que se siente - 89.5 FM en Sullana</h2>
   </header>
 
-  <!-- Reproductor -->
+  <!-- Reproductor personalizado -->
   <div class="reproductor">
     <h3>🎧 Escúchanos en vivo</h3>
-    <audio controls autoplay>
-      <source src="http://sonic.globalstream.pro/8070/stream" type="audio/mpeg">
-      Tu navegador no soporta el elemento de audio.
-    </audio>
+    <div id="controles">
+      <button onclick="playRadio()">▶️ Play</button>
+      <button onclick="stopRadio()">⏹️ Stop</button>
+    </div>
   </div>
+
+  <script>
+    const streamUrl = "http://sonic.globalstream.pro/8070/stream";
+    let radioPlayer = new Audio(streamUrl);
+    radioPlayer.preload = "none";
+    radioPlayer.crossOrigin = "anonymous";
+    radioPlayer.type = "audio/mpeg";
+
+    function playRadio() {
+      radioPlayer.src = streamUrl; // Asegura conexión limpia
+      radioPlayer.load(); // Forzar nueva carga
+      radioPlayer.play().catch(e => console.log("Error al reproducir:", e));
+    }
+
+    function stopRadio() {
+      radioPlayer.pause();
+      radioPlayer.src = ""; // Desconecta completamente
+      radioPlayer.load();
+    }
+  </script>
 
   <!-- Botones de acción -->
   <div class="botones">

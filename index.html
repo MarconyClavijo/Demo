@@ -1,136 +1,204 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Radio La Tremenda</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Radio La Tremenda</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
 
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Poppins', sans-serif;
-      background: radial-gradient(circle at top, #ff2a6d, #6a00ff, #0b0018);
-      color: #fff;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-    }
+<style>
+body{
+  margin:0;
+  font-family:'Orbitron',sans-serif;
+  background:
+    radial-gradient(circle at top, #ff004c, transparent 60%),
+    radial-gradient(circle at bottom, #6a00ff, #050010 70%);
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  color:#fff;
+}
 
-    .radio-card {
-      background: rgba(0,0,0,0.55);
-      backdrop-filter: blur(10px);
-      border-radius: 30px;
-      padding: 35px 25px 40px;
-      width: 320px;
-      box-shadow: 0 0 50px rgba(255,0,120,.6);
-    }
+.app{
+  width:340px;
+  background:rgba(0,0,0,.65);
+  border-radius:35px;
+  padding:30px 20px 35px;
+  box-shadow:0 0 60px rgba(255,0,120,.9);
+  text-align:center;
+}
 
-    .logo {
-      width: 240px;
-      margin-bottom: 20px;
-      filter: drop-shadow(0 0 25px rgba(255,255,255,.4));
-    }
+.logo{
+  width:220px;
+  filter:drop-shadow(0 0 25px #ff2a6d);
+}
 
-    .playing .logo {
-      animation: spin 8s linear infinite;
-    }
+.playing .logo{
+  animation:spin 6s linear infinite;
+}
 
-    @keyframes spin {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
+@keyframes spin{
+  from{transform:rotate(0)}
+  to{transform:rotate(360deg)}
+}
 
-    .title {
-      font-size: 2.2em;
-      font-weight: 900;
-      margin-bottom: 10px;
-    }
+h1{
+  margin:15px 0 5px;
+  font-size:2em;
+}
 
-    .status {
-      font-size: .95em;
-      font-weight: 700;
-      letter-spacing: 2px;
-      color: #ffccff;
-      margin-bottom: 30px;
-      animation: blink 1.5s infinite;
-    }
+.live{
+  font-size:.9em;
+  letter-spacing:2px;
+  color:#ff9bd1;
+  animation:blink 1.4s infinite;
+}
 
-    @keyframes blink {
-      50% { opacity: .4; }
-    }
+@keyframes blink{
+  50%{opacity:.4}
+}
 
-    .play-btn {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      border: none;
-      background: linear-gradient(45deg, #ff0055, #ff77aa);
-      font-size: 50px;
-      color: white;
-      cursor: pointer;
-      box-shadow: 0 0 35px rgba(255,0,120,1);
-      transition: transform .2s, box-shadow .2s;
-    }
+.song{
+  margin:20px 0;
+  font-size:.95em;
+  background:rgba(255,255,255,.1);
+  padding:10px;
+  border-radius:15px;
+}
 
-    .play-btn:hover {
-      transform: scale(1.15);
-      box-shadow: 0 0 55px rgba(255,0,150,1);
-    }
+.controls{
+  margin:25px 0;
+}
 
-    footer {
-      margin-top: 25px;
-      font-size: 12px;
-      opacity: .7;
-    }
-  </style>
+.play{
+  width:110px;
+  height:110px;
+  border-radius:50%;
+  border:none;
+  background:linear-gradient(45deg,#ff0055,#ff77aa);
+  font-size:45px;
+  color:white;
+  box-shadow:0 0 45px #ff0055;
+  cursor:pointer;
+  transition:.2s;
+}
+
+.play:hover{
+  transform:scale(1.15);
+}
+
+.volume{
+  margin-top:20px;
+}
+
+input[type=range]{
+  -webkit-appearance:none;
+  width:100%;
+  height:6px;
+  border-radius:5px;
+  background:#ff77aa;
+  outline:none;
+}
+
+input[type=range]::-webkit-slider-thumb{
+  -webkit-appearance:none;
+  width:18px;
+  height:18px;
+  border-radius:50%;
+  background:#fff;
+  box-shadow:0 0 10px #ff0055;
+  cursor:pointer;
+}
+
+footer{
+  margin-top:20px;
+  font-size:11px;
+  opacity:.7;
+}
+
+/* WHATSAPP */
+.whatsapp{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  background:#25D366;
+  width:60px;
+  height:60px;
+  border-radius:50%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:30px;
+  color:white;
+  text-decoration:none;
+  box-shadow:0 0 25px #25D366;
+  animation:pulse 2s infinite;
+}
+
+@keyframes pulse{
+  50%{transform:scale(1.1)}
+}
+</style>
 </head>
 
 <body>
 
-  <div class="radio-card" id="radioCard">
-    <img src="https://imgfz.com/i/h7TrEm5.png" alt="Radio La Tremenda" class="logo">
+<div class="app" id="app">
+  <img src="https://imgfz.com/i/h7TrEm5.png" class="logo">
 
-    <div class="title">Radio La Tremenda</div>
-    <div class="status" id="status">🔴 EN VIVO</div>
+  <h1>LA TREMENDA</h1>
+  <div class="live">🔴 EN VIVO</div>
 
-    <button class="play-btn" id="playBtn">▶</button>
-
-    <footer>© Diseño web por Marcony Clavijo | © 2025</footer>
+  <div class="song" id="song">
+    🎵 Sonando: <br>
+    <strong>Tu mejor música en vivo</strong>
   </div>
 
-  <audio id="radio" preload="none">
-    <source src="https://uk20freenew.listen2myradio.com/live.mp3?typeportmount=s1_17951_stream_983888271" type="audio/mpeg">
-  </audio>
+  <div class="controls">
+    <button class="play" id="playBtn">▶</button>
+  </div>
 
-  <script>
-    const audio = document.getElementById("radio");
-    const playBtn = document.getElementById("playBtn");
-    const card = document.getElementById("radioCard");
-    const status = document.getElementById("status");
+  <div class="volume">
+    🔊 Volumen
+    <input type="range" min="0" max="1" step="0.01" value="1" id="volume">
+  </div>
 
-    playBtn.addEventListener("click", () => {
-      if (audio.paused) {
-        playBtn.textContent = "⏳";
-        audio.load();
-        audio.play().then(() => {
-          playBtn.textContent = "⏸";
-          status.textContent = "🎶 SONANDO EN VIVO";
-          card.classList.add("playing");
-        }).catch(() => {
-          playBtn.textContent = "❌";
-        });
-      } else {
-        audio.pause();
-        playBtn.textContent = "▶";
-        status.textContent = "🔴 EN VIVO";
-        card.classList.remove("playing");
-      }
+  <footer>© 2025 · Radio La Tremenda</footer>
+</div>
+
+<a class="whatsapp" href="https://wa.me/51942883375" target="_blank">💬</a>
+
+<audio id="radio" preload="none">
+  <source src="https://uk20freenew.listen2myradio.com/live.mp3?typeportmount=s1_17951_stream_983888271">
+</audio>
+
+<script>
+const audio = document.getElementById("radio");
+const playBtn = document.getElementById("playBtn");
+const app = document.getElementById("app");
+const volume = document.getElementById("volume");
+
+playBtn.onclick = () => {
+  if(audio.paused){
+    playBtn.textContent="⏳";
+    audio.load();
+    audio.play().then(()=>{
+      playBtn.textContent="⏸";
+      app.classList.add("playing");
     });
-  </script>
+  }else{
+    audio.pause();
+    playBtn.textContent="▶";
+    app.classList.remove("playing");
+  }
+};
+
+volume.oninput = () => {
+  audio.volume = volume.value;
+};
+</script>
 
 </body>
 </html>

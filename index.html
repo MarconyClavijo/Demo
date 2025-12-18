@@ -1,183 +1,126 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Radio La Poderosa 89.5 FM - Sullana</title>
+  <meta charset="UTF-8">
+  <title>Radio La Tremenda 🔥</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+
   <style>
     body {
       margin: 0;
-      font-family: 'Arial', sans-serif;
-      background-color: #fff9e6;
-      color: #002244;
+      height: 100vh;
+      background: radial-gradient(circle at top, #ffb300, #b80000, #000);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Poppins', sans-serif;
+      color: white;
       text-align: center;
     }
 
-    header {
-      background: linear-gradient(to bottom, #ffffff, #ffe680);
-      padding: 60px 20px 40px;
+    .radio-box {
+      background: rgba(0,0,0,0.6);
+      border-radius: 30px;
+      padding: 30px 25px 40px;
+      width: 320px;
+      box-shadow: 0 0 40px rgba(255,80,0,.8);
     }
 
-    header img {
-      width: 340px;
-      max-width: 95%;
-      display: block;
-      margin: 0 auto;
-      animation: fadeDown 1s ease;
+    .logo {
+      width: 200px;
+      margin-bottom: 20px;
+      animation: pulse 2.5s infinite;
     }
 
-    @keyframes fadeDown {
-      from { opacity: 0; transform: translateY(-20px); }
-      to { opacity: 1; transform: translateY(0); }
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.08); }
+      100% { transform: scale(1); }
     }
 
-    h1 {
-      margin: 25px 0 10px;
-      font-size: 2.6em;
-      color: #002244;
-      font-weight: bold;
+    .status {
+      font-weight: 800;
+      letter-spacing: 2px;
+      margin-bottom: 25px;
+      color: #ffd000;
     }
 
-    h2 {
-      font-size: 1.2em;
-      color: #003366;
-      margin: 0;
-    }
-
-    .reproductor {
-      background: #ffffff;
-      border: 2px solid #ffcc00;
-      border-radius: 15px;
-      padding: 30px 20px;
-      margin: 30px auto;
-      max-width: 500px;
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-    }
-
-    .reproductor h3 {
-      color: #cc9900;
-      font-size: 1.6em;
-      margin-bottom: 15px;
-    }
-
-    #controles button {
-      background-color: #ffcc00;
-      color: #002244;
+    .btn-play {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
       border: none;
-      padding: 12px 24px;
-      margin: 0 10px;
-      border-radius: 8px;
-      font-size: 1em;
-      font-weight: bold;
+      background: linear-gradient(45deg, #ff0000, #ffae00);
+      color: white;
+      font-size: 48px;
       cursor: pointer;
-      transition: 0.3s ease;
+      box-shadow: 0 0 25px rgba(255,80,0,.9);
+      transition: transform .2s, box-shadow .2s;
     }
 
-    #controles button:hover {
-      background-color: #002244;
-      color: #ffcc00;
-      border: 2px solid #ffcc00;
+    .btn-play:hover {
+      transform: scale(1.15);
+      box-shadow: 0 0 40px rgba(255,120,0,1);
     }
 
-    .botones {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 12px;
-      padding: 20px;
+    .playing .logo {
+      animation: spin 6s linear infinite;
     }
 
-    .botones a {
-      background-color: #ffcc00;
-      color: #002244;
-      padding: 12px 24px;
-      text-decoration: none;
-      border-radius: 8px;
-      font-weight: bold;
-      display: inline-block;
-      transition: 0.3s ease;
-      flex: 1 1 200px;
-      max-width: 250px;
-    }
-
-    .botones a:hover {
-      background-color: #002244;
-      color: #ffcc00;
-      border: 2px solid #ffcc00;
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
     }
 
     footer {
-      background-color: #ffcc00;
-      color: #002244;
-      padding: 15px;
-      font-size: 14px;
-      font-weight: bold;
-    }
-
-    @media (max-width: 600px) {
-      h1 { font-size: 2em; }
-      h2 { font-size: 1em; }
-      .botones a {
-        width: 100%;
-        max-width: none;
-      }
-
-      header img {
-        width: 90%;
-      }
+      margin-top: 20px;
+      font-size: 13px;
+      opacity: .7;
     }
   </style>
 </head>
+
 <body>
 
-  <!-- Cabecera -->
-  <header>
-    <img src="https://imgfz.com/i/b5XQLxd.png" alt="Logo Radio La Poderosa">
-    <h1>Radio La Poderosa</h1>
-    <h2>La radio que se siente - 89.5 FM en Sullana</h2>
-  </header>
+  <div class="radio-box" id="radioBox">
+    <img src="logo.png" class="logo" alt="Radio La Tremenda">
 
-  <!-- Reproductor personalizado -->
-  <div class="reproductor">
-    <h3>🎧 Escúchanos en vivo</h3>
-    <div id="controles">
-      <button onclick="playRadio()">▶️ Play</button>
-      <button onclick="stopRadio()">⏹️ Stop</button>
-    </div>
+    <div class="status" id="statusText">EN VIVO 🔴</div>
+
+    <button class="btn-play" id="playBtn">▶</button>
+
+    <footer>Radio La Tremenda © 2025</footer>
   </div>
+
+  <!-- AUDIO -->
+  <audio id="radio">
+    <!-- 🔴 CAMBIA ESTA URL POR TU STREAM REAL -->
+    <source src="https://stream-url-aqui.mp3" type="audio/mpeg">
+  </audio>
 
   <script>
-    const streamUrl = "https://sonic.globalstream.pro/8070/stream";
-    let radioPlayer = new Audio(streamUrl);
-    radioPlayer.preload = "none";
-    radioPlayer.crossOrigin = "anonymous";
-    radioPlayer.type = "audio/mpeg";
+    const audio = document.getElementById("radio");
+    const playBtn = document.getElementById("playBtn");
+    const box = document.getElementById("radioBox");
+    const status = document.getElementById("statusText");
 
-    function playRadio() {
-      radioPlayer.src = streamUrl; // Asegura conexión limpia
-      radioPlayer.load(); // Forzar nueva carga
-      radioPlayer.play().catch(e => console.log("Error al reproducir:", e));
-    }
-
-    function stopRadio() {
-      radioPlayer.pause();
-      radioPlayer.src = ""; // Desconecta completamente
-      radioPlayer.load();
-    }
+    playBtn.addEventListener("click", () => {
+      if (audio.paused) {
+        audio.play();
+        playBtn.textContent = "⏸";
+        status.textContent = "SONANDO EN VIVO 🎶";
+        box.classList.add("playing");
+      } else {
+        audio.pause();
+        playBtn.textContent = "▶";
+        status.textContent = "EN VIVO 🔴";
+        box.classList.remove("playing");
+      }
+    });
   </script>
-
-  <!-- Botones de acción -->
-  <div class="botones">
-    <a href="https://www.facebook.com/share/1ZMtdLd32N/" target="_blank">📘 Facebook</a>
-    <a href="https://wa.me/51925865545" target="_blank">🎤 WhatsApp Oyentes</a>
-    <a href="https://wa.me/51912807362" target="_blank">📢 Publicidad</a>
-    <a href="https://play.google.com/store/apps/details?id=com.innovatel.radiolapoderosa" target="_blank">📲 Descargar App</a>
-  </div>
-
-  <!-- Pie de página -->
-  <footer>
-    Diseñado y desarrollado por Marcony Clavijo – Innovación que conecta.
-  </footer>
 
 </body>
 </html>

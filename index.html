@@ -1,125 +1,93 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Radio La N 96.3 FM | Suena Diferente</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<title>Radio La N 96.3 FM | Suena Diferente</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Fuente -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&display=swap" rel="stylesheet">
 
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(180deg, #000000, #1a1a1a);
-      color: #fff;
-      text-align: center;
-    }
+<style>
+body{
+  margin:0;
+  font-family:'Poppins',sans-serif;
+  background:radial-gradient(circle,#111,#000);
+  color:#fff;
+  text-align:center;
+}
 
-    header {
-      padding: 30px 20px 10px;
-    }
+header{
+  padding:30px 20px;
+}
 
-    header img {
-      max-width: 180px;
-      filter: drop-shadow(0 0 15px rgba(255,204,0,0.8));
-    }
+.logo{
+  max-width:180px;
+  filter:drop-shadow(0 0 15px #ffcc00);
+}
 
-    h1 {
-      font-size: 32px;
-      margin: 10px 0 0;
-      color: #ffcc00;
-    }
+h1{
+  color:#ffcc00;
+  margin:10px 0 0;
+}
 
-    .slogan {
-      font-size: 18px;
-      opacity: 0.9;
-      margin-bottom: 20px;
-    }
+.hero{
+  max-width:900px;
+  margin:20px auto;
+  border-radius:20px;
+  overflow:hidden;
+}
 
-    /* Imagen chica */
-    .hero {
-      position: relative;
-      max-width: 900px;
-      margin: 0 auto;
-      overflow: hidden;
-      border-radius: 20px;
-    }
+.hero img{
+  width:100%;
+  animation:zoom 15s infinite alternate;
+}
 
-    .hero img {
-      width: 100%;
-      animation: zoom 18s infinite alternate;
-      filter: brightness(1.1) contrast(1.1);
-    }
+@keyframes zoom{
+  from{transform:scale(1)}
+  to{transform:scale(1.08)}
+}
 
-    @keyframes zoom {
-      from { transform: scale(1); }
-      to { transform: scale(1.08); }
-    }
+.player{
+  margin:30px auto;
+}
 
-    /* Player */
-    .player {
-      margin: 30px auto;
-      max-width: 420px;
-    }
+audio{
+  width:320px;
+  height:50px;
+}
 
-    /* Botón alterno */
-    .btn-play {
-      display: inline-block;
-      margin-top: 25px;
-      padding: 16px 40px;
-      background: #ffcc00;
-      color: #000;
-      font-size: 20px;
-      font-weight: 800;
-      border-radius: 50px;
-      text-decoration: none;
-      box-shadow: 0 0 25px rgba(255,204,0,0.8);
-      transition: 0.3s;
-    }
-
-    .btn-play:hover {
-      transform: scale(1.08);
-    }
-
-    footer {
-      margin-top: 40px;
-      padding: 15px;
-      font-size: 14px;
-      background: #111;
-      opacity: 0.8;
-    }
-  </style>
+footer{
+  margin-top:40px;
+  padding:15px;
+  background:#111;
+  font-size:14px;
+}
+</style>
 </head>
 
 <body>
 
-  <header>
-    <!-- LOGO (puedes cambiar el link si deseas) -->
-    <img src="https://user1472.na.imgto.link/public/20260117/la-n-removebg-preview.avif" alt="Radio La N">
-    <h1>Radio La N 96.3 FM</h1>
-    <div class="slogan">Suena Diferente</div>
-  </header>
+<header>
+  <img class="logo" src="https://user1472.na.imgto.link/public/20260117/la-n-removebg-preview.avif">
+  <h1>Radio La N 96.3 FM</h1>
+  <p>Suena Diferente</p>
+</header>
 
-  <!-- IMAGEN CHICA CON AUDÍFONOS -->
-  <div class="hero">
-    <img src="AQUI_PONES_EL_LINK_DE_LA_CHICA_CON_AUDIFONOS" alt="Radio La N en vivo">
-  </div>
+<div class="hero">
+  <img src="AQUI_VA_LA_IMAGEN_DE_LA_CHICA">
+</div>
 
-  <!-- PLAYER OFICIAL -->
-  <div class="player">
-    <script src="//myradiostream.com/embed/Anghelo"></script>
-  </div>
+<!-- PLAYER REAL -->
+<div class="player">
+  <audio controls preload="none">
+    <source src="http://s28.myradiostream.com:30500/stream" type="audio/mpeg">
+    Tu navegador no soporta audio.
+  </audio>
+</div>
 
-  <!-- BOTÓN ALTERNATIVO (POR SI EL PLAYER TARDA) -->
-  <a class="btn-play" href="http://anghelo.on-air.fm/free/" target="_blank">
-    ▶ ESCUCHAR RADIO EN VIVO
-  </a>
-
-  <footer>
-    © 2026 Radio La N 96.3 FM · Diseño web
-  </footer>
+<footer>
+© 2026 Radio La N 96.3 FM
+</footer>
 
 </body>
 </html>

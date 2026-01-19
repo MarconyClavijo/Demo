@@ -3,213 +3,136 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Radio La Tremenda</title>
+<title>Radio La N 96.3 FM | Suena Diferente</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
 <style>
 body{
   margin:0;
-  font-family:'Orbitron',sans-serif;
-  background:
-    radial-gradient(circle at top, #ff004c, transparent 60%),
-    radial-gradient(circle at bottom, #6a00ff, #050010 70%);
-  height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
+  font-family:'Poppins', sans-serif;
+  background:linear-gradient(135deg,#000,#111,#ffcc00);
   color:#fff;
-}
-
-.app{
-  width:340px;
-  background:rgba(0,0,0,.65);
-  border-radius:35px;
-  padding:30px 20px 35px;
-  box-shadow:0 0 60px rgba(255,0,120,.9);
   text-align:center;
 }
 
+header{
+  padding:40px 15px 20px;
+}
+
+/* LOGO */
 .logo{
-  width:220px;
-  filter:drop-shadow(0 0 25px #ff2a6d);
+  width:190px;
+  margin-bottom:12px;
+  filter:
+    drop-shadow(0 0 4px #fff)
+    drop-shadow(0 0 12px #ffcc00)
+    drop-shadow(0 0 24px rgba(255,204,0,.9));
+  animation:floatLogo 3.5s ease-in-out infinite;
 }
 
-.playing .logo{
-  animation:spin 6s linear infinite;
-}
-
-@keyframes spin{
-  from{transform:rotate(0)}
-  to{transform:rotate(360deg)}
+@keyframes floatLogo{
+  0%{transform:translateY(0)}
+  50%{transform:translateY(-12px)}
+  100%{transform:translateY(0)}
 }
 
 h1{
-  margin:15px 0 5px;
-  font-size:2em;
+  margin:6px 0 4px;
+  font-size:26px;
 }
 
-.live{
-  font-size:.9em;
+.slogan{
+  color:#ffcc00;
   letter-spacing:2px;
-  color:#ff9bd1;
-  animation:blink 1.4s infinite;
+  font-size:14px;
+  margin-bottom:25px;
 }
 
-@keyframes blink{
-  50%{opacity:.4}
+/* BOTÓN PLAY */
+.play-box{
+  margin:35px 0;
 }
 
-.song{
-  margin:20px 0;
-  font-size:.95em;
-  background:rgba(255,255,255,.1);
-  padding:10px;
-  border-radius:15px;
-}
-
-.controls{
-  margin:25px 0;
-}
-
-.play{
-  width:110px;
-  height:110px;
-  border-radius:50%;
-  border:none;
-  background:linear-gradient(45deg,#ff0055,#ff77aa);
-  font-size:45px;
-  color:white;
-  box-shadow:0 0 45px #ff0055;
-  cursor:pointer;
-  transition:.2s;
-}
-
-.play:hover{
-  transform:scale(1.15);
-}
-
-.volume{
-  margin-top:20px;
-}
-
-input[type=range]{
-  -webkit-appearance:none;
-  width:100%;
-  height:6px;
-  border-radius:5px;
-  background:#ff77aa;
-  outline:none;
-}
-
-input[type=range]::-webkit-slider-thumb{
-  -webkit-appearance:none;
-  width:18px;
-  height:18px;
-  border-radius:50%;
-  background:#fff;
-  box-shadow:0 0 10px #ff0055;
-  cursor:pointer;
-}
-
-footer{
-  margin-top:20px;
-  font-size:11px;
-  opacity:.7;
-}
-
-/* WhatsApp */
-.whatsapp{
-  position:fixed;
-  bottom:20px;
-  right:20px;
-  background:#25D366;
-  width:60px;
-  height:60px;
-  border-radius:50%;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  font-size:30px;
-  color:white;
+.play-box a{
+  display:inline-block;
+  padding:18px 45px;
+  font-size:20px;
+  font-weight:700;
+  color:#000;
+  background:#ffcc00;
+  border-radius:50px;
   text-decoration:none;
-  box-shadow:0 0 25px #25D366;
-  animation:pulse 2s infinite;
+  box-shadow:0 0 25px rgba(255,204,0,.8);
+  transition:0.3s;
 }
 
-@keyframes pulse{
-  50%{transform:scale(1.1)}
+.play-box a:hover{
+  transform:scale(1.06);
+  background:#fff;
+}
+
+/* BOTONES SECUNDARIOS */
+.buttons{
+  margin:30px 0;
+}
+
+.buttons a{
+  display:inline-block;
+  margin:6px;
+  padding:12px 22px;
+  background:#111;
+  color:#ffcc00;
+  border:2px solid #ffcc00;
+  font-weight:600;
+  text-decoration:none;
+  border-radius:30px;
+  transition:.3s;
+}
+
+.buttons a:hover{
+  background:#ffcc00;
+  color:#000;
+}
+
+/* FOOTER */
+footer{
+  margin-top:35px;
+  padding:15px;
+  font-size:13px;
+  background:rgba(0,0,0,.55);
 }
 </style>
 </head>
 
 <body>
 
-<div class="app" id="app">
-  <img src="https://imgfz.com/i/h7TrEm5.png" class="logo">
+<header>
+  <img
+    src="https://user1472.na.imgto.link/public/20260117/la-n-removebg-preview.avif"
+    alt="Radio La N 96.3 FM"
+    class="logo">
 
-  <h1>LA TREMENDA</h1>
-  <div class="live">🔴 EN VIVO</div>
+  <h1>Radio La N 96.3 FM</h1>
+  <div class="slogan">SUENA DIFERENTE</div>
+</header>
 
-  <div class="song" id="nowplaying">
-    🎵 Cargando canción...
-  </div>
-
-  <div class="controls">
-    <button class="play" id="playBtn">▶</button>
-  </div>
-
-  <div class="volume">
-    🔊 Volumen
-    <input type="range" min="0" max="1" step="0.01" value="1" id="volume">
-  </div>
-
-  <footer>Diseño web por Marcony Clavijo | © 2025</footer>
+<!-- BOTÓN PLAY PRINCIPAL -->
+<div class="play-box">
+  <a href="http://anghelo.on-air.fm/free/" target="_blank">
+    ▶ ESCUCHAR RADIO EN VIVO
+  </a>
 </div>
 
-<a class="whatsapp" href="https://wa.me/51942883375" target="_blank">💬</a>
+<!-- BOTONES OPCIONALES -->
+<div class="buttons">
+  <a href="#">📘 Facebook</a>
+  <a href="https://wa.me/51999999999">📞 WhatsApp</a>
+</div>
 
-<audio id="radio" preload="none" playsinline crossorigin="anonymous">
-  <source src="https://stream.zeno.fm/jfjyk4dnuc1vv" type="audio/mpeg">
-</audio>
-
-<script>
-const audio = document.getElementById("radio");
-const playBtn = document.getElementById("playBtn");
-const app = document.getElementById("app");
-const volume = document.getElementById("volume");
-
-playBtn.onclick = () => {
-  if(audio.paused){
-    playBtn.textContent="⏳";
-    audio.load();
-    audio.play().then(()=>{
-      playBtn.textContent="⏸";
-      app.classList.add("playing");
-    });
-  }else{
-    audio.pause();
-    playBtn.textContent="▶";
-    app.classList.remove("playing");
-  }
-};
-
-volume.oninput = () => {
-  audio.volume = volume.value;
-};
-
-/* Canción actual desde Zeno */
-setInterval(()=>{
-  fetch("https://api.zeno.fm/station/jfjyk4dnuc1vv")
-    .then(r=>r.json())
-    .then(data=>{
-      if(data.now_playing){
-        document.getElementById("nowplaying").innerText =
-          "🎶 " + data.now_playing.song.text;
-      }
-    });
-},15000);
-</script>
+<footer>
+  © 2026 Radio La N 96.3 FM · Diseño web: Marcony Clavijo
+</footer>
 
 </body>
 </html>

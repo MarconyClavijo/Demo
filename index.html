@@ -3,266 +3,226 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>La Tremenda 106.5 FM</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&display=swap" rel="stylesheet">
+<script>
+if (location.protocol === 'http:') {
+  location.href = location.href.replace('http:', 'https:');
+}
+</script>
+
+<title>Corporación La Fuerte</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 
 <style>
 body{
   margin:0;
-  font-family:'Poppins',sans-serif;
-  min-height:100vh;
-  background:linear-gradient(140deg,#ff0000,#ff7300,#ffc400);
-  background-size:300% 300%;
-  animation:fondo 10s ease infinite;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  flex-direction:column;
+  font-family:'Montserrat',sans-serif;
+  background:linear-gradient(135deg,#0f1b3d,#0a1026);
+  color:#fff;
 }
 
-@keyframes fondo{
-  0%{background-position:0% 50%}
-  50%{background-position:100% 50%}
-  100%{background-position:0% 50%}
-}
-
-.app{
-  width:92%;
-  max-width:420px;
-  background:rgba(0,0,0,.55);
-  backdrop-filter:blur(12px);
-  border-radius:30px;
-  padding:25px 20px;
-  box-shadow:0 0 40px rgba(0,0,0,.6);
+/* ===== ENCABEZADO ===== */
+header{
   text-align:center;
-  color:#fff;
-  margin-top:20px;
+  padding:2rem 1rem;
+  background:#12315c;
 }
-
-.title{
-  font-size:28px;
-  font-weight:900;
-  margin-bottom:5px;
-  text-shadow:0 0 10px #ff0000;
+header img{
+  width:120px;
 }
-
-.logo{
-  width:170px;
-  margin:10px 0;
-  filter:drop-shadow(0 0 10px #fff);
+header h1{
+  margin:.8rem 0;
+  color:#ffe600;
 }
-
-.player-box{
-  background:rgba(255,255,255,.12);
-  border:2px solid rgba(255,255,255,.2);
-  border-radius:20px;
-  padding:20px;
-  margin-top:10px;
-}
-
-.status{
-  font-weight:bold;
-  margin-bottom:10px;
-  color:#0f0;
-}
-
-.play{
-  padding:20px;
-  width:100%;
-  font-size:28px;
-  font-weight:900;
-  border:none;
-  border-radius:15px;
-  background:#00d95f;
-  color:#fff;
-  cursor:pointer;
-  transition:.3s;
-  box-shadow:0 0 20px rgba(0,255,100,.6);
-}
-
-.play:hover{
-  transform:scale(1.05);
-}
-
-.volume{
-  margin-top:15px;
-}
-
-input[type=range]{
-  width:100%;
-}
-
-.eq{
-  display:flex;
-  justify-content:center;
-  gap:6px;
-  margin:15px 0;
-  height:40px;
-}
-
-.eq span{
-  width:8px;
-  background:#00ff00;
-  animation:eco .7s infinite;
-  animation-play-state:paused;
-}
-
-.playing .eq span{
-  animation-play-state:running;
-}
-
-@keyframes eco{
-  0%{height:10px}
-  50%{height:40px}
-  100%{height:15px}
-}
-
-.social-container{
-  display:flex;
-  gap:10px;
-  margin-top:15px;
-}
-
-.social-box{
-  flex:1;
-  padding:15px;
-  border-radius:15px;
+.btn-contacto{
+  display:inline-block;
+  background:#ffe600;
+  color:#000;
+  padding:10px 20px;
+  border-radius:25px;
   font-weight:bold;
   text-decoration:none;
-  color:#fff;
+}
+
+/* ===== GRID CORREGIDO ===== */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:1.5rem;
+  padding:2rem;
+  max-width:1200px;
+  margin:auto;
+}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+}
+@media(max-width:420px){
+  .grid{
+    grid-template-columns:1fr;
+  }
+}
+
+/* ===== TARJETAS ===== */
+.card{
+  background:#1b2437;
+  border:2px solid #ff5252;
+  border-radius:20px;
+  padding:1.5rem;
   text-align:center;
-  transition:.3s;
+  position:relative;
+}
+.card.activa{
+  border-color:#ffe600;
+  box-shadow:0 0 15px #ffe600;
+}
+.card.activa::before{
+  content:"🔴 EN VIVO";
+  position:absolute;
+  top:8px;
+  right:8px;
+  background:red;
+  padding:3px 8px;
+  border-radius:12px;
+  font-size:.7rem;
+  font-weight:bold;
 }
 
-.facebook{
-  background:#1877f2;
-  box-shadow:0 0 15px rgba(24,119,242,.7);
+/* ===== LOGOS ===== */
+.logo{
+  width:90px;
+  height:90px;
+  object-fit:contain;
+  background:#fff;
+  padding:5px;
+  border-radius:10px;
+  cursor:pointer;
+}
+h2{
+  color:#ffe600;
+  margin:.8rem 0;
 }
 
-.whatsapp{
-  background:#00bb2d;
-  box-shadow:0 0 15px rgba(0,187,45,.7);
-}
-
-.social-box:hover{
-  transform:scale(1.06);
-}
-
-.footer{
+/* ===== BOTONES ===== */
+.play-btn{
   margin-top:10px;
+  padding:8px 18px;
+  border:none;
+  border-radius:20px;
+  background:#ffe600;
+  font-weight:bold;
+  cursor:pointer;
+}
+.stop{
+  background:#ff4d4d;
   color:#fff;
-  font-size:12px;
-  opacity:.8;
+}
+
+footer{
   text-align:center;
+  padding:1.5rem;
+  font-size:.8rem;
+  color:#aaa;
 }
 </style>
 </head>
 
 <body>
 
-<div class="app" id="app">
+<header>
+  <img src="https://imgfz.com/i/bmnsNX4.png">
+  <h1>Corporación La Fuerte</h1>
+  <a class="btn-contacto" href="https://wa.me/51968093770" target="_blank">
+    📞 Contrata publicidad aquí: 51968093770
+  </a>
+</header>
 
-  <div class="title">LA TREMENDA 106.5 FM</div>
+<main class="grid">
 
-  <img src="https://imgfz.com/i/h7TrEm5.png" class="logo">
-
-  <div class="player-box">
-
-    <div class="status" id="estado">🔴 EN VIVO</div>
-
-    <div class="eq">
-      <span></span><span></span><span></span><span></span><span></span>
-    </div>
-
-    <button class="play" id="btn">▶ REPRODUCIR</button>
-
-    <div class="volume">
-      <input type="range" min="0" max="1" step="0.01" value="1" id="volumen">
-    </div>
-
-  </div>
-
-  <div class="social-container">
-    <a class="social-box facebook" href="https://www.facebook.com/profile.php?id=61585616422921" target="_blank">
-      Facebook
-    </a>
-
-    <a class="social-box whatsapp" href="https://wa.me/51942883375" target="_blank">
-      WhatsApp
-    </a>
-  </div>
-
+<div class="card">
+  <img class="logo" src="https://imgfz.com/i/fmdxHD8.png">
+  <h2>La Fuerte</h2>
+  <button class="play-btn">PLAY</button>
+  <audio src="https://panelautodj.innovatestream.pe/7322/;"></audio>
 </div>
 
-<div class="footer">
-  Diseño por Marcony Clavijo – Radio La Tremenda
+<div class="card">
+  <img class="logo" src="https://imgfz.com/i/FRicwT8.png">
+  <h2>La Jefa</h2>
+  <button class="play-btn">PLAY</button>
+  <audio src="https://panelautodj.innovatestream.pe/7320/;"></audio>
 </div>
+
+<div class="card">
+  <img class="logo" src="https://imgfz.com/i/bBApQu2.png">
+  <h2>San Francisco</h2>
+  <button class="play-btn">PLAY</button>
+  <audio src="https://panelautodj.innovatestream.pe/7324/;"></audio>
+</div>
+
+<div class="card">
+  <img class="logo" src="https://imgfz.com/i/bVMWlXD.png">
+  <h2>Máxima</h2>
+  <button class="play-btn">PLAY</button>
+  <audio src="https://panelautodj.innovatestream.pe/8342/;"></audio>
+</div>
+
+<div class="card">
+  <img class="logo" src="https://imgfz.com/i/J89AMPT.png">
+  <h2>La Cumbiambera</h2>
+  <button class="play-btn">PLAY</button>
+  <audio src="https://panelautodj.innovatestream.pe/8464/;"></audio>
+</div>
+
+<div class="card">
+  <img class="logo" src="https://imgfz.com/i/zauB0Id.png">
+  <h2>La Raya</h2>
+  <button class="play-btn">PLAY</button>
+  <audio src="https://panelautodj.innovatestream.pe/8466/;"></audio>
+</div>
+
+</main>
+
+<footer>
+© 2025 Corporación La Fuerte. Todos los derechos reservados.
+</footer>
 
 <script>
-const btn = document.getElementById("btn");
-const estado = document.getElementById("estado");
-const app = document.getElementById("app");
-const vol = document.getElementById("volumen");
+const cards=document.querySelectorAll('.card');
+let currentAudio=null;
 
-let audio = null;
-let sonando = false;
+cards.forEach(card=>{
+  const btn=card.querySelector('.play-btn');
+  const audio=card.querySelector('audio');
 
-function crearAudio() {
-  // Elimina cualquier audio anterior
-  if (audio) {
-    audio.pause();
-    audio.src = "";
-    audio.load();
-  }
+  btn.addEventListener('click',()=>{
+    if(currentAudio && currentAudio!==audio){
+      currentAudio.pause();
+      currentAudio.currentTime=0;
+      document.querySelector('.card.activa')?.classList.remove('activa');
+    }
 
-  // Crea un audio NUEVO – sin nada en buffer
-  audio = new Audio("https://stream.zeno.fm/jfjyk4dnuc1vv");
-  audio.preload = "none";
-  audio.volume = vol.value;
-}
-
-btn.onclick = () => {
-
-  if (!sonando) {
-
-    crearAudio();
-
-    estado.textContent = "⏳ Conectando en vivo...";
-    btn.textContent = "⏳";
-
-    audio.play()
-      .then(() => {
-        estado.textContent = "🎧 EN VIVO - TIEMPO REAL";
-        btn.textContent = "⏸ DETENER";
-        app.classList.add("playing");
-        sonando = true;
-      })
-      .catch(() => {
-        estado.textContent = "⚠️ Error de conexión";
-        btn.textContent = "▶ REPRODUCIR";
-        sonando = false;
-      });
-
-  } else {
-
-    // CORTE TOTAL DEL STREAMING
-    audio.pause();
-    audio.src = "";
-    audio.load();
-
-    estado.textContent = "⏹ TRANSMISIÓN DETENIDA";
-    btn.textContent = "▶ REPRODUCIR";
-    app.classList.remove("playing");
-
-    sonando = false;
-  }
-
-};
-
-vol.oninput = () => {
-  if (audio) audio.volume = vol.value;
-};
+    if(audio.paused){
+      audio.load();          // 👈 evita buffer tipo Spotify
+      audio.play();
+      btn.textContent="STOP";
+      btn.classList.add('stop');
+      card.classList.add('activa');
+      currentAudio=audio;
+    }else{
+      audio.pause();
+      audio.currentTime=0;
+      btn.textContent="PLAY";
+      btn.classList.remove('stop');
+      card.classList.remove('activa');
+      currentAudio=null;
+    }
+  });
+});
 </script>
 
 </body>

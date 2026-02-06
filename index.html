@@ -11,49 +11,69 @@
 body{
   margin:0;
   font-family:'Orbitron',sans-serif;
-  min-height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  background:linear-gradient(135deg,#ff0000,#ff8c00,#ffd700);
+  background:#0a0000;
+  color:#fff;
+  overflow:hidden;
 }
 
-/* LUCES ROBOTICAS */
-.light{
+/* BANNER SUPERIOR */
+.marquee{
   position:fixed;
   top:0;
-  width:220px;
-  height:420px;
-  background:linear-gradient(to bottom,rgba(255,255,255,.7),transparent);
-  clip-path:polygon(50% 0, 0 100%, 100% 100%);
-  opacity:.5;
-  animation:moveLight 3s infinite alternate;
-  pointer-events:none;
+  width:100%;
+  background:linear-gradient(90deg,#ff0000,#ffd700,#ff0000);
+  color:#000;
+  font-weight:900;
+  padding:8px 0;
+  overflow:hidden;
+  z-index:10;
 }
 
-.light.left{left:-40px; animation-delay:0s;}
-.light.right{right:-40px; animation-delay:1.5s;}
-
-@keyframes moveLight{
-  0%{transform:rotate(-10deg)}
-  100%{transform:rotate(10deg)}
+.marquee span{
+  display:inline-block;
+  white-space:nowrap;
+  animation:scroll 15s linear infinite;
 }
 
-.app{
-  width:360px;
-  background:rgba(0,0,0,.75);
-  border-radius:28px;
-  padding:28px 22px;
+@keyframes scroll{
+  from{transform:translateX(100%)}
+  to{transform:translateX(-100%)}
+}
+
+/* LUCES LATERALES */
+.led{
+  position:fixed;
+  top:0;
+  width:20px;
+  height:100vh;
+  background:linear-gradient(#ff0000,#ffd700,#ff0000);
+  animation:ledMove 1.2s infinite alternate;
+}
+
+.led.left{left:0}
+.led.right{right:0}
+
+@keyframes ledMove{
+  0%{filter:brightness(.5)}
+  100%{filter:brightness(1.5)}
+}
+
+/* ESCENARIO */
+.stage{
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  gap:16px;
+  padding:60px 20px;
+  box-sizing:border-box;
   text-align:center;
-  color:#fff;
-  box-shadow:0 0 50px rgba(255,0,0,.9);
-  position:relative;
-  z-index:5;
 }
 
 /* LOGO */
 .logo{
-  width:210px;
+  width:200px;
   filter:drop-shadow(0 0 20px #ffd700);
 }
 
@@ -66,66 +86,70 @@ body{
 }
 
 h1{
-  margin:10px 0 4px;
-  font-size:2em;
+  font-size:2.4em;
+  margin:0;
   color:#ffd700;
-  text-shadow:0 0 15px #ffd700;
+  text-shadow:0 0 25px #ffd700;
 }
 
 .slogan{
-  font-size:.85em;
-  color:#ffb703;
-  letter-spacing:2px;
-}
-
-/* EN VIVO */
-.live{
-  margin-top:6px;
-  font-size:.9em;
-  color:#ff0000;
-  animation:blink 1.2s infinite;
-}
-
-@keyframes blink{
-  50%{opacity:.3}
-}
-
-/* CANCIÓN */
-.song{
-  margin:20px 0;
-  padding:14px;
-  border-radius:16px;
-  background:linear-gradient(90deg,#ff0000,#ff8c00);
-  box-shadow:0 0 20px rgba(255,140,0,.9);
   font-size:.95em;
+  letter-spacing:3px;
+  color:#ffb703;
+}
+
+/* ECUALIZADOR */
+.eq{
+  display:flex;
+  gap:6px;
+  margin:20px 0;
+  height:60px;
+}
+
+.eq span{
+  width:10px;
+  background:#ffd700;
+  animation:equalize .6s infinite;
+  transform-origin:bottom;
+}
+
+.eq span:nth-child(odd){animation-delay:.2s}
+.eq span:nth-child(even){animation-delay:.4s}
+
+.playing .eq span{
+  animation-play-state:running;
+}
+
+.eq span{
+  animation-play-state:paused;
+}
+
+@keyframes equalize{
+  0%{height:15px}
+  50%{height:60px}
+  100%{height:20px}
 }
 
 /* PLAY */
-.controls{
-  margin:26px 0;
-}
-
 .play{
-  width:120px;
-  height:120px;
-  border-radius:50%;
+  padding:18px 50px;
+  font-size:28px;
+  font-weight:900;
   border:none;
-  background:radial-gradient(circle,#ffd700,#ff0000);
-  font-size:46px;
+  background:linear-gradient(90deg,#ffd700,#ff0000);
   color:#000;
   cursor:pointer;
-  box-shadow:0 0 30px #ffd700, 0 0 60px #ff0000;
-  animation:pulse 1.4s infinite;
+  box-shadow:0 0 30px #ff0000;
+  transition:.2s;
 }
 
-@keyframes pulse{
-  50%{transform:scale(1.12)}
+.play:hover{
+  transform:scale(1.08);
 }
 
 /* VOLUMEN */
 .volume{
-  margin-top:18px;
-  font-size:.8em;
+  width:260px;
 }
 
 input[type=range]{
@@ -135,55 +159,53 @@ input[type=range]{
 /* REDES */
 .social{
   display:flex;
-  justify-content:center;
   gap:14px;
-  margin:26px 0;
+  margin-top:20px;
 }
 
 .social a{
-  padding:14px 22px;
-  border-radius:30px;
+  padding:10px 20px;
   background:#ffd700;
   color:#000;
   text-decoration:none;
   font-weight:900;
-  box-shadow:0 0 20px #ffd700;
-  transition:.25s;
 }
 
-.social a:hover{
-  transform:scale(1.1);
-}
-
+/* FOOTER */
 footer{
+  position:fixed;
+  bottom:6px;
+  width:100%;
+  text-align:center;
   font-size:10px;
-  opacity:.7;
+  opacity:.6;
 }
 </style>
 </head>
 
 <body>
 
-<!-- LUCES -->
-<div class="light left"></div>
-<div class="light right"></div>
+<div class="marquee">
+  <span>🎉 LA TREMENDA 106.5 FM · CUMBIA SANJUANERA · LA RADIO DEL PUEBLO · TRANSMITIENDO DONDE ESTÁ LA FIESTA 🎉</span>
+</div>
 
-<div class="app" id="app">
+<div class="led left"></div>
+<div class="led right"></div>
+
+<div class="stage" id="app">
 
   <img src="https://imgfz.com/i/h7TrEm5.png" class="logo">
 
   <h1>LA TREMENDA</h1>
   <div class="slogan">LA RADIO DEL PUEBLO</div>
-  <div class="live">● EN VIVO</div>
 
-  <div class="song" id="nowplaying">🎶 Cargando canción...</div>
-
-  <div class="controls">
-    <button class="play" id="playBtn">▶</button>
+  <div class="eq">
+    <span></span><span></span><span></span><span></span><span></span>
   </div>
 
+  <button class="play" id="playBtn">▶ SONAR LA FIESTA</button>
+
   <div class="volume">
-    🔊 Volumen
     <input type="range" min="0" max="1" step="0.01" value="1" id="volume">
   </div>
 
@@ -192,8 +214,9 @@ footer{
     <a href="https://wa.me/51942883375" target="_blank">WhatsApp</a>
   </div>
 
-  <footer>© 2026 Radio La Tremenda 106.5 FM</footer>
 </div>
+
+<footer>© 2026 Radio La Tremenda 106.5 FM</footer>
 
 <audio id="radio" preload="none" playsinline webkit-playsinline>
   <source src="https://stream.zeno.fm/jfjyk4dnuc1vv" type="audio/mpeg">
@@ -208,12 +231,12 @@ const volume = document.getElementById("volume");
 playBtn.onclick = ()=>{
   if(audio.paused){
     audio.play().then(()=>{
-      playBtn.textContent="⏸";
+      playBtn.textContent="⏸ PAUSAR";
       app.classList.add("playing");
     });
   }else{
     audio.pause();
-    playBtn.textContent="▶";
+    playBtn.textContent="▶ SONAR LA FIESTA";
     app.classList.remove("playing");
   }
 };

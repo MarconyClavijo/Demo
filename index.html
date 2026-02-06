@@ -29,93 +29,84 @@ header{
   background:#12315c;
 }
 header img{
-  width:120px;
+  width:110px;
 }
 header h1{
-  margin:.8rem 0;
+  margin:.7rem 0;
   color:#ffe600;
+  font-size:1.6rem;
 }
 .btn-contacto{
   display:inline-block;
   background:#ffe600;
   color:#000;
-  padding:10px 20px;
+  padding:8px 18px;
   border-radius:25px;
   font-weight:bold;
   text-decoration:none;
+  font-size:.9rem;
 }
 
-/* ===== GRID CORREGIDO ===== */
+/* ===== GRID (SIEMPRE 3 POR FILA) ===== */
 .grid{
   display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:1.5rem;
-  padding:2rem;
+  grid-template-columns:repeat(3, 1fr);
+  gap:1rem;
+  padding:1.2rem;
   max-width:1200px;
   margin:auto;
-}
-
-/* RESPONSIVE */
-@media(max-width:768px){
-  .grid{
-    grid-template-columns:repeat(2,1fr);
-  }
-}
-@media(max-width:420px){
-  .grid{
-    grid-template-columns:1fr;
-  }
 }
 
 /* ===== TARJETAS ===== */
 .card{
   background:#1b2437;
   border:2px solid #ff5252;
-  border-radius:20px;
-  padding:1.5rem;
+  border-radius:16px;
+  padding:1rem .6rem;
   text-align:center;
   position:relative;
 }
 .card.activa{
   border-color:#ffe600;
-  box-shadow:0 0 15px #ffe600;
+  box-shadow:0 0 12px #ffe600;
 }
 .card.activa::before{
   content:"🔴 EN VIVO";
   position:absolute;
-  top:8px;
-  right:8px;
+  top:6px;
+  right:6px;
   background:red;
-  padding:3px 8px;
-  border-radius:12px;
-  font-size:.7rem;
+  padding:2px 6px;
+  border-radius:10px;
+  font-size:.65rem;
   font-weight:bold;
 }
 
 /* ===== LOGOS ===== */
 .logo{
-  width:90px;
-  height:90px;
+  width:65px;
+  height:65px;
   object-fit:contain;
   background:#fff;
-  padding:5px;
+  padding:4px;
   border-radius:10px;
   cursor:pointer;
 }
 h2{
   color:#ffe600;
-  margin:.8rem 0;
+  font-size:.85rem;
+  margin:.6rem 0;
 }
 
 /* ===== BOTONES ===== */
 .play-btn{
-  margin-top:10px;
-  padding:8px 18px;
+  padding:6px 14px;
   border:none;
-  border-radius:20px;
+  border-radius:18px;
   background:#ffe600;
   font-weight:bold;
   cursor:pointer;
+  font-size:.75rem;
 }
 .stop{
   background:#ff4d4d;
@@ -124,8 +115,8 @@ h2{
 
 footer{
   text-align:center;
-  padding:1.5rem;
-  font-size:.8rem;
+  padding:1.2rem;
+  font-size:.7rem;
   color:#aaa;
 }
 </style>
@@ -207,7 +198,7 @@ cards.forEach(card=>{
     }
 
     if(audio.paused){
-      audio.load();          // 👈 evita buffer tipo Spotify
+      audio.load();        // fuerza directo a tiempo real
       audio.play();
       btn.textContent="STOP";
       btn.classList.add('stop');

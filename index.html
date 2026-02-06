@@ -27,7 +27,6 @@ body{
   100%{background-position:0% 50%}
 }
 
-/* CONTENEDOR PRINCIPAL */
 .app{
   width:92%;
   max-width:420px;
@@ -41,7 +40,6 @@ body{
   margin-top:20px;
 }
 
-/* TITULO */
 .title{
   font-size:28px;
   font-weight:900;
@@ -49,14 +47,12 @@ body{
   text-shadow:0 0 10px #ff0000;
 }
 
-/* LOGO */
 .logo{
   width:170px;
   margin:10px 0;
   filter:drop-shadow(0 0 10px #fff);
 }
 
-/* CAJA REPRODUCTOR */
 .player-box{
   background:rgba(255,255,255,.12);
   border:2px solid rgba(255,255,255,.2);
@@ -65,18 +61,16 @@ body{
   margin-top:10px;
 }
 
-/* ESTADO */
 .status{
   font-weight:bold;
   margin-bottom:10px;
   color:#0f0;
 }
 
-/* BOTON PLAY */
 .play{
   padding:20px;
   width:100%;
-  font-size:32px;
+  font-size:28px;
   font-weight:900;
   border:none;
   border-radius:15px;
@@ -91,7 +85,6 @@ body{
   transform:scale(1.05);
 }
 
-/* VOLUMEN */
 .volume{
   margin-top:15px;
 }
@@ -100,7 +93,6 @@ input[type=range]{
   width:100%;
 }
 
-/* EQUALIZADOR */
 .eq{
   display:flex;
   justify-content:center;
@@ -126,7 +118,6 @@ input[type=range]{
   100%{height:15px}
 }
 
-/* CAJAS REDES */
 .social-container{
   display:flex;
   gap:10px;
@@ -158,7 +149,6 @@ input[type=range]{
   transform:scale(1.06);
 }
 
-/* PIE */
 .footer{
   margin-top:10px;
   color:#fff;
@@ -209,38 +199,70 @@ input[type=range]{
   Diseño por Marcony Clavijo – Radio La Tremenda
 </div>
 
-<audio id="radio">
-  <source src="https://stream.zeno.fm/jfjyk4dnuc1vv" type="audio/mpeg">
-</audio>
-
 <script>
-const audio = document.getElementById("radio");
 const btn = document.getElementById("btn");
 const estado = document.getElementById("estado");
 const app = document.getElementById("app");
 const vol = document.getElementById("volumen");
 
+let audio = null;
 let sonando = false;
 
-btn.onclick = ()=>{
-
-  if(!sonando){
-    audio.play();
-    btn.textContent="⏸ PAUSAR";
-    estado.textContent="🎧 REPRODUCIENDO EN VIVO";
-    app.classList.add("playing");
-    sonando=true;
-  }else{
+function crearAudio() {
+  // Elimina cualquier audio anterior
+  if (audio) {
     audio.pause();
-    btn.textContent="▶ REPRODUCIR";
-    estado.textContent="⏸ EN PAUSA";
+    audio.src = "";
+    audio.load();
+  }
+
+  // Crea un audio NUEVO – sin nada en buffer
+  audio = new Audio("https://stream.zeno.fm/jfjyk4dnuc1vv");
+  audio.preload = "none";
+  audio.volume = vol.value;
+}
+
+btn.onclick = () => {
+
+  if (!sonando) {
+
+    crearAudio();
+
+    estado.textContent = "⏳ Conectando en vivo...";
+    btn.textContent = "⏳";
+
+    audio.play()
+      .then(() => {
+        estado.textContent = "🎧 EN VIVO - TIEMPO REAL";
+        btn.textContent = "⏸ DETENER";
+        app.classList.add("playing");
+        sonando = true;
+      })
+      .catch(() => {
+        estado.textContent = "⚠️ Error de conexión";
+        btn.textContent = "▶ REPRODUCIR";
+        sonando = false;
+      });
+
+  } else {
+
+    // CORTE TOTAL DEL STREAMING
+    audio.pause();
+    audio.src = "";
+    audio.load();
+
+    estado.textContent = "⏹ TRANSMISIÓN DETENIDA";
+    btn.textContent = "▶ REPRODUCIR";
     app.classList.remove("playing");
-    sonando=false;
+
+    sonando = false;
   }
 
 };
 
-vol.oninput = ()=> audio.volume = vol.value;
+vol.oninput = () => {
+  if (audio) audio.volume = vol.value;
+};
 </script>
 
 </body>

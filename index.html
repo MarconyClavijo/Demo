@@ -69,7 +69,6 @@ header h1{
   grid-template-columns:repeat(3,1fr);
   gap:14px;
   padding:14px;
-  max-width:100%;
 }
 
 /* ===== CARD ===== */
@@ -80,6 +79,7 @@ header h1{
   padding:12px 6px 14px;
   text-align:center;
   position:relative;
+  cursor:pointer;
 }
 
 .card.activa{
@@ -160,10 +160,9 @@ footer{
   font-size:.85rem;
 }
 
-/* ===== RESPONSIVE EXTRA ===== */
-@media(max-width:360px){
-  .logo{width:80px;height:80px;}
-  h2{font-size:14px;}
+/* ===== RESPONSIVE ===== */
+@media(max-width:600px){
+  .grid{grid-template-columns:repeat(3,1fr);}
 }
 </style>
 </head>
@@ -219,35 +218,48 @@ footer{
 <footer>© 2025 Corporación La Fuerte</footer>
 
 <script>
-let currentAudio=null;
+let currentAudio = null;
 
-document.querySelectorAll('.play-btn').forEach(btn=>{
-  btn.onclick=()=>{
-    const card=btn.closest('.card');
-    const stream=card.dataset.stream;
+function playRadio(card){
+  const btn = card.querySelector('.play-btn');
+  const stream = card.dataset.stream;
 
-    if(btn.classList.contains('stop')){
-      currentAudio.src='';
-      currentAudio=null;
-      btn.classList.remove('stop');
-      card.classList.remove('activa');
-      return;
-    }
-
+  if(card.classList.contains('activa')){
     if(currentAudio){
       currentAudio.src='';
       currentAudio=null;
     }
-
-    document.querySelectorAll('.play-btn').forEach(b=>b.classList.remove('stop'));
-    document.querySelectorAll('.card').forEach(c=>c.classList.remove('activa'));
-
-    currentAudio=new Audio(stream+'?t='+Date.now());
-    currentAudio.play();
-
-    btn.classList.add('stop');
-    card.classList.add('activa');
+    card.classList.remove('activa');
+    btn.classList.remove('stop');
+    return;
   }
+
+  if(currentAudio){
+    currentAudio.src='';
+    currentAudio=null;
+  }
+
+  document.querySelectorAll('.card').forEach(c=>c.classList.remove('activa'));
+  document.querySelectorAll('.play-btn').forEach(b=>b.classList.remove('stop'));
+
+  currentAudio = new Audio(stream+'?t='+Date.now());
+  currentAudio.play();
+
+  card.classList.add('activa');
+  btn.classList.add('stop');
+}
+
+document.querySelectorAll('.play-btn').forEach(btn=>{
+  btn.addEventListener('click',e=>{
+    e.stopPropagation();
+    playRadio(btn.closest('.card'));
+  });
+});
+
+document.querySelectorAll('.card').forEach(card=>{
+  card.addEventListener('click',()=>{
+    playRadio(card);
+  });
 });
 </script>
 

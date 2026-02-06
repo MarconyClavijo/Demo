@@ -201,11 +201,16 @@ input[type=range]{width:100%}
   border-radius:20px;
 }
 
-/* FOOTER */
-footer{
-  margin-top:30px;
+/* CREDITOS FIJOS */
+.footer-credit{
+  position:fixed;
+  bottom:10px;
+  width:100%;
+  text-align:center;
   font-size:10px;
-  opacity:.7;
+  font-weight:600;
+  opacity:.75;
+  pointer-events:none;
 }
 </style>
 </head>
@@ -215,7 +220,7 @@ footer{
 <div class="flags"></div>
 
 <div class="marquee">
-  <span>🎉 LA TREMENDA 106.5 FM · CUMBIA SANJUANERA · LA RADIO DEL PUEBLO · TRANSMITIENDO EN TIEMPO REAL 🎉</span>
+  <span>🎉 LA TREMENDA 106.5 FM · CUMBIA SANJUANERA · LA RADIO DEL PUEBLO · TRANSMITIENDO DESDE MORROPON PARA EL MUNDO ENTERO 🎉</span>
 </div>
 
 <div class="stage" id="app">
@@ -241,11 +246,11 @@ footer{
     <a href="https://wa.me/51942883375" target="_blank">WhatsApp</a>
   </div>
 
-  <footer>
-    © 2026 Radio La Tremenda 106.5 FM<br>
-    Diseño y desarrollo web por <strong>Marcony Clavijo</strong> | Innovación que conecta.
-  </footer>
+</div>
 
+<!-- CREDITOS -->
+<div class="footer-credit">
+  Diseño y desarrollo web por <strong>Marcony Clavijo</strong> | Innovación que conecta.
 </div>
 
 <audio id="radio" preload="none" playsinline webkit-playsinline crossorigin="anonymous">
@@ -274,7 +279,6 @@ playBtn.onclick = () => {
     audio.pause();
     audio.currentTime = 0;
     audio.load();
-
     audio.play().catch(resetState);
   }else{
     audio.pause();

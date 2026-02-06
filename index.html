@@ -39,7 +39,7 @@ body{
   clip-path:polygon(0 0,100% 0,100% 60%,50% 100%,0 60%);
 }
 
-/* MARQUEE */
+/* CINTA */
 .marquee{
   position:fixed;
   top:60px;
@@ -62,7 +62,7 @@ body{
   to{transform:translateX(-100%)}
 }
 
-/* CONTENIDO */
+/* ESCENARIO */
 .stage{
   min-height:100vh;
   display:flex;
@@ -70,7 +70,7 @@ body{
   justify-content:center;
   align-items:center;
   text-align:center;
-  padding:140px 20px 120px;
+  padding:120px 20px 40px;
   box-sizing:border-box;
 }
 
@@ -145,13 +145,33 @@ h1{
   color:#000;
   cursor:pointer;
   box-shadow:0 0 25px rgba(0,0,0,.4);
+  transition:.2s;
 }
 
+.play:hover{transform:scale(1.08);}
+
+/* LOADING */
 .play.loading{
   background:#ccc;
   color:#555;
   cursor:not-allowed;
   pointer-events:none;
+}
+
+.play.loading::after{
+  content:"";
+  display:block;
+  margin:10px auto 0;
+  width:22px;
+  height:22px;
+  border:4px solid #999;
+  border-top:4px solid #ff0000;
+  border-radius:50%;
+  animation:spinLoad 1s linear infinite;
+}
+
+@keyframes spinLoad{
+  to{transform:rotate(360deg)}
 }
 
 /* VOLUMEN */
@@ -160,31 +180,34 @@ h1{
   margin-top:16px;
 }
 
-/* REDES */
+/* BOTONES SOCIALES FLOTANTES */
 .social{
+  position:fixed;
+  right:12px;
+  bottom:70px;
   display:flex;
-  gap:14px;
-  margin-top:24px;
-  margin-bottom:40px;
+  flex-direction:column;
+  gap:12px;
+  z-index:10;
 }
 
 .social a{
-  padding:10px 20px;
+  padding:12px 18px;
   background:#ffd700;
   color:#000;
   text-decoration:none;
   font-weight:900;
-  border-radius:20px;
+  border-radius:30px;
+  box-shadow:0 0 12px rgba(0,0,0,.35);
 }
 
-/* FOOTER FIJO */
+/* FIRMA */
 .footer-credit{
   position:fixed;
-  bottom:5px;
+  bottom:6px;
   width:100%;
   text-align:center;
   font-size:9px;
-  font-weight:600;
   opacity:.7;
   pointer-events:none;
 }
@@ -196,13 +219,11 @@ h1{
 <div class="flags"></div>
 
 <div class="marquee">
-  <span>🎉 LA TREMENDA 106.5 FM · CUMBIA SANJUANERA · LA RADIO DEL PUEBLO · TRANSMITIENDO DESDE MORROPON PARA EL MUNDO 🎉</span>
+  <span>🎉 LA TREMENDA 106.5 FM · CUMBIA SANJUANERA · LA RADIO DEL PUEBLO · DESDE MORROPON PARA EL MUNDO 🎉</span>
 </div>
 
 <div class="stage" id="app">
-
   <img src="https://imgfz.com/i/h7TrEm5.png" class="logo">
-
   <h1>LA TREMENDA</h1>
   <div class="slogan">LA RADIO DEL PUEBLO</div>
   <div class="live" id="liveText">🔴 EN VIVO</div>
@@ -216,16 +237,17 @@ h1{
   <div class="volume">
     <input type="range" min="0" max="1" step="0.01" value="1" id="volume">
   </div>
-
-  <div class="social">
-    <a href="https://www.facebook.com/profile.php?id=61585616422921" target="_blank">Facebook</a>
-    <a href="https://wa.me/51942883375" target="_blank">WhatsApp</a>
-  </div>
-
 </div>
 
+<!-- BOTONES -->
+<div class="social">
+  <a href="https://www.facebook.com/profile.php?id=61585616422921" target="_blank">Facebook</a>
+  <a href="https://wa.me/51942883375" target="_blank">WhatsApp</a>
+</div>
+
+<!-- FIRMA -->
 <div class="footer-credit">
-  DISEÑO WEB POR MARCONY CLAVIJO | INNOVACIÓN QUE CONECTA.
+  Diseño y desarrollo web por <strong>Marcony Clavijo</strong> | Innovación que conecta.
 </div>
 
 <audio id="radio" preload="none">
@@ -243,10 +265,12 @@ let playing=false, loading=false;
 
 playBtn.onclick=()=>{
   if(loading) return;
+
   if(!playing){
     loading=true;
     playBtn.classList.add("loading");
     playBtn.textContent="CONECTANDO…";
+    liveText.textContent="⏳ Conectando…";
     audio.load();
     audio.play().catch(reset);
   }else{
@@ -254,7 +278,7 @@ playBtn.onclick=()=>{
     playing=false;
     app.classList.remove("playing");
     playBtn.textContent="▶ VOLVER AL EN VIVO";
-    liveText.textContent="⏸ PAUSADO";
+    liveText.textContent="⏸ EN PAUSA";
   }
 };
 
@@ -263,7 +287,7 @@ audio.onplaying=()=>{
   playing=true;
   playBtn.classList.remove("loading");
   playBtn.textContent="⏸ SILENCIO";
-  liveText.textContent="🔴 EN VIVO";
+  liveText.textContent="🔴 EN VIVO (TIEMPO REAL)";
   app.classList.add("playing");
 };
 
@@ -272,6 +296,7 @@ function reset(){
   playing=false;
   playBtn.classList.remove("loading");
   playBtn.textContent="▶ SONAR EN VIVO";
+  liveText.textContent="⚠️ Error de conexión";
 }
 
 volume.oninput=()=>audio.volume=volume.value;

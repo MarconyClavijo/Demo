@@ -3,8 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
   <title>Radio Stereo M 101.5 FM</title>
+
+  <!-- SEO básico -->
+  <meta name="description" content="Radio Stereo M 101.5 FM – La Radio Papá. Música, noticias y entretenimiento en vivo." />
+  <meta name="theme-color" content="#ffd700">
+
   <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet"/>
+
   <style>
     :root {
       --rojo: #e60000;
@@ -25,6 +32,7 @@
     header {
       display: flex;
       align-items: center;
+      justify-content: space-between;
       padding: 15px 20px;
       background-color: var(--amarillo);
       color: var(--negro);
@@ -32,7 +40,6 @@
 
     .logo-box {
       text-align: center;
-      margin-right: 20px;
     }
 
     header img.logo {
@@ -93,13 +100,23 @@
       border-radius: 10px;
     }
 
+    #estado {
+      margin-top: 8px;
+      font-weight: bold;
+      color: red;
+    }
+
+    .song-title {
+      margin-top: 6px;
+      font-weight: bold;
+    }
+
     .right-buttons {
       margin: 10px;
       display: flex;
       flex-direction: column;
       gap: 15px;
       max-width: 200px;
-      flex-shrink: 0;
       background: linear-gradient(to bottom right, #ffe066, #ff7b7b);
       padding: 15px;
       border-radius: 20px;
@@ -133,40 +150,28 @@
       margin-top: 40px;
     }
 
+    /* Responsive */
     @media screen and (max-width: 768px) {
-      header {
-        flex-direction: row;
-        justify-content: space-between;
-      }
-
-      .logo-box {
-        margin-right: 10px;
-      }
-
-      .extra-img {
-        width: 200px;
-      }
-
       .main-content {
         flex-direction: column;
         align-items: center;
       }
 
-      .left-content {
-        max-width: 100%;
-        flex: none;
-      }
-
       .right-buttons {
         max-width: 100%;
         flex-direction: row;
-        justify-content: center;
         flex-wrap: wrap;
-        gap: 10px;
+        justify-content: center;
       }
 
       .right-buttons a {
         flex: 1 1 45%;
+      }
+    }
+
+    @media screen and (max-width: 480px) {
+      .extra-img {
+        display: none;
       }
     }
 
@@ -180,87 +185,80 @@
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(-10px); }
     }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    @keyframes zoomIn {
-      0% { transform: scale(0.5); opacity: 0; }
-      70% { transform: scale(1.05); opacity: 1; }
-      100% { transform: scale(1); }
-    }
-
-    @keyframes zoomOut {
-      from { transform: scale(1); opacity: 1; }
-      to { transform: scale(0.7); opacity: 0; }
-    }
   </style>
 </head>
+
 <body>
-  <header>
-    <div class="logo-box">
-      <a href="https://radiostereom.com/" target="_blank">
-        <img src="https://i.postimg.cc/L8bjb6K5/1687464033296.png" alt="Logo Stereo M" class="logo" />
-      </a>
-      <div class="slogan">La Radio Papá 🎙️</div>
-    </div>
-    <img src="http://imgfz.com/i/xgID1Gn.jpeg" alt="Artistas Stereo M" class="extra-img" />
-  </header>
 
-  <div class="main-content">
-    <div class="left-content">
-      <div class="player-box">
-        <h2>🎧 Escúchanos en Vivo</h2>
-        <audio controls autoplay>
-          <source src="https://sonic.globalstream.pro/8108/stream" type="audio/mpeg">
-          Tu navegador no soporta audio HTML5.
-        </audio>
-        <div class="song-title" id="song-title">Cargando canción...</div>
-        <script>
-          async function fetchSongTitle() {
-            try {
-              const proxyUrl = "https://api.allorigins.win/get?url=";
-              const targetUrl = encodeURIComponent("http://sonic.globalstream.pro:8108/stats?sid=1&json=1&nocache=" + Date.now());
-              const response = await fetch(proxyUrl + targetUrl);
-              const data = await response.json();
-              const parsedData = JSON.parse(data.contents);
-              const title = parsedData.songtitle || "Sin título";
-              document.getElementById("song-title").textContent = title;
-            } catch (error) {
-              document.getElementById("song-title").textContent = "Error al cargar canción";
-            }
-          }
-          fetchSongTitle();
-          setInterval(fetchSongTitle, 5000);
-        </script>
-      </div>
-    </div>
+<header>
+  <div class="logo-box">
+    <a href="https://radiostereom.com/" target="_blank">
+      <img src="https://i.postimg.cc/L8bjb6K5/1687464033296.png" alt="Logo Stereo M" class="logo" />
+    </a>
+    <div class="slogan">La Radio Papá 🎙️</div>
+  </div>
 
-    <div class="right-buttons">
-      <a href="https://play.google.com/store/apps/details?id=com.innovatel.radiostereom" target="_blank">📲 Descarga la App</a>
-      <a href="https://www.facebook.com/share/1Dib9eQUFD/" target="_blank">📘 Facebook</a>
-      <a href="https://wa.me/51984412853" target="_blank">🎤 WhatsApp Oyentes</a>
-      <a href="https://wa.me/51942883375" target="_blank">📢 Publicidad Aquí</a>
+  <!-- Imagen en HTTPS (puedes cambiarla si deseas) -->
+  <img src="https://i.postimg.cc/8C0pL1vG/artistas-stereo-m.jpg" alt="Artistas Stereo M" class="extra-img" />
+</header>
+
+<div class="main-content">
+
+  <div class="left-content">
+    <div class="player-box">
+      <h2>🎧 Escúchanos en Vivo</h2>
+
+      <audio id="radioPlayer" controls preload="none">
+        <source src="https://sonic.globalstream.pro/8108/stream" type="audio/mpeg">
+        Tu navegador no soporta audio HTML5.
+      </audio>
+
+      <div id="estado">⏸️ PAUSADO</div>
+      <div class="song-title" id="song-title">Cargando canción...</div>
     </div>
   </div>
 
-  <footer>
-    Diseño y desarrollo web por Marcony Clavijo | Innovación que conecta.
-  </footer>
-  <!--Start of Tawk.to Script-->
-<script type="text/javascript">
-var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-(function(){
-var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-s1.async=true;
-s1.src='https://embed.tawk.to/6984b1a8fcf37c1c39797c48/1jgn5bv6l';
-s1.charset='UTF-8';
-s1.setAttribute('crossorigin','*');
-s0.parentNode.insertBefore(s1,s0);
-})();
+  <div class="right-buttons">
+    <a href="https://play.google.com/store/apps/details?id=com.innovatel.radiostereom" target="_blank">📲 Descarga la App</a>
+    <a href="https://www.facebook.com/share/1Dib9eQUFD/" target="_blank">📘 Facebook</a>
+    <a href="https://wa.me/51984412853" target="_blank">🎤 WhatsApp Oyentes</a>
+    <a href="https://wa.me/51942883375" target="_blank">📢 Publicidad Aquí</a>
+  </div>
+
+</div>
+
+<footer>
+  Diseño y desarrollo web por Marcony Clavijo | Innovación que conecta.
+</footer>
+
+<script>
+  async function fetchSongTitle() {
+    try {
+      const proxyUrl = "https://api.allorigins.win/get?url=";
+      const targetUrl = encodeURIComponent(
+        "http://sonic.globalstream.pro:8108/stats?sid=1&json=1&nocache=" + Date.now()
+      );
+
+      const response = await fetch(proxyUrl + targetUrl);
+      const data = await response.json();
+      const parsedData = JSON.parse(data.contents);
+
+      const title = parsedData.songtitle?.trim() || "Stereo M 101.5 FM en vivo";
+      document.getElementById("song-title").textContent = title;
+    } catch {
+      document.getElementById("song-title").textContent = "Stereo M 101.5 FM en vivo";
+    }
+  }
+
+  fetchSongTitle();
+  setInterval(fetchSongTitle, 5000);
+
+  const audio = document.getElementById("radioPlayer");
+  const estado = document.getElementById("estado");
+
+  audio.addEventListener("play", () => estado.textContent = "🔴 EN VIVO");
+  audio.addEventListener("pause", () => estado.textContent = "⏸️ PAUSADO");
 </script>
-<!--End of Tawk.to Script-->
+
 </body>
 </html>

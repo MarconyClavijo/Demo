@@ -1,305 +1,246 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Radio La Tremenda 106.5 FM</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Radio Stereo M 101.5 FM</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet"/>
 
-<style>
-body{
-  margin:0;
-  font-family:'Orbitron',sans-serif;
-  min-height:100vh;
-  background:linear-gradient(135deg,#ffd500,#ff8c00,#ff3c00);
-  background-size:300% 300%;
-  animation:bgMove 12s infinite alternate;
-  color:#000;
-  overflow:hidden;
-}
+  <style>
+    :root {
+      --rojo: #e60000;
+      --amarillo: #ffd700;
+      --negro: #111;
+      --blanco: #fff;
+      --celeste: #0088cc;
+      --fondo-footer: #222;
+    }
 
-@keyframes bgMove{
-  0%{background-position:0% 50%}
-  100%{background-position:100% 50%}
-}
+    body {
+      margin: 0;
+      font-family: 'Raleway', sans-serif;
+      background: linear-gradient(to bottom, var(--celeste), #f44336);
+      color: var(--blanco);
+    }
 
-/* BANDERINES */
-.flags{
-  position:fixed;
-  top:0;
-  width:100%;
-  height:60px;
-  background:repeating-linear-gradient(
-    135deg,
-    #ff0000 0 20px,
-    #ffd700 20px 40px,
-    #00c853 40px 60px
-  );
-  clip-path:polygon(0 0,100% 0,100% 60%,50% 100%,0 60%);
-}
+    header {
+      display: flex;
+      align-items: center;
+      padding: 15px 20px;
+      background-color: var(--amarillo);
+      color: var(--negro);
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
 
-/* CINTA */
-.marquee{
-  position:fixed;
-  top:60px;
-  width:100%;
-  background:#ff0000;
-  color:#fff;
-  font-weight:900;
-  padding:6px 0;
-  overflow:hidden;
-}
+    .logo-box {
+      text-align: center;
+      margin-right: 20px;
+    }
 
-.marquee span{
-  display:inline-block;
-  white-space:nowrap;
-  animation:scroll 14s linear infinite;
-}
+    header img.logo {
+      width: 120px;
+      display: block;
+      animation: rebote 2s infinite ease-in-out;
+    }
 
-@keyframes scroll{
-  from{transform:translateX(100%)}
-  to{transform:translateX(-100%)}
-}
+    .slogan {
+      margin-top: 8px;
+      font-size: 1em;
+      color: var(--rojo);
+      font-weight: bold;
+      opacity: 0;
+      animation: entrarSlogan 1.2s ease-out forwards;
+      animation-delay: 1.5s;
+    }
 
-/* ESCENARIO */
-.stage{
-  min-height:100vh;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-  padding:120px 20px 40px;
-  box-sizing:border-box;
-}
+    .extra-img {
+      width: 300px;
+      max-width: 100%;
+      background: linear-gradient(135deg, #ff6600, #e60000);
+      padding: 8px;
+      border-radius: 15px;
+      box-shadow: 0 0 15px #e60000a0;
+    }
 
-/* LOGO */
-.logo{
-  width:210px;
-  filter:drop-shadow(0 0 20px #fff);
-}
+    .main-content {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 20px;
+      gap: 20px;
+    }
 
-.playing .logo{
-  animation:spin 6s linear infinite;
-}
+    .player-box {
+      background: #fff;
+      color: var(--negro);
+      border: 3px solid var(--amarillo);
+      border-radius: 15px;
+      padding: 20px;
+      box-shadow: 0 0 15px #ffd700;
+      text-align: center;
+      max-width: 420px;
+      width: 100%;
+    }
 
-@keyframes spin{
-  to{transform:rotate(360deg)}
-}
+    .player-box h2 {
+      color: var(--rojo);
+      margin-bottom: 10px;
+    }
 
-h1{
-  margin:8px 0 4px;
-  font-size:2.4em;
-  color:#ff0000;
-  text-shadow:0 0 10px #fff;
-}
+    audio {
+      width: 100%;
+      border-radius: 10px;
+    }
 
-.slogan{
-  font-size:.95em;
-  letter-spacing:3px;
-}
+    .live-indicator {
+      margin-top: 10px;
+      font-weight: bold;
+      color: red;
+      animation: blink 1s infinite;
+    }
 
-/* LIVE */
-.live{
-  margin-top:4px;
-  font-size:.9em;
-  font-weight:900;
-  color:#c00000;
-}
+    .right-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      max-width: 220px;
+      background: linear-gradient(to bottom right, #ffe066, #ff7b7b);
+      padding: 15px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px #e60000a0;
+    }
 
-/* ECUALIZADOR */
-.eq{
-  display:flex;
-  gap:6px;
-  margin:18px 0;
-  height:60px;
-}
+    .right-buttons a {
+      background: #fff;
+      color: var(--rojo);
+      text-align: center;
+      padding: 12px;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 30px;
+      box-shadow: 0 0 10px #000;
+      transition: 0.3s;
+    }
 
-.eq span{
-  width:10px;
-  background:#ff0000;
-  transform-origin:bottom;
-  animation:equalize .6s infinite;
-  animation-play-state:paused;
-}
+    .right-buttons a:hover {
+      background: var(--amarillo);
+      color: var(--negro);
+    }
 
-.playing .eq span{
-  animation-play-state:running;
-}
+    footer {
+      background-color: var(--fondo-footer);
+      padding: 15px;
+      font-size: 14px;
+      color: #ddd;
+      text-align: center;
+      margin-top: 40px;
+    }
 
-@keyframes equalize{
-  0%{height:15px}
-  50%{height:60px}
-  100%{height:20px}
-}
+    @media (max-width: 768px) {
+      .extra-img {
+        width: 220px;
+      }
+      .right-buttons {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .right-buttons a {
+        flex: 1 1 45%;
+      }
+    }
 
-/* BOTÓN */
-.play{
-  margin-top:10px;
-  padding:18px 50px;
-  font-size:24px;
-  font-weight:900;
-  border:none;
-  background:#00c853;
-  color:#000;
-  cursor:pointer;
-  box-shadow:0 0 25px rgba(0,0,0,.4);
-  transition:.2s;
-}
+    @keyframes rebote {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
 
-.play:hover{transform:scale(1.08);}
+    @keyframes entrarSlogan {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
 
-/* LOADING */
-.play.loading{
-  background:#ccc;
-  color:#555;
-  cursor:not-allowed;
-  pointer-events:none;
-}
-
-.play.loading::after{
-  content:"";
-  display:block;
-  margin:10px auto 0;
-  width:22px;
-  height:22px;
-  border:4px solid #999;
-  border-top:4px solid #ff0000;
-  border-radius:50%;
-  animation:spinLoad 1s linear infinite;
-}
-
-@keyframes spinLoad{
-  to{transform:rotate(360deg)}
-}
-
-/* VOLUMEN */
-.volume{
-  width:260px;
-  margin-top:16px;
-}
-
-/* BOTONES SOCIALES FLOTANTES */
-.social{
-  position:fixed;
-  right:12px;
-  bottom:70px;
-  display:flex;
-  flex-direction:column;
-  gap:12px;
-  z-index:10;
-}
-
-.social a{
-  padding:12px 18px;
-  background:#ffd700;
-  color:#000;
-  text-decoration:none;
-  font-weight:900;
-  border-radius:30px;
-  box-shadow:0 0 12px rgba(0,0,0,.35);
-}
-
-/* FIRMA */
-.footer-credit{
-  position:fixed;
-  bottom:6px;
-  width:100%;
-  text-align:center;
-  font-size:9px;
-  opacity:.7;
-  pointer-events:none;
-}
-</style>
+    @keyframes blink {
+      0%,100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+  </style>
 </head>
 
 <body>
 
-<div class="flags"></div>
-
-<div class="marquee">
-  <span>🎉 LA TREMENDA 106.5 FM · CUMBIA SANJUANERA · LA RADIO DEL PUEBLO · DESDE MORROPON PARA EL MUNDO 🎉</span>
-</div>
-
-<div class="stage" id="app">
-  <img src="https://imgfz.com/i/h7TrEm5.png" class="logo">
-  <h1>LA TREMENDA</h1>
-  <div class="slogan">LA RADIO DEL PUEBLO</div>
-  <div class="live" id="liveText">🔴 EN VIVO</div>
-
-  <div class="eq">
-    <span></span><span></span><span></span><span></span><span></span>
+<header>
+  <div class="logo-box">
+    <a href="https://radiostereom.com/" target="_blank">
+      <img src="https://i.postimg.cc/L8bjb6K5/1687464033296.png" class="logo" alt="Stereo M">
+    </a>
+    <div class="slogan">La Radio Papá 🎙️</div>
   </div>
 
-  <button class="play" id="playBtn">▶ SONAR EN VIVO</button>
+  <img src="http://imgfz.com/i/xgID1Gn.jpeg" class="extra-img" alt="Stereo M">
+</header>
 
-  <div class="volume">
-    <input type="range" min="0" max="1" step="0.01" value="1" id="volume">
+<div class="main-content">
+
+  <div class="player-box">
+    <h2>🎧 Escúchanos en Vivo</h2>
+
+    <audio id="radioPlayer" controls></audio>
+
+    <div class="live-indicator">🔴 EN VIVO</div>
+    <div id="song-title">Cargando canción...</div>
   </div>
+
+  <div class="right-buttons">
+    <a href="https://play.google.com/store/apps/details?id=com.innovatel.radiostereom" target="_blank">📲 App Android</a>
+    <a href="https://www.facebook.com/share/1Dib9eQUFD/" target="_blank">📘 Facebook</a>
+    <a href="https://wa.me/51984412853" target="_blank">🎤 WhatsApp Oyentes</a>
+    <a href="https://wa.me/51942883375" target="_blank">📢 Publicidad</a>
+  </div>
+
 </div>
 
-<!-- BOTONES -->
-<div class="social">
-  <a href="https://www.facebook.com/profile.php?id=61585616422921" target="_blank">Facebook</a>
-  <a href="https://wa.me/51942883375" target="_blank">WhatsApp</a>
-</div>
-
-<!-- FIRMA -->
-<div class="footer-credit">
-  Diseño y desarrollo web por <strong>Marcony Clavijo</strong> | Innovación que conecta.
-</div>
-
-<audio id="radio" preload="none">
-  <source src="https://stream.zeno.fm/jfjyk4dnuc1vv" type="audio/mpeg">
-</audio>
+<footer>
+  Diseño y desarrollo web por Marcony Clavijo | Innovación que conecta.
+</footer>
 
 <script>
-const audio = document.getElementById("radio");
-const playBtn = document.getElementById("playBtn");
-const app = document.getElementById("app");
-const volume = document.getElementById("volume");
-const liveText = document.getElementById("liveText");
+  const player = document.getElementById("radioPlayer");
+  const streamBase = "https://sonic.globalstream.pro/8108/stream";
 
-let playing=false, loading=false;
-
-playBtn.onclick=()=>{
-  if(loading) return;
-
-  if(!playing){
-    loading=true;
-    playBtn.classList.add("loading");
-    playBtn.textContent="CONECTANDO…";
-    liveText.textContent="⏳ Conectando…";
-    audio.load();
-    audio.play().catch(reset);
-  }else{
-    audio.pause();
-    playing=false;
-    app.classList.remove("playing");
-    playBtn.textContent="▶ PLAY";
-    liveText.textContent="⏸ EN PAUSA";
+  function loadLiveStream() {
+    player.src = streamBase + "?nocache=" + Date.now();
+    player.load();
   }
-};
 
-audio.onplaying=()=>{
-  loading=false;
-  playing=true;
-  playBtn.classList.remove("loading");
-  playBtn.textContent="⏸";
-  liveText.textContent="🔴 EN VIVO (TIEMPO REAL)";
-  app.classList.add("playing");
-};
+  player.addEventListener("play", () => {
+    loadLiveStream();
+    player.play();
+  });
 
-function reset(){
-  loading=false;
-  playing=false;
-  playBtn.classList.remove("loading");
-  playBtn.textContent="▶ SONAR EN VIVO";
-  liveText.textContent="⚠️ Error de conexión";
-}
+  loadLiveStream();
 
-volume.oninput=()=>audio.volume=volume.value;
+  async function fetchSongTitle() {
+    try {
+      const proxy = "https://api.allorigins.win/get?url=";
+      const url = encodeURIComponent(
+        "http://sonic.globalstream.pro:8108/stats?sid=1&json=1&nocache=" + Date.now()
+      );
+      const res = await fetch(proxy + url);
+      const data = await res.json();
+      const parsed = JSON.parse(data.contents);
+      document.getElementById("song-title").textContent =
+        parsed.songtitle || "En transmisión...";
+    } catch {
+      document.getElementById("song-title").textContent =
+        "En transmisión...";
+    }
+  }
+
+  fetchSongTitle();
+  setInterval(fetchSongTitle, 5000);
 </script>
 
 </body>

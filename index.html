@@ -72,4 +72,195 @@ body{
   align-items:center;
   text-align:center;
   padding:120px 20px 40px;
-  box-sizing:borde
+  box-sizing:border-box;
+}
+
+/* LOGO */
+.logo{
+  width:210px;
+  filter:drop-shadow(0 0 20px #fff);
+}
+
+.playing .logo{
+  animation:spin 6s linear infinite;
+}
+
+@keyframes spin{
+  to{transform:rotate(360deg)}
+}
+
+h1{
+  margin:8px 0 4px;
+  font-size:2.4em;
+  color:#ff0000;
+  text-shadow:0 0 10px #fff;
+}
+
+.slogan{
+  font-size:.95em;
+  letter-spacing:3px;
+}
+
+/* LIVE */
+.live{
+  margin-top:4px;
+  font-size:.9em;
+  font-weight:900;
+  color:#c00000;
+}
+
+/* ECUALIZADOR */
+.eq{
+  display:flex;
+  gap:6px;
+  margin:18px 0;
+  height:60px;
+}
+
+.eq span{
+  width:10px;
+  background:#ff0000;
+  transform-origin:bottom;
+  animation:equalize .6s infinite;
+  animation-play-state:paused;
+}
+
+.playing .eq span{
+  animation-play-state:running;
+}
+
+@keyframes equalize{
+  0%{height:15px}
+  50%{height:60px}
+  100%{height:20px}
+}
+
+/* BOTÓN */
+.play{
+  margin-top:10px;
+  padding:18px 50px;
+  font-size:24px;
+  font-weight:900;
+  border:none;
+  background:#00c853;
+  color:#000;
+  cursor:pointer;
+  box-shadow:0 0 25px rgba(0,0,0,.4);
+  transition:.2s;
+}
+
+.play:hover{
+  transform:scale(1.08);
+}
+
+/* VOLUMEN */
+.volume{
+  width:260px;
+  margin-top:16px;
+}
+
+input[type=range]{width:100%}
+
+/* REDES */
+.social{
+  display:flex;
+  gap:14px;
+  margin-top:20px;
+}
+
+.social a{
+  padding:10px 20px;
+  background:#ffd700;
+  color:#000;
+  text-decoration:none;
+  font-weight:900;
+  border-radius:20px;
+}
+
+/* FOOTER */
+footer{
+  margin-top:30px;
+  font-size:10px;
+  opacity:.7;
+}
+</style>
+</head>
+
+<body>
+
+<div class="flags"></div>
+
+<div class="marquee">
+  <span>🎉 LA TREMENDA 106.5 FM · CUMBIA SANJUANERA · LA RADIO DEL PUEBLO · TRANSMITIENDO EN TIEMPO REAL 🎉</span>
+</div>
+
+<div class="stage" id="app">
+
+  <img src="https://imgfz.com/i/h7TrEm5.png" class="logo">
+
+  <h1>LA TREMENDA</h1>
+  <div class="slogan">LA RADIO DEL PUEBLO</div>
+  <div class="live" id="liveText">🔴 EN VIVO</div>
+
+  <div class="eq">
+    <span></span><span></span><span></span><span></span><span></span>
+  </div>
+
+  <button class="play" id="playBtn">▶ SONAR EN VIVO</button>
+
+  <div class="volume">
+    <input type="range" min="0" max="1" step="0.01" value="1" id="volume">
+  </div>
+
+  <div class="social">
+    <a href="https://www.facebook.com/profile.php?id=61585616422921" target="_blank">Facebook</a>
+    <a href="https://wa.me/51942883375" target="_blank">WhatsApp</a>
+  </div>
+
+  <footer>© 2026 Radio La Tremenda 106.5 FM</footer>
+
+</div>
+
+<audio id="radio" preload="none" playsinline webkit-playsinline crossorigin="anonymous">
+  <source src="https://stream.zeno.fm/jfjyk4dnuc1vv" type="audio/mpeg">
+</audio>
+
+<script>
+const audio = document.getElementById("radio");
+const playBtn = document.getElementById("playBtn");
+const app = document.getElementById("app");
+const volume = document.getElementById("volume");
+const liveText = document.getElementById("liveText");
+
+let playing = false;
+
+playBtn.onclick = () => {
+  if(!playing){
+    // PLAY → SIEMPRE TIEMPO REAL
+    audio.pause();
+    audio.currentTime = 0;
+    audio.load();
+
+    audio.play().then(()=>{
+      playing = true;
+      app.classList.add("playing");
+      playBtn.textContent = "⏸ SILENCIO";
+      liveText.textContent = "🔴 EN VIVO (TIEMPO REAL)";
+    }).catch(()=>{
+      alert("No se pudo conectar al streaming.");
+    });
+  }else{
+    // PAUSA
+    audio.pause();
+    playing = false;
+    app.classList.remove("playing");
+    playBtn.textContent = "▶ VOLVER AL EN VIVO";
+    liveText.textContent = "⏸ AUDIO EN PAUSA";
+  }
+};
+
+volume.oninput = ()=> audio.volume = volume.value;
+</script>
+
+</body>
+</html>

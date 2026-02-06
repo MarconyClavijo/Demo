@@ -14,17 +14,66 @@ body{
   background:linear-gradient(135deg,#1a1a2e,#16213e);
   color:#fff;
 }
-header{
+
+/* ===== HEADER ===== */
+.top-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:1rem 2rem;
   background:#0f3460;
-  text-align:center;
-  padding:2rem;
+  gap:1rem;
 }
+
+.logo-header{
+  width:90px;
+}
+
+.header-center{
+  text-align:center;
+  flex:1;
+}
+
+.header-center h1{
+  margin:0;
+  font-size:1.4rem;
+}
+
+.header-center p{
+  margin:0;
+  font-size:.9rem;
+  opacity:.9;
+}
+
+.btn-publicidad{
+  background:#ffcc00;
+  color:#000;
+  padding:10px 18px;
+  border-radius:20px;
+  font-weight:bold;
+  text-decoration:none;
+  white-space:nowrap;
+}
+
+.btn-publicidad:hover{
+  background:#ffd84d;
+}
+
+@media(max-width:768px){
+  .top-header{
+    flex-direction:column;
+    text-align:center;
+  }
+}
+
+/* ===== RADIOS ===== */
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
   gap:2rem;
   padding:2rem;
 }
+
 .card{
   background:#222831;
   border:2px solid #ff6f61;
@@ -33,10 +82,12 @@ header{
   text-align:center;
   position:relative;
 }
+
 .card.activa{
   border-color:#ffcc00;
   box-shadow:0 0 20px #ffcc00;
 }
+
 .card.activa::before{
   content:"🔴 EN VIVO";
   position:absolute;
@@ -47,12 +98,14 @@ header{
   border-radius:12px;
   font-size:.8rem;
 }
+
 .logo{
   width:120px;
   background:#fff;
   padding:6px;
   border-radius:12px;
 }
+
 button{
   margin-top:1rem;
   padding:10px 20px;
@@ -62,6 +115,7 @@ button{
   font-weight:bold;
   cursor:pointer;
 }
+
 button.stop{
   background:#ff3b3b;
   color:#fff;
@@ -71,54 +125,68 @@ button.stop{
 
 <body>
 
-<header>
-<h1>Corporación La Fuerte</h1>
-<p>Radio en vivo real (sin buffer)</p>
+<!-- ===== HEADER ===== -->
+<header class="top-header">
+  <div>
+    <img src="logo-corporacion.png" alt="Corporación La Fuerte" class="logo-header">
+  </div>
+
+  <div class="header-center">
+    <h1>Corporación La Fuerte</h1>
+    <p>Las radios que mandan en el norte</p>
+  </div>
+
+  <div>
+    <a href="https://wa.me/51994925890" target="_blank" class="btn-publicidad">
+      CONTRATA PUBLICIDAD AQUÍ
+    </a>
+  </div>
 </header>
 
+<!-- ===== RADIOS ===== -->
 <main class="grid">
 
 <div class="card" data-stream="https://panelautodj.innovatestream.pe/7322/;">
-<img src="https://imgfz.com/i/fmdxHD8.png" class="logo">
-<h3>La Fuerte</h3>
-<button>PLAY</button>
+  <img src="https://imgfz.com/i/fmdxHD8.png" class="logo">
+  <h3>La Fuerte</h3>
+  <button>PLAY</button>
 </div>
 
 <div class="card" data-stream="https://panelautodj.innovatestream.pe/7320/;">
-<img src="https://imgfz.com/i/FRicwT8.png" class="logo">
-<h3>La Jefa</h3>
-<button>PLAY</button>
+  <img src="https://imgfz.com/i/FRicwT8.png" class="logo">
+  <h3>La Jefa</h3>
+  <button>PLAY</button>
 </div>
 
 <div class="card" data-stream="https://panelautodj.innovatestream.pe/7324/;">
-<img src="https://imgfz.com/i/bBApQu2.png" class="logo">
-<h3>San Francisco</h3>
-<button>PLAY</button>
+  <img src="https://imgfz.com/i/bBApQu2.png" class="logo">
+  <h3>San Francisco</h3>
+  <button>PLAY</button>
 </div>
 
 <div class="card" data-stream="https://panelautodj.innovatestream.pe/8342/;">
-<img src="https://imgfz.com/i/bVMWlXD.png" class="logo">
-<h3>Máxima</h3>
-<button>PLAY</button>
+  <img src="https://imgfz.com/i/bVMWlXD.png" class="logo">
+  <h3>Máxima</h3>
+  <button>PLAY</button>
 </div>
 
 <div class="card" data-stream="https://panelautodj.innovatestream.pe/8464/;">
-<img src="https://imgfz.com/i/J89AMPT.png" class="logo">
-<h3>La Cumbiambera</h3>
-<button>PLAY</button>
+  <img src="https://imgfz.com/i/J89AMPT.png" class="logo">
+  <h3>La Cumbiambera</h3>
+  <button>PLAY</button>
 </div>
 
 <div class="card" data-stream="https://panelautodj.innovatestream.pe/8466/;">
-<img src="https://imgfz.com/i/zauB0Id.png" class="logo">
-<h3>La Raya</h3>
-<button>PLAY</button>
+  <img src="https://imgfz.com/i/zauB0Id.png" class="logo">
+  <h3>La Raya</h3>
+  <button>PLAY</button>
 </div>
 
 </main>
 
+<!-- ===== STREAMING REAL ===== -->
 <script>
 let currentAudio = null;
-let currentCard = null;
 
 document.querySelectorAll('.card').forEach(card=>{
   const btn = card.querySelector('button');
@@ -126,7 +194,6 @@ document.querySelectorAll('.card').forEach(card=>{
 
   btn.addEventListener('click',()=>{
 
-    // STOP
     if(btn.classList.contains('stop')){
       if(currentAudio){
         currentAudio.pause();
@@ -138,7 +205,6 @@ document.querySelectorAll('.card').forEach(card=>{
       return;
     }
 
-    // STOP otros
     document.querySelectorAll('button').forEach(b=>{
       b.textContent='PLAY';
       b.classList.remove('stop');
@@ -150,18 +216,15 @@ document.querySelectorAll('.card').forEach(card=>{
       currentAudio=null;
     }
 
-    // PLAY NUEVO (tiempo real)
     currentAudio = new Audio(stream);
     currentAudio.play();
 
     btn.textContent='STOP';
     btn.classList.add('stop');
     card.classList.add('activa');
-    currentCard = card;
   });
 });
 </script>
 
 </body>
 </html>
-

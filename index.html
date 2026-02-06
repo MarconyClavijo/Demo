@@ -28,9 +28,7 @@ header{
   padding:2rem 1rem;
   background:#12315c;
 }
-header img{
-  width:110px;
-}
+header img{width:110px;}
 header h1{
   margin:.7rem 0;
   color:#ffe600;
@@ -47,7 +45,7 @@ header h1{
   font-size:.9rem;
 }
 
-/* ===== GRID (SIEMPRE 3 POR FILA) ===== */
+/* ===== GRID ===== */
 .grid{
   display:grid;
   grid-template-columns:repeat(3, 1fr);
@@ -90,7 +88,6 @@ header h1{
   background:#fff;
   padding:4px;
   border-radius:10px;
-  cursor:pointer;
 }
 h2{
   color:#ffe600;
@@ -98,19 +95,42 @@ h2{
   margin:.6rem 0;
 }
 
-/* ===== BOTONES ===== */
+/* ===== BOTÓN PLAY / STOP ANIMADO ===== */
 .play-btn{
-  padding:6px 14px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+  padding:8px 16px;
   border:none;
-  border-radius:18px;
+  border-radius:20px;
   background:#ffe600;
   font-weight:bold;
   cursor:pointer;
   font-size:.75rem;
+  position:relative;
+  overflow:hidden;
 }
-.stop{
+.play-btn.stop{
   background:#ff4d4d;
   color:#fff;
+}
+.play-btn .icon{font-size:1rem;}
+
+/* Pulso animado */
+.card.activa .play-btn::after{
+  content:"";
+  position:absolute;
+  width:120%;
+  height:120%;
+  border-radius:50%;
+  background:rgba(255,230,0,0.4);
+  animation:pulse 1.5s infinite;
+  z-index:-1;
+}
+@keyframes pulse{
+  0%{transform:scale(0.8);opacity:.8;}
+  100%{transform:scale(1.4);opacity:0;}
 }
 
 footer{
@@ -137,42 +157,54 @@ footer{
 <div class="card">
   <img class="logo" src="https://imgfz.com/i/fmdxHD8.png">
   <h2>La Fuerte</h2>
-  <button class="play-btn">PLAY</button>
+  <button class="play-btn">
+    <span class="icon">▶️</span><span class="text">PLAY</span>
+  </button>
   <audio src="https://panelautodj.innovatestream.pe/7322/;"></audio>
 </div>
 
 <div class="card">
   <img class="logo" src="https://imgfz.com/i/FRicwT8.png">
   <h2>La Jefa</h2>
-  <button class="play-btn">PLAY</button>
+  <button class="play-btn">
+    <span class="icon">▶️</span><span class="text">PLAY</span>
+  </button>
   <audio src="https://panelautodj.innovatestream.pe/7320/;"></audio>
 </div>
 
 <div class="card">
   <img class="logo" src="https://imgfz.com/i/bBApQu2.png">
   <h2>San Francisco</h2>
-  <button class="play-btn">PLAY</button>
+  <button class="play-btn">
+    <span class="icon">▶️</span><span class="text">PLAY</span>
+  </button>
   <audio src="https://panelautodj.innovatestream.pe/7324/;"></audio>
 </div>
 
 <div class="card">
   <img class="logo" src="https://imgfz.com/i/bVMWlXD.png">
   <h2>Máxima</h2>
-  <button class="play-btn">PLAY</button>
+  <button class="play-btn">
+    <span class="icon">▶️</span><span class="text">PLAY</span>
+  </button>
   <audio src="https://panelautodj.innovatestream.pe/8342/;"></audio>
 </div>
 
 <div class="card">
   <img class="logo" src="https://imgfz.com/i/J89AMPT.png">
   <h2>La Cumbiambera</h2>
-  <button class="play-btn">PLAY</button>
+  <button class="play-btn">
+    <span class="icon">▶️</span><span class="text">PLAY</span>
+  </button>
   <audio src="https://panelautodj.innovatestream.pe/8464/;"></audio>
 </div>
 
 <div class="card">
   <img class="logo" src="https://imgfz.com/i/zauB0Id.png">
   <h2>La Raya</h2>
-  <button class="play-btn">PLAY</button>
+  <button class="play-btn">
+    <span class="icon">▶️</span><span class="text">PLAY</span>
+  </button>
   <audio src="https://panelautodj.innovatestream.pe/8466/;"></audio>
 </div>
 
@@ -189,25 +221,35 @@ let currentAudio=null;
 cards.forEach(card=>{
   const btn=card.querySelector('.play-btn');
   const audio=card.querySelector('audio');
+  const icon=btn.querySelector('.icon');
+  const text=btn.querySelector('.text');
 
   btn.addEventListener('click',()=>{
     if(currentAudio && currentAudio!==audio){
       currentAudio.pause();
       currentAudio.currentTime=0;
-      document.querySelector('.card.activa')?.classList.remove('activa');
+      document.querySelectorAll('.card').forEach(c=>{
+        c.classList.remove('activa');
+        const b=c.querySelector('.play-btn');
+        b.classList.remove('stop');
+        b.querySelector('.icon').textContent='▶️';
+        b.querySelector('.text').textContent='PLAY';
+      });
     }
 
     if(audio.paused){
-      audio.load();        // fuerza directo a tiempo real
+      audio.load();
       audio.play();
-      btn.textContent="STOP";
+      icon.textContent='⏸️';
+      text.textContent='STOP';
       btn.classList.add('stop');
       card.classList.add('activa');
       currentAudio=audio;
     }else{
       audio.pause();
       audio.currentTime=0;
-      btn.textContent="PLAY";
+      icon.textContent='▶️';
+      text.textContent='PLAY';
       btn.classList.remove('stop');
       card.classList.remove('activa');
       currentAudio=null;

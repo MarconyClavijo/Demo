@@ -277,7 +277,7 @@ playBtn.onclick=()=>{
     audio.pause();
     playing=false;
     app.classList.remove("playing");
-    playBtn.textContent="▶ VOLVER AL EN VIVO";
+    playBtn.textContent="▶ PLAY";
     liveText.textContent="⏸ EN PAUSA";
   }
 };
@@ -286,7 +286,7 @@ audio.onplaying=()=>{
   loading=false;
   playing=true;
   playBtn.classList.remove("loading");
-  playBtn.textContent="⏸ SILENCIO";
+  playBtn.textContent="⏸";
   liveText.textContent="🔴 EN VIVO (TIEMPO REAL)";
   app.classList.add("playing");
 };

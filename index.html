@@ -152,7 +152,7 @@
 
 <main class="grid">
 
-  <!-- CARD TEMPLATE -->
+  <!-- La Fuerte -->
   <div class="card">
     <img src="https://imgfz.com/i/fmdxHD8.png" class="logo">
     <h2>La Fuerte</h2>
@@ -161,6 +161,7 @@
     </audio>
   </div>
 
+  <!-- La Jefa -->
   <div class="card">
     <img src="https://imgfz.com/i/FRicwT8.png" class="logo">
     <h2>La Jefa</h2>
@@ -169,6 +170,7 @@
     </audio>
   </div>
 
+  <!-- San Francisco -->
   <div class="card">
     <img src="https://imgfz.com/i/bBApQu2.png" class="logo">
     <h2>San Francisco</h2>
@@ -177,11 +179,30 @@
     </audio>
   </div>
 
+  <!-- Máxima -->
   <div class="card">
     <img src="https://imgfz.com/i/bVMWlXD.png" class="logo">
     <h2>Máxima</h2>
     <audio controls playsinline preload="none">
       <source src="https://panelautodj.innovatestream.pe/8342/;" type="audio/mpeg">
+    </audio>
+  </div>
+
+  <!-- La Cumbiambera -->
+  <div class="card">
+    <img src="https://imgfz.com/i/J89AMPT.png" class="logo">
+    <h2>La Cumbiambera</h2>
+    <audio controls playsinline preload="none">
+      <source src="https://panelautodj.innovatestream.pe/8464/;" type="audio/mpeg">
+    </audio>
+  </div>
+
+  <!-- La Raya -->
+  <div class="card">
+    <img src="https://imgfz.com/i/zauB0Id.png" class="logo">
+    <h2>La Raya</h2>
+    <audio controls playsinline preload="none">
+      <source src="https://panelautodj.innovatestream.pe/8466/;" type="audio/mpeg">
     </audio>
   </div>
 
@@ -201,27 +222,46 @@ document.addEventListener('DOMContentLoaded', () => {
   const beep = document.getElementById('beep');
 
   audios.forEach(audio => {
+
+    // Cada vez que se da play, reconecta al streaming en vivo
     audio.addEventListener('play', () => {
+      // Pausa todos los demás
       audios.forEach(a => {
         if (a !== audio) a.pause();
       });
 
-      document.querySelectorAll('.card').forEach(c => c.classList.remove('activa'));
+      // Reconectar al tiempo real
+      const source = audio.querySelector('source');
+      audio.src = source.src;
+      audio.load();
+
       audio.closest('.card').classList.add('activa');
 
       beep.currentTime = 0;
       beep.play().catch(()=>{});
+
+      audio.play().catch(()=>{});
     });
 
     audio.addEventListener('pause', () => {
       audio.closest('.card').classList.remove('activa');
     });
+
   });
 
+  // Click en logo para toggle play/pause en vivo
   document.querySelectorAll('.logo').forEach(logo => {
     logo.addEventListener('click', () => {
       const audio = logo.parentElement.querySelector('audio');
-      audio.paused ? audio.play() : audio.pause();
+      if (audio.paused) {
+        // Reconectar siempre al vivo
+        const source = audio.querySelector('source');
+        audio.src = source.src;
+        audio.load();
+        audio.play().catch(()=>{});
+      } else {
+        audio.pause();
+      }
     });
   });
 });

@@ -3,8 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#ffcc00">
-
 <title>Corporación La Fuerte</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
@@ -12,76 +10,61 @@
 <style>
 body{
   margin:0;
-  font-family:'Montserrat',sans-serif;
+  font-family:Montserrat,sans-serif;
   background:linear-gradient(135deg,#1a1a2e,#16213e);
   color:#fff;
 }
 header{
   background:#0f3460;
   text-align:center;
-  padding:2rem 1rem;
+  padding:2rem;
 }
-.logo-animado{
-  width:260px;
-  animation:entrada 2s,resplandor 3s infinite alternate;
-}
-@keyframes entrada{
-  from{transform:scale(.2);opacity:0}
-  to{transform:scale(1);opacity:1}
-}
-@keyframes resplandor{
-  from{filter:drop-shadow(0 0 10px #ff6f61)}
-  to{filter:drop-shadow(0 0 25px #ffcc00)}
-}
-h1{color:#ffcc00}
 .grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
   gap:2rem;
   padding:2rem;
-  max-width:1300px;
-  margin:auto;
 }
 .card{
   background:#222831;
   border:2px solid #ff6f61;
-  border-radius:20px;
+  border-radius:18px;
   padding:1.5rem;
   text-align:center;
   position:relative;
 }
 .card.activa{
   border-color:#ffcc00;
-  box-shadow:0 0 25px #ffcc00;
+  box-shadow:0 0 20px #ffcc00;
 }
 .card.activa::before{
   content:"🔴 EN VIVO";
   position:absolute;
-  top:10px;
-  right:10px;
+  top:8px;
+  right:8px;
   background:red;
   padding:4px 10px;
-  border-radius:15px;
+  border-radius:12px;
   font-size:.8rem;
-  animation:blink 1.2s infinite;
 }
-@keyframes blink{50%{opacity:.4}}
 .logo{
   width:120px;
   background:#fff;
   padding:6px;
   border-radius:12px;
+}
+button{
+  margin-top:1rem;
+  padding:10px 20px;
+  border:none;
+  border-radius:20px;
+  background:#ffcc00;
+  font-weight:bold;
   cursor:pointer;
 }
-audio{
-  width:100%;
-  margin-top:1rem;
-}
-footer{
-  text-align:center;
-  padding:2rem;
-  background:#0f0f0f;
-  color:#aaa;
+button.stop{
+  background:#ff3b3b;
+  color:#fff;
 }
 </style>
 </head>
@@ -89,100 +72,96 @@ footer{
 <body>
 
 <header>
-<img src="https://imgfz.com/i/bmnsNX4.png" class="logo-animado">
 <h1>Corporación La Fuerte</h1>
+<p>Radio en vivo real (sin buffer)</p>
 </header>
 
 <main class="grid">
 
 <div class="card" data-stream="https://panelautodj.innovatestream.pe/7322/;">
 <img src="https://imgfz.com/i/fmdxHD8.png" class="logo">
-<h2>La Fuerte</h2>
-<audio controls playsinline preload="none"></audio>
+<h3>La Fuerte</h3>
+<button>PLAY</button>
 </div>
 
 <div class="card" data-stream="https://panelautodj.innovatestream.pe/7320/;">
 <img src="https://imgfz.com/i/FRicwT8.png" class="logo">
-<h2>La Jefa</h2>
-<audio controls playsinline preload="none"></audio>
+<h3>La Jefa</h3>
+<button>PLAY</button>
 </div>
 
 <div class="card" data-stream="https://panelautodj.innovatestream.pe/7324/;">
 <img src="https://imgfz.com/i/bBApQu2.png" class="logo">
-<h2>San Francisco</h2>
-<audio controls playsinline preload="none"></audio>
+<h3>San Francisco</h3>
+<button>PLAY</button>
 </div>
 
 <div class="card" data-stream="https://panelautodj.innovatestream.pe/8342/;">
 <img src="https://imgfz.com/i/bVMWlXD.png" class="logo">
-<h2>Máxima</h2>
-<audio controls playsinline preload="none"></audio>
+<h3>Máxima</h3>
+<button>PLAY</button>
 </div>
 
 <div class="card" data-stream="https://panelautodj.innovatestream.pe/8464/;">
 <img src="https://imgfz.com/i/J89AMPT.png" class="logo">
-<h2>La Cumbiambera</h2>
-<audio controls playsinline preload="none"></audio>
+<h3>La Cumbiambera</h3>
+<button>PLAY</button>
 </div>
 
 <div class="card" data-stream="https://panelautodj.innovatestream.pe/8466/;">
 <img src="https://imgfz.com/i/zauB0Id.png" class="logo">
-<h2>La Raya</h2>
-<audio controls playsinline preload="none"></audio>
+<h3>La Raya</h3>
+<button>PLAY</button>
 </div>
 
 </main>
 
-<footer>© 2025 Corporación La Fuerte</footer>
-
 <script>
-document.addEventListener('DOMContentLoaded',()=>{
+let currentAudio = null;
+let currentCard = null;
 
-const cards=document.querySelectorAll('.card');
-let currentAudio=null;
+document.querySelectorAll('.card').forEach(card=>{
+  const btn = card.querySelector('button');
+  const stream = card.dataset.stream;
 
-function stopAll(){
-  cards.forEach(c=>{
-    const a=c.querySelector('audio');
-    a.pause();
-    a.removeAttribute('src');
-    a.load();
-    c.classList.remove('activa');
-  });
-  currentAudio=null;
-}
+  btn.addEventListener('click',()=>{
 
-cards.forEach(card=>{
-  const audio=card.querySelector('audio');
-  const stream=card.dataset.stream;
-
-  audio.addEventListener('play',()=>{
-    if(currentAudio && currentAudio!==audio){
-      stopAll();
+    // STOP
+    if(btn.classList.contains('stop')){
+      if(currentAudio){
+        currentAudio.pause();
+        currentAudio = null;
+      }
+      btn.textContent = 'PLAY';
+      btn.classList.remove('stop');
+      card.classList.remove('activa');
+      return;
     }
-    currentAudio=audio;
+
+    // STOP otros
+    document.querySelectorAll('button').forEach(b=>{
+      b.textContent='PLAY';
+      b.classList.remove('stop');
+    });
+    document.querySelectorAll('.card').forEach(c=>c.classList.remove('activa'));
+
+    if(currentAudio){
+      currentAudio.pause();
+      currentAudio=null;
+    }
+
+    // PLAY NUEVO (tiempo real)
+    currentAudio = new Audio(stream);
+    currentAudio.play();
+
+    btn.textContent='STOP';
+    btn.classList.add('stop');
     card.classList.add('activa');
+    currentCard = card;
   });
-
-  audio.addEventListener('pause',()=>{
-    card.classList.remove('activa');
-  });
-
-  card.querySelector('.logo').addEventListener('click',()=>{
-    if(audio.paused){
-      stopAll();
-      audio.src = stream + '?t=' + Date.now(); // 🔥 CLAVE ANTI-SPOTIFY
-      audio.play().catch(()=>{});
-      card.classList.add('activa');
-      currentAudio=audio;
-    }else{
-      audio.pause();
-    }
-  });
-});
-
 });
 </script>
 
 </body>
 </html>
+

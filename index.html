@@ -114,7 +114,6 @@ header h1{
   background:#fff;
   padding:6px;
   border-radius:12px;
-  cursor:pointer;
 }
 
 h2{color:#ffcc00}
@@ -202,35 +201,46 @@ footer{
 © 2025 Corporación La Fuerte. Todos los derechos reservados.
 </footer>
 
-<!-- ===== STREAMING SIN BUFFER ===== -->
+<!-- ===== STREAMING SIN BUFFER + STOP CORREGIDO ===== -->
 <script>
 let currentAudio = null;
-let currentButton = null;
 
-document.querySelectorAll('.play-btn').forEach(btn=>{
-  btn.addEventListener('click',()=>{
-
+document.querySelectorAll('.play-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
     const card = btn.closest('.card');
     const stream = card.dataset.stream;
 
-    // detener actual
-    if(currentAudio){
-      currentAudio.src='';
-      currentAudio.load();
-      currentAudio=null;
+    /* --- SI ES STOP --- */
+    if (btn.classList.contains('stop')) {
+      if (currentAudio) {
+        currentAudio.src = '';
+        currentAudio.load();
+        currentAudio = null;
+      }
+      btn.textContent = 'PLAY';
+      btn.classList.remove('stop');
+      card.classList.remove('activa');
+      return;
     }
 
-    document.querySelectorAll('.card').forEach(c=>c.classList.remove('activa'));
-    document.querySelectorAll('.play-btn').forEach(b=>{
-      b.textContent='PLAY';
+    /* --- DETENER CUALQUIER RADIO ACTIVA --- */
+    if (currentAudio) {
+      currentAudio.src = '';
+      currentAudio.load();
+      currentAudio = null;
+    }
+
+    document.querySelectorAll('.card').forEach(c => c.classList.remove('activa'));
+    document.querySelectorAll('.play-btn').forEach(b => {
+      b.textContent = 'PLAY';
       b.classList.remove('stop');
     });
 
-    // nuevo stream SIN BUFFER
+    /* --- CREAR STREAM NUEVO (TIEMPO REAL) --- */
     currentAudio = new Audio(stream + '?nocache=' + Date.now());
     currentAudio.play();
 
-    btn.textContent='STOP';
+    btn.textContent = 'STOP';
     btn.classList.add('stop');
     card.classList.add('activa');
   });

@@ -1,263 +1,248 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Radio La Tremenda 106.5 FM</title>
 
-  <title>Radio Stereo M 101.5 FM</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#ff0055">
 
-  <!-- SEO básico -->
-  <meta name="description" content="Radio Stereo M 101.5 FM – La Radio Papá. Música, noticias y entretenimiento en vivo." />
-  <meta name="theme-color" content="#ffd700">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
 
-  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet"/>
+<style>
+body{
+  margin:0;
+  font-family:'Orbitron',sans-serif;
+  background:
+    radial-gradient(circle at top, #ff004c, transparent 60%),
+    radial-gradient(circle at bottom, #6a00ff, #050010 70%);
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  color:#fff;
+}
 
-  <style>
-    :root {
-      --rojo: #e60000;
-      --amarillo: #ffd700;
-      --negro: #111;
-      --blanco: #fff;
-      --celeste: #0088cc;
-      --fondo-footer: #222;
-    }
+.app{
+  width:340px;
+  background:rgba(0,0,0,.7);
+  border-radius:35px;
+  padding:30px 20px;
+  box-shadow:0 0 70px rgba(255,0,120,.9);
+  text-align:center;
+}
 
-    body {
-      margin: 0;
-      font-family: 'Raleway', sans-serif;
-      background: linear-gradient(to bottom, var(--celeste), #f44336);
-      color: var(--blanco);
-    }
+/* LOGO */
+.logo{
+  width:220px;
+  filter:
+    drop-shadow(0 0 6px #fff)
+    drop-shadow(0 0 18px #ff0055)
+    drop-shadow(0 0 35px rgba(255,0,85,.9));
+}
 
-    header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 15px 20px;
-      background-color: var(--amarillo);
-      color: var(--negro);
-    }
+.playing .logo{
+  animation:spin 6s linear infinite;
+}
 
-    .logo-box {
-      text-align: center;
-    }
+@keyframes spin{
+  from{transform:rotate(0)}
+  to{transform:rotate(360deg)}
+}
 
-    header img.logo {
-      width: 120px;
-      display: block;
-      animation: rebote 2s infinite ease-in-out;
-    }
+h1{
+  margin:15px 0 5px;
+  font-size:2em;
+  letter-spacing:2px;
+}
 
-    .slogan {
-      margin-top: 8px;
-      font-size: 1em;
-      color: var(--rojo);
-      font-weight: bold;
-      opacity: 0;
-      animation: entrarSlogan 1.2s ease-out forwards;
-      animation-delay: 1.7s;
-    }
+.live{
+  font-size:.9em;
+  letter-spacing:2px;
+  color:#ff9bd1;
+  animation:blink 1.4s infinite;
+}
 
-    .extra-img {
-      width: 300px;
-      max-width: 100%;
-      background: linear-gradient(135deg, #ff6600, #e60000);
-      padding: 8px;
-      border-radius: 15px;
-      box-shadow: 0 0 15px #e60000a0;
-    }
+@keyframes blink{
+  50%{opacity:.4}
+}
 
-    .main-content {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      padding: 20px;
-    }
+.song{
+  margin:20px 0;
+  font-size:.95em;
+  background:rgba(255,255,255,.1);
+  padding:12px;
+  border-radius:18px;
+}
 
-    .left-content {
-      max-width: 450px;
-      margin: 10px;
-      flex: 1 1 450px;
-    }
+.controls{
+  margin:25px 0;
+}
 
-    .player-box {
-      background: #fff;
-      color: var(--negro);
-      border: 3px solid var(--amarillo);
-      border-radius: 15px;
-      padding: 20px;
-      box-shadow: 0 0 15px #ffd700;
-      text-align: center;
-    }
+.play{
+  width:110px;
+  height:110px;
+  border-radius:50%;
+  border:none;
+  background:linear-gradient(45deg,#ff0055,#ff77aa);
+  font-size:45px;
+  color:white;
+  box-shadow:0 0 45px #ff0055;
+  cursor:pointer;
+  transition:.25s;
+}
 
-    .player-box h2 {
-      color: var(--rojo);
-      margin-bottom: 10px;
-    }
+.play:hover{
+  transform:scale(1.15);
+  box-shadow:0 0 65px #ff2a6d;
+}
 
-    audio {
-      width: 100%;
-      border-radius: 10px;
-    }
+.volume{
+  margin-top:20px;
+  font-size:.8em;
+}
 
-    #estado {
-      margin-top: 8px;
-      font-weight: bold;
-      color: red;
-    }
+input[type=range]{
+  -webkit-appearance:none;
+  width:100%;
+  height:6px;
+  border-radius:5px;
+  background:#ff77aa;
+}
 
-    .song-title {
-      margin-top: 6px;
-      font-weight: bold;
-    }
+input[type=range]::-webkit-slider-thumb{
+  -webkit-appearance:none;
+  width:18px;
+  height:18px;
+  border-radius:50%;
+  background:#fff;
+  box-shadow:0 0 10px #ff0055;
+}
 
-    .right-buttons {
-      margin: 10px;
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-      max-width: 200px;
-      background: linear-gradient(to bottom right, #ffe066, #ff7b7b);
-      padding: 15px;
-      border-radius: 20px;
-      box-shadow: 0 0 20px #e60000a0;
-    }
+.social{
+  display:flex;
+  justify-content:center;
+  gap:16px;
+  margin:30px 0;
+}
 
-    .right-buttons a {
-      display: block;
-      background: #fff;
-      color: var(--rojo);
-      text-align: center;
-      padding: 12px 15px;
-      text-decoration: none;
-      font-weight: bold;
-      border-radius: 30px;
-      box-shadow: 0 0 10px #000;
-      transition: 0.3s;
-    }
+.social a{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:14px 26px;
+  border-radius:40px;
+  font-weight:700;
+  text-decoration:none;
+  font-size:14px;
+  transition:.3s;
+}
 
-    .right-buttons a:hover {
-      background: var(--amarillo);
-      color: var(--negro);
-    }
+.facebook{
+  background:#1877F2;
+  color:white;
+  box-shadow:0 0 28px rgba(24,119,242,.9);
+}
 
-    footer {
-      background-color: var(--fondo-footer);
-      padding: 15px;
-      font-size: 14px;
-      color: #ddd;
-      text-align: center;
-      margin-top: 40px;
-    }
+.whatsapp{
+  background:#25D366;
+  color:#000;
+  box-shadow:0 0 28px rgba(37,211,102,.9);
+}
 
-    /* Responsive */
-    @media screen and (max-width: 768px) {
-      .main-content {
-        flex-direction: column;
-        align-items: center;
-      }
+.social a:hover{
+  transform:scale(1.08);
+  filter:brightness(1.15);
+}
 
-      .right-buttons {
-        max-width: 100%;
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: center;
-      }
-
-      .right-buttons a {
-        flex: 1 1 45%;
-      }
-    }
-
-    @media screen and (max-width: 480px) {
-      .extra-img {
-        display: none;
-      }
-    }
-
-    @keyframes entrarSlogan {
-      0% { opacity: 0; transform: translateY(30px) scale(0.9); }
-      60% { opacity: 1; transform: translateY(-5px) scale(1.05); }
-      100% { opacity: 1; transform: translateY(0) scale(1); }
-    }
-
-    @keyframes rebote {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
-    }
-  </style>
+footer{
+  margin-top:20px;
+  font-size:10px;
+  opacity:.6;
+}
+</style>
 </head>
 
 <body>
 
-<header>
-  <div class="logo-box">
-    <a href="https://radiostereom.com/" target="_blank">
-      <img src="https://i.postimg.cc/L8bjb6K5/1687464033296.png" alt="Logo Stereo M" class="logo" />
-    </a>
-    <div class="slogan">La Radio Papá 🎙️</div>
+<div class="app" id="app">
+
+  <img src="https://imgfz.com/i/h7TrEm5.png" class="logo" alt="Radio La Tremenda">
+
+  <h1>LA TREMENDA</h1>
+  <div class="live">🔴 EN VIVO</div>
+
+  <div class="song" id="nowplaying">
+    🎵 Cargando canción...
   </div>
 
-  <!-- Imagen en HTTPS (puedes cambiarla si deseas) -->
-  <img src="https://i.postimg.cc/8C0pL1vG/artistas-stereo-m.jpg" alt="Artistas Stereo M" class="extra-img" />
-</header>
-
-<div class="main-content">
-
-  <div class="left-content">
-    <div class="player-box">
-      <h2>🎧 Escúchanos en Vivo</h2>
-
-      <audio id="radioPlayer" controls preload="none">
-        <source src="https://sonic.globalstream.pro/8108/stream" type="audio/mpeg">
-        Tu navegador no soporta audio HTML5.
-      </audio>
-
-      <div id="estado">⏸️ PAUSADO</div>
-      <div class="song-title" id="song-title">Cargando canción...</div>
-    </div>
+  <div class="controls">
+    <button class="play" id="playBtn">▶</button>
   </div>
 
-  <div class="right-buttons">
-    <a href="https://play.google.com/store/apps/details?id=com.innovatel.radiostereom" target="_blank">📲 Descarga la App</a>
-    <a href="https://www.facebook.com/share/1Dib9eQUFD/" target="_blank">📘 Facebook</a>
-    <a href="https://wa.me/51984412853" target="_blank">🎤 WhatsApp Oyentes</a>
-    <a href="https://wa.me/51942883375" target="_blank">📢 Publicidad Aquí</a>
+  <div class="volume">
+    🔊 Volumen
+    <input type="range" min="0" max="1" step="0.01" value="1" id="volume">
   </div>
+
+  <div class="social">
+    <a class="facebook" href="https://www.facebook.com/profile.php?id=61585616422921" target="_blank">Facebook</a>
+    <a class="whatsapp" href="https://wa.me/51942883375" target="_blank">WhatsApp</a>
+  </div>
+
+  <footer>© 2026 Radio La Tremenda 106.5 FM · Diseño web: Marcony Clavijo</footer>
 
 </div>
 
-<footer>
-  Diseño y desarrollo web por Marcony Clavijo | Innovación que conecta.
-</footer>
+<!-- AUDIO OPTIMIZADO PARA iOS / ANDROID -->
+<audio id="radio" preload="none" playsinline webkit-playsinline crossorigin="anonymous">
+  <source src="https://stream.zeno.fm/jfjyk4dnuc1vv" type="audio/mpeg">
+</audio>
 
 <script>
-  async function fetchSongTitle() {
-    try {
-      const proxyUrl = "https://api.allorigins.win/get?url=";
-      const targetUrl = encodeURIComponent(
-        "http://sonic.globalstream.pro:8108/stats?sid=1&json=1&nocache=" + Date.now()
-      );
+const audio = document.getElementById("radio");
+const playBtn = document.getElementById("playBtn");
+const app = document.getElementById("app");
+const volume = document.getElementById("volume");
+const nowplaying = document.getElementById("nowplaying");
 
-      const response = await fetch(proxyUrl + targetUrl);
-      const data = await response.json();
-      const parsedData = JSON.parse(data.contents);
-
-      const title = parsedData.songtitle?.trim() || "Stereo M 101.5 FM en vivo";
-      document.getElementById("song-title").textContent = title;
-    } catch {
-      document.getElementById("song-title").textContent = "Stereo M 101.5 FM en vivo";
-    }
+playBtn.onclick = () => {
+  if(audio.paused){
+    playBtn.textContent="⏳";
+    audio.play().then(()=>{
+      playBtn.textContent="⏸";
+      app.classList.add("playing");
+    }).catch(()=>{
+      playBtn.textContent="▶";
+      alert("⚠️ No se pudo reproducir la radio. Intenta nuevamente.");
+    });
+  }else{
+    audio.pause();
+    playBtn.textContent="▶";
+    app.classList.remove("playing");
   }
+};
 
-  fetchSongTitle();
-  setInterval(fetchSongTitle, 5000);
+volume.oninput = () => audio.volume = volume.value;
 
-  const audio = document.getElementById("radioPlayer");
-  const estado = document.getElementById("estado");
+// CANCIÓN ACTUAL (PROTEGIDO)
+setInterval(()=>{
+  fetch("https://api.zeno.fm/station/jfjyk4dnuc1vv/now_playing")
+    .then(r=>r.json())
+    .then(data=>{
+      if(data?.now_playing?.song?.text){
+        nowplaying.innerText = "🎶 " + data.now_playing.song.text;
+      }
+    })
+    .catch(()=>{});
+},15000);
+</script>
 
-  audio.addEventListener("play", () => estado.textContent = "🔴 EN VIVO");
-  audio.addEventListener("pause", () => estado.textContent = "⏸️ PAUSADO");
+<script>
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("sw.js");
+}
 </script>
 
 </body>

@@ -95,52 +95,40 @@ footer{
 
 <main class="grid">
 
-<!-- 1 -->
-<div class="card">
+<div class="card" data-stream="https://panelautodj.innovatestream.pe/7322/;">
 <img src="https://imgfz.com/i/fmdxHD8.png" class="logo">
 <h2>La Fuerte</h2>
-<audio controls playsinline preload="none"
-src="https://panelautodj.innovatestream.pe/7322/;"></audio>
+<audio controls playsinline preload="none"></audio>
 </div>
 
-<!-- 2 -->
-<div class="card">
+<div class="card" data-stream="https://panelautodj.innovatestream.pe/7320/;">
 <img src="https://imgfz.com/i/FRicwT8.png" class="logo">
 <h2>La Jefa</h2>
-<audio controls playsinline preload="none"
-src="https://panelautodj.innovatestream.pe/7320/;"></audio>
+<audio controls playsinline preload="none"></audio>
 </div>
 
-<!-- 3 -->
-<div class="card">
+<div class="card" data-stream="https://panelautodj.innovatestream.pe/7324/;">
 <img src="https://imgfz.com/i/bBApQu2.png" class="logo">
 <h2>San Francisco</h2>
-<audio controls playsinline preload="none"
-src="https://panelautodj.innovatestream.pe/7324/;"></audio>
+<audio controls playsinline preload="none"></audio>
 </div>
 
-<!-- 4 -->
-<div class="card">
+<div class="card" data-stream="https://panelautodj.innovatestream.pe/8342/;">
 <img src="https://imgfz.com/i/bVMWlXD.png" class="logo">
 <h2>Máxima</h2>
-<audio controls playsinline preload="none"
-src="https://panelautodj.innovatestream.pe/8342/;"></audio>
+<audio controls playsinline preload="none"></audio>
 </div>
 
-<!-- 5 -->
-<div class="card">
+<div class="card" data-stream="https://panelautodj.innovatestream.pe/8464/;">
 <img src="https://imgfz.com/i/J89AMPT.png" class="logo">
 <h2>La Cumbiambera</h2>
-<audio controls playsinline preload="none"
-src="https://panelautodj.innovatestream.pe/8464/;"></audio>
+<audio controls playsinline preload="none"></audio>
 </div>
 
-<!-- 6 -->
-<div class="card">
+<div class="card" data-stream="https://panelautodj.innovatestream.pe/8466/;">
 <img src="https://imgfz.com/i/zauB0Id.png" class="logo">
 <h2>La Raya</h2>
-<audio controls playsinline preload="none"
-src="https://panelautodj.innovatestream.pe/8466/;"></audio>
+<audio controls playsinline preload="none"></audio>
 </div>
 
 </main>
@@ -150,32 +138,46 @@ src="https://panelautodj.innovatestream.pe/8466/;"></audio>
 <script>
 document.addEventListener('DOMContentLoaded',()=>{
 
-const audios=document.querySelectorAll('audio');
 const cards=document.querySelectorAll('.card');
+let currentAudio=null;
 
-audios.forEach(audio=>{
+function stopAll(){
+  cards.forEach(c=>{
+    const a=c.querySelector('audio');
+    a.pause();
+    a.removeAttribute('src');
+    a.load();
+    c.classList.remove('activa');
+  });
+  currentAudio=null;
+}
+
+cards.forEach(card=>{
+  const audio=card.querySelector('audio');
+  const stream=card.dataset.stream;
 
   audio.addEventListener('play',()=>{
-    audios.forEach(a=>{
-      if(a!==audio){
-        a.pause();
-        a.closest('.card').classList.remove('activa');
-      }
-    });
-    audio.closest('.card').classList.add('activa');
+    if(currentAudio && currentAudio!==audio){
+      stopAll();
+    }
+    currentAudio=audio;
+    card.classList.add('activa');
   });
 
   audio.addEventListener('pause',()=>{
-    audio.closest('.card').classList.remove('activa');
+    card.classList.remove('activa');
   });
 
-});
-
-// click en logo = play / pause
-document.querySelectorAll('.logo').forEach(logo=>{
-  logo.addEventListener('click',()=>{
-    const audio=logo.parentElement.querySelector('audio');
-    audio.paused ? audio.play() : audio.pause();
+  card.querySelector('.logo').addEventListener('click',()=>{
+    if(audio.paused){
+      stopAll();
+      audio.src = stream + '?t=' + Date.now(); // 🔥 CLAVE ANTI-SPOTIFY
+      audio.play().catch(()=>{});
+      card.classList.add('activa');
+      currentAudio=audio;
+    }else{
+      audio.pause();
+    }
   });
 });
 

@@ -5,84 +5,70 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Radio La Tremenda 106.5 FM</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;800&display=swap" rel="stylesheet">
 
 <style>
 body{
   margin:0;
-  font-family:'Orbitron',sans-serif;
-  min-height:100vh;
-  background:linear-gradient(135deg,#ffd500,#ff8c00,#ff3c00);
-  background-size:300% 300%;
-  animation:bgMove 12s infinite alternate;
-  color:#000;
-  overflow:hidden;
-}
-
-@keyframes bgMove{
-  0%{background-position:0% 50%}
-  100%{background-position:100% 50%}
-}
-
-/* BANDERINES */
-.flags{
-  position:fixed;
-  top:0;
-  width:100%;
-  height:60px;
-  background:
-    repeating-linear-gradient(
-      135deg,
-      #ff0000 0 20px,
-      #ffd700 20px 40px,
-      #00c853 40px 60px
-    );
-  clip-path:polygon(0 0,100% 0,100% 60%,50% 100%,0 60%);
-}
-
-/* CINTA EVENTO */
-.marquee{
-  position:fixed;
-  top:60px;
-  width:100%;
-  background:#ff0000;
-  color:#fff;
-  font-weight:900;
-  padding:6px 0;
-  overflow:hidden;
-}
-
-.marquee span{
-  display:inline-block;
-  white-space:nowrap;
-  animation:scroll 14s linear infinite;
-}
-
-@keyframes scroll{
-  from{transform:translateX(100%)}
-  to{transform:translateX(-100%)}
-}
-
-/* ESCENARIO */
-.stage{
+  font-family:'Poppins',sans-serif;
   min-height:100vh;
   display:flex;
-  flex-direction:column;
   justify-content:center;
   align-items:center;
+  background:
+    radial-gradient(circle at top left,#ffea00,#ff9800),
+    radial-gradient(circle at bottom right,#ff1744,#ff9100);
+  color:#fff;
+}
+
+/* TARJETA */
+.app{
+  width:360px;
+  background:rgba(255,255,255,.18);
+  backdrop-filter:blur(18px);
+  border-radius:32px;
+  padding:25px 20px 30px;
+  box-shadow:0 30px 80px rgba(0,0,0,.35);
   text-align:center;
-  padding:120px 20px 40px;
-  box-sizing:border-box;
+  position:relative;
+  overflow:hidden;
+}
+
+/* LUCES EVENTO */
+.app::before,
+.app::after{
+  content:"";
+  position:absolute;
+  width:140px;
+  height:140px;
+  border-radius:50%;
+  filter:blur(50px);
+  animation:lights 6s infinite alternate;
+}
+
+.app::before{
+  top:-40px; left:-40px;
+  background:#00e5ff;
+}
+.app::after{
+  top:-40px; right:-40px;
+  background:#ff00c8;
+  animation-delay:3s;
+}
+
+@keyframes lights{
+  from{opacity:.4}
+  to{opacity:.9}
 }
 
 /* LOGO */
 .logo{
-  width:210px;
-  filter:drop-shadow(0 0 20px #fff);
+  width:200px;
+  margin-top:10px;
 }
 
 .playing .logo{
-  animation:spin 6s linear infinite;
+  animation:spin 7s linear infinite;
 }
 
 @keyframes spin{
@@ -90,135 +76,112 @@ body{
 }
 
 h1{
-  margin:8px 0 4px;
-  font-size:2.4em;
-  color:#ff0000;
-  text-shadow:0 0 10px #fff;
+  margin:10px 0 0;
+  font-size:28px;
+  letter-spacing:2px;
 }
 
-.slogan{
-  font-size:.95em;
-  letter-spacing:3px;
+.status{
+  margin-top:6px;
+  font-size:13px;
+  letter-spacing:1px;
 }
 
-/* LIVE */
-.live{
-  margin-top:4px;
-  font-size:.9em;
-  font-weight:900;
-  color:#c00000;
-}
-
-/* ECUALIZADOR */
-.eq{
-  display:flex;
-  gap:6px;
+/* CANCIÓN */
+.song{
   margin:18px 0;
-  height:60px;
-}
-
-.eq span{
-  width:10px;
-  background:#ff0000;
-  transform-origin:bottom;
-  animation:equalize .6s infinite;
-  animation-play-state:paused;
-}
-
-.playing .eq span{
-  animation-play-state:running;
-}
-
-@keyframes equalize{
-  0%{height:15px}
-  50%{height:60px}
-  100%{height:20px}
+  background:rgba(255,255,255,.25);
+  padding:12px;
+  border-radius:16px;
+  font-size:14px;
 }
 
 /* BOTÓN */
-.play{
-  margin-top:10px;
-  padding:18px 50px;
-  font-size:24px;
-  font-weight:900;
-  border:none;
-  background:#00c853;
-  color:#000;
-  cursor:pointer;
-  box-shadow:0 0 25px rgba(0,0,0,.4);
-  transition:.2s;
+.controls{
+  margin:25px 0;
 }
 
-.play:hover{
-  transform:scale(1.08);
+.play{
+  width:120px;
+  height:120px;
+  border-radius:50%;
+  border:none;
+  font-size:15px;
+  font-weight:800;
+  background:linear-gradient(135deg,#00e5ff,#00ff6a);
+  color:#003;
+  cursor:pointer;
+  box-shadow:0 0 40px rgba(0,0,0,.4);
+  transition:.3s;
+}
+
+.play:hover:not(.loading){
+  transform:scale(1.12);
+}
+
+/* LOADING */
+.play.loading{
+  background:#ddd;
+  color:#555;
+  cursor:not-allowed;
+}
+
+.play.loading::after{
+  content:"";
+  display:block;
+  margin:10px auto 0;
+  width:28px;
+  height:28px;
+  border:4px solid #999;
+  border-top:4px solid red;
+  border-radius:50%;
+  animation:spinLoad 1s linear infinite;
+}
+
+@keyframes spinLoad{
+  to{transform:rotate(360deg)}
 }
 
 /* VOLUMEN */
 .volume{
-  width:260px;
-  margin-top:16px;
+  margin-top:15px;
+  font-size:12px;
 }
 
-input[type=range]{width:100%}
-
-/* REDES */
-.social{
-  display:flex;
-  gap:14px;
-  margin-top:20px;
-}
-
-.social a{
-  padding:10px 20px;
-  background:#ffd700;
-  color:#000;
-  text-decoration:none;
-  font-weight:900;
-  border-radius:20px;
+input[type=range]{
+  width:100%;
 }
 
 /* FOOTER */
 footer{
-  margin-top:30px;
+  margin-top:20px;
   font-size:10px;
-  opacity:.7;
+  opacity:.8;
 }
 </style>
 </head>
 
 <body>
 
-<div class="flags"></div>
+<div class="app" id="app">
 
-<div class="marquee">
-  <span>🎉 LA TREMENDA 106.5 FM · CUMBIA SANJUANERA · LA RADIO DEL PUEBLO · TRANSMITIENDO EN TIEMPO REAL 🎉</span>
-</div>
-
-<div class="stage" id="app">
-
-  <img src="https://imgfz.com/i/h7TrEm5.png" class="logo">
+  <img src="https://imgfz.com/i/h7TrEm5.png" class="logo" alt="Radio La Tremenda">
 
   <h1>LA TREMENDA</h1>
-  <div class="slogan">LA RADIO DEL PUEBLO</div>
-  <div class="live" id="liveText">🔴 EN VIVO</div>
+  <div class="status" id="liveText">🔴 EN VIVO · La radio del pueblo</div>
 
-  <div class="eq">
-    <span></span><span></span><span></span><span></span><span></span>
+  <div class="song" id="nowplaying">🎵 Cargando canción…</div>
+
+  <div class="controls">
+    <button class="play" id="playBtn">▶ EN VIVO</button>
   </div>
 
-  <button class="play" id="playBtn">▶ SONAR EN VIVO</button>
-
   <div class="volume">
+    🔊 Volumen
     <input type="range" min="0" max="1" step="0.01" value="1" id="volume">
   </div>
 
-  <div class="social">
-    <a href="https://www.facebook.com/profile.php?id=61585616422921" target="_blank">Facebook</a>
-    <a href="https://wa.me/51942883375" target="_blank">WhatsApp</a>
-  </div>
-
   <footer>© 2026 Radio La Tremenda 106.5 FM</footer>
-
 </div>
 
 <audio id="radio" preload="none" playsinline webkit-playsinline crossorigin="anonymous">
@@ -231,35 +194,67 @@ const playBtn = document.getElementById("playBtn");
 const app = document.getElementById("app");
 const volume = document.getElementById("volume");
 const liveText = document.getElementById("liveText");
+const nowplaying = document.getElementById("nowplaying");
 
 let playing = false;
+let loading = false;
 
-playBtn.onclick = () => {
+playBtn.onclick = ()=>{
+  if(loading) return;
+
   if(!playing){
-    // PLAY → SIEMPRE TIEMPO REAL
+    loading = true;
+    playBtn.disabled = true;
+    playBtn.classList.add("loading");
+    playBtn.textContent = "CONECTANDO…";
+    liveText.textContent = "⏳ Volviendo a la señal en vivo…";
+
     audio.pause();
     audio.currentTime = 0;
     audio.load();
-
-    audio.play().then(()=>{
-      playing = true;
-      app.classList.add("playing");
-      playBtn.textContent = "⏸ SILENCIO";
-      liveText.textContent = "🔴 EN VIVO (TIEMPO REAL)";
-    }).catch(()=>{
-      alert("No se pudo conectar al streaming.");
-    });
+    audio.play().catch(reset);
   }else{
-    // PAUSA
     audio.pause();
     playing = false;
     app.classList.remove("playing");
-    playBtn.textContent = "▶ VOLVER AL EN VIVO";
-    liveText.textContent = "⏸ AUDIO EN PAUSA";
+    playBtn.textContent = "▶ EN VIVO";
+    liveText.textContent = "⏸ Audio en silencio";
   }
 };
 
+audio.onplaying = ()=>{
+  loading = false;
+  playing = true;
+  playBtn.disabled = false;
+  playBtn.classList.remove("loading");
+  playBtn.textContent = "⏸ SILENCIO";
+  liveText.textContent = "🔴 EN VIVO · Tiempo real";
+  app.classList.add("playing");
+};
+
+audio.onerror = reset;
+
+function reset(){
+  loading = false;
+  playing = false;
+  playBtn.disabled = false;
+  playBtn.classList.remove("loading");
+  playBtn.textContent = "▶ EN VIVO";
+  liveText.textContent = "⚠️ Error de conexión";
+}
+
 volume.oninput = ()=> audio.volume = volume.value;
+
+/* CANCIÓN */
+setInterval(()=>{
+  fetch("https://api.zeno.fm/station/jfjyk4dnuc1vv")
+    .then(r=>r.json())
+    .then(d=>{
+      if(d?.now_playing?.song?.text){
+        nowplaying.textContent = "🎶 " + d.now_playing.song.text;
+      }
+    }).catch(()=>{});
+},15000);
 </script>
 
 </body>

@@ -15,39 +15,50 @@ body{
   display:flex;
   justify-content:center;
   align-items:center;
-  background:
-    linear-gradient(130deg,#7A00FF,#FF003C,#FFD600);
-  background-size:400% 400%;
-  animation:bgMove 8s infinite alternate;
+  background:linear-gradient(135deg,#ff0000,#ff8c00,#ffd700);
 }
 
-@keyframes bgMove{
-  0%{background-position:0% 50%}
-  100%{background-position:100% 50%}
+/* LUCES ROBOTICAS */
+.light{
+  position:fixed;
+  top:0;
+  width:220px;
+  height:420px;
+  background:linear-gradient(to bottom,rgba(255,255,255,.7),transparent);
+  clip-path:polygon(50% 0, 0 100%, 100% 100%);
+  opacity:.5;
+  animation:moveLight 3s infinite alternate;
+  pointer-events:none;
+}
+
+.light.left{left:-40px; animation-delay:0s;}
+.light.right{right:-40px; animation-delay:1.5s;}
+
+@keyframes moveLight{
+  0%{transform:rotate(-10deg)}
+  100%{transform:rotate(10deg)}
 }
 
 .app{
   width:360px;
-  background:rgba(5,0,15,.85);
-  border-radius:30px;
+  background:rgba(0,0,0,.75);
+  border-radius:28px;
   padding:28px 22px;
-  box-shadow:
-    0 0 40px #FF003C,
-    0 0 90px #7A00FF;
   text-align:center;
   color:#fff;
+  box-shadow:0 0 50px rgba(255,0,0,.9);
+  position:relative;
+  z-index:5;
 }
 
 /* LOGO */
 .logo{
   width:210px;
-  filter:
-    drop-shadow(0 0 10px #FFD600)
-    drop-shadow(0 0 25px #FF003C);
+  filter:drop-shadow(0 0 20px #ffd700);
 }
 
 .playing .logo{
-  animation:spin 5s linear infinite;
+  animation:spin 6s linear infinite;
 }
 
 @keyframes spin{
@@ -55,16 +66,23 @@ body{
 }
 
 h1{
-  margin:12px 0 5px;
-  font-size:2.1em;
-  color:#FFD600;
-  text-shadow:0 0 20px #FFD600;
+  margin:10px 0 4px;
+  font-size:2em;
+  color:#ffd700;
+  text-shadow:0 0 15px #ffd700;
 }
 
+.slogan{
+  font-size:.85em;
+  color:#ffb703;
+  letter-spacing:2px;
+}
+
+/* EN VIVO */
 .live{
+  margin-top:6px;
   font-size:.9em;
-  letter-spacing:3px;
-  color:#FF003C;
+  color:#ff0000;
   animation:blink 1.2s infinite;
 }
 
@@ -74,17 +92,17 @@ h1{
 
 /* CANCIÓN */
 .song{
-  margin:22px 0;
+  margin:20px 0;
   padding:14px;
   border-radius:16px;
-  background:linear-gradient(90deg,#FF003C,#7A00FF);
+  background:linear-gradient(90deg,#ff0000,#ff8c00);
+  box-shadow:0 0 20px rgba(255,140,0,.9);
   font-size:.95em;
-  box-shadow:0 0 25px rgba(255,0,60,.6);
 }
 
 /* PLAY */
 .controls{
-  margin:28px 0;
+  margin:26px 0;
 }
 
 .play{
@@ -92,27 +110,21 @@ h1{
   height:120px;
   border-radius:50%;
   border:none;
-  background:radial-gradient(circle,#FFD600,#FF003C);
+  background:radial-gradient(circle,#ffd700,#ff0000);
   font-size:46px;
   color:#000;
   cursor:pointer;
-  box-shadow:
-    0 0 30px #FFD600,
-    0 0 70px #FF003C;
-  animation:pulse 1.5s infinite;
+  box-shadow:0 0 30px #ffd700, 0 0 60px #ff0000;
+  animation:pulse 1.4s infinite;
 }
 
 @keyframes pulse{
   50%{transform:scale(1.12)}
 }
 
-.play:hover{
-  filter:brightness(1.15);
-}
-
 /* VOLUMEN */
 .volume{
-  margin-top:20px;
+  margin-top:18px;
   font-size:.8em;
 }
 
@@ -129,13 +141,13 @@ input[type=range]{
 }
 
 .social a{
-  padding:14px 24px;
+  padding:14px 22px;
   border-radius:30px;
-  text-decoration:none;
-  font-weight:800;
+  background:#ffd700;
   color:#000;
-  background:#FFD600;
-  box-shadow:0 0 25px #FFD600;
+  text-decoration:none;
+  font-weight:900;
+  box-shadow:0 0 20px #ffd700;
   transition:.25s;
 }
 
@@ -145,21 +157,26 @@ input[type=range]{
 
 footer{
   font-size:10px;
-  opacity:.6;
+  opacity:.7;
 }
 </style>
 </head>
 
 <body>
 
+<!-- LUCES -->
+<div class="light left"></div>
+<div class="light right"></div>
+
 <div class="app" id="app">
 
   <img src="https://imgfz.com/i/h7TrEm5.png" class="logo">
 
   <h1>LA TREMENDA</h1>
+  <div class="slogan">LA RADIO DEL PUEBLO</div>
   <div class="live">● EN VIVO</div>
 
-  <div class="song" id="nowplaying">🎵 Cargando canción...</div>
+  <div class="song" id="nowplaying">🎶 Cargando canción...</div>
 
   <div class="controls">
     <button class="play" id="playBtn">▶</button>
@@ -172,4 +189,37 @@ footer{
 
   <div class="social">
     <a href="https://www.facebook.com/profile.php?id=61585616422921" target="_blank">Facebook</a>
-    <a href="https://
+    <a href="https://wa.me/51942883375" target="_blank">WhatsApp</a>
+  </div>
+
+  <footer>© 2026 Radio La Tremenda 106.5 FM</footer>
+</div>
+
+<audio id="radio" preload="none" playsinline webkit-playsinline>
+  <source src="https://stream.zeno.fm/jfjyk4dnuc1vv" type="audio/mpeg">
+</audio>
+
+<script>
+const audio = document.getElementById("radio");
+const playBtn = document.getElementById("playBtn");
+const app = document.getElementById("app");
+const volume = document.getElementById("volume");
+
+playBtn.onclick = ()=>{
+  if(audio.paused){
+    audio.play().then(()=>{
+      playBtn.textContent="⏸";
+      app.classList.add("playing");
+    });
+  }else{
+    audio.pause();
+    playBtn.textContent="▶";
+    app.classList.remove("playing");
+  }
+};
+
+volume.oninput = ()=> audio.volume = volume.value;
+</script>
+
+</body>
+</html>

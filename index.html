@@ -2,134 +2,140 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Radio Stereo M 101.5 FM</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#ffcc00">
 
-  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet"/>
+  <script>
+    if (location.protocol === 'http:') {
+      location.href = location.href.replace('http:', 'https:');
+    }
+  </script>
+
+  <title>Corporación La Fuerte</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
 
   <style>
-    :root {
-      --rojo:#e60000;
-      --amarillo:#ffd700;
-      --negro:#111;
-      --blanco:#fff;
-      --celeste:#0088cc;
-      --footer:#222;
+    body {
+      margin: 0;
+      font-family: 'Montserrat', sans-serif;
+      background: linear-gradient(135deg, #1a1a2e, #16213e);
+      color: #fff;
     }
 
-    body{
-      margin:0;
-      font-family:'Raleway',sans-serif;
-      background:linear-gradient(to bottom,var(--celeste),#f44336);
-      color:var(--blanco);
+    header {
+      background: #0f3460;
+      text-align: center;
+      padding: 2rem 1rem 1rem;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.6);
     }
 
-    header{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      padding:15px 20px;
-      background:var(--amarillo);
-      color:var(--negro);
-      flex-wrap:wrap;
+    .logo-animado {
+      width: 300px;
+      margin: auto;
+      display: block;
+      animation: entradaLogo 2s ease-out forwards, resplandor 3s infinite alternate;
     }
 
-    .logo-box{text-align:center}
-
-    .logo{
-      width:120px;
-      animation:rebote 2s infinite;
+    @keyframes entradaLogo {
+      0% { transform: scale(0.2); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
     }
 
-    .slogan{
-      font-weight:bold;
-      color:var(--rojo);
-      margin-top:6px;
-      animation:entrar 1.2s forwards;
+    @keyframes resplandor {
+      0% { filter: drop-shadow(0 0 10px #ff6f61); }
+      100% { filter: drop-shadow(0 0 25px #ffcc00); }
     }
 
-    .extra-img{
-      width:280px;
-      border-radius:15px;
-      box-shadow:0 0 15px #e60000aa;
+    header h1 {
+      font-size: 3rem;
+      margin: 1rem 0 0;
+      color: #ffcc00;
+      text-shadow: 2px 2px 8px #000;
     }
 
-    .main{
-      display:flex;
-      justify-content:center;
-      gap:20px;
-      padding:25px;
-      flex-wrap:wrap;
+    .btn-contacto {
+      display: inline-block;
+      background: #ffcc00;
+      color: #000;
+      font-weight: bold;
+      padding: 12px 24px;
+      border-radius: 30px;
+      text-decoration: none;
+      margin-top: 1rem;
     }
 
-    .player-box{
-      background:#fff;
-      color:#000;
-      border-radius:15px;
-      padding:20px;
-      max-width:420px;
-      width:100%;
-      text-align:center;
-      box-shadow:0 0 15px #ffd700;
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      padding: 2rem;
+      max-width: 1300px;
+      margin: auto;
     }
 
-    audio{
-      width:100%;
-      margin-top:10px;
+    .card {
+      background: #222831;
+      border: 2px solid #ff6f61;
+      border-radius: 20px;
+      padding: 1.5rem;
+      text-align: center;
+      position: relative;
+      transition: 0.3s;
     }
 
-    .live{
-      margin-top:10px;
-      color:red;
-      font-weight:bold;
-      animation:blink 1s infinite;
+    .card.activa {
+      animation: brilloPulsante 2.5s infinite;
+      border-color: #ffcc00;
     }
 
-    .buttons{
-      background:linear-gradient(to bottom right,#ffe066,#ff7b7b);
-      padding:15px;
-      border-radius:20px;
-      display:flex;
-      flex-direction:column;
-      gap:12px;
-      max-width:220px;
+    @keyframes brilloPulsante {
+      0%,100% { box-shadow: 0 0 15px #ff6f61; }
+      50% { box-shadow: 0 0 30px #ffcc00; }
     }
 
-    .buttons a{
-      background:#fff;
-      color:var(--rojo);
-      padding:12px;
-      text-decoration:none;
-      border-radius:30px;
-      font-weight:bold;
-      text-align:center;
+    .card.activa::before {
+      content: "🔴 EN VIVO";
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: red;
+      padding: 4px 10px;
+      border-radius: 15px;
+      font-size: 0.8rem;
+      animation: parpadeo 1.2s infinite;
     }
 
-    footer{
-      background:var(--footer);
-      text-align:center;
-      padding:15px;
-      font-size:14px;
-      margin-top:30px;
-      color:#ddd;
+    @keyframes parpadeo {
+      0%,100% { opacity: 1; }
+      50% { opacity: 0.4; }
     }
 
-    @keyframes rebote{
-      0%,100%{transform:translateY(0)}
-      50%{transform:translateY(-10px)}
-    }
-    @keyframes blink{
-      50%{opacity:0}
-    }
-    @keyframes entrar{
-      from{opacity:0;transform:translateY(20px)}
-      to{opacity:1;transform:translateY(0)}
+    .logo {
+      width: 120px;
+      height: 120px;
+      object-fit: contain;
+      background: white;
+      border-radius: 12px;
+      padding: 5px;
+      cursor: pointer;
     }
 
-    @media(max-width:768px){
-      .extra-img{width:220px}
-      .buttons{flex-direction:row;flex-wrap:wrap}
-      .buttons a{flex:1 1 45%}
+    audio {
+      width: 100%;
+      margin-top: 1rem;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      background: #0f0f0f;
+      color: #aaa;
+    }
+
+    @media (max-width: 480px) {
+      header h1 { font-size: 2rem; }
+      .logo-animado { width: 220px; }
     }
   </style>
 </head>
@@ -137,84 +143,88 @@
 <body>
 
 <header>
-  <div class="logo-box">
-    <img src="https://i.postimg.cc/L8bjb6K5/1687464033296.png" class="logo" alt="Stereo M">
-    <div class="slogan">La Radio Papá 🎙️</div>
-  </div>
-  <img src="http://imgfz.com/i/xgID1Gn.jpeg" class="extra-img" alt="Stereo M">
+  <img src="https://imgfz.com/i/bmnsNX4.png" class="logo-animado">
+  <h1>Corporación La Fuerte</h1>
+  <a class="btn-contacto" href="https://wa.me/51968093770" target="_blank">
+    📞 Publicidad: 51968093770
+  </a>
 </header>
 
-<div class="main">
+<main class="grid">
 
-  <div class="player-box">
-    <h2>🎧 Escúchanos en Vivo</h2>
-
-    <!-- AUDIO -->
-    <audio id="radioPlayer" controls preload="none"></audio>
-
-    <div class="live">🔴 EN VIVO</div>
-    <div id="song-title">Cargando canción...</div>
+  <!-- CARD TEMPLATE -->
+  <div class="card">
+    <img src="https://imgfz.com/i/fmdxHD8.png" class="logo">
+    <h2>La Fuerte</h2>
+    <audio controls playsinline preload="none">
+      <source src="https://panelautodj.innovatestream.pe/7322/;" type="audio/mpeg">
+    </audio>
   </div>
 
-  <div class="buttons">
-    <a href="https://play.google.com/store/apps/details?id=com.innovatel.radiostereom" target="_blank">📲 Descarga la App</a>
-    <a href="https://www.facebook.com/share/1Dib9eQUFD/" target="_blank">📘 Facebook</a>
-    <a href="https://wa.me/51984412853" target="_blank">🎤 WhatsApp Oyentes</a>
-    <a href="https://wa.me/51942883375" target="_blank">📢 Publicidad</a>
+  <div class="card">
+    <img src="https://imgfz.com/i/FRicwT8.png" class="logo">
+    <h2>La Jefa</h2>
+    <audio controls playsinline preload="none">
+      <source src="https://panelautodj.innovatestream.pe/7320/;" type="audio/mpeg">
+    </audio>
   </div>
 
-</div>
+  <div class="card">
+    <img src="https://imgfz.com/i/bBApQu2.png" class="logo">
+    <h2>San Francisco</h2>
+    <audio controls playsinline preload="none">
+      <source src="https://panelautodj.innovatestream.pe/7324/;" type="audio/mpeg">
+    </audio>
+  </div>
+
+  <div class="card">
+    <img src="https://imgfz.com/i/bVMWlXD.png" class="logo">
+    <h2>Máxima</h2>
+    <audio controls playsinline preload="none">
+      <source src="https://panelautodj.innovatestream.pe/8342/;" type="audio/mpeg">
+    </audio>
+  </div>
+
+</main>
 
 <footer>
-  Diseño y desarrollo web por Marcony Clavijo | 942883375.
+  © 2025 Corporación La Fuerte
 </footer>
 
+<audio id="beep" muted preload="auto">
+  <source src="https://www.soundjay.com/buttons/sounds/beep-07.mp3" type="audio/mpeg">
+</audio>
+
 <script>
-  const player = document.getElementById("radioPlayer");
-  const STREAM = "https://sonic.globalstream.pro/8108/stream";
-  let pausedByUser = false;
+document.addEventListener('DOMContentLoaded', () => {
+  const audios = document.querySelectorAll('audio[controls]');
+  const beep = document.getElementById('beep');
 
-  function connectLive() {
-    player.src = STREAM + "?live=" + Date.now();
-    player.load();
-  }
+  audios.forEach(audio => {
+    audio.addEventListener('play', () => {
+      audios.forEach(a => {
+        if (a !== audio) a.pause();
+      });
 
-  // conectar al cargar la página
-  connectLive();
+      document.querySelectorAll('.card').forEach(c => c.classList.remove('activa'));
+      audio.closest('.card').classList.add('activa');
 
-  // marcar pausa
-  player.addEventListener("pause", () => {
-    pausedByUser = true;
+      beep.currentTime = 0;
+      beep.play().catch(()=>{});
+    });
+
+    audio.addEventListener('pause', () => {
+      audio.closest('.card').classList.remove('activa');
+    });
   });
 
-  // al volver a play, reconectar al vivo
-  player.addEventListener("play", () => {
-    if (pausedByUser) {
-      pausedByUser = false;
-      connectLive();
-      setTimeout(() => player.play(), 200);
-    }
+  document.querySelectorAll('.logo').forEach(logo => {
+    logo.addEventListener('click', () => {
+      const audio = logo.parentElement.querySelector('audio');
+      audio.paused ? audio.play() : audio.pause();
+    });
   });
-
-  // ====== TÍTULO DE CANCIÓN ======
-  async function fetchSongTitle(){
-    try{
-      const proxy="https://api.allorigins.win/get?url=";
-      const url=encodeURIComponent(
-        "http://sonic.globalstream.pro:8108/stats?sid=1&json=1&nocache="+Date.now()
-      );
-      const res=await fetch(proxy+url);
-      const data=await res.json();
-      const parsed=JSON.parse(data.contents);
-      document.getElementById("song-title").textContent =
-        parsed.songtitle || "En transmisión...";
-    }catch{
-      document.getElementById("song-title").textContent="En transmisión...";
-    }
-  }
-
-  fetchSongTitle();
-  setInterval(fetchSongTitle,5000);
+});
 </script>
 
 </body>

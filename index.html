@@ -30,17 +30,16 @@ body{
   top:0;
   width:100%;
   height:60px;
-  background:
-    repeating-linear-gradient(
-      135deg,
-      #ff0000 0 20px,
-      #ffd700 20px 40px,
-      #00c853 40px 60px
-    );
+  background:repeating-linear-gradient(
+    135deg,
+    #ff0000 0 20px,
+    #ffd700 20px 40px,
+    #00c853 40px 60px
+  );
   clip-path:polygon(0 0,100% 0,100% 60%,50% 100%,0 60%);
 }
 
-/* CINTA EVENTO */
+/* MARQUEE */
 .marquee{
   position:fixed;
   top:60px;
@@ -63,7 +62,7 @@ body{
   to{transform:translateX(-100%)}
 }
 
-/* ESCENARIO */
+/* CONTENIDO */
 .stage{
   min-height:100vh;
   display:flex;
@@ -71,7 +70,7 @@ body{
   justify-content:center;
   align-items:center;
   text-align:center;
-  padding:120px 20px 40px;
+  padding:140px 20px 120px;
   box-sizing:border-box;
 }
 
@@ -146,35 +145,13 @@ h1{
   color:#000;
   cursor:pointer;
   box-shadow:0 0 25px rgba(0,0,0,.4);
-  transition:.2s;
 }
 
-.play:hover{
-  transform:scale(1.08);
-}
-
-/* LOADING */
 .play.loading{
   background:#ccc;
   color:#555;
   cursor:not-allowed;
   pointer-events:none;
-}
-
-.play.loading::after{
-  content:"";
-  display:block;
-  margin:10px auto 0;
-  width:22px;
-  height:22px;
-  border:4px solid #999;
-  border-top:4px solid #ff0000;
-  border-radius:50%;
-  animation:spinLoad 1s linear infinite;
-}
-
-@keyframes spinLoad{
-  to{transform:rotate(360deg)}
 }
 
 /* VOLUMEN */
@@ -183,13 +160,12 @@ h1{
   margin-top:16px;
 }
 
-input[type=range]{width:100%}
-
 /* REDES */
 .social{
   display:flex;
   gap:14px;
-  margin-top:20px;
+  margin-top:24px;
+  margin-bottom:40px;
 }
 
 .social a{
@@ -201,15 +177,15 @@ input[type=range]{width:100%}
   border-radius:20px;
 }
 
-/* CREDITOS FIJOS */
+/* FOOTER FIJO */
 .footer-credit{
   position:fixed;
-  bottom:10px;
+  bottom:5px;
   width:100%;
   text-align:center;
-  font-size:10px;
+  font-size:9px;
   font-weight:600;
-  opacity:.75;
+  opacity:.7;
   pointer-events:none;
 }
 </style>
@@ -220,12 +196,12 @@ input[type=range]{width:100%}
 <div class="flags"></div>
 
 <div class="marquee">
-  <span>🎉 LA TREMENDA 106.5 FM · CUMBIA SANJUANERA · LA RADIO DEL PUEBLO · TRANSMITIENDO DESDE MORROPON PARA EL MUNDO ENTERO 🎉</span>
+  <span>🎉 LA TREMENDA 106.5 FM · CUMBIA SANJUANERA · LA RADIO DEL PUEBLO · TRANSMITIENDO DESDE MORROPON PARA EL MUNDO 🎉</span>
 </div>
 
 <div class="stage" id="app">
 
-  <img src="https://imgfz.com/i/h7TrEm5.png" class="logo" alt="Radio La Tremenda">
+  <img src="https://imgfz.com/i/h7TrEm5.png" class="logo">
 
   <h1>LA TREMENDA</h1>
   <div class="slogan">LA RADIO DEL PUEBLO</div>
@@ -248,12 +224,11 @@ input[type=range]{width:100%}
 
 </div>
 
-<!-- CREDITOS -->
 <div class="footer-credit">
-  Diseño y desarrollo web por <strong>Marcony Clavijo</strong> | Innovación que conecta.
+  DISEÑO WEB POR MARCONY CLAVIJO | INNOVACIÓN QUE CONECTA.
 </div>
 
-<audio id="radio" preload="none" playsinline webkit-playsinline crossorigin="anonymous">
+<audio id="radio" preload="none">
   <source src="https://stream.zeno.fm/jfjyk4dnuc1vv" type="audio/mpeg">
 </audio>
 
@@ -264,51 +239,42 @@ const app = document.getElementById("app");
 const volume = document.getElementById("volume");
 const liveText = document.getElementById("liveText");
 
-let playing = false;
-let loading = false;
+let playing=false, loading=false;
 
-playBtn.onclick = () => {
+playBtn.onclick=()=>{
   if(loading) return;
-
   if(!playing){
-    loading = true;
+    loading=true;
     playBtn.classList.add("loading");
-    playBtn.textContent = "CONECTANDO…";
-    liveText.textContent = "⏳ Conectando a la señal en vivo…";
-
-    audio.pause();
-    audio.currentTime = 0;
+    playBtn.textContent="CONECTANDO…";
     audio.load();
-    audio.play().catch(resetState);
+    audio.play().catch(reset);
   }else{
     audio.pause();
-    playing = false;
+    playing=false;
     app.classList.remove("playing");
-    playBtn.textContent = "▶ VOLVER AL EN VIVO";
-    liveText.textContent = "⏸ AUDIO EN PAUSA";
+    playBtn.textContent="▶ VOLVER AL EN VIVO";
+    liveText.textContent="⏸ PAUSADO";
   }
 };
 
-audio.onplaying = () => {
-  loading = false;
-  playing = true;
+audio.onplaying=()=>{
+  loading=false;
+  playing=true;
   playBtn.classList.remove("loading");
-  playBtn.textContent = "⏸ SILENCIO";
-  liveText.textContent = "🔴 EN VIVO (TIEMPO REAL)";
+  playBtn.textContent="⏸ SILENCIO";
+  liveText.textContent="🔴 EN VIVO";
   app.classList.add("playing");
 };
 
-audio.onerror = resetState;
-
-function resetState(){
-  loading = false;
-  playing = false;
+function reset(){
+  loading=false;
+  playing=false;
   playBtn.classList.remove("loading");
-  playBtn.textContent = "▶ SONAR EN VIVO";
-  liveText.textContent = "⚠️ Error de conexión";
+  playBtn.textContent="▶ SONAR EN VIVO";
 }
 
-volume.oninput = () => audio.volume = volume.value;
+volume.oninput=()=>audio.volume=volume.value;
 </script>
 
 </body>

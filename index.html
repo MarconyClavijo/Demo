@@ -16,7 +16,7 @@ body{
   color:#fff;
 }
 
-/* ===== HEADER ===== */
+/* HEADER */
 header{
   padding:2.5rem 1rem;
   text-align:center;
@@ -34,7 +34,7 @@ header p{
   margin:0;
 }
 
-/* ===== LIVE PANEL ===== */
+/* PANEL CENTRAL */
 .live-panel{
   max-width:1400px;
   margin:2rem auto;
@@ -85,7 +85,7 @@ header p{
   background:#1ebe57;
 }
 
-/* ===== GRID DE RADIOS ===== */
+/* GRID RADIOS */
 .grid{
   max-width:1400px;
   margin:auto;
@@ -125,7 +125,7 @@ header p{
   margin:1rem 0 .5rem;
 }
 
-/* ===== PLAY/STOP ANIMADO ===== */
+/* PLAY/STOP ANIMADO */
 .play-btn{
   margin-top:1rem;
   width:60px;
@@ -159,7 +159,7 @@ header p{
   box-shadow:0 0 30px rgba(255,204,0,.8);
 }
 
-/* ===== FOOTER ===== */
+/* FOOTER */
 footer{
   text-align:center;
   padding:2rem;
@@ -184,7 +184,7 @@ footer{
   <div class="live-whatsapp" id="liveWhatsapp"></div>
 </section>
 
-<!-- GRID DE RADIOS -->
+<!-- GRID RADIOS -->
 <main class="grid">
 
 <div class="card" data-name="La Fuerte" data-logo="https://imgfz.com/i/fmdxHD8.png" data-stream="https://panelautodj.innovatestream.pe/7322/" data-whatsapp="+51968093770">
@@ -229,43 +229,40 @@ footer{
 © 2025 Corporación La Fuerte
 </footer>
 
-<script>
-let currentAudio=null;
+<!-- AUDIO OCULTO GLOBAL -->
+<audio id="globalAudio" preload="none"></audio>
 
-// Selección de radios y play animado
+<script>
+const audio = document.getElementById('globalAudio');
+let activeBtn = null;
+
 document.querySelectorAll('.card').forEach(card=>{
   const btn = card.querySelector('.play-btn');
-  btn.addEventListener('click',()=>{
+  
+  btn.addEventListener('click', ()=>{
+    const stream = card.dataset.stream + '?nocache=' + Date.now();
 
-    // STOP si ya estaba reproduciendo la misma radio
+    // Si ya está activo => detener
     if(btn.classList.contains('stop')){
       btn.classList.remove('stop');
-      card.querySelector('.card').classList?.remove('activa');
-      if(currentAudio){
-        currentAudio.pause();
-        currentAudio.src='';
-        currentAudio.load();
-        currentAudio=null;
-      }
+      audio.pause();
+      audio.src='';
+      audio.load();
+      activeBtn = null;
       document.getElementById('livePanel').classList.add('hidden');
       return;
     }
 
-    // Detener cualquier radio activa
-    if(currentAudio){
-      currentAudio.pause();
-      currentAudio.src='';
-      currentAudio.load();
-      currentAudio=null;
+    // Detener cualquier otro botón
+    if(activeBtn){
+      activeBtn.classList.remove('stop');
     }
-    document.querySelectorAll('.play-btn').forEach(b=>b.classList.remove('stop'));
-
-    // Crear audio sin buffer
-    currentAudio = new Audio(card.dataset.stream+'?nocache='+Date.now());
-    currentAudio.play();
-
-    // Animar botón play/stop
+    audio.pause();
+    audio.src = stream;
+    audio.load();
+    audio.play();
     btn.classList.add('stop');
+    activeBtn = btn;
 
     // Abrir panel central
     const panel = document.getElementById('livePanel');

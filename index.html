@@ -214,17 +214,6 @@ footer{
 
 <script>
 let currentAudio = null;
-let preloadAudio = null;
-
-function preloadStream(stream){
-  if(preloadAudio){
-    preloadAudio.src = '';
-    preloadAudio = null;
-  }
-  preloadAudio = new Audio();
-  preloadAudio.src = stream;
-  preloadAudio.preload = 'auto';
-}
 
 function playRadio(card){
   const btn = card.querySelector('.play-btn');
@@ -241,7 +230,7 @@ function playRadio(card){
     return;
   }
 
-  // Detener cualquier otra
+  // Detener otra radio
   if(currentAudio){
     currentAudio.src = '';
     currentAudio = null;
@@ -250,30 +239,26 @@ function playRadio(card){
   document.querySelectorAll('.card').forEach(c=>c.classList.remove('activa'));
   document.querySelectorAll('.play-btn').forEach(b=>b.classList.remove('stop'));
 
-  // Reproducir con preload
-  currentAudio = new Audio();
-  currentAudio.src = stream + '?t=' + Date.now();
-  currentAudio.preload = 'auto';
+  // PLAY directo (sin preload, sin hipo)
+  currentAudio = new Audio(stream + '?t=' + Date.now());
   currentAudio.play();
 
   card.classList.add('activa');
   btn.classList.add('stop');
 }
 
-// PRELOAD al tocar (mejora brutal en móvil)
-document.querySelectorAll('.card').forEach(card=>{
-  const stream = card.dataset.stream;
-
-  card.addEventListener('mouseenter', ()=>preloadStream(stream));
-  card.addEventListener('touchstart', ()=>preloadStream(stream), {passive:true});
-
-  card.addEventListener('click', ()=>playRadio(card));
-});
-
+// Click en botón
 document.querySelectorAll('.play-btn').forEach(btn=>{
   btn.addEventListener('click', e=>{
     e.stopPropagation();
     playRadio(btn.closest('.card'));
+  });
+});
+
+// Click en todo el cuadro
+document.querySelectorAll('.card').forEach(card=>{
+  card.addEventListener('click', ()=>{
+    playRadio(card);
   });
 });
 </script>

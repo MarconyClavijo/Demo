@@ -12,174 +12,162 @@ if (location.protocol === 'http:') {
 
 <title>Corporación La Fuerte</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
 
 <style>
+*{box-sizing:border-box}
+
 body{
   margin:0;
   font-family:'Montserrat',sans-serif;
+  background:radial-gradient(circle at top,#1b1f3b,#0b0e1a);
   color:#fff;
-  transition:background 2s ease;
-}
-
-/* ===== FONDOS SEGÚN HORA ===== */
-body.manana{
-  background:linear-gradient(135deg,#00c6ff,#faff00);
-  animation:bgmove 15s ease infinite;
-}
-
-body.tarde{
-  background:linear-gradient(135deg,#ff512f,#dd2476);
-  animation:bgmove 15s ease infinite;
-}
-
-body.noche{
-  background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
-  animation:bgmove 18s ease infinite;
-}
-
-@keyframes bgmove{
-  0%{background-position:0% 50%}
-  50%{background-position:100% 50%}
-  100%{background-position:0% 50%}
 }
 
 /* ===== HEADER ===== */
 header{
-  background:#0f3460;
   text-align:center;
-  padding:2rem 1rem 1.5rem;
-  box-shadow:0 4px 15px rgba(0,0,0,.6);
+  padding:3rem 1rem 2rem;
+  background:#0f3460;
+  box-shadow:0 6px 25px rgba(0,0,0,.6);
 }
 
-.logo-animado{
-  width:240px;
-  margin:auto;
-  display:block;
-  animation:entrada 1.8s ease-out,resplandor 3s infinite alternate;
+header img{
+  width:280px;
+  animation:logoIn 1.8s ease-out forwards, glow 3s infinite alternate;
 }
 
-@keyframes entrada{
+@keyframes logoIn{
   from{transform:scale(.3);opacity:0}
   to{transform:scale(1);opacity:1}
 }
-@keyframes resplandor{
-  from{filter:drop-shadow(0 0 8px #ff6f61)}
-  to{filter:drop-shadow(0 0 18px #ffcc00)}
+@keyframes glow{
+  from{filter:drop-shadow(0 0 10px #ffcc00)}
+  to{filter:drop-shadow(0 0 30px #ff6f61)}
 }
 
 header h1{
-  color:#ffeb3b;
-  margin:1rem 0;
-  font-size:2.5rem;
+  margin:1rem 0 .3rem;
+  font-size:2.8rem;
+  color:#ffcc00;
+}
+
+header p{
+  margin:0;
+  font-size:1rem;
+  opacity:.9;
 }
 
 .btn-contacto{
   display:inline-block;
+  margin-top:1rem;
+  padding:12px 28px;
+  border-radius:30px;
   background:#ffcc00;
   color:#000;
-  font-weight:bold;
-  padding:12px 26px;
-  border-radius:30px;
+  font-weight:700;
   text-decoration:none;
-  box-shadow:0 0 15px rgba(255,204,0,.6);
+  box-shadow:0 0 20px rgba(255,204,0,.6);
 }
 
-/* ===== GRID ===== */
+/* ===== GRID RADIOS ===== */
 .grid{
+  max-width:1300px;
+  margin:auto;
+  padding:2.5rem 1.5rem;
   display:grid;
   grid-template-columns:repeat(3,1fr);
-  gap:14px;
-  padding:14px;
+  gap:2rem;
+}
+
+@media(max-width:900px){
+  .grid{grid-template-columns:repeat(3,1fr);}
+}
+@media(max-width:600px){
+  .grid{grid-template-columns:repeat(2,1fr);}
 }
 
 /* ===== CARD ===== */
 .card{
-  background:#222831;
-  border:2px solid #ff6f61;
-  border-radius:16px;
-  padding:12px 6px 14px;
+  background:#181c2f;
+  border-radius:22px;
+  padding:1.8rem 1rem 2.2rem;
   text-align:center;
   position:relative;
-  cursor:pointer;
+  transition:.4s ease;
+  border:2px solid transparent;
+}
+
+.card:hover{
+  transform:translateY(-6px);
 }
 
 .card.activa{
   border-color:#ffcc00;
-  box-shadow:0 0 18px rgba(255,204,0,.9);
+  box-shadow:0 0 40px rgba(255,204,0,.85);
 }
 
-.card.activa::before{
-  content:"🔴 EN VIVO";
+.card.activa::after{
+  content:"LIVE";
   position:absolute;
-  top:6px;
-  right:6px;
-  background:red;
-  padding:3px 8px;
+  top:12px;
+  right:14px;
+  font-size:.75rem;
+  background:#ffcc00;
+  color:#000;
+  padding:4px 10px;
   border-radius:12px;
-  font-size:.7rem;
+  font-weight:800;
 }
 
+/* ===== LOGO ===== */
 .logo{
-  width:90px;
-  height:90px;
+  width:120px;
+  height:120px;
   object-fit:contain;
   background:#fff;
-  padding:5px;
-  border-radius:10px;
+  border-radius:16px;
+  padding:8px;
 }
 
-h2{
+/* ===== TITULO ===== */
+.card h2{
+  margin:1rem 0 .8rem;
   color:#ffcc00;
-  font-size:15px;
-  margin:8px 0;
 }
 
-/* ===== PLAY BUTTON ===== */
+/* ===== BOTON PLAY ===== */
 .play-btn{
-  width:54px;
-  height:54px;
+  width:70px;
+  height:70px;
   border-radius:50%;
   border:none;
   background:#ffcc00;
+  color:#000;
+  font-size:20px;
+  font-weight:900;
   cursor:pointer;
-  position:relative;
-  animation:pulse 2s infinite;
+  box-shadow:0 0 25px rgba(255,204,0,.6);
+  transition:.3s ease;
 }
 
-.play-btn::before{
-  content:"▶";
-  font-size:22px;
-  color:#000;
-  position:absolute;
-  top:50%;
-  left:50%;
-  transform:translate(-45%,-50%);
+.play-btn:hover{
+  transform:scale(1.08);
 }
 
 .play-btn.stop{
   background:#ff3b3b;
-  animation:none;
-}
-
-.play-btn.stop::before{
-  content:"■";
-  transform:translate(-50%,-50%);
-}
-
-@keyframes pulse{
-  0%{box-shadow:0 0 0 0 rgba(255,204,0,.7)}
-  70%{box-shadow:0 0 0 14px rgba(255,204,0,0)}
-  100%{box-shadow:0 0 0 0 rgba(255,204,0,0)}
+  color:#fff;
+  box-shadow:0 0 25px rgba(255,59,59,.6);
 }
 
 /* ===== FOOTER ===== */
 footer{
   text-align:center;
-  padding:1.5rem;
-  background:#0f0f0f;
-  color:#aaa;
+  padding:2rem;
   font-size:.85rem;
+  background:#080a14;
+  color:#aaa;
 }
 </style>
 </head>
@@ -187,105 +175,103 @@ footer{
 <body>
 
 <header>
-  <img src="https://imgfz.com/i/bmnsNX4.png" class="logo-animado">
+  <img src="https://imgfz.com/i/bmnsNX4.png" alt="Corporación La Fuerte">
   <h1>Corporación La Fuerte</h1>
-  <a href="https://wa.me/51968093770" class="btn-contacto">📞 Contrata publicidad aquí</a>
+  <p>Red de radios que conectan al Perú</p>
+  <a class="btn-contacto" href="https://wa.me/51968093770" target="_blank">
+    📞 Publicidad: 51968093770
+  </a>
 </header>
 
 <main class="grid">
 
 <div class="card" data-stream="https://panelautodj.innovatestream.pe/7322/;">
-  <img src="https://imgfz.com/i/fmdxHD8.png" class="logo">
+  <img class="logo" src="https://imgfz.com/i/fmdxHD8.png">
   <h2>La Fuerte</h2>
-  <button class="play-btn"></button>
+  <button class="play-btn">▶</button>
 </div>
 
 <div class="card" data-stream="https://panelautodj.innovatestream.pe/7320/;">
-  <img src="https://imgfz.com/i/FRicwT8.png" class="logo">
+  <img class="logo" src="https://imgfz.com/i/FRicwT8.png">
   <h2>La Jefa</h2>
-  <button class="play-btn"></button>
+  <button class="play-btn">▶</button>
 </div>
 
 <div class="card" data-stream="https://panelautodj.innovatestream.pe/7324/;">
-  <img src="https://imgfz.com/i/bBApQu2.png" class="logo">
+  <img class="logo" src="https://imgfz.com/i/bBApQu2.png">
   <h2>San Francisco</h2>
-  <button class="play-btn"></button>
+  <button class="play-btn">▶</button>
 </div>
 
 <div class="card" data-stream="https://panelautodj.innovatestream.pe/8342/;">
-  <img src="https://imgfz.com/i/bVMWlXD.png" class="logo">
+  <img class="logo" src="https://imgfz.com/i/bVMWlXD.png">
   <h2>Máxima</h2>
-  <button class="play-btn"></button>
+  <button class="play-btn">▶</button>
 </div>
 
 <div class="card" data-stream="https://panelautodj.innovatestream.pe/8464/;">
-  <img src="https://imgfz.com/i/J89AMPT.png" class="logo">
+  <img class="logo" src="https://imgfz.com/i/J89AMPT.png">
   <h2>La Cumbiambera</h2>
-  <button class="play-btn"></button>
+  <button class="play-btn">▶</button>
 </div>
 
 <div class="card" data-stream="https://panelautodj.innovatestream.pe/8466/;">
-  <img src="https://imgfz.com/i/zauB0Id.png" class="logo">
+  <img class="logo" src="https://imgfz.com/i/zauB0Id.png">
   <h2>La Raya</h2>
-  <button class="play-btn"></button>
+  <button class="play-btn">▶</button>
 </div>
 
 </main>
 
-<footer>© 2025 Corporación La Fuerte</footer>
+<footer>
+© 2025 Corporación La Fuerte · Todos los derechos reservados
+</footer>
 
 <script>
-/* ===== FONDO SEGÚN HORA ===== */
-const hora = new Date().getHours();
-if(hora >= 6 && hora < 13){
-  document.body.classList.add('manana');
-}else if(hora >= 13 && hora < 19){
-  document.body.classList.add('tarde');
-}else{
-  document.body.classList.add('noche');
-}
-
-/* ===== AUDIO ===== */
 let currentAudio = null;
 
-function playRadio(card){
-  const btn = card.querySelector('.play-btn');
-  const stream = card.dataset.stream;
+document.querySelectorAll('.play-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
 
-  if(card.classList.contains('activa')){
+    const card = btn.closest('.card');
+    const stream = card.dataset.stream;
+
+    /* STOP */
+    if(btn.classList.contains('stop')){
+      if(currentAudio){
+        currentAudio.pause();
+        currentAudio.src='';
+        currentAudio.load();
+        currentAudio=null;
+      }
+      btn.textContent='▶';
+      btn.classList.remove('stop');
+      card.classList.remove('activa');
+      return;
+    }
+
+    /* DETENER TODO */
     if(currentAudio){
+      currentAudio.pause();
       currentAudio.src='';
+      currentAudio.load();
       currentAudio=null;
     }
-    card.classList.remove('activa');
-    btn.classList.remove('stop');
-    return;
-  }
 
-  if(currentAudio){
-    currentAudio.src='';
-    currentAudio=null;
-  }
+    document.querySelectorAll('.card').forEach(c=>c.classList.remove('activa'));
+    document.querySelectorAll('.play-btn').forEach(b=>{
+      b.textContent='▶';
+      b.classList.remove('stop');
+    });
 
-  document.querySelectorAll('.card').forEach(c=>c.classList.remove('activa'));
-  document.querySelectorAll('.play-btn').forEach(b=>b.classList.remove('stop'));
+    /* AUDIO NUEVO – SIN BUFFER */
+    currentAudio = new Audio(stream+'?nocache='+Date.now());
+    currentAudio.play();
 
-  currentAudio = new Audio(stream + '?t=' + Date.now());
-  currentAudio.play();
-
-  card.classList.add('activa');
-  btn.classList.add('stop');
-}
-
-document.querySelectorAll('.play-btn').forEach(btn=>{
-  btn.addEventListener('click',e=>{
-    e.stopPropagation();
-    playRadio(btn.closest('.card'));
+    btn.textContent='■';
+    btn.classList.add('stop');
+    card.classList.add('activa');
   });
-});
-
-document.querySelectorAll('.card').forEach(card=>{
-  card.addEventListener('click',()=>playRadio(card));
 });
 </script>
 

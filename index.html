@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Corporación La Fuerte</title>
-
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
 
 <style>
@@ -45,6 +44,7 @@ header p{
   text-align:center;
   background:linear-gradient(135deg,#0c1024,#05070f);
   position:relative;
+  transition:.4s ease;
 }
 
 .live-panel.hidden{display:none}
@@ -126,7 +126,7 @@ header p{
   font-weight:700;
 }
 
-/* ===== BOTON PLAY ===== */
+/* ===== PLAY BUTTON ANIMADO ===== */
 .play-btn{
   margin-top:1rem;
   width:60px;
@@ -136,11 +136,28 @@ header p{
   background:#ffcc00;
   font-weight:900;
   cursor:pointer;
+  box-shadow:0 0 15px rgba(255,204,0,.6);
+  position:relative;
+  transition:.3s ease;
 }
 
-.play-btn.stop{
-  background:#ff3b3b;
-  color:#fff;
+.play-btn::before{
+  content:'▶';
+  font-size:26px;
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  transition:.2s;
+}
+
+.play-btn.stop::before{
+  content:'■';
+}
+
+.play-btn:hover{
+  transform:scale(1.1);
+  box-shadow:0 0 30px rgba(255,204,0,.8);
 }
 
 /* ===== FOOTER ===== */
@@ -166,7 +183,7 @@ footer{
   <img id="liveLogo">
   <div id="liveTitle" class="live-title"></div>
   <div class="live-status">TRANSMISIÓN EN VIVO</div>
-  <button id="liveBtn" class="play-btn stop">■</button>
+  <button id="liveBtn" class="play-btn stop"></button>
   <div class="live-whatsapp" id="liveWhatsapp"></div>
 </section>
 
@@ -220,6 +237,7 @@ const whatsapp=document.getElementById('liveWhatsapp');
 
 document.querySelectorAll('.selector').forEach(sel=>{
   sel.addEventListener('click',()=>{
+    // Detener audio anterior
     if(audio){
       audio.pause();
       audio.src='';
@@ -227,7 +245,7 @@ document.querySelectorAll('.selector').forEach(sel=>{
       audio=null;
     }
 
-    // Datos del panel
+    // Panel grande
     panel.classList.remove('hidden');
     logo.src=sel.dataset.logo;
     title.textContent=sel.dataset.name;
@@ -238,12 +256,17 @@ document.querySelectorAll('.selector').forEach(sel=>{
     // Scroll al panel
     panel.scrollIntoView({behavior:'smooth'});
 
-    // Play stream
+    // Crear audio sin buffer
     audio=new Audio(sel.dataset.stream+'?nocache='+Date.now());
     audio.play();
+
+    // Play animado
+    btn.classList.remove('stop'); // reinicia
+    btn.classList.add('stop'); // poner STOP
   });
 });
 
+// STOP BUTTON
 btn.onclick=()=>{
   if(audio){
     audio.pause();
@@ -252,6 +275,7 @@ btn.onclick=()=>{
     audio=null;
   }
   panel.classList.add('hidden');
+  btn.classList.remove('stop');
 };
 </script>
 

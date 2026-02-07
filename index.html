@@ -28,13 +28,28 @@ header{
   text-align:center;
   padding:2rem 1rem 1rem;
   box-shadow:0 4px 15px rgba(0,0,0,.6);
+  position:relative;
 }
 
-.logo-animado{
+.logo-principal{
   width:300px;
   margin:2rem auto 0;
   display:block;
   animation:entradaLogo 2s ease-out forwards,resplandor 3s infinite alternate;
+  transition: all 0.5s ease;
+}
+
+.logo-radio{
+  width:200px;
+  height:200px;
+  object-fit:contain;
+  border-radius:20px;
+  background:#fff;
+  padding:10px;
+  margin:2rem auto;
+  display:none;
+  box-shadow:0 0 30px rgba(255,204,0,.8);
+  animation:resplandor 3s infinite alternate;
 }
 
 @keyframes entradaLogo{
@@ -147,7 +162,12 @@ footer{
 
 <!-- ===== ENCABEZADO ===== -->
 <header>
-  <img src="https://imgfz.com/i/bmnsNX4.png" class="logo-animado" alt="Corporación La Fuerte">
+  <!-- Logo principal -->
+  <img src="https://imgfz.com/i/bmnsNX4.png" class="logo-principal" id="logoPrincipal" alt="Corporación La Fuerte">
+  
+  <!-- Logo de la radio activa -->
+  <img src="" class="logo-radio" id="logoRadio" alt="Logo Radio">
+  
   <h1>Corporación La Fuerte</h1>
   <p>
     <a href="https://wa.me/51968093770" class="btn-contacto" target="_blank">
@@ -159,37 +179,37 @@ footer{
 <!-- ===== RADIOS ===== -->
 <main class="grid">
 
-<div class="card" data-stream="https://panelautodj.innovatestream.pe/7322/;">
+<div class="card" data-stream="https://panelautodj.innovatestream.pe/7322/" data-logo="https://imgfz.com/i/fmdxHD8.png">
   <img src="https://imgfz.com/i/fmdxHD8.png" class="logo">
   <h2>La Fuerte</h2>
   <button class="play-btn">PLAY</button>
 </div>
 
-<div class="card" data-stream="https://panelautodj.innovatestream.pe/7320/;">
+<div class="card" data-stream="https://panelautodj.innovatestream.pe/7320/" data-logo="https://imgfz.com/i/FRicwT8.png">
   <img src="https://imgfz.com/i/FRicwT8.png" class="logo">
   <h2>La Jefa</h2>
   <button class="play-btn">PLAY</button>
 </div>
 
-<div class="card" data-stream="https://panelautodj.innovatestream.pe/7324/;">
+<div class="card" data-stream="https://panelautodj.innovatestream.pe/7324/" data-logo="https://imgfz.com/i/bBApQu2.png">
   <img src="https://imgfz.com/i/bBApQu2.png" class="logo">
   <h2>San Francisco</h2>
   <button class="play-btn">PLAY</button>
 </div>
 
-<div class="card" data-stream="https://panelautodj.innovatestream.pe/8342/;">
+<div class="card" data-stream="https://panelautodj.innovatestream.pe/8342/" data-logo="https://imgfz.com/i/bVMWlXD.png">
   <img src="https://imgfz.com/i/bVMWlXD.png" class="logo">
   <h2>Máxima</h2>
   <button class="play-btn">PLAY</button>
 </div>
 
-<div class="card" data-stream="https://panelautodj.innovatestream.pe/8464/;">
+<div class="card" data-stream="https://panelautodj.innovatestream.pe/8464/" data-logo="https://imgfz.com/i/J89AMPT.png">
   <img src="https://imgfz.com/i/J89AMPT.png" class="logo">
   <h2>La Cumbiambera</h2>
   <button class="play-btn">PLAY</button>
 </div>
 
-<div class="card" data-stream="https://panelautodj.innovatestream.pe/8466/;">
+<div class="card" data-stream="https://panelautodj.innovatestream.pe/8466/" data-logo="https://imgfz.com/i/zauB0Id.png">
   <img src="https://imgfz.com/i/zauB0Id.png" class="logo">
   <h2>La Raya</h2>
   <button class="play-btn">PLAY</button>
@@ -201,14 +221,18 @@ footer{
 © 2025 Corporación La Fuerte. Todos los derechos reservados.
 </footer>
 
-<!-- ===== STREAMING SIN BUFFER + STOP CORREGIDO ===== -->
+<!-- ===== STREAMING EN CUADRO CENTRAL ===== -->
 <script>
 let currentAudio = null;
+
+const logoPrincipal = document.getElementById('logoPrincipal');
+const logoRadio = document.getElementById('logoRadio');
 
 document.querySelectorAll('.play-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     const card = btn.closest('.card');
     const stream = card.dataset.stream;
+    const radioLogo = card.dataset.logo;
 
     /* --- SI ES STOP --- */
     if (btn.classList.contains('stop')) {
@@ -217,9 +241,15 @@ document.querySelectorAll('.play-btn').forEach(btn => {
         currentAudio.load();
         currentAudio = null;
       }
+
       btn.textContent = 'PLAY';
       btn.classList.remove('stop');
       card.classList.remove('activa');
+
+      // Volver a logo principal
+      logoRadio.style.display = 'none';
+      logoPrincipal.style.display = 'block';
+
       return;
     }
 
@@ -236,13 +266,18 @@ document.querySelectorAll('.play-btn').forEach(btn => {
       b.classList.remove('stop');
     });
 
-    /* --- CREAR STREAM NUEVO (TIEMPO REAL) --- */
+    // Crear audio nuevo
     currentAudio = new Audio(stream + '?nocache=' + Date.now());
     currentAudio.play();
 
     btn.textContent = 'STOP';
     btn.classList.add('stop');
     card.classList.add('activa');
+
+    // Mostrar logo de radio en el encabezado
+    logoPrincipal.style.display = 'none';
+    logoRadio.src = radioLogo;
+    logoRadio.style.display = 'block';
   });
 });
 </script>

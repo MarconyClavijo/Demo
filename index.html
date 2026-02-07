@@ -4,168 +4,23 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Corporación La Fuerte</title>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 <style>
-*{box-sizing:border-box;}
-
-body{
-  margin:0;
-  font-family:'Montserrat',sans-serif;
-  background:#05070f;
-  color:#fff;
-}
-
-/* HEADER */
-header{
-  padding:2.5rem 1rem;
-  text-align:center;
-  border-bottom:1px solid #1c1f33;
-}
-
+body{margin:0;font-family:'Montserrat',sans-serif;background:#05070f;color:#fff;}
+header{text-align:center;padding:2rem;}
 header img{width:260px;}
-header h1{
-  margin:.8rem 0 .3rem;
-  font-size:2.6rem;
-  font-weight:900;
-}
-header p{
-  color:#aaa;
-  margin:0;
-}
-
-/* PANEL CENTRAL */
-.live-panel{
-  max-width:1400px;
-  margin:2rem auto;
-  padding:2.5rem;
-  border:2px solid #ffcc00;
-  border-radius:20px;
-  text-align:center;
-  background:linear-gradient(135deg,#0c1024,#05070f);
-  transition:.4s ease;
-  position:relative;
-}
-
-.live-panel.hidden{display:none;}
-
-.live-panel img{
-  width:160px;
-  background:#fff;
-  padding:10px;
-  border-radius:16px;
-}
-
-.live-title{
-  margin:1.2rem 0 .4rem;
-  font-size:2.4rem;
-  font-weight:900;
-  color:#ffcc00;
-}
-
-.live-status{
-  letter-spacing:3px;
-  font-size:.9rem;
-  color:#fff;
-  margin-bottom:1rem;
-}
-
-.live-whatsapp a{
-  display:inline-block;
-  margin-top:1rem;
-  padding:10px 20px;
-  background:#25d366;
-  color:#fff;
-  font-weight:700;
-  border-radius:30px;
-  text-decoration:none;
-  transition:.3s;
-}
-.live-whatsapp a:hover{
-  background:#1ebe57;
-}
-
-/* GRID RADIOS */
-.grid{
-  max-width:1400px;
-  margin:auto;
-  padding:2rem 1.5rem 3rem;
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:2rem;
-}
-
-@media(max-width:900px){
-  .grid{grid-template-columns:repeat(2,1fr);}
-}
-
-.card{
-  background:#222831;
-  border:2px solid #ff6f61;
-  border-radius:20px;
-  padding:1.5rem;
-  text-align:center;
-  position:relative;
-  transition:.3s;
-}
-
-.card:hover{
-  border-color:#ffcc00;
-}
-
-.card img{
-  width:120px;
-  background:#fff;
-  padding:6px;
-  border-radius:12px;
-}
-
-.card h2{
-  color:#ffcc00;
-  margin:1rem 0 .5rem;
-}
-
-/* PLAY/STOP ANIMADO */
-.play-btn{
-  margin-top:1rem;
-  width:60px;
-  height:60px;
-  border-radius:50%;
-  border:none;
-  background:#ffcc00;
-  font-weight:900;
-  cursor:pointer;
-  box-shadow:0 0 15px rgba(255,204,0,.6);
-  position:relative;
-  transition:.3s ease;
-}
-
-.play-btn::before{
-  content:'▶';
-  font-size:26px;
-  position:absolute;
-  top:50%;
-  left:50%;
-  transform:translate(-50%,-50%);
-  transition:.2s;
-}
-
-.play-btn.stop::before{
-  content:'■';
-}
-
-.play-btn:hover{
-  transform:scale(1.1);
-  box-shadow:0 0 30px rgba(255,204,0,.8);
-}
-
-/* FOOTER */
-footer{
-  text-align:center;
-  padding:2rem;
-  color:#666;
-  border-top:1px solid #1c1f33;
-}
+header h1{font-size:2.6rem;margin:1rem 0;}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;max-width:1400px;margin:2rem auto;padding:0 1rem;}
+@media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr);}}
+.card{background:#222831;border:2px solid #ff6f61;border-radius:20px;padding:1.5rem;text-align:center;position:relative;transition:.3s;}
+.card:hover{border-color:#ffcc00;}
+.card img{width:120px;background:#fff;padding:6px;border-radius:12px;}
+.card h2{color:#ffcc00;margin:1rem 0 .5rem;}
+.play-btn{margin-top:1rem;width:60px;height:60px;border-radius:50%;border:none;background:#ffcc00;font-weight:900;cursor:pointer;position:relative;transition:.3s ease;}
+.play-btn::before{content:'▶';font-size:26px;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);transition:.2s;}
+.play-btn.stop::before{content:'■';}
+.play-btn:hover{transform:scale(1.1);box-shadow:0 0 30px rgba(255,204,0,.8);}
+footer{text-align:center;padding:2rem;color:#aaa;background:#0f0f0f;}
 </style>
 </head>
 <body>
@@ -173,106 +28,78 @@ footer{
 <header>
   <img src="https://imgfz.com/i/bmnsNX4.png">
   <h1>Corporación La Fuerte</h1>
-  <p>Red de radios en transmisión en vivo</p>
 </header>
 
-<!-- PANEL CENTRAL -->
-<section id="livePanel" class="live-panel hidden">
-  <img id="liveLogo">
-  <div id="liveTitle" class="live-title"></div>
-  <div class="live-status">TRANSMISIÓN EN VIVO</div>
-  <div class="live-whatsapp" id="liveWhatsapp"></div>
-</section>
-
-<!-- GRID RADIOS -->
 <main class="grid">
-
-<div class="card" data-name="La Fuerte" data-logo="https://imgfz.com/i/fmdxHD8.png" data-stream="https://panelautodj.innovatestream.pe/7322/" data-whatsapp="+51968093770">
-  <img src="https://imgfz.com/i/fmdxHD8.png" alt="">
-  <h2>La Fuerte</h2>
-  <button class="play-btn"></button>
-</div>
-
-<div class="card" data-name="La Jefa" data-logo="https://imgfz.com/i/FRicwT8.png" data-stream="https://panelautodj.innovatestream.pe/7320/" data-whatsapp="+51968093771">
-  <img src="https://imgfz.com/i/FRicwT8.png" alt="">
-  <h2>La Jefa</h2>
-  <button class="play-btn"></button>
-</div>
-
-<div class="card" data-name="San Francisco" data-logo="https://imgfz.com/i/bBApQu2.png" data-stream="https://panelautodj.innovatestream.pe/7324/" data-whatsapp="+51968093772">
-  <img src="https://imgfz.com/i/bBApQu2.png" alt="">
-  <h2>San Francisco</h2>
-  <button class="play-btn"></button>
-</div>
-
-<div class="card" data-name="Máxima" data-logo="https://imgfz.com/i/bVMWlXD.png" data-stream="https://panelautodj.innovatestream.pe/8342/" data-whatsapp="+51968093773">
-  <img src="https://imgfz.com/i/bVMWlXD.png" alt="">
-  <h2>Máxima</h2>
-  <button class="play-btn"></button>
-</div>
-
-<div class="card" data-name="La Cumbiambera" data-logo="https://imgfz.com/i/J89AMPT.png" data-stream="https://panelautodj.innovatestream.pe/8464/" data-whatsapp="+51968093774">
-  <img src="https://imgfz.com/i/J89AMPT.png" alt="">
-  <h2>La Cumbiambera</h2>
-  <button class="play-btn"></button>
-</div>
-
-<div class="card" data-name="La Raya" data-logo="https://imgfz.com/i/zauB0Id.png" data-stream="https://panelautodj.innovatestream.pe/8466/" data-whatsapp="+51968093775">
-  <img src="https://imgfz.com/i/zauB0Id.png" alt="">
-  <h2>La Raya</h2>
-  <button class="play-btn"></button>
-</div>
-
+  <div class="card" data-name="La Fuerte" data-stream="https://panelautodj.innovatestream.pe/7322/">
+    <img src="https://imgfz.com/i/fmdxHD8.png">
+    <h2>La Fuerte</h2>
+    <button class="play-btn"></button>
+  </div>
+  <div class="card" data-name="La Jefa" data-stream="https://panelautodj.innovatestream.pe/7320/">
+    <img src="https://imgfz.com/i/FRicwT8.png">
+    <h2>La Jefa</h2>
+    <button class="play-btn"></button>
+  </div>
+  <div class="card" data-name="San Francisco" data-stream="https://panelautodj.innovatestream.pe/7324/">
+    <img src="https://imgfz.com/i/bBApQu2.png">
+    <h2>San Francisco</h2>
+    <button class="play-btn"></button>
+  </div>
+  <div class="card" data-name="Máxima" data-stream="https://panelautodj.innovatestream.pe/8342/">
+    <img src="https://imgfz.com/i/bVMWlXD.png">
+    <h2>Máxima</h2>
+    <button class="play-btn"></button>
+  </div>
+  <div class="card" data-name="La Cumbiambera" data-stream="https://panelautodj.innovatestream.pe/8464/">
+    <img src="https://imgfz.com/i/J89AMPT.png">
+    <h2>La Cumbiambera</h2>
+    <button class="play-btn"></button>
+  </div>
+  <div class="card" data-name="La Raya" data-stream="https://panelautodj.innovatestream.pe/8466/">
+    <img src="https://imgfz.com/i/zauB0Id.png">
+    <h2>La Raya</h2>
+    <button class="play-btn"></button>
+  </div>
 </main>
 
-<footer>
-© 2025 Corporación La Fuerte
-</footer>
+<footer>© 2025 Corporación La Fuerte</footer>
 
-<!-- AUDIO OCULTO GLOBAL -->
-<audio id="globalAudio" preload="none"></audio>
-
+<!-- Howler.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script>
 <script>
-const audio = document.getElementById('globalAudio');
-let activeBtn = null;
+let currentSound = null;
+let currentBtn = null;
 
 document.querySelectorAll('.card').forEach(card=>{
   const btn = card.querySelector('.play-btn');
-  
-  btn.addEventListener('click', ()=>{
-    const stream = card.dataset.stream + '?nocache=' + Date.now();
+  const stream = card.dataset.stream;
 
-    // Si ya está activo => detener
+  btn.addEventListener('click', ()=>{
+    // Detener si ya estaba reproduciendo
     if(btn.classList.contains('stop')){
       btn.classList.remove('stop');
-      audio.pause();
-      audio.src='';
-      audio.load();
-      activeBtn = null;
-      document.getElementById('livePanel').classList.add('hidden');
+      if(currentSound) currentSound.stop();
+      currentSound = null;
+      currentBtn = null;
       return;
     }
 
-    // Detener cualquier otro botón
-    if(activeBtn){
-      activeBtn.classList.remove('stop');
+    // Detener otra radio activa
+    if(currentSound){
+      currentSound.stop();
+      if(currentBtn) currentBtn.classList.remove('stop');
     }
-    audio.pause();
-    audio.src = stream;
-    audio.load();
-    audio.play();
+
+    // Crear nuevo audio Howler
+    currentSound = new Howl({
+      src:[stream+'?nocache='+Date.now()],
+      html5:true,
+      format:['mp3','aac']
+    });
+    currentSound.play();
     btn.classList.add('stop');
-    activeBtn = btn;
-
-    // Abrir panel central
-    const panel = document.getElementById('livePanel');
-    panel.classList.remove('hidden');
-    panel.querySelector('#liveLogo').src = card.dataset.logo;
-    panel.querySelector('#liveTitle').textContent = card.dataset.name;
-    panel.querySelector('#liveWhatsapp').innerHTML = `<a href="https://wa.me/${card.dataset.whatsapp}" target="_blank">💬 Contactar por WhatsApp</a>`;
-
-    // Scroll al panel
-    panel.scrollIntoView({behavior:'smooth'});
+    currentBtn = btn;
   });
 });
 </script>

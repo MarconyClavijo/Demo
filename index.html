@@ -20,154 +20,170 @@ if (location.protocol === 'http:') {
 body{
   margin:0;
   font-family:'Montserrat',sans-serif;
-  background:radial-gradient(circle at top,#1b1f3b,#0b0e1a);
+  background:#0a0d18;
   color:#fff;
 }
 
 /* ===== HEADER ===== */
 header{
+  padding:3rem 1rem;
   text-align:center;
-  padding:3rem 1rem 2rem;
-  background:#0f3460;
-  box-shadow:0 6px 25px rgba(0,0,0,.6);
+  background:linear-gradient(135deg,#11173a,#0a0d18);
+  border-bottom:3px solid #ffcc00;
 }
 
 header img{
   width:280px;
-  animation:logoIn 1.8s ease-out forwards, glow 3s infinite alternate;
-}
-
-@keyframes logoIn{
-  from{transform:scale(.3);opacity:0}
-  to{transform:scale(1);opacity:1}
-}
-@keyframes glow{
-  from{filter:drop-shadow(0 0 10px #ffcc00)}
-  to{filter:drop-shadow(0 0 30px #ff6f61)}
+  margin-bottom:1rem;
 }
 
 header h1{
-  margin:1rem 0 .3rem;
+  margin:0;
   font-size:2.8rem;
   color:#ffcc00;
 }
 
 header p{
-  margin:0;
-  font-size:1rem;
-  opacity:.9;
+  margin:.3rem 0 1rem;
+  opacity:.85;
 }
 
 .btn-contacto{
   display:inline-block;
-  margin-top:1rem;
-  padding:12px 28px;
-  border-radius:30px;
+  padding:12px 30px;
   background:#ffcc00;
   color:#000;
-  font-weight:700;
+  font-weight:900;
+  border-radius:30px;
   text-decoration:none;
-  box-shadow:0 0 20px rgba(255,204,0,.6);
 }
 
-/* ===== GRID RADIOS ===== */
+/* ===== GRID ===== */
 .grid{
-  max-width:1300px;
+  max-width:1400px;
   margin:auto;
-  padding:2.5rem 1.5rem;
+  padding:3rem 1.5rem;
   display:grid;
   grid-template-columns:repeat(3,1fr);
-  gap:2rem;
+  gap:2.5rem;
 }
 
 @media(max-width:900px){
-  .grid{grid-template-columns:repeat(3,1fr);}
-}
-@media(max-width:600px){
   .grid{grid-template-columns:repeat(2,1fr);}
 }
 
-/* ===== CARD ===== */
-.card{
-  background:#181c2f;
+/* ===== RADIO PANEL ===== */
+.radio{
+  background:linear-gradient(160deg,#14182f,#0d1020);
   border-radius:22px;
-  padding:1.8rem 1rem 2.2rem;
+  padding:2.2rem 1.5rem;
   text-align:center;
   position:relative;
+  overflow:hidden;
   transition:.4s ease;
-  border:2px solid transparent;
+  border:2px solid #1f2547;
 }
 
-.card:hover{
-  transform:translateY(-6px);
+.radio:hover{
+  transform:translateY(-8px);
 }
 
-.card.activa{
+/* ===== ACTIVA ===== */
+.radio.activa{
+  background:linear-gradient(160deg,#2b2f55,#14182f);
   border-color:#ffcc00;
-  box-shadow:0 0 40px rgba(255,204,0,.85);
+  box-shadow:0 0 50px rgba(255,204,0,.6);
 }
 
-.card.activa::after{
-  content:"LIVE";
+/* ===== LIVE BAR ===== */
+.radio.activa::before{
+  content:"EN VIVO AHORA";
   position:absolute;
-  top:12px;
-  right:14px;
-  font-size:.75rem;
+  top:0;
+  left:0;
+  right:0;
   background:#ffcc00;
   color:#000;
-  padding:4px 10px;
-  border-radius:12px;
-  font-weight:800;
+  font-weight:900;
+  padding:8px;
+  font-size:.85rem;
+  letter-spacing:1px;
+  animation:blink 1.2s infinite alternate;
+}
+
+@keyframes blink{
+  from{opacity:1}
+  to{opacity:.5}
 }
 
 /* ===== LOGO ===== */
-.logo{
+.radio img{
   width:120px;
   height:120px;
   object-fit:contain;
   background:#fff;
   border-radius:16px;
-  padding:8px;
+  padding:10px;
+  margin-top:1.5rem;
 }
 
-/* ===== TITULO ===== */
-.card h2{
-  margin:1rem 0 .8rem;
+/* ===== NOMBRE ===== */
+.radio h2{
+  margin:1.2rem 0 .5rem;
+  font-size:1.6rem;
+  font-weight:900;
+  color:#ccc;
+  transition:.3s;
+}
+
+.radio.activa h2{
   color:#ffcc00;
+  text-shadow:0 0 15px rgba(255,204,0,.8);
 }
 
-/* ===== BOTON PLAY ===== */
+/* ===== ON AIR ===== */
+.estado{
+  font-size:.85rem;
+  letter-spacing:2px;
+  color:#777;
+}
+
+.radio.activa .estado{
+  color:#fff;
+}
+
+/* ===== PLAY ===== */
 .play-btn{
-  width:70px;
-  height:70px;
+  margin-top:1.4rem;
+  width:85px;
+  height:85px;
   border-radius:50%;
   border:none;
   background:#ffcc00;
-  color:#000;
-  font-size:20px;
+  font-size:22px;
   font-weight:900;
   cursor:pointer;
-  box-shadow:0 0 25px rgba(255,204,0,.6);
+  box-shadow:0 0 30px rgba(255,204,0,.6);
   transition:.3s ease;
 }
 
 .play-btn:hover{
-  transform:scale(1.08);
+  transform:scale(1.1);
 }
 
 .play-btn.stop{
   background:#ff3b3b;
   color:#fff;
-  box-shadow:0 0 25px rgba(255,59,59,.6);
+  box-shadow:0 0 30px rgba(255,59,59,.7);
 }
 
 /* ===== FOOTER ===== */
 footer{
   text-align:center;
   padding:2rem;
+  background:#05070f;
+  color:#777;
   font-size:.85rem;
-  background:#080a14;
-  color:#aaa;
 }
 </style>
 </head>
@@ -175,9 +191,9 @@ footer{
 <body>
 
 <header>
-  <img src="https://imgfz.com/i/bmnsNX4.png" alt="Corporación La Fuerte">
+  <img src="https://imgfz.com/i/bmnsNX4.png">
   <h1>Corporación La Fuerte</h1>
-  <p>Red de radios que conectan al Perú</p>
+  <p>Red de radios en vivo · Transmisión nacional</p>
   <a class="btn-contacto" href="https://wa.me/51968093770" target="_blank">
     📞 Publicidad: 51968093770
   </a>
@@ -185,39 +201,45 @@ footer{
 
 <main class="grid">
 
-<div class="card" data-stream="https://panelautodj.innovatestream.pe/7322/;">
-  <img class="logo" src="https://imgfz.com/i/fmdxHD8.png">
-  <h2>La Fuerte</h2>
+<div class="radio" data-stream="https://panelautodj.innovatestream.pe/7322/;">
+  <img src="https://imgfz.com/i/fmdxHD8.png">
+  <h2>LA FUERTE</h2>
+  <div class="estado">ON AIR</div>
   <button class="play-btn">▶</button>
 </div>
 
-<div class="card" data-stream="https://panelautodj.innovatestream.pe/7320/;">
-  <img class="logo" src="https://imgfz.com/i/FRicwT8.png">
-  <h2>La Jefa</h2>
+<div class="radio" data-stream="https://panelautodj.innovatestream.pe/7320/;">
+  <img src="https://imgfz.com/i/FRicwT8.png">
+  <h2>LA JEFA</h2>
+  <div class="estado">ON AIR</div>
   <button class="play-btn">▶</button>
 </div>
 
-<div class="card" data-stream="https://panelautodj.innovatestream.pe/7324/;">
-  <img class="logo" src="https://imgfz.com/i/bBApQu2.png">
-  <h2>San Francisco</h2>
+<div class="radio" data-stream="https://panelautodj.innovatestream.pe/7324/;">
+  <img src="https://imgfz.com/i/bBApQu2.png">
+  <h2>SAN FRANCISCO</h2>
+  <div class="estado">ON AIR</div>
   <button class="play-btn">▶</button>
 </div>
 
-<div class="card" data-stream="https://panelautodj.innovatestream.pe/8342/;">
-  <img class="logo" src="https://imgfz.com/i/bVMWlXD.png">
-  <h2>Máxima</h2>
+<div class="radio" data-stream="https://panelautodj.innovatestream.pe/8342/;">
+  <img src="https://imgfz.com/i/bVMWlXD.png">
+  <h2>MÁXIMA</h2>
+  <div class="estado">ON AIR</div>
   <button class="play-btn">▶</button>
 </div>
 
-<div class="card" data-stream="https://panelautodj.innovatestream.pe/8464/;">
-  <img class="logo" src="https://imgfz.com/i/J89AMPT.png">
-  <h2>La Cumbiambera</h2>
+<div class="radio" data-stream="https://panelautodj.innovatestream.pe/8464/;">
+  <img src="https://imgfz.com/i/J89AMPT.png">
+  <h2>LA CUMBIAMBERA</h2>
+  <div class="estado">ON AIR</div>
   <button class="play-btn">▶</button>
 </div>
 
-<div class="card" data-stream="https://panelautodj.innovatestream.pe/8466/;">
-  <img class="logo" src="https://imgfz.com/i/zauB0Id.png">
-  <h2>La Raya</h2>
+<div class="radio" data-stream="https://panelautodj.innovatestream.pe/8466/;">
+  <img src="https://imgfz.com/i/zauB0Id.png">
+  <h2>LA RAYA</h2>
+  <div class="estado">ON AIR</div>
   <button class="play-btn">▶</button>
 </div>
 
@@ -233,8 +255,8 @@ let currentAudio = null;
 document.querySelectorAll('.play-btn').forEach(btn=>{
   btn.addEventListener('click',()=>{
 
-    const card = btn.closest('.card');
-    const stream = card.dataset.stream;
+    const radio = btn.closest('.radio');
+    const stream = radio.dataset.stream;
 
     /* STOP */
     if(btn.classList.contains('stop')){
@@ -246,7 +268,7 @@ document.querySelectorAll('.play-btn').forEach(btn=>{
       }
       btn.textContent='▶';
       btn.classList.remove('stop');
-      card.classList.remove('activa');
+      radio.classList.remove('activa');
       return;
     }
 
@@ -258,19 +280,19 @@ document.querySelectorAll('.play-btn').forEach(btn=>{
       currentAudio=null;
     }
 
-    document.querySelectorAll('.card').forEach(c=>c.classList.remove('activa'));
+    document.querySelectorAll('.radio').forEach(r=>r.classList.remove('activa'));
     document.querySelectorAll('.play-btn').forEach(b=>{
       b.textContent='▶';
       b.classList.remove('stop');
     });
 
-    /* AUDIO NUEVO – SIN BUFFER */
+    /* NUEVO AUDIO – SIN BUFFER */
     currentAudio = new Audio(stream+'?nocache='+Date.now());
     currentAudio.play();
 
     btn.textContent='■';
     btn.classList.add('stop');
-    card.classList.add('activa');
+    radio.classList.add('activa');
   });
 });
 </script>

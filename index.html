@@ -18,8 +18,30 @@ if (location.protocol === 'http:') {
 body{
   margin:0;
   font-family:'Montserrat',sans-serif;
-  background:linear-gradient(135deg,#1a1a2e,#16213e);
   color:#fff;
+  transition:background 2s ease;
+}
+
+/* ===== FONDOS SEGÚN HORA ===== */
+body.manana{
+  background:linear-gradient(135deg,#00c6ff,#faff00);
+  animation:bgmove 15s ease infinite;
+}
+
+body.tarde{
+  background:linear-gradient(135deg,#ff512f,#dd2476);
+  animation:bgmove 15s ease infinite;
+}
+
+body.noche{
+  background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+  animation:bgmove 18s ease infinite;
+}
+
+@keyframes bgmove{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
 }
 
 /* ===== HEADER ===== */
@@ -213,33 +235,41 @@ footer{
 <footer>© 2025 Corporación La Fuerte</footer>
 
 <script>
+/* ===== FONDO SEGÚN HORA ===== */
+const hora = new Date().getHours();
+if(hora >= 6 && hora < 13){
+  document.body.classList.add('manana');
+}else if(hora >= 13 && hora < 19){
+  document.body.classList.add('tarde');
+}else{
+  document.body.classList.add('noche');
+}
+
+/* ===== AUDIO ===== */
 let currentAudio = null;
 
 function playRadio(card){
   const btn = card.querySelector('.play-btn');
   const stream = card.dataset.stream;
 
-  // STOP
   if(card.classList.contains('activa')){
     if(currentAudio){
-      currentAudio.src = '';
-      currentAudio = null;
+      currentAudio.src='';
+      currentAudio=null;
     }
     card.classList.remove('activa');
     btn.classList.remove('stop');
     return;
   }
 
-  // Detener otra radio
   if(currentAudio){
-    currentAudio.src = '';
-    currentAudio = null;
+    currentAudio.src='';
+    currentAudio=null;
   }
 
   document.querySelectorAll('.card').forEach(c=>c.classList.remove('activa'));
   document.querySelectorAll('.play-btn').forEach(b=>b.classList.remove('stop'));
 
-  // PLAY directo (sin preload, sin hipo)
   currentAudio = new Audio(stream + '?t=' + Date.now());
   currentAudio.play();
 
@@ -247,19 +277,15 @@ function playRadio(card){
   btn.classList.add('stop');
 }
 
-// Click en botón
 document.querySelectorAll('.play-btn').forEach(btn=>{
-  btn.addEventListener('click', e=>{
+  btn.addEventListener('click',e=>{
     e.stopPropagation();
     playRadio(btn.closest('.card'));
   });
 });
 
-// Click en todo el cuadro
 document.querySelectorAll('.card').forEach(card=>{
-  card.addEventListener('click', ()=>{
-    playRadio(card);
-  });
+  card.addEventListener('click',()=>playRadio(card));
 });
 </script>
 

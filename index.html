@@ -19,19 +19,23 @@ header {
   text-align:center;
   padding:2rem 1rem 1rem;
   box-shadow:0 4px 15px rgba(0,0,0,.6);
-  position:relative;
 }
 
-.logo-central {
-  width:200px;
-  height:200px;
-  object-fit:contain;
+header img {
+  width:300px;
   margin:1rem auto;
-  transition: all 0.5s ease;
-  border-radius:20px;
-  background:#fff;
-  padding:10px;
-  box-shadow:0 0 30px rgba(255,204,0,.8);
+  display:block;
+  animation:entradaLogo 2s ease-out forwards,resplandor 3s infinite alternate;
+  border-radius:12px;
+}
+
+@keyframes entradaLogo{
+  0%{transform:scale(.2);opacity:0}
+  100%{transform:scale(1);opacity:1}
+}
+@keyframes resplandor{
+  0%{filter:drop-shadow(0 0 10px #ff6f61)}
+  100%{filter:drop-shadow(0 0 25px #ffcc00)}
 }
 
 header h1 {
@@ -125,6 +129,23 @@ h2{color:#ffcc00}
   color:#fff;
 }
 
+/* ===== CUADRO CENTRAL ===== */
+#radioCentral {
+  display:none;
+  position:fixed;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  width:220px;
+  height:220px;
+  background:#fff;
+  border-radius:20px;
+  padding:10px;
+  box-shadow:0 0 40px rgba(255,204,0,.8);
+  z-index:999;
+  animation:resplandor 3s infinite alternate;
+}
+
 footer {
   text-align:center;
   padding:2rem;
@@ -138,7 +159,7 @@ footer {
 
 <!-- ENCABEZADO -->
 <header>
-  <img src="https://imgfz.com/i/bmnsNX4.png" class="logo-central" id="logoCentral" alt="Corporación La Fuerte">
+  <img src="https://imgfz.com/i/bmnsNX4.png" alt="Corporación La Fuerte">
   <h1>Corporación La Fuerte</h1>
   <p>
     <a href="https://wa.me/51968093770" class="btn-contacto" target="_blank">
@@ -146,6 +167,9 @@ footer {
     </a>
   </p>
 </header>
+
+<!-- CUADRO CENTRAL RADIO -->
+<img id="radioCentral" src="" alt="Logo Radio">
 
 <!-- RADIOS -->
 <main class="grid">
@@ -189,25 +213,23 @@ footer {
 <script>
 let currentAudio = new Audio();
 let currentCard = null;
-const logoCentral = document.getElementById('logoCentral');
+const radioCentral = document.getElementById('radioCentral');
 
 document.querySelectorAll('.play-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     const card = btn.closest('.card');
     const stream = card.dataset.stream;
-    const radioLogo = card.dataset.logo;
+    const logo = card.dataset.logo;
 
-    // Si ya estaba reproduciendo la misma radio -> STOP
-    if (card === currentCard && !btn.classList.contains('stop')) {
-      // Detener audio
+    // Si ya está reproduciendo la misma radio -> STOP
+    if (card === currentCard && btn.classList.contains('stop')) {
       currentAudio.pause();
       currentAudio.currentTime = 0;
-      currentAudio.src = '';
       btn.textContent = 'PLAY';
       btn.classList.remove('stop');
       card.classList.remove('activa');
       currentCard = null;
-      logoCentral.src = 'https://imgfz.com/i/bmnsNX4.png'; // vuelve logo principal
+      radioCentral.style.display = 'none';
       return;
     }
 
@@ -223,16 +245,17 @@ document.querySelectorAll('.play-btn').forEach(btn => {
     // Configurar nueva radio
     currentAudio.src = stream + '?nocache=' + Date.now();
     currentAudio.play().catch(e => console.log("Error reproduciendo:", e));
-
     btn.textContent = 'STOP';
     btn.classList.add('stop');
     card.classList.add('activa');
     currentCard = card;
 
-    // Cambiar logo central
-    logoCentral.src = radioLogo;
+    // Mostrar logo central
+    radioCentral.src = logo;
+    radioCentral.style.display = 'block';
   });
 });
 </script>
+
 </body>
 </html>

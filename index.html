@@ -7,7 +7,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
 
 <style>
-*{box-sizing:border-box}
+*{box-sizing:border-box;}
 
 body{
   margin:0;
@@ -23,7 +23,7 @@ header{
   border-bottom:1px solid #1c1f33;
 }
 
-header img{width:260px}
+header img{width:260px;}
 header h1{
   margin:.8rem 0 .3rem;
   font-size:2.6rem;
@@ -37,17 +37,17 @@ header p{
 /* ===== LIVE PANEL ===== */
 .live-panel{
   max-width:1400px;
-  margin:3rem auto 2rem;
+  margin:2rem auto;
   padding:2.5rem;
   border:2px solid #ffcc00;
   border-radius:20px;
   text-align:center;
   background:linear-gradient(135deg,#0c1024,#05070f);
-  position:relative;
   transition:.4s ease;
+  position:relative;
 }
 
-.live-panel.hidden{display:none}
+.live-panel.hidden{display:none;}
 
 .live-panel img{
   width:160px;
@@ -70,7 +70,6 @@ header p{
   margin-bottom:1rem;
 }
 
-/* ===== WHATSAPP ===== */
 .live-whatsapp a{
   display:inline-block;
   margin-top:1rem;
@@ -86,47 +85,47 @@ header p{
   background:#1ebe57;
 }
 
-/* ===== GRID SELECTORES ===== */
+/* ===== GRID DE RADIOS ===== */
 .grid{
   max-width:1400px;
   margin:auto;
   padding:2rem 1.5rem 3rem;
   display:grid;
   grid-template-columns:repeat(3,1fr);
-  gap:1.8rem;
+  gap:2rem;
 }
 
 @media(max-width:900px){
   .grid{grid-template-columns:repeat(2,1fr);}
 }
 
-.selector{
-  border:1px solid #1c1f33;
-  border-radius:16px;
+.card{
+  background:#222831;
+  border:2px solid #ff6f61;
+  border-radius:20px;
   padding:1.5rem;
   text-align:center;
-  cursor:pointer;
-  transition:.3s ease;
+  position:relative;
+  transition:.3s;
 }
 
-.selector:hover{
+.card:hover{
   border-color:#ffcc00;
 }
 
-.selector img{
-  width:90px;
+.card img{
+  width:120px;
   background:#fff;
-  padding:8px;
+  padding:6px;
   border-radius:12px;
 }
 
-.selector h3{
-  margin:.8rem 0 0;
-  font-size:1.1rem;
-  font-weight:700;
+.card h2{
+  color:#ffcc00;
+  margin:1rem 0 .5rem;
 }
 
-/* ===== PLAY BUTTON ANIMADO ===== */
+/* ===== PLAY/STOP ANIMADO ===== */
 .play-btn{
   margin-top:1rem;
   width:60px;
@@ -169,7 +168,6 @@ footer{
 }
 </style>
 </head>
-
 <body>
 
 <header>
@@ -178,105 +176,108 @@ footer{
   <p>Red de radios en transmisión en vivo</p>
 </header>
 
-<!-- PANEL LIVE -->
+<!-- PANEL CENTRAL -->
 <section id="livePanel" class="live-panel hidden">
   <img id="liveLogo">
   <div id="liveTitle" class="live-title"></div>
   <div class="live-status">TRANSMISIÓN EN VIVO</div>
-  <button id="liveBtn" class="play-btn stop"></button>
   <div class="live-whatsapp" id="liveWhatsapp"></div>
 </section>
 
-<!-- SELECTORES -->
-<section class="grid">
+<!-- GRID DE RADIOS -->
+<main class="grid">
 
-<div class="selector" data-name="LA FUERTE" data-logo="https://imgfz.com/i/fmdxHD8.png" data-stream="https://panelautodj.innovatestream.pe/7322/" data-whatsapp="+51968093770">
-  <img src="https://imgfz.com/i/fmdxHD8.png">
-  <h3>La Fuerte</h3>
+<div class="card" data-name="La Fuerte" data-logo="https://imgfz.com/i/fmdxHD8.png" data-stream="https://panelautodj.innovatestream.pe/7322/" data-whatsapp="+51968093770">
+  <img src="https://imgfz.com/i/fmdxHD8.png" alt="">
+  <h2>La Fuerte</h2>
+  <button class="play-btn"></button>
 </div>
 
-<div class="selector" data-name="LA JEFA" data-logo="https://imgfz.com/i/FRicwT8.png" data-stream="https://panelautodj.innovatestream.pe/7320/" data-whatsapp="+51968093771">
-  <img src="https://imgfz.com/i/FRicwT8.png">
-  <h3>La Jefa</h3>
+<div class="card" data-name="La Jefa" data-logo="https://imgfz.com/i/FRicwT8.png" data-stream="https://panelautodj.innovatestream.pe/7320/" data-whatsapp="+51968093771">
+  <img src="https://imgfz.com/i/FRicwT8.png" alt="">
+  <h2>La Jefa</h2>
+  <button class="play-btn"></button>
 </div>
 
-<div class="selector" data-name="SAN FRANCISCO" data-logo="https://imgfz.com/i/bBApQu2.png" data-stream="https://panelautodj.innovatestream.pe/7324/" data-whatsapp="+51968093772">
-  <img src="https://imgfz.com/i/bBApQu2.png">
-  <h3>San Francisco</h3>
+<div class="card" data-name="San Francisco" data-logo="https://imgfz.com/i/bBApQu2.png" data-stream="https://panelautodj.innovatestream.pe/7324/" data-whatsapp="+51968093772">
+  <img src="https://imgfz.com/i/bBApQu2.png" alt="">
+  <h2>San Francisco</h2>
+  <button class="play-btn"></button>
 </div>
 
-<div class="selector" data-name="MÁXIMA" data-logo="https://imgfz.com/i/bVMWlXD.png" data-stream="https://panelautodj.innovatestream.pe/8342/" data-whatsapp="+51968093773">
-  <img src="https://imgfz.com/i/bVMWlXD.png">
-  <h3>Máxima</h3>
+<div class="card" data-name="Máxima" data-logo="https://imgfz.com/i/bVMWlXD.png" data-stream="https://panelautodj.innovatestream.pe/8342/" data-whatsapp="+51968093773">
+  <img src="https://imgfz.com/i/bVMWlXD.png" alt="">
+  <h2>Máxima</h2>
+  <button class="play-btn"></button>
 </div>
 
-<div class="selector" data-name="LA CUMBIAMBERA" data-logo="https://imgfz.com/i/J89AMPT.png" data-stream="https://panelautodj.innovatestream.pe/8464/" data-whatsapp="+51968093774">
-  <img src="https://imgfz.com/i/J89AMPT.png">
-  <h3>La Cumbiambera</h3>
+<div class="card" data-name="La Cumbiambera" data-logo="https://imgfz.com/i/J89AMPT.png" data-stream="https://panelautodj.innovatestream.pe/8464/" data-whatsapp="+51968093774">
+  <img src="https://imgfz.com/i/J89AMPT.png" alt="">
+  <h2>La Cumbiambera</h2>
+  <button class="play-btn"></button>
 </div>
 
-<div class="selector" data-name="LA RAYA" data-logo="https://imgfz.com/i/zauB0Id.png" data-stream="https://panelautodj.innovatestream.pe/8466/" data-whatsapp="+51968093775">
-  <img src="https://imgfz.com/i/zauB0Id.png">
-  <h3>La Raya</h3>
+<div class="card" data-name="La Raya" data-logo="https://imgfz.com/i/zauB0Id.png" data-stream="https://panelautodj.innovatestream.pe/8466/" data-whatsapp="+51968093775">
+  <img src="https://imgfz.com/i/zauB0Id.png" alt="">
+  <h2>La Raya</h2>
+  <button class="play-btn"></button>
 </div>
 
-</section>
+</main>
 
 <footer>
 © 2025 Corporación La Fuerte
 </footer>
 
 <script>
-let audio=null;
+let currentAudio=null;
 
-const panel=document.getElementById('livePanel');
-const logo=document.getElementById('liveLogo');
-const title=document.getElementById('liveTitle');
-const btn=document.getElementById('liveBtn');
-const whatsapp=document.getElementById('liveWhatsapp');
+// Selección de radios y play animado
+document.querySelectorAll('.card').forEach(card=>{
+  const btn = card.querySelector('.play-btn');
+  btn.addEventListener('click',()=>{
 
-document.querySelectorAll('.selector').forEach(sel=>{
-  sel.addEventListener('click',()=>{
-    // Detener audio anterior
-    if(audio){
-      audio.pause();
-      audio.src='';
-      audio.load();
-      audio=null;
+    // STOP si ya estaba reproduciendo la misma radio
+    if(btn.classList.contains('stop')){
+      btn.classList.remove('stop');
+      card.querySelector('.card').classList?.remove('activa');
+      if(currentAudio){
+        currentAudio.pause();
+        currentAudio.src='';
+        currentAudio.load();
+        currentAudio=null;
+      }
+      document.getElementById('livePanel').classList.add('hidden');
+      return;
     }
 
-    // Panel grande
-    panel.classList.remove('hidden');
-    logo.src=sel.dataset.logo;
-    title.textContent=sel.dataset.name;
+    // Detener cualquier radio activa
+    if(currentAudio){
+      currentAudio.pause();
+      currentAudio.src='';
+      currentAudio.load();
+      currentAudio=null;
+    }
+    document.querySelectorAll('.play-btn').forEach(b=>b.classList.remove('stop'));
 
-    // WhatsApp
-    whatsapp.innerHTML=`<a href="https://wa.me/${sel.dataset.whatsapp}" target="_blank">💬 Contactar por WhatsApp</a>`;
+    // Crear audio sin buffer
+    currentAudio = new Audio(card.dataset.stream+'?nocache='+Date.now());
+    currentAudio.play();
+
+    // Animar botón play/stop
+    btn.classList.add('stop');
+
+    // Abrir panel central
+    const panel = document.getElementById('livePanel');
+    panel.classList.remove('hidden');
+    panel.querySelector('#liveLogo').src = card.dataset.logo;
+    panel.querySelector('#liveTitle').textContent = card.dataset.name;
+    panel.querySelector('#liveWhatsapp').innerHTML = `<a href="https://wa.me/${card.dataset.whatsapp}" target="_blank">💬 Contactar por WhatsApp</a>`;
 
     // Scroll al panel
     panel.scrollIntoView({behavior:'smooth'});
-
-    // Crear audio sin buffer
-    audio=new Audio(sel.dataset.stream+'?nocache='+Date.now());
-    audio.play();
-
-    // Play animado
-    btn.classList.remove('stop'); // reinicia
-    btn.classList.add('stop'); // poner STOP
   });
 });
-
-// STOP BUTTON
-btn.onclick=()=>{
-  if(audio){
-    audio.pause();
-    audio.src='';
-    audio.load();
-    audio=null;
-  }
-  panel.classList.add('hidden');
-  btn.classList.remove('stop');
-};
 </script>
 
 </body>

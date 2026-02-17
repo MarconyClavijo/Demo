@@ -3,258 +3,321 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Corporación La Fuerte</title>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+<title>La Tremenda 106.5 FM</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&display=swap" rel="stylesheet">
+
 <style>
-body {
+body{
   margin:0;
-  font-family:'Montserrat',sans-serif;
-  background:linear-gradient(135deg,#1a1a2e,#16213e);
-  color:#fff;
+  font-family:'Poppins',sans-serif;
+  min-height:100vh;
+  background:linear-gradient(140deg,#ff0000,#ff7300,#ffc400);
+  background-size:300% 300%;
+  animation:fondo 10s ease infinite;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
 }
 
-/* ===== ENCABEZADO ===== */
-header {
-  background:#0f3460;
-  text-align:center;
-  padding:2rem 1rem 1rem;
-  box-shadow:0 4px 15px rgba(0,0,0,.6);
+@keyframes fondo{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
 }
 
-header img {
-  width:300px;
-  margin:1rem auto;
-  display:block;
-  animation:entradaLogo 2s ease-out forwards,resplandor 3s infinite alternate;
-  border-radius:12px;
-}
-
-@keyframes entradaLogo{
-  0%{transform:scale(.2);opacity:0}
-  100%{transform:scale(1);opacity:1}
-}
-@keyframes resplandor{
-  0%{filter:drop-shadow(0 0 10px #ff6f61)}
-  100%{filter:drop-shadow(0 0 25px #ffcc00)}
-}
-
-header h1 {
-  font-size:2.5rem;
-  margin:1rem 0 0;
-  color:#f9f871;
-  text-shadow:2px 2px 8px #000;
-}
-
-.btn-contacto{
-  display:inline-block;
-  background:#ffcc00;
-  color:#000;
-  font-weight:bold;
-  padding:12px 24px;
+.app{
+  width:92%;
+  max-width:420px;
+  background:rgba(0,0,0,.55);
+  backdrop-filter:blur(12px);
   border-radius:30px;
-  text-decoration:none;
-  font-size:1.1rem;
-  margin-top:1rem;
-  box-shadow:0 4px 15px rgba(255,204,0,.6);
-}
-
-.btn-contacto:hover{
-  background:#ff6f61;
-  color:#fff;
-}
-
-/* ===== RADIOS ===== */
-.grid {
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-  gap:2rem;
-  padding:2rem;
-  max-width:1300px;
-  margin:auto;
-}
-
-.card {
-  background:#222831;
-  border:2px solid #ff6f61;
-  border-radius:20px;
-  padding:1.5rem;
+  padding:25px 20px;
+  box-shadow:0 0 40px rgba(0,0,0,.6);
   text-align:center;
-  position:relative;
+  color:#fff;
+  margin-top:20px;
 }
 
-.card.activa {
-  border-color:#ffcc00;
-  box-shadow:0 0 25px rgba(255,204,0,.9);
+.title{
+  font-size:28px;
+  font-weight:900;
+  margin-bottom:5px;
+  text-shadow:0 0 10px #ff0000;
 }
 
-.card.activa::before {
-  content:"🔴 EN VIVO";
-  position:absolute;
-  top:8px;
-  right:8px;
-  background:red;
-  padding:4px 10px;
-  border-radius:12px;
-  font-size:.8rem;
+.logo{
+  width:170px;
+  margin:10px 0;
+  filter:drop-shadow(0 0 10px #fff);
 }
 
-.logo {
-  width:120px;
-  height:120px;
-  object-fit:contain;
-  background:#fff;
-  padding:6px;
-  border-radius:12px;
-}
-
-h2{color:#ffcc00}
-
-.play-btn {
-  margin-top:1rem;
-  padding:10px 22px;
-  border:none;
+.player-box{
+  background:rgba(255,255,255,.12);
+  border:2px solid rgba(255,255,255,.2);
   border-radius:20px;
-  background:#ffcc00;
+  padding:20px;
+  margin-top:10px;
+}
+
+.status{
   font-weight:bold;
+  margin-bottom:10px;
+  color:#0f0;
+}
+
+.play{
+  padding:20px;
+  width:100%;
+  font-size:22px;
+  font-weight:900;
+  border:none;
+  border-radius:15px;
+  background:#00d95f;
+  color:#fff;
   cursor:pointer;
-  transition: all 0.3s;
+  transition:.3s;
+  box-shadow:0 0 20px rgba(0,255,100,.6);
 }
 
-.play-btn:hover {
-  background:#ff6f61;
+.play:hover{
+  transform:scale(1.05);
 }
 
-.play-btn.stop {
-  background:#ff3b3b;
+.volume{
+  margin-top:15px;
+}
+
+input[type=range]{
+  width:100%;
+}
+
+.eq{
+  display:flex;
+  justify-content:center;
+  gap:6px;
+  margin:15px 0;
+  height:40px;
+}
+
+.eq span{
+  width:8px;
+  background:#00ff00;
+  animation:eco .7s infinite;
+  animation-play-state:paused;
+}
+
+.playing .eq span{
+  animation-play-state:running;
+}
+
+@keyframes eco{
+  0%{height:10px}
+  50%{height:40px}
+  100%{height:15px}
+}
+
+/* METADATA */
+.metadata-box{
+  margin-top:15px;
+  padding:12px;
+  border-radius:15px;
+  background:rgba(0,0,0,.4);
+}
+
+.metadata-title{
+  font-size:12px;
+  opacity:.7;
+  margin-bottom:5px;
+}
+
+.metadata-song{
+  font-size:16px;
+  font-weight:bold;
   color:#fff;
 }
 
-/* ===== CUADRO CENTRAL ===== */
-#radioCentral {
-  display:none;
-  position:fixed;
-  top:50%;
-  left:50%;
-  transform:translate(-50%,-50%);
-  width:220px;
-  height:220px;
-  background:#fff;
-  border-radius:20px;
-  padding:10px;
-  box-shadow:0 0 40px rgba(255,204,0,.8);
-  z-index:999;
-  animation:resplandor 3s infinite alternate;
+.social-container{
+  display:flex;
+  gap:10px;
+  margin-top:15px;
 }
 
-footer {
+.social-box{
+  flex:1;
+  padding:15px;
+  border-radius:15px;
+  font-weight:bold;
+  text-decoration:none;
+  color:#fff;
   text-align:center;
-  padding:2rem;
-  font-size:.9rem;
-  background:#0f0f0f;
-  color:#aaa;
+  transition:.3s;
+}
+
+.facebook{
+  background:#1877f2;
+  box-shadow:0 0 15px rgba(24,119,242,.7);
+}
+
+.whatsapp{
+  background:#00bb2d;
+  box-shadow:0 0 15px rgba(0,187,45,.7);
+}
+
+.social-box:hover{
+  transform:scale(1.06);
+}
+
+.footer{
+  margin-top:10px;
+  color:#fff;
+  font-size:12px;
+  opacity:.8;
+  text-align:center;
 }
 </style>
 </head>
+
 <body>
 
-<!-- ENCABEZADO -->
-<header>
-  <img src="https://imgfz.com/i/bmnsNX4.png" alt="Corporación La Fuerte">
-  <h1>Corporación La Fuerte</h1>
-  <p>
-    <a href="https://wa.me/51968093770" class="btn-contacto" target="_blank">
-      📞 Contrata publicidad aquí: 51968093770
+<div class="app" id="app">
+
+  <div class="title">LA TREMENDA 106.5 FM</div>
+
+  <img src="https://imgfz.com/i/h7TrEm5.png" class="logo">
+
+  <div class="player-box">
+
+    <div class="status" id="estado">🔴 EN VIVO</div>
+
+    <div class="eq">
+      <span></span><span></span><span></span><span></span><span></span>
+    </div>
+
+    <button class="play" id="btn">▶ REPRODUCIR</button>
+
+    <div class="volume">
+      <input type="range" min="0" max="1" step="0.01" value="1" id="volumen">
+    </div>
+
+    <!-- METADATA -->
+    <div class="metadata-box">
+      <div class="metadata-title">SONANDO AHORA</div>
+      <div class="metadata-song" id="cancion">
+        Cargando información...
+      </div>
+    </div>
+
+  </div>
+
+  <div class="social-container">
+    <a class="social-box facebook" href="https://www.facebook.com/profile.php?id=61585616422921" target="_blank">
+      Facebook
     </a>
-  </p>
-</header>
 
-<!-- CUADRO CENTRAL RADIO -->
-<img id="radioCentral" src="" alt="Logo Radio">
+    <a class="social-box whatsapp" href="https://wa.me/51942883375" target="_blank">
+      WhatsApp
+    </a>
+  </div>
 
-<!-- RADIOS -->
-<main class="grid">
-  <div class="card" data-stream="https://panelautodj.innovatestream.pe/7322/" data-logo="https://imgfz.com/i/fmdxHD8.png">
-    <img src="https://imgfz.com/i/fmdxHD8.png" class="logo">
-    <h2>La Fuerte</h2>
-    <button class="play-btn">PLAY</button>
-  </div>
-  <div class="card" data-stream="https://panelautodj.innovatestream.pe/7320/" data-logo="https://imgfz.com/i/FRicwT8.png">
-    <img src="https://imgfz.com/i/FRicwT8.png" class="logo">
-    <h2>La Jefa</h2>
-    <button class="play-btn">PLAY</button>
-  </div>
-  <div class="card" data-stream="https://panelautodj.innovatestream.pe/7324/" data-logo="https://imgfz.com/i/bBApQu2.png">
-    <img src="https://imgfz.com/i/bBApQu2.png" class="logo">
-    <h2>San Francisco</h2>
-    <button class="play-btn">PLAY</button>
-  </div>
-  <div class="card" data-stream="https://panelautodj.innovatestream.pe/8342/" data-logo="https://imgfz.com/i/bVMWlXD.png">
-    <img src="https://imgfz.com/i/bVMWlXD.png" class="logo">
-    <h2>Máxima</h2>
-    <button class="play-btn">PLAY</button>
-  </div>
-  <div class="card" data-stream="https://panelautodj.innovatestream.pe/8464/" data-logo="https://imgfz.com/i/J89AMPT.png">
-    <img src="https://imgfz.com/i/J89AMPT.png" class="logo">
-    <h2>La Cumbiambera</h2>
-    <button class="play-btn">PLAY</button>
-  </div>
-  <div class="card" data-stream="https://panelautodj.innovatestream.pe/8466/" data-logo="https://imgfz.com/i/zauB0Id.png">
-    <img src="https://imgfz.com/i/zauB0Id.png" class="logo">
-    <h2>La Raya</h2>
-    <button class="play-btn">PLAY</button>
-  </div>
-</main>
+</div>
 
-<footer>
-© 2025 Corporación La Fuerte. Todos los derechos reservados.
-</footer>
+<div class="footer">
+  Diseño por Marcony Clavijo – Radio La Tremenda
+</div>
 
-<!-- SCRIPT DE AUDIO CENTRAL -->
 <script>
-let currentAudio = new Audio();
-let currentCard = null;
-const radioCentral = document.getElementById('radioCentral');
+const btn = document.getElementById("btn");
+const estado = document.getElementById("estado");
+const app = document.getElementById("app");
+const vol = document.getElementById("volumen");
+const cancion = document.getElementById("cancion");
 
-document.querySelectorAll('.play-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const card = btn.closest('.card');
-    const stream = card.dataset.stream;
-    const logo = card.dataset.logo;
+let audio = null;
+let sonando = false;
 
-    // Si ya está reproduciendo la misma radio -> STOP
-    if (card === currentCard && btn.classList.contains('stop')) {
-      currentAudio.pause();
-      currentAudio.currentTime = 0;
-      btn.textContent = 'PLAY';
-      btn.classList.remove('stop');
-      card.classList.remove('activa');
-      currentCard = null;
-      radioCentral.style.display = 'none';
-      return;
+function crearAudio() {
+  if (audio) {
+    audio.pause();
+    audio.src = "";
+    audio.load();
+  }
+
+  audio = new Audio("https://sonic.globalstream.pro/8080/stream");
+  audio.preload = "none";
+  audio.volume = vol.value;
+}
+
+btn.onclick = () => {
+
+  if (!sonando) {
+
+    crearAudio();
+
+    estado.textContent = "⏳ Conectando en vivo...";
+    btn.textContent = "⏳";
+
+    audio.play()
+      .then(() => {
+        estado.textContent = "🎧 EN VIVO - TIEMPO REAL";
+        btn.textContent = "⏸ DETENER";
+        app.classList.add("playing");
+        sonando = true;
+      })
+      .catch(() => {
+        estado.textContent = "⚠️ Error de conexión";
+        btn.textContent = "▶ REPRODUCIR";
+        sonando = false;
+      });
+
+  } else {
+
+    audio.pause();
+    audio.src = "";
+    audio.load();
+
+    estado.textContent = "⏹ TRANSMISIÓN DETENIDA";
+    btn.textContent = "▶ REPRODUCIR";
+    app.classList.remove("playing");
+
+    sonando = false;
+  }
+
+};
+
+vol.oninput = () => {
+  if (audio) audio.volume = vol.value;
+};
+
+// ===== METADATA ICECAST =====
+
+async function obtenerMetadata() {
+  try {
+
+    const response = await fetch("https://sonic.globalstream.pro/8080/status-json.xsl");
+    const data = await response.json();
+
+    let source = data.icestats.source;
+
+    if (Array.isArray(source)) {
+      source = source[0];
     }
 
-    // Detener cualquier otra radio
-    if (currentCard) {
-      currentCard.querySelector('.play-btn').textContent = 'PLAY';
-      currentCard.querySelector('.play-btn').classList.remove('stop');
-      currentCard.classList.remove('activa');
-      currentAudio.pause();
-      currentAudio.currentTime = 0;
+    if (source && source.title) {
+      cancion.textContent = source.title;
+    } else {
+      cancion.textContent = "Transmisión en vivo";
     }
 
-    // Configurar nueva radio
-    currentAudio.src = stream + '?nocache=' + Date.now();
-    currentAudio.play().catch(e => console.log("Error reproduciendo:", e));
-    btn.textContent = 'STOP';
-    btn.classList.add('stop');
-    card.classList.add('activa');
-    currentCard = card;
+  } catch (error) {
+    cancion.textContent = "La Tremenda 106.5 FM";
+  }
+}
 
-    // Mostrar logo central
-    radioCentral.src = logo;
-    radioCentral.style.display = 'block';
-  });
-});
+setInterval(obtenerMetadata, 10000);
+obtenerMetadata();
+
 </script>
 
 </body>

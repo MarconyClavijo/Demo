@@ -3,279 +3,153 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>La Tremenda 106.5 FM</title>
+<title>Radio La N 96.3 FM | Suena Diferente</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
 <style>
 body{
   margin:0;
-  font-family:'Poppins',sans-serif;
-  min-height:100vh;
-  background:linear-gradient(140deg,#b30000,#ff5e00,#ffb300);
-  background-size:300% 300%;
-  animation:fondo 12s ease infinite;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  flex-direction:column;
-}
-
-@keyframes fondo{
-  0%{background-position:0% 50%}
-  50%{background-position:100% 50%}
-  100%{background-position:0% 50%}
-}
-
-.app{
-  width:92%;
-  max-width:420px;
-  background:rgba(0,0,0,.65);
-  backdrop-filter:blur(12px);
-  border-radius:25px;
-  padding:25px 20px;
-  box-shadow:0 0 40px rgba(0,0,0,.7);
-  text-align:center;
+  font-family:'Poppins', sans-serif;
+  background:linear-gradient(135deg,#000000,#1a1a1a,#ffcc00);
   color:#fff;
-  margin-top:20px;
+  text-align:center;
 }
 
-.title{
-  font-size:26px;
-  font-weight:900;
-  margin-bottom:8px;
-  letter-spacing:1px;
+header{
+  padding:40px 15px 10px;
 }
 
 .logo{
-  width:160px;
-  margin:10px 0 15px;
+  width:180px;
+  margin-bottom:15px;
+  animation:float 3s ease-in-out infinite;
+  filter: drop-shadow(0 0 20px rgba(255,204,0,.9));
 }
 
-.player-box{
-  background:rgba(255,255,255,.08);
-  border-radius:20px;
-  padding:20px;
+@keyframes float{
+  0%{transform:translateY(0)}
+  50%{transform:translateY(-10px)}
+  100%{transform:translateY(0)}
 }
 
-.status{
-  font-weight:600;
-  margin-bottom:10px;
-  color:#00ff88;
-  font-size:14px;
+h1{
+  margin:5px 0;
+  font-size:26px;
 }
 
-.play{
-  padding:18px;
-  width:100%;
-  font-size:20px;
+.slogan{
+  color:#ffcc00;
+  letter-spacing:3px;
+  font-size:13px;
+}
+
+.live{
+  margin-top:10px;
+  color:red;
   font-weight:700;
+  animation:blink 1s infinite;
+}
+
+@keyframes blink{
+  50%{opacity:0.3}
+}
+
+/* PLAYER PERSONALIZADO */
+.player{
+  margin-top:35px;
+}
+
+.play-btn{
+  background:#ffcc00;
   border:none;
-  border-radius:12px;
-  background:#00c853;
-  color:#fff;
+  color:#000;
+  font-size:18px;
+  font-weight:700;
+  padding:15px 40px;
+  border-radius:40px;
   cursor:pointer;
+  box-shadow:0 0 25px rgba(255,204,0,.8);
   transition:.3s;
 }
 
-.play:hover{
+.play-btn:hover{
   transform:scale(1.05);
 }
 
-.volume{
-  margin-top:15px;
+.buttons{
+  margin:35px 0;
 }
 
-input[type=range]{
-  width:100%;
-}
-
-.metadata-box{
-  margin-top:18px;
-  padding:12px;
-  border-radius:12px;
-  background:rgba(255,255,255,.08);
-}
-
-.metadata-title{
-  font-size:12px;
-  opacity:.7;
-  margin-bottom:6px;
-  letter-spacing:1px;
-}
-
-.metadata-song{
-  font-size:15px;
-  font-weight:600;
-  min-height:20px;
-}
-
-.social-container{
-  display:flex;
-  gap:10px;
-  margin-top:18px;
-}
-
-.social-box{
-  flex:1;
-  padding:12px;
-  border-radius:12px;
-  font-weight:600;
+.buttons a{
+  display:inline-block;
+  margin:8px;
+  padding:12px 25px;
+  background:#111;
+  color:#ffcc00;
+  border:2px solid #ffcc00;
   text-decoration:none;
-  color:#fff;
-  text-align:center;
+  border-radius:30px;
+  font-weight:600;
   transition:.3s;
 }
 
-.facebook{
-  background:#1877f2;
+.buttons a:hover{
+  background:#ffcc00;
+  color:#000;
 }
 
-.whatsapp{
-  background:#00c853;
-}
-
-.social-box:hover{
-  transform:scale(1.05);
-}
-
-.footer{
-  margin-top:15px;
-  font-size:12px;
-  opacity:.7;
+footer{
+  margin-top:40px;
+  padding:15px;
+  font-size:13px;
+  background:rgba(0,0,0,.6);
 }
 </style>
 </head>
 
 <body>
 
-<div class="app" id="app">
+<header>
+  <img src="https://user1472.na.imgto.link/public/20260117/la-n-removebg-preview.avif"
+       alt="Radio La N 96.3 FM"
+       class="logo">
 
-  <div class="title">LA TREMENDA 106.5 FM</div>
+  <h1>Radio La N 96.3 FM</h1>
+  <div class="slogan">SUENA DIFERENTE</div>
+  <div class="live">● EN VIVO</div>
+</header>
 
-  <img src="https://imgfz.com/i/h7TrEm5.png" class="logo">
-
-  <div class="player-box">
-
-    <div class="status" id="estado">🔴 EN VIVO</div>
-
-    <button class="play" id="btn">▶ REPRODUCIR</button>
-
-    <div class="volume">
-      <input type="range" min="0" max="1" step="0.01" value="1" id="volumen">
-    </div>
-
-    <div class="metadata-box">
-      <div class="metadata-title">SONANDO AHORA</div>
-      <div class="metadata-song" id="cancion">
-        Cargando información...
-      </div>
-    </div>
-
-  </div>
-
-  <div class="social-container">
-    <a class="social-box facebook" href="https://www.facebook.com/profile.php?id=61585616422921" target="_blank">
-      Facebook
-    </a>
-
-    <a class="social-box whatsapp" href="https://wa.me/51942883375" target="_blank">
-      WhatsApp
-    </a>
-  </div>
-
+<div class="player">
+  <button class="play-btn" onclick="toggleRadio()">▶ ESCUCHAR EN VIVO</button>
+  <audio id="radio" preload="none">
+    <source src="https://link.zeno.fm/TU_CODIGO_AQUI?port=8080" type="audio/mpeg">
+  </audio>
 </div>
 
-<div class="footer">
-  Diseño por Marcony Clavijo – Radio La Tremenda
+<div class="buttons">
+  <a href="#">📘 Facebook</a>
+  <a href="https://wa.me/51999999999">📞 WhatsApp</a>
 </div>
+
+<footer>
+  © 2026 Radio La N 96.3 FM · Diseño web: Marcony Clavijo
+</footer>
 
 <script>
-const btn = document.getElementById("btn");
-const estado = document.getElementById("estado");
-const vol = document.getElementById("volumen");
-const cancion = document.getElementById("cancion");
+let radio = document.getElementById("radio");
+let btn = document.querySelector(".play-btn");
 
-let audio = null;
-let sonando = false;
-
-function crearAudio() {
-  if (audio) {
-    audio.pause();
-    audio.src = "";
-    audio.load();
-  }
-
-  audio = new Audio("https://sonic.globalstream.pro/8080/stream");
-  audio.preload = "none";
-  audio.volume = vol.value;
-}
-
-btn.onclick = () => {
-  if (!sonando) {
-
-    crearAudio();
-    estado.textContent = "Conectando...";
-    btn.textContent = "Cargando...";
-
-    audio.play()
-      .then(() => {
-        estado.textContent = "🎧 EN VIVO";
-        btn.textContent = "⏸ DETENER";
-        sonando = true;
-      })
-      .catch(() => {
-        estado.textContent = "Error de conexión";
-        btn.textContent = "▶ REPRODUCIR";
-      });
-
-  } else {
-
-    audio.pause();
-    audio.src = "";
-    audio.load();
-
-    estado.textContent = "Transmisión detenida";
-    btn.textContent = "▶ REPRODUCIR";
-    sonando = false;
-  }
-};
-
-vol.oninput = () => {
-  if (audio) audio.volume = vol.value;
-};
-
-/* ===== METADATA PARA GITHUB ===== */
-
-async function obtenerMetadata() {
-  try {
-
-    const proxy = "https://api.allorigins.win/raw?url=";
-    const url = encodeURIComponent("https://sonic.globalstream.pro/8080/status-json.xsl");
-
-    const response = await fetch(proxy + url);
-    const data = await response.json();
-
-    let source = data.icestats.source;
-
-    if (Array.isArray(source)) {
-      source = source[0];
-    }
-
-    if (source && source.title) {
-      cancion.textContent = source.title;
-    } else {
-      cancion.textContent = "Transmisión en vivo";
-    }
-
-  } catch (error) {
-    cancion.textContent = "La Tremenda 106.5 FM";
+function toggleRadio(){
+  if(radio.paused){
+    radio.load();   // reduce buffer inicial
+    radio.play();
+    btn.innerHTML = "⏹ DETENER";
+  }else{
+    radio.pause();
+    btn.innerHTML = "▶ ESCUCHAR EN VIVO";
   }
 }
-
-setInterval(obtenerMetadata, 10000);
-obtenerMetadata();
-
 </script>
 
 </body>

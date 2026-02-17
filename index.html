@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Radio La N 96.3 FM | Suena Diferente</title>
+<title>Radio La N 96.3 FM | En Vivo</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
@@ -24,7 +24,7 @@ header{
   width:180px;
   margin-bottom:15px;
   animation:float 3s ease-in-out infinite;
-  filter: drop-shadow(0 0 20px rgba(255,204,0,.9));
+  filter: drop-shadow(0 0 25px rgba(255,204,0,.9));
 }
 
 @keyframes float{
@@ -45,7 +45,7 @@ h1{
 }
 
 .live{
-  margin-top:10px;
+  margin-top:8px;
   color:red;
   font-weight:700;
   animation:blink 1s infinite;
@@ -55,9 +55,9 @@ h1{
   50%{opacity:0.3}
 }
 
-/* PLAYER PERSONALIZADO */
+/* PLAYER */
 .player{
-  margin-top:35px;
+  margin-top:40px;
 }
 
 .play-btn{
@@ -66,7 +66,7 @@ h1{
   color:#000;
   font-size:18px;
   font-weight:700;
-  padding:15px 40px;
+  padding:15px 45px;
   border-radius:40px;
   cursor:pointer;
   box-shadow:0 0 25px rgba(255,204,0,.8);
@@ -77,8 +77,15 @@ h1{
   transform:scale(1.05);
 }
 
+.status{
+  margin-top:15px;
+  font-size:14px;
+  color:#ccc;
+}
+
+/* BOTONES */
 .buttons{
-  margin:35px 0;
+  margin:40px 0;
 }
 
 .buttons a{
@@ -122,8 +129,10 @@ footer{
 
 <div class="player">
   <button class="play-btn" onclick="toggleRadio()">▶ ESCUCHAR EN VIVO</button>
+  <div class="status" id="status">Presiona el botón para escuchar</div>
+
   <audio id="radio" preload="none">
-    <source src="https://link.zeno.fm/TU_CODIGO_AQUI?port=8080" type="audio/mpeg">
+    <source src="https://stream.zeno.fm/jfiyk4dnuc1vv" type="audio/mpeg">
   </audio>
 </div>
 
@@ -139,17 +148,28 @@ footer{
 <script>
 let radio = document.getElementById("radio");
 let btn = document.querySelector(".play-btn");
+let statusText = document.getElementById("status");
 
 function toggleRadio(){
   if(radio.paused){
-    radio.load();   // reduce buffer inicial
+    radio.load();
     radio.play();
     btn.innerHTML = "⏹ DETENER";
+    statusText.innerHTML = "Conectando...";
   }else{
     radio.pause();
     btn.innerHTML = "▶ ESCUCHAR EN VIVO";
+    statusText.innerHTML = "Transmisión detenida";
   }
 }
+
+radio.addEventListener("playing", function(){
+  statusText.innerHTML = "Transmitiendo en vivo 🎙️";
+});
+
+radio.addEventListener("error", function(){
+  statusText.innerHTML = "No hay señal disponible";
+});
 </script>
 
 </body>

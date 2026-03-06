@@ -9,121 +9,107 @@
 
 <style>
 body{
-  margin:0;
-  font-family:'Poppins', sans-serif;
-  background:linear-gradient(135deg,#000,#111,#ffcc00);
-  color:#fff;
-  text-align:center;
+margin:0;
+font-family:'Poppins', sans-serif;
+background:linear-gradient(135deg,#000,#111,#ffcc00);
+color:#fff;
+text-align:center;
 }
 
 header{
-  padding:40px 15px 20px;
+padding:40px 15px 20px;
 }
 
 .logo{
-  width:190px;
-  margin-bottom:12px;
-  filter:
-    drop-shadow(0 0 4px #fff)
-    drop-shadow(0 0 12px #ffcc00)
-    drop-shadow(0 0 24px rgba(255,204,0,.9));
-  animation:floatLogo 3.5s ease-in-out infinite;
+width:190px;
+margin-bottom:12px;
+filter:drop-shadow(0 0 4px #fff) drop-shadow(0 0 12px #ffcc00);
+animation:floatLogo 3.5s ease-in-out infinite;
 }
 
 @keyframes floatLogo{
-  0%{transform:translateY(0)}
-  50%{transform:translateY(-12px)}
-  100%{transform:translateY(0)}
+0%{transform:translateY(0)}
+50%{transform:translateY(-12px)}
+100%{transform:translateY(0)}
 }
 
 h1{
-  margin:6px 0 4px;
-  font-size:26px;
+margin:6px 0 4px;
+font-size:26px;
 }
 
 .slogan{
-  color:#ffcc00;
-  letter-spacing:2px;
-  font-size:14px;
-  margin-bottom:25px;
+color:#ffcc00;
+letter-spacing:2px;
+font-size:14px;
+margin-bottom:25px;
 }
 
 .player-box{
-  margin:40px 0;
+margin:40px 0;
 }
 
 .play-btn{
-  background:#ffcc00;
-  color:#000;
-  border:none;
-  padding:18px 50px;
-  font-size:20px;
-  font-weight:700;
-  border-radius:50px;
-  cursor:pointer;
-  box-shadow:0 0 25px rgba(255,204,0,.8);
-  transition:.3s;
-}
-
-.play-btn:hover{
-  transform:scale(1.05);
+background:#ffcc00;
+color:#000;
+border:none;
+padding:18px 50px;
+font-size:20px;
+font-weight:700;
+border-radius:50px;
+cursor:pointer;
+box-shadow:0 0 25px rgba(255,204,0,.8);
 }
 
 .live-indicator{
-  margin-top:15px;
-  font-size:14px;
-  display:none;
+margin-top:15px;
+font-size:14px;
+display:none;
 }
 
 .live-dot{
-  height:10px;
-  width:10px;
-  background:red;
-  border-radius:50%;
-  display:inline-block;
-  margin-right:6px;
-  animation:pulse 1s infinite;
+height:10px;
+width:10px;
+background:red;
+border-radius:50%;
+display:inline-block;
+margin-right:6px;
+animation:pulse 1s infinite;
 }
 
 @keyframes pulse{
-  0%{opacity:1}
-  50%{opacity:.3}
-  100%{opacity:1}
+0%{opacity:1}
+50%{opacity:.3}
+100%{opacity:1}
 }
 
 .song-title{
-  margin-top:25px;
-  font-size:16px;
-  color:#ffcc00;
+margin-top:25px;
+font-size:16px;
+color:#ffcc00;
 }
 
 .buttons{
-  margin:30px 0;
+margin:30px 0;
 }
 
 .buttons a{
-  display:inline-block;
-  margin:6px;
-  padding:12px 22px;
-  background:#111;
-  color:#ffcc00;
-  border:2px solid #ffcc00;
-  font-weight:600;
-  text-decoration:none;
-  border-radius:30px;
-  transition:.3s;
-}
-
-.buttons a:hover{
-  background:#ffcc00;
-  color:#000;
+display:inline-block;
+margin:6px;
+padding:12px 22px;
+background:#111;
+color:#ffcc00;
+border:2px solid #ffcc00;
+font-weight:600;
+text-decoration:none;
+border-radius:30px;
 }
 
 footer{
-  margin-top:35px;
-  padding:15px;
-  font-size:13px;
-  background:rgba(0,0,0,.55);
+margin-top:35px;
+padding:15px;
+font-size:13px;
+background:rgba(0,0,0,.55);
 }
 </style>
 </head>
@@ -132,10 +118,7 @@ footer{
 
 <header>
 
-<img
-src="https://user1472.na.imgto.link/public/20260117/la-n-removebg-preview.avif"
-alt="Radio La N 96.3 FM"
-class="logo">
+<img src="https://user1472.na.imgto.link/public/20260117/la-n-removebg-preview.avif" class="logo">
 
 <h1>Radio La N 96.3 FM</h1>
 <div class="slogan">SUENA DIFERENTE</div>
@@ -151,7 +134,7 @@ class="logo">
 </div>
 
 <div class="song-title">
-🎵 <span id="songtitle">Cargando canción...</span>
+🎵 <span id="songtitle">Transmitiendo...</span>
 </div>
 
 </div>
@@ -167,69 +150,40 @@ class="logo">
 
 <script>
 
-const streamURL = "https://radiostreaming.pro/8222/stream";
-const button = document.getElementById("playButton");
-const liveIndicator = document.getElementById("liveIndicator");
+const streamURL="https://radiostreaming.pro/8222/stream";
+const button=document.getElementById("playButton");
+const liveIndicator=document.getElementById("liveIndicator");
 
-let audio = null;
-let isPlaying = false;
+let audio=new Audio(streamURL);
+let isPlaying=false;
 
-button.addEventListener("click", function() {
+button.onclick=function(){
 
-if (!isPlaying) {
+if(!isPlaying){
 
-audio = new Audio(streamURL + "?t=" + Date.now());
 audio.play();
+isPlaying=true;
+button.textContent="■ DETENER";
+liveIndicator.style.display="block";
 
-isPlaying = true;
-button.textContent = "■ DETENER";
-liveIndicator.style.display = "block";
-
-} else {
+}else{
 
 audio.pause();
-audio.src = "";
-audio.load();
-audio = null;
-
-isPlaying = false;
-button.textContent = "▶ ESCUCHAR EN VIVO";
-liveIndicator.style.display = "none";
+isPlaying=false;
+button.textContent="▶ ESCUCHAR EN VIVO";
+liveIndicator.style.display="none";
 
 }
 
-});
+};
 
-</script>
+audio.addEventListener("loadedmetadata",function(){
 
-<script>
-
-function obtenerCancion(){
-
-fetch("https://radiostreaming.pro:8222/7.html?"+Math.random())
-
-.then(response => response.text())
-
-.then(data => {
-
-let datos = data.split(",");
-
-let cancion = datos[datos.length - 1];
-
-document.getElementById("songtitle").innerText = cancion;
-
-})
-
-.catch(()=>{
-
-document.getElementById("songtitle").innerText = "En vivo";
-
-});
-
+if(audio.metadata && audio.metadata.title){
+document.getElementById("songtitle").innerText=audio.metadata.title;
 }
 
-setInterval(obtenerCancion,5000);
-obtenerCancion();
+});
 
 </script>
 

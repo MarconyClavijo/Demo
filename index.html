@@ -23,7 +23,7 @@ padding:40px 15px 20px;
 .logo{
 width:190px;
 margin-bottom:12px;
-filter:drop-shadow(0 0 4px #fff) drop-shadow(0 0 12px #ffcc00) drop-shadow(0 0 24px rgba(255,204,0,.9));
+filter:drop-shadow(0 0 4px #fff) drop-shadow(0 0 12px #ffcc00);
 animation:floatLogo 3.5s ease-in-out infinite;
 }
 
@@ -59,11 +59,6 @@ font-weight:700;
 border-radius:50px;
 cursor:pointer;
 box-shadow:0 0 25px rgba(255,204,0,.8);
-transition:.3s;
-}
-
-.play-btn:hover{
-transform:scale(1.05);
 }
 
 .live-indicator{
@@ -108,12 +103,6 @@ border:2px solid #ffcc00;
 font-weight:600;
 text-decoration:none;
 border-radius:30px;
-transition:.3s;
-}
-
-.buttons a:hover{
-background:#ffcc00;
-color:#000;
 }
 
 footer{
@@ -206,7 +195,9 @@ fetch("https://radiostreaming.pro/cp/get_info.php?p=8222")
 
 .then(data=>{
 
-document.getElementById("songtitle").innerText=data.songtitle;
+let titulo = data.songtitle || data.title || data.song || data.currentSong || "Transmitiendo en vivo";
+
+document.getElementById("songtitle").innerText = titulo;
 
 })
 

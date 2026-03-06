@@ -23,7 +23,7 @@ padding:40px 15px 20px;
 .logo{
 width:190px;
 margin-bottom:12px;
-filter:drop-shadow(0 0 4px #fff) drop-shadow(0 0 12px #ffcc00);
+filter:drop-shadow(0 0 4px #fff) drop-shadow(0 0 12px #ffcc00) drop-shadow(0 0 24px rgba(255,204,0,.9));
 animation:floatLogo 3.5s ease-in-out infinite;
 }
 
@@ -59,6 +59,11 @@ font-weight:700;
 border-radius:50px;
 cursor:pointer;
 box-shadow:0 0 25px rgba(255,204,0,.8);
+transition:.3s;
+}
+
+.play-btn:hover{
+transform:scale(1.05);
 }
 
 .live-indicator{
@@ -103,6 +108,12 @@ border:2px solid #ffcc00;
 font-weight:600;
 text-decoration:none;
 border-radius:30px;
+transition:.3s;
+}
+
+.buttons a:hover{
+background:#ffcc00;
+color:#000;
 }
 
 footer{
@@ -134,7 +145,7 @@ background:rgba(0,0,0,.55);
 </div>
 
 <div class="song-title">
-🎵 <span id="songtitle">Transmitiendo...</span>
+🎵 <span id="songtitle">Cargando canción...</span>
 </div>
 
 </div>
@@ -154,14 +165,16 @@ const streamURL="https://radiostreaming.pro/8222/stream";
 const button=document.getElementById("playButton");
 const liveIndicator=document.getElementById("liveIndicator");
 
-let audio=new Audio(streamURL);
+let audio=null;
 let isPlaying=false;
 
-button.onclick=function(){
+button.addEventListener("click",function(){
 
 if(!isPlaying){
 
+audio=new Audio(streamURL+"?t="+Date.now());
 audio.play();
+
 isPlaying=true;
 button.textContent="■ DETENER";
 liveIndicator.style.display="block";
@@ -169,21 +182,44 @@ liveIndicator.style.display="block";
 }else{
 
 audio.pause();
+audio.src="";
+audio.load();
+audio=null;
+
 isPlaying=false;
 button.textContent="▶ ESCUCHAR EN VIVO";
 liveIndicator.style.display="none";
 
 }
 
-};
+});
 
-audio.addEventListener("loadedmetadata",function(){
+</script>
 
-if(audio.metadata && audio.metadata.title){
-document.getElementById("songtitle").innerText=audio.metadata.title;
-}
+<script>
+
+function cargarCancion(){
+
+fetch("https://radiostreaming.pro/cp/get_info.php?p=8222")
+
+.then(res=>res.json())
+
+.then(data=>{
+
+document.getElementById("songtitle").innerText=data.songtitle;
+
+})
+
+.catch(()=>{
+
+document.getElementById("songtitle").innerText="Transmitiendo en vivo";
 
 });
+
+}
+
+setInterval(cargarCancion,5000);
+cargarCancion();
 
 </script>
 

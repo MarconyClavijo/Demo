@@ -206,7 +206,7 @@ liveIndicator.style.display = "none";
 
 function obtenerCancion(){
 
-fetch("https://radiostreaming.pro:8222/7.html")
+fetch("https://radiostreaming.pro:8222/7.html?"+Math.random())
 
 .then(response => response.text())
 
@@ -214,30 +214,21 @@ fetch("https://radiostreaming.pro:8222/7.html")
 
 let datos = data.split(",");
 
-let cancion = datos[6];
+let cancion = datos[datos.length - 1];
 
-if(cancion && cancion !== ""){
-
-document.getElementById("songtitle").textContent = cancion;
-
-}else{
-
-document.getElementById("songtitle").textContent = "En vivo";
-
-}
+document.getElementById("songtitle").innerText = cancion;
 
 })
 
 .catch(()=>{
 
-document.getElementById("songtitle").textContent = "En vivo";
+document.getElementById("songtitle").innerText = "En vivo";
 
 });
 
 }
 
 setInterval(obtenerCancion,5000);
-
 obtenerCancion();
 
 </script>

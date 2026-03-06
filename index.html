@@ -1,344 +1,246 @@
-```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>La Tremenda 106.5 FM</title>
+<title>Radio La N 96.3 FM | Suena Diferente</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
 <style>
-
 body{
-margin:0;
-font-family:'Poppins',sans-serif;
-min-height:100vh;
-background:linear-gradient(140deg,#ff0000,#ff7300,#ffc400);
-background-size:300% 300%;
-animation:fondo 10s ease infinite;
-display:flex;
-justify-content:center;
-align-items:center;
-flex-direction:column;
+  margin:0;
+  font-family:'Poppins', sans-serif;
+  background:linear-gradient(135deg,#000,#111,#ffcc00);
+  color:#fff;
+  text-align:center;
 }
 
-@keyframes fondo{
-0%{background-position:0% 50%}
-50%{background-position:100% 50%}
-100%{background-position:0% 50%}
-}
-
-.app{
-width:92%;
-max-width:420px;
-background:rgba(0,0,0,.55);
-backdrop-filter:blur(12px);
-border-radius:30px;
-padding:25px 20px;
-box-shadow:0 0 40px rgba(0,0,0,.6);
-text-align:center;
-color:#fff;
-margin-top:20px;
-}
-
-.title{
-font-size:28px;
-font-weight:900;
-margin-bottom:5px;
-text-shadow:0 0 10px #ff0000;
+header{
+  padding:40px 15px 20px;
 }
 
 .logo{
-width:170px;
-margin:10px 0;
-filter:drop-shadow(0 0 10px #fff);
+  width:190px;
+  margin-bottom:12px;
+  filter:
+    drop-shadow(0 0 4px #fff)
+    drop-shadow(0 0 12px #ffcc00)
+    drop-shadow(0 0 24px rgba(255,204,0,.9));
+  animation:floatLogo 3.5s ease-in-out infinite;
+}
+
+@keyframes floatLogo{
+  0%{transform:translateY(0)}
+  50%{transform:translateY(-12px)}
+  100%{transform:translateY(0)}
+}
+
+h1{
+  margin:6px 0 4px;
+  font-size:26px;
+}
+
+.slogan{
+  color:#ffcc00;
+  letter-spacing:2px;
+  font-size:14px;
+  margin-bottom:25px;
 }
 
 .player-box{
-background:rgba(255,255,255,.12);
-border:2px solid rgba(255,255,255,.2);
-border-radius:20px;
-padding:20px;
-margin-top:10px;
+  margin:40px 0;
 }
 
-.status{
-font-weight:bold;
-margin-bottom:5px;
-color:#0f0;
+.play-btn{
+  background:#ffcc00;
+  color:#000;
+  border:none;
+  padding:18px 50px;
+  font-size:20px;
+  font-weight:700;
+  border-radius:50px;
+  cursor:pointer;
+  box-shadow:0 0 25px rgba(255,204,0,.8);
+  transition:.3s;
 }
 
-.song{
-font-size:14px;
-margin-bottom:10px;
-opacity:.9;
+.play-btn:hover{
+  transform:scale(1.05);
 }
 
-.cover-box{
-margin:10px 0;
+.live-indicator{
+  margin-top:15px;
+  font-size:14px;
+  display:none;
 }
 
-.cover-box img{
-width:140px;
-height:140px;
-border-radius:15px;
-object-fit:cover;
-box-shadow:0 0 20px rgba(0,0,0,.6);
+.live-dot{
+  height:10px;
+  width:10px;
+  background:red;
+  border-radius:50%;
+  display:inline-block;
+  margin-right:6px;
+  animation:pulse 1s infinite;
 }
 
-.play{
-padding:20px;
-width:100%;
-font-size:26px;
-font-weight:900;
-border:none;
-border-radius:15px;
-background:#00d95f;
-color:#fff;
-cursor:pointer;
-transition:.3s;
-box-shadow:0 0 20px rgba(0,255,100,.6);
+@keyframes pulse{
+  0%{opacity:1}
+  50%{opacity:.3}
+  100%{opacity:1}
 }
 
-.play:hover{
-transform:scale(1.05);
+.song-title{
+  margin-top:25px;
+  font-size:16px;
+  color:#ffcc00;
 }
 
-.volume{
-margin-top:15px;
+.buttons{
+  margin:30px 0;
 }
 
-input[type=range]{
-width:100%;
+.buttons a{
+  display:inline-block;
+  margin:6px;
+  padding:12px 22px;
+  background:#111;
+  color:#ffcc00;
+  border:2px solid #ffcc00;
+  font-weight:600;
+  text-decoration:none;
+  border-radius:30px;
+  transition:.3s;
 }
 
-.eq{
-display:flex;
-justify-content:center;
-gap:6px;
-margin:15px 0;
-height:40px;
+.buttons a:hover{
+  background:#ffcc00;
+  color:#000;
 }
 
-.eq span{
-width:8px;
-background:#00ff00;
-animation:eco .7s infinite;
-animation-play-state:paused;
+footer{
+  margin-top:35px;
+  padding:15px;
+  font-size:13px;
+  background:rgba(0,0,0,.55);
 }
-
-.playing .eq span{
-animation-play-state:running;
-}
-
-@keyframes eco{
-0%{height:10px}
-50%{height:40px}
-100%{height:15px}
-}
-
-.social-container{
-display:flex;
-gap:10px;
-margin-top:15px;
-}
-
-.social-box{
-flex:1;
-padding:15px;
-border-radius:15px;
-font-weight:bold;
-text-decoration:none;
-color:#fff;
-text-align:center;
-transition:.3s;
-}
-
-.facebook{
-background:#1877f2;
-}
-
-.whatsapp{
-background:#00bb2d;
-}
-
-.social-box:hover{
-transform:scale(1.06);
-}
-
-.footer{
-margin-top:10px;
-color:#fff;
-font-size:12px;
-opacity:.8;
-text-align:center;
-}
-
 </style>
 </head>
 
 <body>
 
-<div class="app" id="app">
+<header>
 
-<div class="title">LA TREMENDA 106.5 FM</div>
+<img
+src="https://user1472.na.imgto.link/public/20260117/la-n-removebg-preview.avif"
+alt="Radio La N 96.3 FM"
+class="logo">
 
-<img src="https://imgfz.com/i/h7TrEm5.png" class="logo">
+<h1>Radio La N 96.3 FM</h1>
+<div class="slogan">SUENA DIFERENTE</div>
+
+</header>
 
 <div class="player-box">
 
-<div class="status" id="estado">🔴 EN VIVO</div>
+<button class="play-btn" id="playButton">▶ ESCUCHAR EN VIVO</button>
 
-<div class="song">
-<span id="sonic_title">Cargando canción...</span>
+<div class="live-indicator" id="liveIndicator">
+<span class="live-dot"></span> EN VIVO
 </div>
 
-<div class="cover-box">
-<img id="cover" src="https://i.imgur.com/7bKQK8T.png">
-</div>
-
-<div class="eq">
-<span></span><span></span><span></span><span></span><span></span>
-</div>
-
-<button class="play" id="btn">▶ PLAY</button>
-
-<div class="volume">
-<input type="range" min="0" max="1" step="0.01" value="1" id="volumen">
+<div class="song-title">
+🎵 <span id="songtitle">Cargando canción...</span>
 </div>
 
 </div>
 
-<div class="social-container">
-
-<a class="social-box facebook"
-href="https://www.facebook.com/profile.php?id=61585616422921"
-target="_blank">
-Facebook
-</a>
-
-<a class="social-box whatsapp"
-href="https://wa.me/51942883375"
-target="_blank">
-WhatsApp
-</a>
-
+<div class="buttons">
+<a href="#">📘 Facebook</a>
+<a href="https://wa.me/51999999999">📞 WhatsApp</a>
 </div>
 
-</div>
-
-<div class="footer">
-Diseño por Marcony Clavijo – Radio La Tremenda
-</div>
+<footer>
+© 2026 Radio La N 96.3 FM · Diseño web: Marcony Clavijo
+</footer>
 
 <script>
 
-const btn = document.getElementById("btn");
-const estado = document.getElementById("estado");
-const app = document.getElementById("app");
-const vol = document.getElementById("volumen");
+const streamURL = "https://radiostreaming.pro/8222/stream";
+const button = document.getElementById("playButton");
+const liveIndicator = document.getElementById("liveIndicator");
 
 let audio = null;
-let sonando = false;
+let isPlaying = false;
 
-function crearAudio(){
+button.addEventListener("click", function() {
 
-if(audio){
+if (!isPlaying) {
+
+audio = new Audio(streamURL + "?t=" + Date.now());
+audio.play();
+
+isPlaying = true;
+button.textContent = "■ DETENER";
+liveIndicator.style.display = "block";
+
+} else {
+
 audio.pause();
-audio.src="";
+audio.src = "";
 audio.load();
+audio = null;
+
+isPlaying = false;
+button.textContent = "▶ ESCUCHAR EN VIVO";
+liveIndicator.style.display = "none";
+
 }
 
-audio = new Audio("https://sonic.globalstream.pro/8080/stream");
-audio.preload="none";
-audio.volume=vol.value;
-
-}
-
-btn.onclick=()=>{
-
-if(!sonando){
-
-crearAudio();
-
-estado.textContent="⏳ Conectando en vivo...";
-btn.textContent="⏳";
-
-audio.play()
-.then(()=>{
-estado.textContent="🎧 EN VIVO - TIEMPO REAL";
-btn.textContent="⏸ DETENER";
-app.classList.add("playing");
-sonando=true;
-})
-.catch(()=>{
-estado.textContent="⚠️ Error de conexión";
-btn.textContent="▶ REPRODUCIR";
-sonando=false;
 });
-
-}else{
-
-audio.pause();
-audio.src="";
-audio.load();
-
-estado.textContent="⏹ TRANSMISIÓN DETENIDA";
-btn.textContent="▶ REPRODUCIR";
-app.classList.remove("playing");
-
-sonando=false;
-
-}
-
-};
-
-vol.oninput=()=>{
-if(audio) audio.volume=vol.value;
-};
 
 </script>
 
-<script id='sonic_js' data-port='8080' src='https://sonic.globalstream.pro/cp/widgets.js?r=545'></script>
-
 <script>
 
-function buscarCaratula(cancion){
+function obtenerCancion(){
 
-let cover=document.getElementById("cover");
+fetch("https://radiostreaming.pro:8222/7.html")
 
-fetch("https://itunes.apple.com/search?term="+encodeURIComponent(cancion)+"&entity=song&limit=1")
-.then(r=>r.json())
-.then(data=>{
+.then(response => response.text())
 
-if(data.results.length>0){
+.then(data => {
 
-let img=data.results[0].artworkUrl100;
-img=img.replace("100x100","500x500");
+let datos = data.split(",");
 
-cover.src=img;
+let cancion = datos[6];
+
+if(cancion && cancion !== ""){
+
+document.getElementById("songtitle").textContent = cancion;
+
+}else{
+
+document.getElementById("songtitle").textContent = "En vivo";
 
 }
+
+})
+
+.catch(()=>{
+
+document.getElementById("songtitle").textContent = "En vivo";
 
 });
 
 }
 
-setInterval(()=>{
+setInterval(obtenerCancion,5000);
 
-let titulo=document.getElementById("sonic_title");
-
-if(titulo){
-
-buscarCaratula(titulo.innerText);
-
-}
-
-},8000);
+obtenerCancion();
 
 </script>
 
 </body>
 </html>
-```

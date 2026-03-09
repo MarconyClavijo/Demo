@@ -25,10 +25,10 @@ padding:20px;
 
 .logo{
 width:120px;
-animation:logo 3s infinite ease-in-out;
+animation:float 3s infinite ease-in-out;
 }
 
-@keyframes logo{
+@keyframes float{
 0%{transform:translateY(0)}
 50%{transform:translateY(-10px)}
 100%{transform:translateY(0)}
@@ -68,10 +68,6 @@ padding:15px 25px;
 font-size:18px;
 border-radius:30px;
 cursor:pointer;
-}
-
-button:hover{
-background:#b80000;
 }
 
 .song{
@@ -153,35 +149,50 @@ font-size:14px;
 Diseño web Marcony Clavijo | 942883375
 </footer>
 
-<audio id="radioPlayer"></audio>
-
 <script>
 
 const btn = document.getElementById("playBtn");
 const radio = document.getElementById("radio");
 
-const STREAM = "https://sonic.globalstream.pro/8108/stream";
+let playing=false;
+let streamIndex=0;
 
-let playing = false;
+const streams=[
+"https://sonic.globalstream.pro/8108/stream",
+"https://sonic.globalstream.pro/8108/;stream.mp3",
+"https://sonic.globalstream.pro/8108/stream.mp3"
+];
 
-btn.onclick = function(){
+function playStream(){
+
+radio.src = streams[streamIndex] + "?t=" + new Date().getTime();
+radio.play().catch(()=>{
+
+streamIndex++;
+
+if(streamIndex < streams.length){
+playStream();
+}
+
+});
+
+}
+
+btn.onclick=function(){
 
 if(!playing){
 
-radio.src = STREAM + "?nocache=" + new Date().getTime();
-radio.play();
+streamIndex=0;
+playStream();
 
 btn.innerText="DETENER";
-
 playing=true;
 
 }else{
 
 radio.pause();
 radio.src="";
-
 btn.innerText="ESCUCHAR EN VIVO";
-
 playing=false;
 
 }
@@ -190,7 +201,7 @@ playing=false;
 
 </script>
 
-<!-- WIDGET SONIC PARA TITULO DE CANCION -->
+<!-- TITULO DE CANCION -->
 
 <script id="sonic_js" data-port="8108" src="https://sonic.globalstream.pro/cp/widgets.js?r=906"></script>
 
@@ -202,11 +213,11 @@ if(typeof sonic_data!=="undefined"){
 
 if(sonic_data.songtitle){
 
-document.getElementById("songTitle").innerText = sonic_data.songtitle;
+document.getElementById("songTitle").innerText=sonic_data.songtitle;
 
 }else{
 
-document.getElementById("songTitle").innerText = "En transmisión...";
+document.getElementById("songTitle").innerText="En transmisión...";
 
 }
 

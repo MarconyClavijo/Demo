@@ -12,6 +12,7 @@ body{
   background:radial-gradient(circle at top,#ff00cc,#111,#000);
   color:white;
 }
+
 /* HEADER */
 header{
   display:flex;
@@ -21,9 +22,7 @@ header{
   background:#000;
   border-bottom:1px solid #222;
 }
-.logo-text{
-  height:40px;
-}
+.logo-text{ height:40px; }
 .appBtn{
   background:#00c853;
   padding:8px 18px;
@@ -34,6 +33,7 @@ header{
   font-weight:bold;
   box-shadow:0 0 10px #00c853;
 }
+
 /* CONTAINER */
 .container{
   max-width:420px;
@@ -41,6 +41,7 @@ header{
   text-align:center;
   padding:20px;
 }
+
 /* LOGO RADIO */
 .logo{
   width:180px;
@@ -55,16 +56,11 @@ header{
   from{transform:rotate(0)}
   to{transform:rotate(360deg)}
 }
+
 /* TITULO */
-h1{
-  margin:10px 0;
-  font-size:26px;
-}
-.sub{
-  font-size:13px;
-  color:#ffcc00;
-  letter-spacing:2px;
-}
+h1{ margin:10px 0; font-size:26px; }
+.sub{ font-size:13px; color:#ffcc00; letter-spacing:2px; }
+
 /* PLAYER */
 .playBtn{
   margin-top:20px;
@@ -77,17 +73,18 @@ h1{
   cursor:pointer;
   box-shadow:0 0 20px #ff0000;
 }
-.status{
-  margin-top:12px;
-  font-size:14px;
-  color:#00ffff;
-}
-/* SONG */
-.song{
+.status{ margin-top:12px; font-size:14px; color:#00ffff; }
+
+/* COUNTER */
+.counter{
   margin-top:10px;
-  font-size:15px;
+  font-size:14px;
   color:#ffcc00;
 }
+
+/* SONG */
+.song{ margin-top:10px; font-size:15px; color:#ffcc00; }
+
 /* COVER */
 .cover{
   margin-top:20px;
@@ -97,6 +94,7 @@ h1{
   object-fit:cover;
   box-shadow:0 0 20px #000;
 }
+
 /* EQ */
 .eq{
   display:flex;
@@ -114,27 +112,15 @@ h1{
 .eq span:nth-child(3){animation-delay:.4s}
 .eq span:nth-child(4){animation-delay:.6s}
 .eq span:nth-child(5){animation-delay:.8s}
-@keyframes eq{
-  0%,100%{height:5px}
-  50%{height:20px}
-}
+@keyframes eq{ 0%,100%{height:5px} 50%{height:20px} }
+
 /* HISTORY */
-.history{
-  margin-top:20px;
-  font-size:13px;
-  text-align:left;
-}
-.history h3{
-  color:#00ffff;
-}
-.history ul{
-  list-style:none;
-  padding:0;
-}
+.history{ margin-top:20px; font-size:13px; text-align:left; }
+.history h3{ color:#00ffff; }
+.history ul{ list-style:none; padding:0; }
+
 /* SOCIAL */
-.social{
-  margin-top:20px;
-}
+.social{ margin-top:20px; }
 .social a{
   display:inline-block;
   margin:5px;
@@ -146,6 +132,7 @@ h1{
 }
 .fb{background:#1877f2}
 .wa{background:#25d366}
+
 /* SPONSORS */
 .sponsors{
   margin-top:35px;
@@ -156,33 +143,32 @@ h1{
   padding-left:10px;
   color:#ffcc00;
 }
-/* Carrusel de auspiciadores */
+/* Carrusel autodeslizante */
 .sponsor-carousel{
   display:flex;
-  overflow-x:auto;
   gap:15px;
-  padding:10px;
-  scroll-behavior:smooth;
+  overflow:hidden;
+  position:relative;
 }
-.sponsor-carousel::-webkit-scrollbar{
-  display:none;
+.sponsor-track{
+  display:flex;
+  gap:15px;
+  animation:scrollSponsors 15s linear infinite;
 }
-.sponsor-carousel img{
+@keyframes scrollSponsors{
+  0%{transform:translateX(0);}
+  100%{transform:translateX(-50%);}
+}
+.sponsor-track img{
   width:180px;
   border-radius:12px;
   box-shadow:0 0 15px #ff00cc;
   transition:.3s;
-  flex-shrink:0;
   cursor:pointer;
-  animation:pulse 3s infinite;
+  flex-shrink:0;
 }
-.sponsor-carousel img:hover{
-  transform:scale(1.2);
-}
-@keyframes pulse{
-  0%,100%{transform:scale(1);}
-  50%{transform:scale(1.1);}
-}
+.sponsor-track img:hover{ transform:scale(1.2); }
+
 /* FOOTER */
 footer{
   margin-top:40px;
@@ -203,15 +189,15 @@ footer{
 <div class="container">
 
 <img src="https://image2url.com/r2/default/images/1773073454712-7beae05c-bba6-4cbc-a169-e794356cf998.png" class="logo" id="logo">
-
 <h1>MARCONY RADIO</h1>
 <div class="sub">TRANSMITIENDO EN VIVO 24/7</div>
 
 <audio id="radio"></audio>
 
 <button class="playBtn" id="btn" onclick="toggleRadio()">▶ ESCUCHAR EN VIVO</button>
-
 <div class="status" id="status">Radio detenida</div>
+
+<div class="counter" id="counter">Visitantes: 0</div>
 
 <div class="song">🎵 <span id="sonic_title">Cargando canción...</span></div>
 
@@ -236,12 +222,21 @@ footer{
 <div class="sponsors">
 <h3>Auspiciadores</h3>
 <div class="sponsor-carousel">
-  <a href="https://www.facebook.com/eltiojhony" target="_blank">
-    <img src="https://image2url.com/r2/default/images/1773033863184-0f8f4472-23e2-499a-9ee2-09855499b657.png">
-  </a>
-  <a href="https://www.facebook.com/iepchildrenscollege" target="_blank">
-    <img src="https://image2url.com/r2/default/images/1773033971607-e63d7b01-4951-4025-9317-a1a96877113d.png">
-  </a>
+  <div class="sponsor-track">
+    <a href="https://www.facebook.com/eltiojhony" target="_blank">
+      <img src="https://image2url.com/r2/default/images/1773033863184-0f8f4472-23e2-499a-9ee2-09855499b657.png">
+    </a>
+    <a href="https://www.facebook.com/iepchildrenscollege" target="_blank">
+      <img src="https://image2url.com/r2/default/images/1773033971607-e63d7b01-4951-4025-9317-a1a96877113d.png">
+    </a>
+    <!-- Duplicamos para loop infinito -->
+    <a href="https://www.facebook.com/eltiojhony" target="_blank">
+      <img src="https://image2url.com/r2/default/images/1773033863184-0f8f4472-23e2-499a-9ee2-09855499b657.png">
+    </a>
+    <a href="https://www.facebook.com/iepchildrenscollege" target="_blank">
+      <img src="https://image2url.com/r2/default/images/1773033971607-e63d7b01-4951-4025-9317-a1a96877113d.png">
+    </a>
+  </div>
 </div>
 </div>
 
@@ -252,6 +247,7 @@ Página creada por Marcony Clavijo
 </div>
 
 <script>
+// PLAYER
 const radio=document.getElementById("radio")
 const btn=document.getElementById("btn")
 const status=document.getElementById("status")
@@ -283,6 +279,7 @@ logo.classList.add("spin")
 eq.style.display="flex"
 })
 
+// HISTORIAL
 setInterval(()=>{
 let song=document.getElementById("sonic_title").innerText
 if(song && !history.includes(song)){
@@ -307,6 +304,13 @@ document.getElementById("cover").src=data.results[0].artworkUrl100.replace("100x
 }
 })
 }
+
+// CONTADOR DE VISITANTES (simulado local)
+let counterEl = document.getElementById("counter");
+let visitors = localStorage.getItem("visitors") || 0;
+visitors++;
+localStorage.setItem("visitors", visitors);
+counterEl.innerText = "Visitantes: "+visitors;
 </script>
 
 </body>

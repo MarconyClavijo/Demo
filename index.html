@@ -53,67 +53,95 @@ header{
 .hero{
   background: linear-gradient(to right, rgba(0,0,0,0.7) 30%, rgba(0,0,0,0.3) 70%),
               url("https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4") center/cover no-repeat;
-  height:360px;
+  height:380px;
   display:flex;
   align-items:center;
   justify-content:center;
+  padding:20px;
 }
 
 /* PLAYER */
 .player{
-  background:rgba(0,0,0,0.75);
-  padding:20px 25px;
-  border-radius:20px;
+  background:rgba(0,0,0,0.85);
+  padding:25px;
+  border-radius:25px;
   text-align:center;
-  width:95%;
-  max-width:500px;
+  width:100%;
+  max-width:700px;
   display:flex;
   flex-direction:row;
   align-items:center;
-  gap:20px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+  gap:25px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+  position:relative;
 }
 
 .song{
-  font-size:18px;
+  font-size:20px;
   color:white;
-  text-shadow:1px 1px 5px rgba(0,0,0,0.7);
+  text-shadow:2px 2px 8px rgba(0,0,0,0.8);
   flex:1;
+  transition: opacity 0.5s ease;
 }
 
 .cover{
-  width:120px;
-  height:120px;
+  width:180px;
+  height:180px;
   object-fit:cover;
-  border-radius:15px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+  border-radius:20px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.6);
+  transition: transform 0.3s ease;
+}
+
+.cover:hover{
+  transform: scale(1.05);
 }
 
 .play{
-  width:55px;
-  height:55px;
+  width:60px;
+  height:60px;
   border-radius:50%;
   border:none;
   background:white;
-  font-size:24px;
+  font-size:28px;
   cursor:pointer;
   flex-shrink:0;
 }
 
 .volume{
-  margin-top:10px;
+  margin-top:15px;
   width:100%;
+}
+
+/* HISTORIAL CON FADE */
+.history ul{
+  list-style:none;
+  padding:0;
+  max-width:500px;
+  margin:10px auto 0;
+}
+
+.history li{
+  margin-bottom:5px;
+  font-size:15px;
+  opacity:0;
+  animation:fadeIn 0.8s forwards;
+}
+
+@keyframes fadeIn{
+  from{opacity:0; transform: translateX(-20px);}
+  to{opacity:1; transform: translateX(0);}
 }
 
 /* AUSPICIADORES */
 .sponsor{
   text-align:center;
-  padding:25px 15px;
+  padding:30px 20px;
   background:#f9f9f9;
   color:black;
-  border-radius:15px;
-  box-shadow:0 4px 15px rgba(0,0,0,0.2);
-  margin:30px auto;
+  border-radius:20px;
+  box-shadow:0 5px 20px rgba(0,0,0,0.2);
+  margin:40px auto;
   max-width:95%;
 }
 
@@ -124,13 +152,13 @@ header{
 
 .track{
   display:flex;
-  gap:40px;
+  gap:45px;
   animation:scroll 20s linear infinite;
   align-items:center;
 }
 
 .track img{
-  width:140px;
+  width:150px;
   height:auto;
   border-radius:10px;
 }
@@ -160,21 +188,6 @@ header{
   padding:30px;
 }
 
-.history{
-  text-align:center;
-  padding:30px;
-}
-
-.history ul{
-  list-style:none;
-  padding:0;
-}
-
-.history li{
-  margin-bottom:5px;
-  font-size:14px;
-}
-
 /* FOOTER */
 footer{
   text-align:center;
@@ -198,23 +211,25 @@ footer{
     height:55px;
   }
   .hero{
-    height:280px;
+    height:300px;
+    flex-direction:column;
   }
   .player{
     flex-direction:column;
     padding:20px;
-    gap:15px;
+    gap:20px;
+    max-width:95%;
   }
   .cover{
-    width:150px;
-    height:150px;
+    width:160px;
+    height:160px;
   }
   .song{
-    font-size:16px;
+    font-size:17px;
     text-align:center;
   }
   .sponsor{
-    padding:15px 10px;
+    padding:20px 15px;
   }
   .carousel{
     overflow-x:auto;
@@ -224,7 +239,10 @@ footer{
     gap:25px;
   }
   .track img{
-    width:100px;
+    width:110px;
+  }
+  .history li{
+    font-size:14px;
   }
 }
 </style>
@@ -307,20 +325,28 @@ function toggleRadio(){
   }
 }
 
-// Función para actualizar título y cover con widget Sonic
+// Función para actualizar título, portada y historial con efecto fade
 function updateSonic(){
   if(window.Sonic){
     Sonic.on('songChange', function(data){
-      title.textContent = data.song.title || 'Sin título'
+      // Título
+      title.style.opacity=0
+      setTimeout(()=>{ 
+        title.textContent = data.song.title || 'Sin título'
+        title.style.opacity=1
+      }, 300)
+
+      // Portada
       cover.src = data.song.cover || 'https://i.imgur.com/8Km9tLL.png'
 
-      // historial últimas 5 canciones
+      // Historial últimas 5 canciones
       history.unshift(data.song.title)
       if(history.length>5) history.pop()
-      historyList.innerHTML = ''
-      history.forEach(song => {
+      historyList.innerHTML=''
+      history.forEach((song,i)=>{
         const li = document.createElement('li')
         li.textContent = song
+        li.style.animationDelay = (i*0.2)+'s'
         historyList.appendChild(li)
       })
     })

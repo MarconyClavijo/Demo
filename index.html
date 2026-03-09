@@ -3,13 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Marcony Radio | En Vivo</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 
 <style>
-
 body{
   margin:0;
   font-family:Poppins;
@@ -18,7 +16,6 @@ body{
 }
 
 /* HEADER */
-
 header{
   display:flex;
   justify-content:space-between;
@@ -53,11 +50,9 @@ header{
 }
 
 /* HERO */
-
 .hero{
-  background:
-    linear-gradient(to right, rgba(0,0,0,0.7) 30%, rgba(0,0,0,0.3) 70%),
-    url("https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4") center/cover no-repeat;
+  background: linear-gradient(to right, rgba(0,0,0,0.7) 30%, rgba(0,0,0,0.3) 70%),
+              url("https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4") center/cover no-repeat;
   height:360px;
   display:flex;
   align-items:center;
@@ -65,7 +60,6 @@ header{
 }
 
 /* PLAYER */
-
 .player{
   background:rgba(0,0,0,0.75);
   padding:20px 25px;
@@ -112,7 +106,6 @@ header{
 }
 
 /* AUSPICIADORES */
-
 .sponsor{
   text-align:center;
   padding:25px 15px;
@@ -143,7 +136,6 @@ header{
 }
 
 /* REDES */
-
 .redes{
   text-align:center;
   padding:35px;
@@ -163,7 +155,6 @@ header{
 .wa{background:#25d366}
 
 /* VISITAS */
-
 .visitas{
   text-align:center;
   padding:30px;
@@ -174,6 +165,17 @@ header{
   padding:30px;
 }
 
+.history ul{
+  list-style:none;
+  padding:0;
+}
+
+.history li{
+  margin-bottom:5px;
+  font-size:14px;
+}
+
+/* FOOTER */
 footer{
   text-align:center;
   padding:20px;
@@ -182,183 +184,151 @@ footer{
 }
 
 /* ANIMACIONES */
-
 @keyframes scroll{
   0%{transform:translateX(0)}
   100%{transform:translateX(-50%)}
 }
 
 /* MOBILE */
-
 @media(max-width:700px){
-
-header{
-  padding:12px 20px;
+  header{
+    padding:12px 20px;
+  }
+  .header-logo{
+    height:55px;
+  }
+  .hero{
+    height:280px;
+  }
+  .player{
+    flex-direction:column;
+    padding:20px;
+    gap:15px;
+  }
+  .cover{
+    width:150px;
+    height:150px;
+  }
+  .song{
+    font-size:16px;
+    text-align:center;
+  }
+  .sponsor{
+    padding:15px 10px;
+  }
+  .carousel{
+    overflow-x:auto;
+  }
+  .track{
+    animation:none;
+    gap:25px;
+  }
+  .track img{
+    width:100px;
+  }
 }
-
-.header-logo{
-  height:55px;
-}
-
-.hero{
-  height:280px;
-}
-
-.player{
-  flex-direction:column;
-  padding:20px;
-  gap:15px;
-}
-
-.cover{
-  width:150px;
-  height:150px;
-}
-
-.song{
-  font-size:16px;
-  text-align:center;
-}
-
-.sponsor{
-  padding:15px 10px;
-}
-
-.carousel{
-  overflow-x:auto;
-}
-
-.track{
-  animation:none;
-  gap:25px;
-}
-
-.track img{
-  width:100px;
-}
-
-}
-
 </style>
 </head>
 
 <body>
 
 <header>
-
-<img class="header-logo" src="https://image2url.com/r2/default/images/1773037946056-a151a866-7199-4082-8a26-038f5e9ca31c.png">
-
-<a class="appbtn" href="https://play.google.com/store/apps/details?id=com.innovatel.marconyradio" target="_blank">
-Descarga nuestra<br>APP
-</a>
-
+  <img class="header-logo" src="https://image2url.com/r2/default/images/1773037946056-a151a866-7199-4082-8a26-038f5e9ca31c.png">
+  <a class="appbtn" href="https://play.google.com/store/apps/details?id=com.innovatel.marconyradio" target="_blank">
+    Descarga nuestra<br>APP
+  </a>
 </header>
 
 <section class="hero">
-
-<div class="player">
-
-<img id="cover" class="cover" src="https://i.imgur.com/8Km9tLL.png">
-
-<div class="song">
-🎵 <span id="sonic_title">Cargando canción...</span>
-</div>
-
-<button class="play" onclick="toggleRadio()" id="btn">▶</button>
-
-</div>
-
+  <div class="player">
+    <img id="cover" class="cover" src="https://i.imgur.com/8Km9tLL.png">
+    <div class="song">
+      🎵 <span id="sonic_title">Cargando canción...</span>
+    </div>
+    <button class="play" onclick="toggleRadio()" id="btn">▶</button>
+    <input type="range" min="0" max="1" step="0.01" class="volume" onchange="radio.volume=this.value">
+  </div>
 </section>
 
 <section class="sponsor">
-
-<h2>Auspiciado por:</h2>
-
-<div class="carousel">
-<div class="track">
-
-<a href="https://www.facebook.com/eltiojhony" target="_blank">
-<img src="https://image2url.com/r2/default/images/1773033863184-0f8f4472-23e2-499a-9ee2-09855499b657.png">
-</a>
-
-<a href="https://www.facebook.com/iepchildrenscollege" target="_blank">
-<img src="https://image2url.com/r2/default/images/1773033971607-e63d7b01-4951-4025-9317-a1a96877113d.png">
-</a>
-
-<a href="https://www.facebook.com/eltiojhony" target="_blank">
-<img src="https://image2url.com/r2/default/images/1773033863184-0f8f4472-23e2-499a-9ee2-09855499b657.png">
-</a>
-
-<a href="https://www.facebook.com/iepchildrenscollege" target="_blank">
-<img src="https://image2url.com/r2/default/images/1773033971607-e63d7b01-4951-4025-9317-a1a96877113d.png">
-</a>
-
-</div>
-</div>
-
+  <h2>Auspiciado por:</h2>
+  <div class="carousel">
+    <div class="track">
+      <a href="https://www.facebook.com/eltiojhony" target="_blank">
+        <img src="https://image2url.com/r2/default/images/1773033863184-0f8f4472-23e2-499a-9ee2-09855499b657.png">
+      </a>
+      <a href="https://www.facebook.com/iepchildrenscollege" target="_blank">
+        <img src="https://image2url.com/r2/default/images/1773033971607-e63d7b01-4951-4025-9317-a1a96877113d.png">
+      </a>
+    </div>
+  </div>
 </section>
 
 <section class="redes">
-
-<h2>Síguenos</h2>
-
-<a class="fb" href="https://www.facebook.com/radiomarcony">Facebook</a>
-
-<a class="wa" href="https://wa.me/51942883375">WhatsApp</a>
-
+  <h2>Síguenos</h2>
+  <a class="fb" href="https://www.facebook.com/radiomarcony">Facebook</a>
+  <a class="wa" href="https://wa.me/51942883375">WhatsApp</a>
 </section>
 
 <section class="visitas">
-
-<h2>Número de visitas</h2>
-
-<img src="https://hitwebcounter.com/counter/counter.php?page=18947533&style=0006&nbdigits=6&type=page&initCount=0">
-
+  <h2>Número de visitas</h2>
+  <img src="https://hitwebcounter.com/counter/counter.php?page=18947533&style=0006&nbdigits=6&type=page&initCount=0">
 </section>
 
 <section class="history">
-
-<h3>Últimas canciones</h3>
-
-<ul id="history"></ul>
-
+  <h3>Últimas canciones</h3>
+  <ul id="history_list"></ul>
 </section>
 
-<footer>
-
-Marcony Radio © 2026
-
-</footer>
+<footer>Marcony Radio © 2026</footer>
 
 <audio id="radio"></audio>
-
-<script id="sonic_js" data-port="8216" src="https://radiostreaming.pro/cp/widgets.js?r=846"></script>
+<script src="https://radiostreaming.pro/cp/widgets.js?r=846" id="sonic_js" data-port="8216"></script>
 
 <script>
-
 const radio=document.getElementById("radio")
+const title=document.getElementById("sonic_title")
+const cover=document.getElementById("cover")
+const historyList=document.getElementById("history_list")
 let playing=false
+let history=[]
 
 function toggleRadio(){
-
-if(!playing){
-
-radio.src="https://radiostreaming.pro/8216/stream"
-radio.play()
-playing=true
-document.getElementById("btn").innerHTML="⏹"
-
-}else{
-
-radio.pause()
-radio.src=""
-playing=false
-document.getElementById("btn").innerHTML="▶"
-
+  if(!playing){
+    radio.src="https://radiostreaming.pro/8216/stream"
+    radio.play()
+    playing=true
+    document.getElementById("btn").innerHTML="⏹"
+  } else {
+    radio.pause()
+    radio.src=""
+    playing=false
+    document.getElementById("btn").innerHTML="▶"
+  }
 }
 
-}
+// Función para actualizar título y cover con widget Sonic
+function updateSonic(){
+  if(window.Sonic){
+    Sonic.on('songChange', function(data){
+      title.textContent = data.song.title || 'Sin título'
+      cover.src = data.song.cover || 'https://i.imgur.com/8Km9tLL.png'
 
+      // historial últimas 5 canciones
+      history.unshift(data.song.title)
+      if(history.length>5) history.pop()
+      historyList.innerHTML = ''
+      history.forEach(song => {
+        const li = document.createElement('li')
+        li.textContent = song
+        historyList.appendChild(li)
+      })
+    })
+  } else {
+    setTimeout(updateSonic, 1000)
+  }
+}
+updateSonic()
 </script>
 
 </body>

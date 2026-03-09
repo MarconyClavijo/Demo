@@ -2,114 +2,142 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Radio La N 96.3 FM | Suena Diferente</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Radio Stereo M 101.5 FM</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet"/>
 
 <style>
+:root{
+--rojo:#e60000;
+--amarillo:#ffd700;
+--negro:#111;
+--blanco:#fff;
+--celeste:#0088cc;
+--footer:#222;
+}
+
 body{
 margin:0;
-font-family:'Poppins', sans-serif;
-background:linear-gradient(135deg,#000,#111,#ffcc00);
-color:#fff;
-text-align:center;
+font-family:'Raleway',sans-serif;
+background:linear-gradient(to bottom,var(--celeste),#f44336);
+color:var(--blanco);
 }
 
 header{
-padding:40px 15px 20px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:15px 20px;
+background:var(--amarillo);
+color:var(--negro);
+flex-wrap:wrap;
 }
+
+.logo-box{text-align:center}
 
 .logo{
-width:190px;
-margin-bottom:12px;
-filter:drop-shadow(0 0 4px #fff) drop-shadow(0 0 12px #ffcc00);
-animation:floatLogo 3.5s ease-in-out infinite;
-}
-
-@keyframes floatLogo{
-0%{transform:translateY(0)}
-50%{transform:translateY(-12px)}
-100%{transform:translateY(0)}
-}
-
-h1{
-margin:6px 0 4px;
-font-size:26px;
+width:120px;
+animation:rebote 2s infinite;
 }
 
 .slogan{
-color:#ffcc00;
-letter-spacing:2px;
-font-size:14px;
-margin-bottom:25px;
+font-weight:bold;
+color:var(--rojo);
+margin-top:6px;
+animation:entrar 1.2s forwards;
+}
+
+.extra-img{
+width:280px;
+border-radius:15px;
+box-shadow:0 0 15px #e60000aa;
+}
+
+.main{
+display:flex;
+justify-content:center;
+gap:20px;
+padding:25px;
+flex-wrap:wrap;
 }
 
 .player-box{
-margin:40px 0;
-}
-
-.play-btn{
-background:#ffcc00;
+background:#fff;
 color:#000;
-border:none;
-padding:18px 50px;
-font-size:20px;
-font-weight:700;
-border-radius:50px;
-cursor:pointer;
-box-shadow:0 0 25px rgba(255,204,0,.8);
+border-radius:15px;
+padding:20px;
+max-width:420px;
+width:100%;
+text-align:center;
+box-shadow:0 0 15px #ffd700;
 }
 
-.live-indicator{
-margin-top:15px;
-font-size:14px;
-display:none;
+audio{
+width:100%;
+margin-top:10px;
 }
 
-.live-dot{
-height:10px;
-width:10px;
-background:red;
-border-radius:50%;
-display:inline-block;
-margin-right:6px;
-animation:pulse 1s infinite;
+.live{
+margin-top:10px;
+color:red;
+font-weight:bold;
+animation:blink 1s infinite;
 }
 
-@keyframes pulse{
-0%{opacity:1}
-50%{opacity:.3}
-100%{opacity:1}
-}
-
-.song-title{
-margin-top:25px;
+#song-title{
+margin-top:10px;
+font-weight:bold;
 font-size:16px;
-color:#ffcc00;
 }
 
 .buttons{
-margin:30px 0;
+background:linear-gradient(to bottom right,#ffe066,#ff7b7b);
+padding:15px;
+border-radius:20px;
+display:flex;
+flex-direction:column;
+gap:12px;
+max-width:220px;
 }
 
 .buttons a{
-display:inline-block;
-margin:6px;
-padding:12px 22px;
-background:#111;
-color:#ffcc00;
-border:2px solid #ffcc00;
-font-weight:600;
+background:#fff;
+color:var(--rojo);
+padding:12px;
 text-decoration:none;
 border-radius:30px;
+font-weight:bold;
+text-align:center;
 }
 
 footer{
-margin-top:35px;
+background:var(--footer);
+text-align:center;
 padding:15px;
-font-size:13px;
-background:rgba(0,0,0,.55);
+font-size:14px;
+margin-top:30px;
+color:#ddd;
+}
+
+@keyframes rebote{
+0%,100%{transform:translateY(0)}
+50%{transform:translateY(-10px)}
+}
+
+@keyframes blink{
+50%{opacity:0}
+}
+
+@keyframes entrar{
+from{opacity:0;transform:translateY(20px)}
+to{opacity:1;transform:translateY(0)}
+}
+
+@media(max-width:768px){
+.extra-img{width:220px}
+.buttons{flex-direction:row;flex-wrap:wrap}
+.buttons a{flex:1 1 45%}
 }
 </style>
 </head>
@@ -117,67 +145,66 @@ background:rgba(0,0,0,.55);
 <body>
 
 <header>
+<div class="logo-box">
+<img src="https://i.postimg.cc/L8bjb6K5/1687464033296.png" class="logo">
+<div class="slogan">La Radio Papá 🎙️</div>
+</div>
 
-<img src="https://user1472.na.imgto.link/public/20260117/la-n-removebg-preview.avif" class="logo">
-
-<h1>Radio La N 96.3 FM</h1>
-<div class="slogan">SUENA DIFERENTE</div>
-
+<img src="http://imgfz.com/i/xgID1Gn.jpeg" class="extra-img">
 </header>
+
+<div class="main">
 
 <div class="player-box">
 
-<button class="play-btn" id="playButton">▶ ESCUCHAR EN VIVO</button>
+<h2>🎧 Escúchanos en Vivo</h2>
 
-<div class="live-indicator" id="liveIndicator">
-<span class="live-dot"></span> EN VIVO
-</div>
+<audio id="radioPlayer" controls preload="none" playsinline>
+<source src="https://sonic.globalstream.pro/8108/stream" type="audio/mpeg">
+Tu navegador no soporta audio.
+</audio>
 
-<div class="song-title">
-🎵 <span id="songtitle">Cargando canción...</span>
+<div class="live">🔴 EN VIVO</div>
+
+<div id="song-title">
+<span id="sonic_title">Cargando canción...</span>
 </div>
 
 </div>
 
 <div class="buttons">
-<a href="#">📘 Facebook</a>
-<a href="https://wa.me/51999999999">📞 WhatsApp</a>
+<a href="https://play.google.com/store/apps/details?id=com.innovatel.radiostereom" target="_blank">📲 Descarga la App</a>
+<a href="https://www.facebook.com/share/1Dib9eQUFD/" target="_blank">📘 Facebook</a>
+<a href="https://wa.me/51984412853" target="_blank">🎤 WhatsApp Oyentes</a>
+<a href="https://wa.me/51942883375" target="_blank">📢 Publicidad</a>
+</div>
+
 </div>
 
 <footer>
-© 2026 Radio La N 96.3 FM · Diseño web: Marcony Clavijo
+Diseño y desarrollo web por Marcony Clavijo | 942883375.
 </footer>
 
 <script>
 
-const streamURL="https://radiostreaming.pro/8222/stream";
-const button=document.getElementById("playButton");
-const liveIndicator=document.getElementById("liveIndicator");
+const player = document.getElementById("radioPlayer");
+const STREAM = "https://sonic.globalstream.pro/8108/stream";
 
-let audio=null;
-let isPlaying=false;
+let connected=false;
 
-button.addEventListener("click",function(){
+player.addEventListener("play",()=>{
 
-if(!isPlaying){
+if(!connected){
 
-audio=new Audio(streamURL+"?t="+Date.now());
-audio.play();
+player.src = STREAM + "?t=" + Date.now();
 
-isPlaying=true;
-button.textContent="■ DETENER";
-liveIndicator.style.display="block";
+player.load();
 
-}else{
+connected=true;
 
-audio.pause();
-audio.src="";
-audio.load();
-audio=null;
-
-isPlaying=false;
-button.textContent="▶ ESCUCHAR EN VIVO";
-liveIndicator.style.display="none";
+setTimeout(()=>{
+player.play();
+},200);
 
 }
 
@@ -185,32 +212,31 @@ liveIndicator.style.display="none";
 
 </script>
 
+<!-- WIDGET SONIC -->
+
+<script id="sonic_js" data-port="8108" src="https://sonic.globalstream.pro/cp/widgets.js?r=906"></script>
+
 <script>
 
-function cargarCancion(){
+function updateSong(){
 
-fetch("https://radiostreaming.pro/cp/get_info.php?p=8222")
+if(typeof sonic_data!=="undefined"){
 
-.then(res=>res.json())
+if(sonic_data.songtitle){
 
-.then(data=>{
+document.getElementById("sonic_title").innerText=sonic_data.songtitle;
 
-let titulo = data.songtitle || data.title || data.song || data.currentSong || "Transmitiendo en vivo";
+}else{
 
-document.getElementById("songtitle").innerText = titulo;
-
-})
-
-.catch(()=>{
-
-document.getElementById("songtitle").innerText="Transmitiendo en vivo";
-
-});
+document.getElementById("sonic_title").innerText="En transmisión...";
 
 }
 
-setInterval(cargarCancion,5000);
-cargarCancion();
+}
+
+}
+
+setInterval(updateSong,2000);
 
 </script>
 

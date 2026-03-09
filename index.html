@@ -5,13 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Radio Stereo M 101.5 FM</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
 
 <style>
 
 body{
 margin:0;
-font-family:Poppins, sans-serif;
+font-family:Poppins;
 background:linear-gradient(180deg,#0088cc,#f44336);
 color:white;
 text-align:center;
@@ -19,8 +19,8 @@ text-align:center;
 
 header{
 background:#ffd700;
-color:#111;
 padding:20px;
+color:#111;
 }
 
 .logo{
@@ -35,17 +35,33 @@ animation:float 3s infinite ease-in-out;
 }
 
 .container{
-max-width:500px;
+max-width:420px;
 margin:auto;
 padding:30px 20px;
 }
 
 .player{
-background:white;
-color:black;
+background:#111;
 padding:25px;
 border-radius:20px;
-box-shadow:0 0 20px rgba(0,0,0,0.2);
+box-shadow:0 0 25px rgba(0,0,0,0.4);
+}
+
+.cover{
+width:220px;
+height:220px;
+margin:auto;
+border-radius:15px;
+background:#222;
+background-size:cover;
+background-position:center;
+box-shadow:0 0 20px rgba(0,0,0,0.5);
+}
+
+.song{
+margin-top:15px;
+font-weight:600;
+font-size:16px;
 }
 
 .live{
@@ -64,23 +80,18 @@ margin-top:20px;
 background:#e60000;
 border:none;
 color:white;
-padding:15px 25px;
+padding:15px 30px;
 font-size:18px;
 border-radius:30px;
 cursor:pointer;
-}
-
-.song{
-margin-top:15px;
-font-weight:bold;
-font-size:16px;
+font-weight:700;
 }
 
 .links{
 margin-top:25px;
 display:flex;
 flex-direction:column;
-gap:12px;
+gap:10px;
 }
 
 .links a{
@@ -89,7 +100,7 @@ color:#e60000;
 padding:12px;
 border-radius:25px;
 text-decoration:none;
-font-weight:bold;
+font-weight:600;
 }
 
 footer{
@@ -117,15 +128,15 @@ font-size:14px;
 
 <div class="player">
 
-<h3>🎧 Escuchar en Vivo</h3>
+<div id="cover" class="cover"></div>
 
 <div class="live">🔴 EN VIVO</div>
-
-<button id="playBtn">ESCUCHAR EN VIVO</button>
 
 <div class="song">
 🎵 <span id="songTitle">Cargando canción...</span>
 </div>
+
+<button id="playBtn">ESCUCHAR EN VIVO</button>
 
 <audio id="radio" playsinline preload="none"></audio>
 
@@ -151,41 +162,22 @@ Diseño web Marcony Clavijo | 942883375
 
 <script>
 
-const btn = document.getElementById("playBtn");
-const radio = document.getElementById("radio");
+const btn=document.getElementById("playBtn");
+const radio=document.getElementById("radio");
 
 let playing=false;
-let streamIndex=0;
 
-const streams=[
-"https://sonic.globalstream.pro/8108/stream",
-"https://sonic.globalstream.pro/8108/;stream.mp3",
-"https://sonic.globalstream.pro/8108/stream.mp3"
-];
-
-function playStream(){
-
-radio.src = streams[streamIndex] + "?t=" + new Date().getTime();
-radio.play().catch(()=>{
-
-streamIndex++;
-
-if(streamIndex < streams.length){
-playStream();
-}
-
-});
-
-}
+const stream="https://sonic.globalstream.pro/8108/stream";
 
 btn.onclick=function(){
 
 if(!playing){
 
-streamIndex=0;
-playStream();
+radio.src=stream+"?t="+Date.now();
+radio.play();
 
 btn.innerText="DETENER";
+
 playing=true;
 
 }else{
@@ -193,6 +185,7 @@ playing=true;
 radio.pause();
 radio.src="";
 btn.innerText="ESCUCHAR EN VIVO";
+
 playing=false;
 
 }
@@ -201,7 +194,7 @@ playing=false;
 
 </script>
 
-<!-- TITULO DE CANCION -->
+<!-- SONIC TITULO -->
 
 <script id="sonic_js" data-port="8108" src="https://sonic.globalstream.pro/cp/widgets.js?r=906"></script>
 
@@ -213,19 +206,39 @@ if(typeof sonic_data!=="undefined"){
 
 if(sonic_data.songtitle){
 
-document.getElementById("songTitle").innerText=sonic_data.songtitle;
+let song=sonic_data.songtitle;
 
-}else{
+document.getElementById("songTitle").innerText=song;
 
-document.getElementById("songTitle").innerText="En transmisión...";
-
-}
+loadCover(song);
 
 }
 
 }
 
-setInterval(updateSong,2000);
+}
+
+setInterval(updateSong,3000);
+
+function loadCover(song){
+
+let url="https://itunes.apple.com/search?term="+encodeURIComponent(song)+"&limit=1";
+
+fetch(url)
+.then(r=>r.json())
+.then(data=>{
+
+if(data.results.length>0){
+
+let cover=data.results[0].artworkUrl100.replace("100x100","500x500");
+
+document.getElementById("cover").style.backgroundImage="url("+cover+")";
+
+}
+
+});
+
+}
 
 </script>
 

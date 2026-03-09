@@ -43,128 +43,116 @@ text-decoration:none;
 border:1px solid white;
 padding:8px 15px;
 border-radius:5px;
+text-decoration:none;
+color:white;
 }
 
 /* HERO PLAYER */
 
 .hero{
-
 background:url("https://images.unsplash.com/photo-1590608897129-79da98d15969") center/cover no-repeat;
-
 height:420px;
-
 display:flex;
-
 align-items:center;
-
 justify-content:center;
-
 text-align:center;
-
 }
 
 .player{
-
-background:rgba(0,0,0,0.6);
-
+background:rgba(0,0,0,0.7);
 padding:40px;
-
 border-radius:10px;
-
 width:80%;
-
 max-width:600px;
-
 }
-
-/* LOGO PLAYER */
 
 .player img{
-
 width:140px;
-
 border-radius:50%;
-
 margin-bottom:15px;
-
 }
-
-/* SONG */
 
 .song{
-
 font-size:20px;
-
 margin-bottom:20px;
-
 }
-
-/* PLAY BUTTON */
 
 .play{
-
 width:80px;
-
 height:80px;
-
 border-radius:50%;
-
 border:none;
-
 background:white;
-
 color:black;
-
 font-size:30px;
-
 cursor:pointer;
-
 }
-
-/* VOLUME */
 
 .volume{
-
 margin-top:20px;
-
 width:100%;
-
 }
 
-/* SPONSOR */
+/* REDES */
+
+.redes{
+text-align:center;
+padding:25px;
+}
+
+.redes a{
+display:inline-block;
+margin:5px;
+padding:10px 18px;
+border-radius:30px;
+color:white;
+text-decoration:none;
+font-size:14px;
+}
+
+.fb{background:#1877f2}
+.wa{background:#25d366}
+
+/* AUSPICIADORES */
 
 .sponsor{
-
 text-align:center;
-
 padding:40px;
-
+background:#050505;
 }
 
-.sponsor img{
+.sponsor h2{
+margin-bottom:30px;
+}
 
-width:200px;
+.sponsor-grid{
+display:flex;
+justify-content:center;
+gap:40px;
+flex-wrap:wrap;
+}
 
-margin:10px;
+.sponsor-grid img{
+width:180px;
+transition:0.3s;
+cursor:pointer;
+border-radius:10px;
+}
 
+.sponsor-grid img:hover{
+transform:scale(1.1);
 }
 
 /* FOOTER */
 
 footer{
-
 text-align:center;
-
 padding:20px;
-
 background:#000;
-
 opacity:.7;
-
 }
 
 </style>
-
 </head>
 
 <body>
@@ -174,21 +162,15 @@ opacity:.7;
 <div class="logo">MARCONY RADIO</div>
 
 <div class="menu">
-
 <a href="#">Inicio</a>
-
 <a href="#">Contacto</a>
-
 </div>
 
 <a class="appbtn" href="https://play.google.com/store/apps/details?id=com.innovatel.marconyradio" target="_blank">
-
 Descarga nuestra APP
-
 </a>
 
 </header>
-
 
 <section class="hero">
 
@@ -197,15 +179,11 @@ Descarga nuestra APP
 <img src="https://image2url.com/r2/default/images/1772424553305-5e1866b9-0926-4d13-9fad-dae04af28c89.png">
 
 <div class="song">
-
 🎵 <span id="sonic_title">Cargando canción...</span>
-
 </div>
 
 <button class="play" onclick="toggleRadio()" id="btn">
-
 ▶
-
 </button>
 
 <br>
@@ -216,15 +194,43 @@ Descarga nuestra APP
 
 </section>
 
+<!-- REDES -->
+
+<section class="redes">
+
+<h2>Síguenos</h2>
+
+<a class="fb" href="https://www.facebook.com/radiomarcony" target="_blank">
+Facebook
+</a>
+
+<a class="wa" href="https://wa.me/51942883375" target="_blank">
+WhatsApp
+</a>
+
+</section>
+
+<!-- AUSPICIADORES -->
+
 <section class="sponsor">
 
-<h2>AUSPICIADO POR</h2>
+<h2>AUSPICIADORES</h2>
 
-<a href="https://instasize.com/p/cc4e29c5bea0755ba0111ea8e96b6cbd4df2e07f7665f90be61928ace1b2689e" target="_blank">
+<div class="sponsor-grid">
 
-<img src="https://instasize.com/p/cc4e29c5bea0755ba0111ea8e96b6cbd4df2e07f7665f90be61928ace1b2689e">
+<a href="https://www.facebook.com/eltiojhony" target="_blank">
+
+<img src="https://image2url.com/r2/default/images/1773033863184-0f8f4472-23e2-499a-9ee2-09855499b657.png">
 
 </a>
+
+<a href="https://www.facebook.com/iepchildrenscollege" target="_blank">
+
+<img src="https://image2url.com/r2/default/images/1773033971607-e63d7b01-4951-4025-9317-a1a96877113d.png">
+
+</a>
+
+</div>
 
 </section>
 
@@ -233,7 +239,6 @@ Descarga nuestra APP
 Marcony Radio © 2026
 
 </footer>
-
 
 <audio id="radio"></audio>
 

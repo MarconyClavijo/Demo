@@ -26,6 +26,8 @@ align-items:center;
 padding:12px 40px;
 background:#000;
 border-bottom:1px solid #222;
+position:relative;
+z-index:10;
 }
 
 .header-logo{
@@ -67,11 +69,14 @@ justify-content:center;
 
 .player{
 background:rgba(0,0,0,0.65);
-padding:35px;
+padding:25px;
 border-radius:14px;
 text-align:center;
 width:90%;
 max-width:420px;
+position:relative;
+z-index:5;
+margin-top:15px; /* separa del header en móvil */
 }
 
 .song{
@@ -107,31 +112,33 @@ width:100%;
 
 .sponsor{
 text-align:center;
-padding:35px;
+padding:20px 15px; /* reducido */
 background:white;
 color:black;
+border-radius:12px; /* opcional */
 }
 
 .carousel{
 overflow:hidden;
+margin:0 auto;
+max-width:90%;
 }
 
 .track{
 display:flex;
-gap:70px;
+gap:50px; /* reducido */
 animation:scroll 20s linear infinite;
 align-items:center;
 }
 
 .track img{
-width:150px;
+width:120px; /* reducido */
+height:auto;
 }
 
 @keyframes scroll{
-
 0%{transform:translateX(0)}
 100%{transform:translateX(-50%)}
-
 }
 
 /* REDES */
@@ -196,6 +203,10 @@ padding:25px;
 .cover{
 width:170px;
 height:170px;
+}
+
+.sponsor{
+padding:15px 10px; /* más compacto en móvil */
 }
 
 }

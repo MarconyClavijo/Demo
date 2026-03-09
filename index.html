@@ -4,6 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Marcony Radio | En Vivo</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
@@ -29,7 +30,7 @@ border-bottom:1px solid #222;
 }
 
 .logo{
-font-size:22px;
+font-size:24px;
 font-weight:bold;
 }
 
@@ -51,7 +52,7 @@ color:white;
 
 .hero{
 background:url("https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4") center/cover no-repeat;
-height:450px;
+height:480px;
 display:flex;
 align-items:center;
 justify-content:center;
@@ -60,37 +61,40 @@ justify-content:center;
 /* PLAYER */
 
 .player{
-background:rgba(0,0,0,0.7);
-padding:35px;
+background:rgba(0,0,0,0.65);
+padding:40px;
 border-radius:12px;
 text-align:center;
 width:90%;
-max-width:500px;
+max-width:520px;
 }
 
-.player img.logo-radio{
-width:120px;
-border-radius:50%;
-margin-bottom:10px;
+/* LOGO RADIO */
+
+.logo-radio{
+width:200px;
+margin-bottom:15px;
 }
+
+/* SONG */
 
 .song{
 font-size:18px;
 margin-bottom:10px;
 }
 
-/* PORTADA */
+/* COVER */
 
 .cover{
-width:180px;
-height:180px;
+width:220px;
+height:220px;
 object-fit:cover;
 border-radius:10px;
 margin:15px auto;
 display:block;
 }
 
-/* BOTON */
+/* PLAY */
 
 .play{
 width:70px;
@@ -120,7 +124,7 @@ padding:0;
 }
 
 .history li{
-margin:5px 0;
+margin:6px 0;
 opacity:.8;
 }
 
@@ -155,27 +159,36 @@ text-decoration:none;
 
 .sponsor{
 text-align:center;
-padding:40px;
-background:#050505;
-overflow:hidden;
+padding:50px;
+background:#ffffff;
+color:#000;
 }
 
 .carousel{
 display:flex;
-gap:60px;
 justify-content:center;
-animation:scroll 12s linear infinite;
+align-items:center;
+gap:80px;
+animation:slide 12s infinite linear;
 }
 
 .carousel img{
-width:180px;
-border-radius:10px;
+width:190px;
+transition:0.3s;
 }
 
-@keyframes scroll{
+.carousel img:hover{
+transform:scale(1.08);
+}
+
+@keyframes slide{
+
 0%{transform:translateX(0)}
-50%{transform:translateX(-60px)}
+
+50%{transform:translateX(-40px)}
+
 100%{transform:translateX(0)}
+
 }
 
 /* FOOTER */
@@ -217,7 +230,7 @@ Descarga nuestra APP
 🎵 <span id="sonic_title">Cargando canción...</span>
 </div>
 
-<img id="cover" class="cover" src="https://via.placeholder.com/200">
+<img id="cover" class="cover" src="https://i.imgur.com/8Km9tLL.png">
 
 <button class="play" onclick="toggleRadio()" id="btn">▶</button>
 
@@ -286,6 +299,7 @@ Marcony Radio © 2026
 <script>
 
 const radio=document.getElementById("radio")
+
 let playing=false
 
 function toggleRadio(){
@@ -314,7 +328,7 @@ document.getElementById("btn").innerHTML="▶"
 
 }
 
-/* HISTORIAL + PORTADA */
+/* HISTORIAL + PORTADA RAPIDA */
 
 let history=[]
 

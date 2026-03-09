@@ -64,19 +64,20 @@ justify-content:center;
 
 .player{
 background:rgba(0,0,0,0.65);
-padding:40px;
-border-radius:12px;
+padding:45px 40px 50px 40px;
+border-radius:14px;
 text-align:center;
 width:90%;
 max-width:520px;
+margin-bottom:30px;
 }
 
 /* LOGO RADIO */
 
 .logo-radio{
-width:240px;
-margin-bottom:15px;
-filter: drop-shadow(0 0 10px rgba(0,0,0,0.9));
+width:200px;
+margin-bottom:20px;
+filter: drop-shadow(0 4px 10px rgba(0,0,0,0.9));
 }
 
 /* SONG */
@@ -118,9 +119,11 @@ width:100%;
 
 .sponsor{
 text-align:center;
-padding:40px;
+padding:35px;
 background:#ffffff;
 color:#000;
+border-top:1px solid #eee;
+box-shadow:0 -3px 15px rgba(0,0,0,0.08);
 }
 
 .carousel{
@@ -128,15 +131,25 @@ display:flex;
 justify-content:center;
 align-items:center;
 gap:80px;
+flex-wrap:wrap;
 }
 
 .carousel img{
-width:190px;
+width:170px;
 transition:0.3s;
+filter: drop-shadow(0 3px 6px rgba(0,0,0,0.2));
 }
 
 .carousel img:hover{
-transform:scale(1.08);
+transform:scale(1.06);
+}
+
+/* VISITAS */
+
+.visitas{
+text-align:center;
+padding:40px;
+background:#020202;
 }
 
 /* HISTORIAL */
@@ -154,14 +167,6 @@ padding:0;
 .history li{
 margin:6px 0;
 opacity:.8;
-}
-
-/* VISITAS */
-
-.visitas{
-text-align:center;
-padding:40px;
-background:#020202;
 }
 
 /* REDES */
@@ -315,8 +320,6 @@ document.getElementById("btn").innerHTML="▶"
 }
 
 }
-
-/* HISTORIAL + PORTADA */
 
 let history=[]
 

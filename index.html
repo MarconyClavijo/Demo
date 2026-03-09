@@ -88,13 +88,19 @@ header{
   width:180px;
   height:180px;
   object-fit:cover;
-  border-radius:20px;
+  border-radius:50%;
   box-shadow: 0 6px 15px rgba(0,0,0,0.6);
   transition: transform 0.3s ease;
+  animation: spin 20s linear infinite;
 }
 
 .cover:hover{
   transform: scale(1.05);
+}
+
+@keyframes spin{
+  from{transform: rotate(0deg);}
+  to{transform: rotate(360deg);}
 }
 
 .play{
@@ -136,13 +142,19 @@ header{
 /* AUSPICIADORES */
 .sponsor{
   text-align:center;
-  padding:30px 20px;
+  padding:25px 10px;
   background:#f9f9f9;
-  color:black;
   border-radius:20px;
   box-shadow:0 5px 20px rgba(0,0,0,0.2);
   margin:40px auto;
   max-width:95%;
+}
+
+.sponsor h2{
+  font-size:16px;
+  color:#555;
+  margin-bottom:15px;
+  font-weight:400;
 }
 
 .carousel{
@@ -152,15 +164,16 @@ header{
 
 .track{
   display:flex;
-  gap:45px;
-  animation:scroll 20s linear infinite;
+  gap:50px;
   align-items:center;
+  animation:scroll 20s linear infinite;
 }
 
 .track img{
-  width:150px;
+  width:160px;
   height:auto;
-  border-radius:10px;
+  border-radius:12px;
+  box-shadow:0 4px 15px rgba(0,0,0,0.3);
 }
 
 /* REDES */
@@ -228,8 +241,8 @@ footer{
     font-size:17px;
     text-align:center;
   }
-  .sponsor{
-    padding:20px 15px;
+  .sponsor h2{
+    font-size:14px;
   }
   .carousel{
     overflow-x:auto;
@@ -239,7 +252,7 @@ footer{
     gap:25px;
   }
   .track img{
-    width:110px;
+    width:120px;
   }
   .history li{
     font-size:14px;
@@ -325,21 +338,21 @@ function toggleRadio(){
   }
 }
 
-// Función para actualizar título, portada y historial con efecto fade
+// Sonic widget: actualizar título, portada y historial con fade
 function updateSonic(){
   if(window.Sonic){
     Sonic.on('songChange', function(data){
-      // Título
+      // título fade
       title.style.opacity=0
       setTimeout(()=>{ 
         title.textContent = data.song.title || 'Sin título'
         title.style.opacity=1
       }, 300)
 
-      // Portada
+      // portada
       cover.src = data.song.cover || 'https://i.imgur.com/8Km9tLL.png'
 
-      // Historial últimas 5 canciones
+      // historial últimas 5 canciones
       history.unshift(data.song.title)
       if(history.length>5) history.pop()
       historyList.innerHTML=''

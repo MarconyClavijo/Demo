@@ -221,10 +221,14 @@ animation:scrollSponsors 15s linear infinite;
 100%{transform:translateX(-50%);}
 }
 
+/* LOGOS SIN CORTARSE */
+
 .sponsor-track img{
 width:220px;
-height:130px;
-object-fit:cover;
+height:140px;
+object-fit:contain;
+background:white;
+padding:10px;
 border-radius:15px;
 box-shadow:0 0 20px #ff00cc;
 transition:.3s;
@@ -233,7 +237,7 @@ flex-shrink:0;
 }
 
 .sponsor-track img:hover{
-transform:scale(1.15);
+transform:scale(1.1);
 }
 
 /* FOOTER */
@@ -267,7 +271,9 @@ DESCARGAR APP
 
 <h1>MARCONY RADIO</h1>
 
-<div class="sub">TRANSMITIENDO EN VIVO 24/7</div>
+<div class="sub">
+TRANSMITIENDO EN VIVO 24/7
+</div>
 
 <audio id="radio"></audio>
 
@@ -398,9 +404,7 @@ if(history.length>5)history.pop()
 let html=""
 
 history.forEach(s=>{
-
 html+="<li>"+s+"</li>"
-
 })
 
 document.getElementById("history").innerHTML=html

@@ -21,17 +21,25 @@ color:white;
 
 header{
 display:flex;
-justify-content:space-between;
 align-items:center;
+justify-content:space-between;
 padding:15px 40px;
 background:#000;
 border-bottom:1px solid #222;
 }
 
-.header-logo{
-height:55px;
-filter:drop-shadow(0 4px 10px rgba(0,0,0,0.9));
+.header-left{
+display:flex;
+align-items:center;
+gap:20px;
 }
+
+.header-logo{
+height:70px;
+filter:drop-shadow(0 5px 10px rgba(0,0,0,0.9));
+}
+
+/* BOTON APP */
 
 .appbtn{
 border:1px solid white;
@@ -41,7 +49,8 @@ text-decoration:none;
 color:white;
 font-family:'Poppins',sans-serif;
 font-size:14px;
-transition:.3s;
+text-align:center;
+line-height:1.2;
 }
 
 .appbtn:hover{
@@ -53,7 +62,7 @@ color:black;
 
 .hero{
 background:url("https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4") center/cover no-repeat;
-min-height:500px;
+min-height:480px;
 display:flex;
 align-items:center;
 justify-content:center;
@@ -63,19 +72,11 @@ justify-content:center;
 
 .player{
 background:rgba(0,0,0,0.65);
-padding:40px 40px 45px 40px;
+padding:40px;
 border-radius:14px;
 text-align:center;
 width:90%;
 max-width:520px;
-}
-
-/* LOGO RADIO PLAYER */
-
-.logo-radio{
-width:180px;
-margin-bottom:15px;
-filter:drop-shadow(0 6px 12px rgba(0,0,0,0.9));
 }
 
 /* SONG */
@@ -152,11 +153,8 @@ transform:scale(1.05);
 }
 
 @keyframes scroll{
-
 0%{transform:translateX(0)}
-
 100%{transform:translateX(-50%)}
-
 }
 
 /* VISITAS */
@@ -222,12 +220,12 @@ flex-direction:column;
 gap:10px;
 }
 
-.header-logo{
-height:50px;
+.header-left{
+flex-direction:column;
 }
 
-.logo-radio{
-width:150px;
+.header-logo{
+height:65px;
 }
 
 }
@@ -239,19 +237,21 @@ width:150px;
 
 <header>
 
-<img class="header-logo" src="https://image2url.com/r2/default/images/1772424553305-5e1866b9-0926-4d13-9fad-dae04af28c89.png">
+<div class="header-left">
+
+<img class="header-logo" src="https://image2url.com/r2/default/images/1773037946056-a151a866-7199-4082-8a26-038f5e9ca31c.png">
 
 <a class="appbtn" href="https://play.google.com/store/apps/details?id=com.innovatel.marconyradio" target="_blank">
-Descarga nuestra APP
+Descarga nuestra<br>APP
 </a>
+
+</div>
 
 </header>
 
 <section class="hero">
 
 <div class="player">
-
-<img class="logo-radio" src="https://image2url.com/r2/default/images/1772424553305-5e1866b9-0926-4d13-9fad-dae04af28c89.png">
 
 <div class="song">
 🎵 <span id="sonic_title">Cargando canción...</span>
@@ -326,9 +326,7 @@ Descarga nuestra APP
 </section>
 
 <footer>
-
 Marcony Radio © 2026
-
 </footer>
 
 <audio id="radio"></audio>
@@ -358,51 +356,6 @@ playing=false
 document.getElementById("btn").innerHTML="▶"
 
 }
-
-}
-
-let history=[]
-
-setInterval(()=>{
-
-let song=document.getElementById("sonic_title").innerText
-
-if(song && !history.includes(song)){
-
-history.unshift(song)
-
-if(history.length>5)history.pop()
-
-let html=""
-
-history.forEach(s=>{
-html+="<li>"+s+"</li>"
-})
-
-document.getElementById("history").innerHTML=html
-
-buscarCover(song)
-
-}
-
-},4000)
-
-function buscarCover(song){
-
-let q=encodeURIComponent(song)
-
-fetch("https://itunes.apple.com/search?term="+q+"&limit=1")
-
-.then(r=>r.json())
-.then(data=>{
-
-if(data.results.length>0){
-
-document.getElementById("cover").src=data.results[0].artworkUrl100.replace("100x100","300x300")
-
-}
-
-})
 
 }
 

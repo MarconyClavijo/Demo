@@ -26,13 +26,11 @@ align-items:center;
 padding:15px 40px;
 background:#000;
 border-bottom:1px solid #222;
-flex-wrap:wrap;
 }
 
-.logo{
-font-size:24px;
-font-weight:bold;
-letter-spacing:2px;
+.header-logo{
+height:55px;
+filter:drop-shadow(0 4px 10px rgba(0,0,0,0.9));
 }
 
 .appbtn{
@@ -43,37 +41,40 @@ text-decoration:none;
 color:white;
 font-family:'Poppins',sans-serif;
 font-size:14px;
-margin-top:10px;
+transition:.3s;
+}
+
+.appbtn:hover{
+background:white;
+color:black;
 }
 
 /* HERO */
 
 .hero{
 background:url("https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4") center/cover no-repeat;
-min-height:520px;
+min-height:500px;
 display:flex;
 align-items:center;
 justify-content:center;
-padding-top:40px;
 }
 
 /* PLAYER */
 
 .player{
 background:rgba(0,0,0,0.65);
-padding:50px 40px 60px 40px;
+padding:40px 40px 45px 40px;
 border-radius:14px;
 text-align:center;
 width:90%;
 max-width:520px;
-margin-top:30px;
 }
 
-/* LOGO RADIO */
+/* LOGO RADIO PLAYER */
 
 .logo-radio{
 width:180px;
-margin-bottom:25px;
+margin-bottom:15px;
 filter:drop-shadow(0 6px 12px rgba(0,0,0,0.9));
 }
 
@@ -116,14 +117,14 @@ width:100%;
 
 .sponsor{
 text-align:center;
-padding:50px 20px;
+padding:40px 20px;
 background:#ffffff;
 color:#000;
-margin-top:40px;
+margin-top:30px;
 }
 
 .sponsor h2{
-margin-bottom:30px;
+margin-bottom:25px;
 }
 
 /* CARRUSEL */
@@ -152,13 +153,9 @@ transform:scale(1.05);
 
 @keyframes scroll{
 
-0%{
-transform:translateX(0);
-}
+0%{transform:translateX(0)}
 
-100%{
-transform:translateX(-50%);
-}
+100%{transform:translateX(-50%)}
 
 }
 
@@ -222,15 +219,15 @@ opacity:.7;
 
 header{
 flex-direction:column;
-align-items:center;
+gap:10px;
+}
+
+.header-logo{
+height:50px;
 }
 
 .logo-radio{
 width:150px;
-}
-
-.hero{
-padding-top:70px;
 }
 
 }
@@ -242,7 +239,7 @@ padding-top:70px;
 
 <header>
 
-<div class="logo">MARCONY RADIO</div>
+<img class="header-logo" src="https://image2url.com/r2/default/images/1772424553305-5e1866b9-0926-4d13-9fad-dae04af28c89.png">
 
 <a class="appbtn" href="https://play.google.com/store/apps/details?id=com.innovatel.marconyradio" target="_blank">
 Descarga nuestra APP
@@ -287,8 +284,6 @@ Descarga nuestra APP
 <a href="https://www.facebook.com/iepchildrenscollege" target="_blank">
 <img src="https://image2url.com/r2/default/images/1773033971607-e63d7b01-4951-4025-9317-a1a96877113d.png">
 </a>
-
-<!-- duplicados para efecto carrusel -->
 
 <a href="https://www.facebook.com/eltiojhony" target="_blank">
 <img src="https://image2url.com/r2/default/images/1773033863184-0f8f4472-23e2-499a-9ee2-09855499b657.png">
@@ -351,21 +346,15 @@ function toggleRadio(){
 if(!playing){
 
 radio.src="https://radiostreaming.pro/8216/stream"
-
 radio.play()
-
 playing=true
-
 document.getElementById("btn").innerHTML="⏹"
 
 }else{
 
 radio.pause()
-
 radio.src=""
-
 playing=false
-
 document.getElementById("btn").innerHTML="▶"
 
 }
@@ -387,9 +376,7 @@ if(history.length>5)history.pop()
 let html=""
 
 history.forEach(s=>{
-
 html+="<li>"+s+"</li>"
-
 })
 
 document.getElementById("history").innerHTML=html
@@ -407,7 +394,6 @@ let q=encodeURIComponent(song)
 fetch("https://itunes.apple.com/search?term="+q+"&limit=1")
 
 .then(r=>r.json())
-
 .then(data=>{
 
 if(data.results.length>0){

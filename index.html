@@ -12,10 +12,9 @@
 
 body{
 margin:0;
-font-family:Orbitron;
+font-family:'Orbitron',sans-serif;
 background:#000;
 color:white;
-overflow-x:hidden;
 }
 
 /* HEADER */
@@ -35,7 +34,7 @@ font-weight:bold;
 }
 
 .menu a{
-margin:0 10px;
+margin:0 15px;
 color:white;
 text-decoration:none;
 }
@@ -51,67 +50,78 @@ color:white;
 /* HERO */
 
 .hero{
-position:relative;
+background:url("https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4") center/cover no-repeat;
 height:450px;
 display:flex;
 align-items:center;
 justify-content:center;
-background:url("https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4") center/cover no-repeat;
-}
-
-/* PARLANTES */
-
-.speaker{
-position:absolute;
-top:50%;
-transform:translateY(-50%);
-width:180px;
-opacity:0.9;
-}
-
-.speaker.left{
-left:40px;
-}
-
-.speaker.right{
-right:40px;
 }
 
 /* PLAYER */
 
 .player{
-background:rgba(0,0,0,0.75);
+background:rgba(0,0,0,0.7);
 padding:35px;
-border-radius:10px;
+border-radius:12px;
 text-align:center;
 width:90%;
-max-width:520px;
+max-width:500px;
 }
 
-.player img{
-width:140px;
+.player img.logo-radio{
+width:120px;
 border-radius:50%;
-margin-bottom:15px;
+margin-bottom:10px;
 }
 
 .song{
-font-size:20px;
-margin-bottom:20px;
+font-size:18px;
+margin-bottom:10px;
 }
 
+/* PORTADA */
+
+.cover{
+width:180px;
+height:180px;
+object-fit:cover;
+border-radius:10px;
+margin:15px auto;
+display:block;
+}
+
+/* BOTON */
+
 .play{
-width:80px;
-height:80px;
+width:70px;
+height:70px;
 border-radius:50%;
 border:none;
 background:white;
-font-size:30px;
+font-size:28px;
 cursor:pointer;
 }
 
 .volume{
 margin-top:20px;
 width:100%;
+}
+
+/* HISTORIAL */
+
+.history{
+text-align:center;
+padding:30px;
+}
+
+.history ul{
+list-style:none;
+padding:0;
+}
+
+.history li{
+margin:5px 0;
+opacity:.8;
 }
 
 /* VISITAS */
@@ -147,24 +157,25 @@ text-decoration:none;
 text-align:center;
 padding:40px;
 background:#050505;
+overflow:hidden;
 }
 
-.sponsor-grid{
+.carousel{
 display:flex;
+gap:60px;
 justify-content:center;
-gap:40px;
-flex-wrap:wrap;
-margin-top:25px;
+animation:scroll 12s linear infinite;
 }
 
-.sponsor-grid img{
+.carousel img{
 width:180px;
-transition:0.3s;
 border-radius:10px;
 }
 
-.sponsor-grid img:hover{
-transform:scale(1.08);
+@keyframes scroll{
+0%{transform:translateX(0)}
+50%{transform:translateX(-60px)}
+100%{transform:translateX(0)}
 }
 
 /* FOOTER */
@@ -198,16 +209,15 @@ Descarga nuestra APP
 
 <section class="hero">
 
-<img class="speaker left" src="https://cdn-icons-png.flaticon.com/512/1048/1048940.png">
-<img class="speaker right" src="https://cdn-icons-png.flaticon.com/512/1048/1048940.png">
-
 <div class="player">
 
-<img src="https://image2url.com/r2/default/images/1772424553305-5e1866b9-0926-4d13-9fad-dae04af28c89.png">
+<img class="logo-radio" src="https://image2url.com/r2/default/images/1772424553305-5e1866b9-0926-4d13-9fad-dae04af28c89.png">
 
 <div class="song">
 🎵 <span id="sonic_title">Cargando canción...</span>
 </div>
+
+<img id="cover" class="cover" src="https://via.placeholder.com/200">
 
 <button class="play" onclick="toggleRadio()" id="btn">▶</button>
 
@@ -216,6 +226,14 @@ Descarga nuestra APP
 <input type="range" min="0" max="1" step="0.01" class="volume" onchange="radio.volume=this.value">
 
 </div>
+
+</section>
+
+<section class="history">
+
+<h3>Últimas canciones</h3>
+
+<ul id="history"></ul>
 
 </section>
 
@@ -231,13 +249,9 @@ Descarga nuestra APP
 
 <h2>Síguenos</h2>
 
-<a class="fb" href="https://www.facebook.com/radiomarcony" target="_blank">
-Facebook
-</a>
+<a class="fb" href="https://www.facebook.com/radiomarcony" target="_blank">Facebook</a>
 
-<a class="wa" href="https://wa.me/51942883375" target="_blank">
-WhatsApp
-</a>
+<a class="wa" href="https://wa.me/51942883375" target="_blank">WhatsApp</a>
 
 </section>
 
@@ -245,7 +259,7 @@ WhatsApp
 
 <h2>AUSPICIADORES</h2>
 
-<div class="sponsor-grid">
+<div class="carousel">
 
 <a href="https://www.facebook.com/eltiojhony" target="_blank">
 <img src="https://image2url.com/r2/default/images/1773033863184-0f8f4472-23e2-499a-9ee2-09855499b657.png">
@@ -272,7 +286,6 @@ Marcony Radio © 2026
 <script>
 
 const radio=document.getElementById("radio")
-
 let playing=false
 
 function toggleRadio(){
@@ -298,6 +311,56 @@ playing=false
 document.getElementById("btn").innerHTML="▶"
 
 }
+
+}
+
+/* HISTORIAL + PORTADA */
+
+let history=[]
+
+setInterval(()=>{
+
+let song=document.getElementById("sonic_title").innerText
+
+if(song && !history.includes(song)){
+
+history.unshift(song)
+
+if(history.length>5)history.pop()
+
+let html=""
+
+history.forEach(s=>{
+
+html+="<li>"+s+"</li>"
+
+})
+
+document.getElementById("history").innerHTML=html
+
+buscarCover(song)
+
+}
+
+},4000)
+
+function buscarCover(song){
+
+let q=encodeURIComponent(song)
+
+fetch("https://itunes.apple.com/search?term="+q+"&limit=1")
+
+.then(r=>r.json())
+
+.then(data=>{
+
+if(data.results.length>0){
+
+document.getElementById("cover").src=data.results[0].artworkUrl100.replace("100x100","300x300")
+
+}
+
+})
 
 }
 

@@ -4,13 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Marcony Radio</title>
+<title>Marcony Radio | En Vivo</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 
 <style>
 
 body{
 margin:0;
-font-family:Arial, Helvetica, sans-serif;
+font-family:Poppins;
 background:#000;
 color:white;
 }
@@ -19,138 +21,181 @@ color:white;
 
 header{
 display:flex;
-align-items:center;
 justify-content:space-between;
-padding:15px 25px;
+align-items:center;
+padding:12px 40px;
 background:#000;
 border-bottom:1px solid #222;
 }
 
 .header-logo{
-height:70px;
-filter:drop-shadow(0 0 8px rgba(0,0,0,0.6));
+height:65px;
+filter:drop-shadow(0 4px 10px rgba(0,0,0,.8));
 }
 
 .appbtn{
-background:#ff0033;
+border:1px solid white;
 padding:10px 18px;
-border-radius:25px;
+border-radius:6px;
 text-decoration:none;
 color:white;
-font-weight:bold;
+font-size:14px;
+text-align:center;
+line-height:1.2;
+transition:.3s;
+}
+
+.appbtn:hover{
+background:white;
+color:black;
 }
 
 /* HERO */
 
 .hero{
-
 background:
-linear-gradient(rgba(0,0,0,.65),rgba(0,0,0,.65)),
+linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.6)),
 url("https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4")
 center/cover no-repeat;
-
 height:360px;
-
 display:flex;
-flex-direction:column;
 align-items:center;
 justify-content:center;
-text-align:center;
-padding:20px;
 }
 
 /* PLAYER */
 
 .player{
-background:#111;
-padding:20px;
-border-radius:15px;
-box-shadow:0 0 20px rgba(0,0,0,.6);
-margin-top:20px;
-}
-
-audio{
-width:260px;
-}
-
-/* SPONSORS */
-
-.sponsors{
-background:#ffffff;
-padding:15px 10px;
+background:rgba(0,0,0,0.65);
+padding:35px;
+border-radius:14px;
 text-align:center;
-overflow:hidden;
+width:90%;
+max-width:420px;
 }
 
-.sponsors h3{
-color:#111;
+.song{
 font-size:18px;
 margin-bottom:10px;
 }
 
-.sponsor-track{
+.cover{
+width:200px;
+height:200px;
+object-fit:cover;
+border-radius:10px;
+margin:15px auto;
+display:block;
+}
+
+.play{
+width:65px;
+height:65px;
+border-radius:50%;
+border:none;
+background:white;
+font-size:28px;
+cursor:pointer;
+}
+
+.volume{
+margin-top:15px;
+width:100%;
+}
+
+/* AUSPICIADORES */
+
+.sponsor{
+text-align:center;
+padding:35px;
+background:white;
+color:black;
+}
+
+.carousel{
+overflow:hidden;
+}
+
+.track{
 display:flex;
-gap:50px;
-width:max-content;
-animation:scroll 25s linear infinite;
+gap:70px;
+animation:scroll 20s linear infinite;
+align-items:center;
 }
 
-.sponsor-track img{
-height:45px;
-width:auto;
-opacity:0.9;
-transition:.3s;
-}
-
-.sponsor-track img:hover{
-opacity:1;
-transform:scale(1.05);
+.track img{
+width:150px;
 }
 
 @keyframes scroll{
 
 0%{transform:translateX(0)}
-
 100%{transform:translateX(-50%)}
 
 }
 
-/* FOOTER */
+/* REDES */
 
-.footer{
+.redes{
+text-align:center;
+padding:35px;
+background:#020202;
+}
+
+.redes a{
+display:inline-block;
+margin:6px;
+padding:10px 18px;
+border-radius:25px;
+color:white;
+text-decoration:none;
+}
+
+.fb{background:#1877f2}
+.wa{background:#25d366}
+
+/* VISITAS */
+
+.visitas{
+text-align:center;
+padding:30px;
+}
+
+.history{
+text-align:center;
+padding:30px;
+}
+
+footer{
 text-align:center;
 padding:20px;
 background:#000;
-border-top:1px solid #222;
-}
-
-.socials a{
-margin:0 10px;
-color:white;
-text-decoration:none;
-font-size:18px;
+opacity:.7;
 }
 
 /* MOBILE */
 
-@media(max-width:768px){
+@media(max-width:700px){
 
 header{
-flex-direction:column;
-gap:10px;
+padding:12px 20px;
 }
 
 .header-logo{
-height:60px;
+height:55px;
 }
 
 .hero{
-height:auto;
-padding:40px 20px;
+height:300px;
 }
 
 .player{
-margin-top:20px;
+padding:25px;
+}
+
+.cover{
+width:170px;
+height:170px;
 }
 
 }
@@ -164,63 +209,122 @@ margin-top:20px;
 
 <img class="header-logo" src="https://image2url.com/r2/default/images/1773037946056-a151a866-7199-4082-8a26-038f5e9ca31c.png">
 
-<a class="appbtn" href="#">Descargar<br>Nuestra App</a>
+<a class="appbtn" href="https://play.google.com/store/apps/details?id=com.innovatel.marconyradio" target="_blank">
+Descarga nuestra<br>APP
+</a>
 
 </header>
 
 <section class="hero">
 
-<h2>🎵 Escucha en Vivo</h2>
-
 <div class="player">
 
-<audio controls autoplay>
+<div class="song">
+🎵 <span id="sonic_title">Cargando canción...</span>
+</div>
 
-<source src="TU_STREAM_AQUI" type="audio/mpeg">
+<img id="cover" class="cover" src="https://i.imgur.com/8Km9tLL.png">
 
-</audio>
+<button class="play" onclick="toggleRadio()" id="btn">▶</button>
+
+<br>
+
+<input type="range" min="0" max="1" step="0.01" class="volume" onchange="radio.volume=this.value">
 
 </div>
 
 </section>
 
-<section class="sponsors">
+<section class="sponsor">
 
-<h3>Auspiciado por:</h3>
+<h2>Auspiciado por:</h2>
 
-<div style="overflow:hidden">
+<div class="carousel">
+<div class="track">
 
-<div class="sponsor-track">
+<a href="https://www.facebook.com/eltiojhony" target="_blank">
+<img src="https://image2url.com/r2/default/images/1773033863184-0f8f4472-23e2-499a-9ee2-09855499b657.png">
+</a>
 
-<img src="https://dummyimage.com/180x80/000/fff&text=Sponsor+1">
-<img src="https://dummyimage.com/180x80/000/fff&text=Sponsor+2">
-<img src="https://dummyimage.com/180x80/000/fff&text=Sponsor+3">
-<img src="https://dummyimage.com/180x80/000/fff&text=Sponsor+4">
+<a href="https://www.facebook.com/iepchildrenscollege" target="_blank">
+<img src="https://image2url.com/r2/default/images/1773033971607-e63d7b01-4951-4025-9317-a1a96877113d.png">
+</a>
 
-<img src="https://dummyimage.com/180x80/000/fff&text=Sponsor+1">
-<img src="https://dummyimage.com/180x80/000/fff&text=Sponsor+2">
-<img src="https://dummyimage.com/180x80/000/fff&text=Sponsor+3">
-<img src="https://dummyimage.com/180x80/000/fff&text=Sponsor+4">
+<a href="https://www.facebook.com/eltiojhony" target="_blank">
+<img src="https://image2url.com/r2/default/images/1773033863184-0f8f4472-23e2-499a-9ee2-09855499b657.png">
+</a>
+
+<a href="https://www.facebook.com/iepchildrenscollege" target="_blank">
+<img src="https://image2url.com/r2/default/images/1773033971607-e63d7b01-4951-4025-9317-a1a96877113d.png">
+</a>
 
 </div>
-
 </div>
 
 </section>
 
-<div class="footer">
+<section class="redes">
 
-<div class="socials">
+<h2>Síguenos</h2>
 
-<a href="#">Facebook</a>
-<a href="#">Instagram</a>
-<a href="#">WhatsApp</a>
+<a class="fb" href="https://www.facebook.com/radiomarcony">Facebook</a>
 
-</div>
+<a class="wa" href="https://wa.me/51942883375">WhatsApp</a>
 
-<p>Visitas: 000123</p>
+</section>
 
-</div>
+<section class="visitas">
+
+<h2>Número de visitas</h2>
+
+<img src="https://hitwebcounter.com/counter/counter.php?page=18947533&style=0006&nbdigits=6&type=page&initCount=0">
+
+</section>
+
+<section class="history">
+
+<h3>Últimas canciones</h3>
+
+<ul id="history"></ul>
+
+</section>
+
+<footer>
+
+Marcony Radio © 2026
+
+</footer>
+
+<audio id="radio"></audio>
+
+<script id="sonic_js" data-port="8216" src="https://radiostreaming.pro/cp/widgets.js?r=846"></script>
+
+<script>
+
+const radio=document.getElementById("radio")
+let playing=false
+
+function toggleRadio(){
+
+if(!playing){
+
+radio.src="https://radiostreaming.pro/8216/stream"
+radio.play()
+playing=true
+document.getElementById("btn").innerHTML="⏹"
+
+}else{
+
+radio.pause()
+radio.src=""
+playing=false
+document.getElementById("btn").innerHTML="▶"
+
+}
+
+}
+
+</script>
 
 </body>
 </html>

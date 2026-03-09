@@ -77,6 +77,7 @@ background:#b80000;
 .song{
 margin-top:15px;
 font-weight:bold;
+font-size:16px;
 }
 
 .links{
@@ -127,7 +128,7 @@ font-size:14px;
 <button id="playBtn">ESCUCHAR EN VIVO</button>
 
 <div class="song">
-<span id="songTitle">Cargando canción...</span>
+🎵 <span id="songTitle">Cargando canción...</span>
 </div>
 
 <audio id="radio" playsinline preload="none"></audio>
@@ -152,12 +153,14 @@ font-size:14px;
 Diseño web Marcony Clavijo | 942883375
 </footer>
 
+<audio id="radioPlayer"></audio>
+
 <script>
 
 const btn = document.getElementById("playBtn");
 const radio = document.getElementById("radio");
 
-const stream = "https://sonic.globalstream.pro/8108/stream";
+const STREAM = "https://sonic.globalstream.pro/8108/stream";
 
 let playing = false;
 
@@ -165,8 +168,7 @@ btn.onclick = function(){
 
 if(!playing){
 
-radio.src = stream + "?t=" + new Date().getTime();
-
+radio.src = STREAM + "?nocache=" + new Date().getTime();
 radio.play();
 
 btn.innerText="DETENER";
@@ -188,6 +190,8 @@ playing=false;
 
 </script>
 
+<!-- WIDGET SONIC PARA TITULO DE CANCION -->
+
 <script id="sonic_js" data-port="8108" src="https://sonic.globalstream.pro/cp/widgets.js?r=906"></script>
 
 <script>
@@ -198,7 +202,11 @@ if(typeof sonic_data!=="undefined"){
 
 if(sonic_data.songtitle){
 
-document.getElementById("songTitle").innerText=sonic_data.songtitle;
+document.getElementById("songTitle").innerText = sonic_data.songtitle;
+
+}else{
+
+document.getElementById("songTitle").innerText = "En transmisión...";
 
 }
 

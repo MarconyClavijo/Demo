@@ -14,7 +14,7 @@ body{
 margin:0;
 font-family:'Orbitron',sans-serif;
 color:white;
-background:url("https://imgfz.com/i/HRt3zvp.png") center/cover fixed;
+background:url("https://image2url.com/r2/default/images/1773142982332-f4033449-a600-48f7-9fa2-c372d57e39a1.jpg") center/cover fixed;
 }
 
 body::before{
@@ -58,12 +58,34 @@ padding:20px;
 /* PLAYER BOX */
 
 .player-box{
+position:relative;
 background:rgba(0,0,0,0.75);
 border:1px solid #444;
 border-radius:15px;
 padding:20px;
-box-shadow:0 0 20px #000;
+overflow:hidden;
 }
+
+/* fondo interno reproductor */
+
+.player-box::before{
+content:"";
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:url("https://image2url.com/r2/default/images/1773143555043-7c9270c3-1a57-4056-a89c-374eb0f1ffa7.jpg") center/cover;
+opacity:0.25;
+z-index:0;
+}
+
+.player-box *{
+position:relative;
+z-index:1;
+}
+
+/* LOGO */
 
 .logo{
 width:150px;
@@ -255,15 +277,17 @@ opacity:.6;
 
 <div class="sponsor-track">
 
-<img src="https://image2url.com/r2/default/images/1773033863184-0f8f4472-23e2-499a-9ee2-09855499b657.png">
+<img src="https://image2url.com/r2/default/images/1773141840320-d32f3735-f62f-4317-bfee-65382a98eb3f.jpg">
 
-<img src="https://image2url.com/r2/default/images/1773033971607-e63d7b01-4951-4025-9317-a1a96877113d.png">
+<img src="https://image2url.com/r2/default/images/1773080547360-7276c41e-bc2b-4523-a9d2-eb7ef477970f.jpg">
+
+<img src="https://image2url.com/r2/default/images/1773080574071-15a3a699-29b4-49fa-bc48-7cf6cd52d8f0.jpg">
 
 <img src="https://image2url.com/r2/default/images/1773141840320-d32f3735-f62f-4317-bfee-65382a98eb3f.jpg">
 
-<img src="https://image2url.com/r2/default/images/1773033863184-0f8f4472-23e2-499a-9ee2-09855499b657.png">
+<img src="https://image2url.com/r2/default/images/1773080547360-7276c41e-bc2b-4523-a9d2-eb7ef477970f.jpg">
 
-<img src="https://image2url.com/r2/default/images/1773033971607-e63d7b01-4951-4025-9317-a1a96877113d.png">
+<img src="https://image2url.com/r2/default/images/1773080574071-15a3a699-29b4-49fa-bc48-7cf6cd52d8f0.jpg">
 
 </div>
 
@@ -272,11 +296,8 @@ opacity:.6;
 </div>
 
 <div class="history">
-
 <h3>Últimas canciones</h3>
-
 <ul id="history"></ul>
-
 </div>
 
 <div class="visits" id="counter">
@@ -304,9 +325,7 @@ function toggleRadio(){
 if(!playing){
 
 radio.src="https://radiostreaming.pro/8216/stream?"+Date.now()
-
 radio.play()
-
 playing=true
 
 }else{
@@ -323,11 +342,9 @@ logo.classList.remove("spin")
 }
 
 radio.addEventListener("play",()=>{
-
 status.innerText="🔴 EN VIVO"
 btn.innerText="⏹ DETENER"
 logo.classList.add("spin")
-
 })
 
 setInterval(()=>{
@@ -343,9 +360,7 @@ if(history.length>5)history.pop()
 let html=""
 
 history.forEach(s=>{
-
 html+="<li>"+s+"</li>"
-
 })
 
 document.getElementById("history").innerHTML=html
@@ -379,9 +394,7 @@ document.getElementById("cover").src=data.results[0].artworkUrl100.replace("100x
 let counterEl=document.getElementById("counter")
 
 let visits=localStorage.getItem("visits")||0
-
 visits++
-
 localStorage.setItem("visits",visits)
 
 counterEl.innerText="Número de visitas: "+visits

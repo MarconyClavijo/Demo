@@ -3,7 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Marcony Radio - En Vivo</title>
+
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&display=swap" rel="stylesheet">
 
 <style>
@@ -11,34 +13,37 @@
 body{
 margin:0;
 font-family:'Orbitron',sans-serif;
-background:radial-gradient(circle at top,#ff00cc,#111,#000);
 color:white;
+background:url("https://imgfz.com/i/HRt3zvp.png") center/cover fixed;
+}
+
+body::before{
+content:"";
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.85);
+z-index:-1;
 }
 
 /* HEADER */
 
 header{
 display:flex;
-justify-content:space-between;
+justify-content:center;
 align-items:center;
-padding:10px 20px;
+padding:15px;
 background:#000;
-border-bottom:1px solid #222;
+border-bottom:2px solid #222;
 }
 
 .logo-text{
-height:40px;
-}
-
-.appBtn{
-background:#00c853;
-padding:8px 18px;
-border-radius:25px;
-color:white;
-text-decoration:none;
-font-size:12px;
-font-weight:bold;
-box-shadow:0 0 10px #00c853;
+height:45px;
+border:2px solid white;
+padding:5px;
+border-radius:8px;
 }
 
 /* CONTAINER */
@@ -50,13 +55,21 @@ text-align:center;
 padding:20px;
 }
 
-/* LOGO RADIO */
+/* PLAYER BOX */
+
+.player-box{
+background:rgba(0,0,0,0.75);
+border:1px solid #444;
+border-radius:15px;
+padding:20px;
+box-shadow:0 0 20px #000;
+}
 
 .logo{
-width:180px;
+width:150px;
 border-radius:50%;
+border:3px solid white;
 box-shadow:0 0 25px #ff00cc;
-margin-top:10px;
 }
 
 .spin{
@@ -68,49 +81,6 @@ from{transform:rotate(0)}
 to{transform:rotate(360deg)}
 }
 
-/* TITULO */
-
-h1{
-margin:10px 0;
-font-size:26px;
-}
-
-.sub{
-font-size:13px;
-color:#ffcc00;
-letter-spacing:2px;
-}
-
-/* PLAYER */
-
-.playBtn{
-margin-top:20px;
-background:#ff0000;
-border:none;
-padding:15px 35px;
-font-size:18px;
-border-radius:40px;
-color:white;
-cursor:pointer;
-box-shadow:0 0 20px #ff0000;
-}
-
-.status{
-margin-top:12px;
-font-size:14px;
-color:#00ffff;
-}
-
-/* COUNTER */
-
-.counter{
-margin-top:10px;
-font-size:14px;
-color:#ffcc00;
-}
-
-/* SONG */
-
 .song{
 margin-top:10px;
 font-size:15px;
@@ -120,41 +90,55 @@ color:#ffcc00;
 /* COVER */
 
 .cover{
-margin-top:20px;
+margin-top:15px;
 width:200px;
 height:200px;
 border-radius:10px;
 object-fit:cover;
-box-shadow:0 0 20px #000;
+box-shadow:0 0 20px black;
 }
 
-/* ECUALIZADOR */
+/* PLAYER BUTTON */
 
-.eq{
-display:flex;
-justify-content:center;
-gap:4px;
+.playBtn{
 margin-top:20px;
-height:20px;
+background:#ff0000;
+border:none;
+padding:14px 35px;
+font-size:17px;
+border-radius:40px;
+color:white;
+cursor:pointer;
+box-shadow:0 0 20px red;
 }
 
-.eq span{
-width:4px;
-background:#00ffff;
-animation:eq 1s infinite ease-in-out;
+.status{
+margin-top:10px;
+font-size:14px;
+color:#00ffff;
 }
 
-.eq span:nth-child(2){animation-delay:.2s}
-.eq span:nth-child(3){animation-delay:.4s}
-.eq span:nth-child(4){animation-delay:.6s}
-.eq span:nth-child(5){animation-delay:.8s}
+/* VOLUME */
 
-@keyframes eq{
-0%,100%{height:5px}
-50%{height:20px}
+.volume{
+margin-top:15px;
 }
 
-/* HISTORIAL */
+.volume input{
+width:100%;
+}
+
+/* APP BUTTON */
+
+.app{
+margin-top:15px;
+}
+
+.app img{
+width:180px;
+}
+
+/* HISTORY */
 
 .history{
 margin-top:20px;
@@ -171,83 +155,58 @@ list-style:none;
 padding:0;
 }
 
-/* SOCIAL */
-
-.social{
-margin-top:20px;
-}
-
-.social a{
-display:inline-block;
-margin:5px;
-padding:9px 18px;
-border-radius:25px;
-text-decoration:none;
-color:white;
-font-size:13px;
-}
-
-.fb{background:#1877f2}
-.wa{background:#25d366}
-
-/* AUSPICIADORES */
+/* SPONSORS */
 
 .sponsors{
-margin-top:35px;
+margin-top:25px;
 }
 
 .sponsors h3{
-margin-bottom:10px;
-text-align:left;
-padding-left:10px;
 color:#ffcc00;
+text-align:left;
 }
 
 .sponsor-carousel{
 display:flex;
-gap:15px;
 overflow:hidden;
-position:relative;
 }
 
 .sponsor-track{
 display:flex;
 gap:15px;
-animation:scrollSponsors 15s linear infinite;
+animation:scroll 15s linear infinite;
 }
 
-@keyframes scrollSponsors{
-0%{transform:translateX(0);}
-100%{transform:translateX(-50%);}
+@keyframes scroll{
+0%{transform:translateX(0)}
+100%{transform:translateX(-50%)}
 }
-
-/* LOGOS SIN CORTARSE */
 
 .sponsor-track img{
-width:220px;
-height:140px;
-object-fit:contain;
-background:white;
-padding:10px;
-border-radius:15px;
-box-shadow:0 0 20px #ff00cc;
+width:180px;
+border-radius:12px;
+box-shadow:0 0 15px #ff00cc;
 transition:.3s;
-cursor:pointer;
-flex-shrink:0;
 }
 
 .sponsor-track img:hover{
-transform:scale(1.1);
+transform:scale(1.15);
+}
+
+/* VISITS */
+
+.visits{
+margin-top:30px;
+font-size:14px;
+color:#ffcc00;
 }
 
 /* FOOTER */
 
 footer{
-margin-top:40px;
+margin-top:5px;
 font-size:11px;
 opacity:.6;
-text-align:center;
-padding-bottom:20px;
 }
 
 </style>
@@ -256,69 +215,37 @@ padding-bottom:20px;
 <body>
 
 <header>
-
 <img src="https://image2url.com/r2/default/images/1773073582797-5c7bb2aa-125b-466e-8fe1-13def1cfa011.png" class="logo-text">
-
-<a class="appBtn" href="https://play.google.com/store/apps/details?id=com.innovatel.marconyradio" target="_blank">
-DESCARGAR APP
-</a>
-
 </header>
 
 <div class="container">
 
+<div class="player-box">
+
 <img src="https://image2url.com/r2/default/images/1773073454712-7beae05c-bba6-4cbc-a169-e794356cf998.png" class="logo" id="logo">
 
-<h1>MARCONY RADIO</h1>
-
-<div class="sub">
-TRANSMITIENDO EN VIVO 24/7
-</div>
-
-<audio id="radio"></audio>
-
-<button class="playBtn" id="btn" onclick="toggleRadio()">
-▶ ESCUCHAR EN VIVO
-</button>
-
-<div class="status" id="status">
-Radio detenida
-</div>
-
-<div class="counter" id="counter">
-Visitantes: 0
-</div>
-
-<div class="song">
-🎵 <span id="sonic_title">Cargando canción...</span>
-</div>
+<div class="song">🎵 <span id="sonic_title">Cargando canción...</span></div>
 
 <img id="cover" class="cover" src="https://via.placeholder.com/200x200?text=Marcony+Radio">
 
-<div class="eq" id="eq" style="display:none">
-<span></span><span></span><span></span><span></span><span></span>
+<audio id="radio"></audio>
+
+<button class="playBtn" id="btn" onclick="toggleRadio()">▶ ESCUCHAR EN VIVO</button>
+
+<div class="status" id="status">Radio detenida</div>
+
+<div class="volume">
+🔊 Volumen
+<input type="range" min="0" max="1" step="0.01" value="1" onchange="radio.volume=this.value">
 </div>
 
-<div class="history">
-<h3>Últimas canciones</h3>
-<ul id="history"></ul>
-</div>
-
-<script id="sonic_js" data-port="8216" src="https://radiostreaming.pro/cp/widgets.js?r=846"></script>
-
-<div class="social">
-
-<a class="fb" href="https://www.facebook.com/radiomarcony" target="_blank">
-Facebook
+<div class="app">
+<a href="https://play.google.com/store/apps/details?id=com.innovatel.marconyradio" target="_blank">
+<img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg">
 </a>
-
-<a class="wa" href="https://wa.me/51942883375" target="_blank">
-WhatsApp
-</a>
-
 </div>
 
-<!-- AUSPICIADORES -->
+</div>
 
 <div class="sponsors">
 
@@ -328,18 +255,32 @@ WhatsApp
 
 <div class="sponsor-track">
 
-<img src="https://image2url.com/r2/default/images/1773080547360-7276c41e-bc2b-4523-a9d2-eb7ef477970f.jpg">
+<img src="https://image2url.com/r2/default/images/1773033863184-0f8f4472-23e2-499a-9ee2-09855499b657.png">
 
-<img src="https://image2url.com/r2/default/images/1773080574071-15a3a699-29b4-49fa-bc48-7cf6cd52d8f0.jpg">
+<img src="https://image2url.com/r2/default/images/1773033971607-e63d7b01-4951-4025-9317-a1a96877113d.png">
 
-<img src="https://image2url.com/r2/default/images/1773080547360-7276c41e-bc2b-4523-a9d2-eb7ef477970f.jpg">
+<img src="https://image2url.com/r2/default/images/1773141840320-d32f3735-f62f-4317-bfee-65382a98eb3f.jpg">
 
-<img src="https://image2url.com/r2/default/images/1773080574071-15a3a699-29b4-49fa-bc48-7cf6cd52d8f0.jpg">
+<img src="https://image2url.com/r2/default/images/1773033863184-0f8f4472-23e2-499a-9ee2-09855499b657.png">
+
+<img src="https://image2url.com/r2/default/images/1773033971607-e63d7b01-4951-4025-9317-a1a96877113d.png">
 
 </div>
 
 </div>
 
+</div>
+
+<div class="history">
+
+<h3>Últimas canciones</h3>
+
+<ul id="history"></ul>
+
+</div>
+
+<div class="visits" id="counter">
+Número de visitas: 0
 </div>
 
 <footer>
@@ -354,7 +295,6 @@ const radio=document.getElementById("radio")
 const btn=document.getElementById("btn")
 const status=document.getElementById("status")
 const logo=document.getElementById("logo")
-const eq=document.getElementById("eq")
 
 let playing=false
 let history=[]
@@ -364,7 +304,9 @@ function toggleRadio(){
 if(!playing){
 
 radio.src="https://radiostreaming.pro/8216/stream?"+Date.now()
+
 radio.play()
+
 playing=true
 
 }else{
@@ -372,11 +314,9 @@ playing=true
 radio.pause()
 radio.src=""
 playing=false
-
 status.innerText="Radio detenida"
 btn.innerText="▶ ESCUCHAR EN VIVO"
 logo.classList.remove("spin")
-eq.style.display="none"
 
 }
 
@@ -387,7 +327,6 @@ radio.addEventListener("play",()=>{
 status.innerText="🔴 EN VIVO"
 btn.innerText="⏹ DETENER"
 logo.classList.add("spin")
-eq.style.display="flex"
 
 })
 
@@ -404,7 +343,9 @@ if(history.length>5)history.pop()
 let html=""
 
 history.forEach(s=>{
+
 html+="<li>"+s+"</li>"
+
 })
 
 document.getElementById("history").innerHTML=html
@@ -420,7 +361,9 @@ function buscarCover(song){
 let q=encodeURIComponent(song)
 
 fetch("https://itunes.apple.com/search?term="+q+"&limit=1")
+
 .then(r=>r.json())
+
 .then(data=>{
 
 if(data.results.length>0){
@@ -435,15 +378,17 @@ document.getElementById("cover").src=data.results[0].artworkUrl100.replace("100x
 
 let counterEl=document.getElementById("counter")
 
-let visitors=localStorage.getItem("visitors")||0
+let visits=localStorage.getItem("visits")||0
 
-visitors++
+visits++
 
-localStorage.setItem("visitors",visitors)
+localStorage.setItem("visits",visits)
 
-counterEl.innerText="Visitantes: "+visitors
+counterEl.innerText="Número de visitas: "+visits
 
 </script>
+
+<script id="sonic_js" data-port="8216" src="https://radiostreaming.pro/cp/widgets.js?r=846"></script>
 
 </body>
 </html>

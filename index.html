@@ -8,6 +8,9 @@
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#ff0000">
+
 <style>
 
 body{
@@ -18,7 +21,7 @@ text-align:center;
 transition:.3s;
 }
 
-/* HEADER ORIGINAL */
+/* HEADER */
 .header{
 padding:20px;
 }
@@ -36,7 +39,19 @@ filter:drop-shadow(0 0 20px rgba(255,120,0,.5));
 100%{transform:translateY(0);}
 }
 
-/* GRID ORIGINAL */
+/* BOTON DARK */
+#darkBtn{
+padding:10px 18px;
+border:none;
+border-radius:25px;
+cursor:pointer;
+font-weight:bold;
+margin-top:10px;
+background:#111;
+color:#fff;
+}
+
+/* GRID */
 .radios{
 display:grid;
 grid-template-columns:repeat(2,1fr);
@@ -46,7 +61,11 @@ max-width:900px;
 margin:auto;
 }
 
-/* CARD ORIGINAL */
+@media(min-width:768px){
+.radios{grid-template-columns:repeat(3,1fr);}
+}
+
+/* CARD */
 .radio{
 background:white;
 border-radius:15px;
@@ -69,8 +88,7 @@ position:relative;
 }
 
 .radio-top img{
-width:85px;
-object-fit:contain;
+width:80px;
 }
 
 /* PLAY */
@@ -86,7 +104,6 @@ align-items:center;
 justify-content:center;
 color:white;
 font-size:22px;
-box-shadow:0 5px 15px rgba(0,0,0,.4);
 }
 
 /* NAME */
@@ -110,6 +127,24 @@ audio{
 width:300px;
 }
 
+/* ADS */
+.ads{
+margin:40px auto;
+max-width:600px;
+background:linear-gradient(90deg,#ff0000,#ff7300);
+padding:25px;
+border-radius:20px;
+color:white;
+}
+
+/* FOOTER */
+footer{
+margin-top:20px;
+padding:15px;
+font-size:13px;
+opacity:.7;
+}
+
 /* MINI PLAYER */
 #miniPlayer{
 position:fixed;
@@ -121,6 +156,8 @@ color:#fff;
 padding:12px;
 border-radius:15px;
 z-index:9999;
+display:flex;
+justify-content:center;
 font-weight:600;
 }
 
@@ -134,6 +171,10 @@ color:white;
 background:#1f1f1f;
 }
 
+.dark .ads{
+background:linear-gradient(90deg,#222,#444);
+}
+
 </style>
 
 </head>
@@ -143,12 +184,13 @@ background:#1f1f1f;
 <!-- HEADER -->
 <div class="header">
 <img src="https://imgfz.com/i/eR5Xw2K.png">
+<br>
+<button id="darkBtn">🌙 Modo Oscuro</button>
 </div>
 
 <!-- RADIOS -->
 <div class="radios">
 
-<!-- STEREO M -->
 <div class="radio" id="r1"
 onclick="playRadio('https://sonic.globalstream.pro/8108/stream','Stereo M','r1')">
 <div class="radio-top" style="background:#ffd400">
@@ -158,7 +200,6 @@ onclick="playRadio('https://sonic.globalstream.pro/8108/stream','Stereo M','r1')
 <div class="radio-name">Stereo M</div>
 </div>
 
-<!-- LA PATRONA (FIX LOGO) -->
 <div class="radio" id="r2"
 onclick="playRadio('https://radiostreaming.pro/8310/stream','Radio La Patrona','r2')">
 <div class="radio-top" style="background:#ff2e8a">
@@ -168,7 +209,6 @@ onclick="playRadio('https://radiostreaming.pro/8310/stream','Radio La Patrona','
 <div class="radio-name">Radio La Patrona</div>
 </div>
 
-<!-- LA TREMENDA -->
 <div class="radio" id="r3"
 onclick="playRadio('https://radiostreaming.pro/8238/stream','La Tremenda','r3')">
 <div class="radio-top" style="background:#ff3d00">
@@ -178,7 +218,6 @@ onclick="playRadio('https://radiostreaming.pro/8238/stream','La Tremenda','r3')"
 <div class="radio-name">La Tremenda</div>
 </div>
 
-<!-- STEREO L -->
 <div class="radio" id="r4"
 onclick="playRadio('https://radiostreaming.pro/8234/stream','Stereo L','r4')">
 <div class="radio-top" style="background:#0f8f73">
@@ -192,49 +231,101 @@ onclick="playRadio('https://radiostreaming.pro/8234/stream','Stereo L','r4')">
 
 <!-- PLAYER -->
 <div class="player">
-<h3 id="title">Selecciona una radio</h3>
-<audio id="audio" controls></audio>
+<h3 id="radioTitle">Selecciona una radio</h3>
+<audio id="player" controls></audio>
 </div>
+
+<!-- ADS -->
+<div class="ads">
+<h3>📢 Publicidad en nuestras radios</h3>
+<p>Promociona tu negocio en Corporación Marcony</p>
+<a href="https://wa.me/51942883375" target="_blank" style="color:white;">💬 WhatsApp</a>
+</div>
+
+<footer>
+© 2026 Corporación Marcony
+</footer>
 
 <!-- MINI PLAYER -->
 <div id="miniPlayer">
-🎧 <span id="miniText">Ninguna radio activa</span>
+🎧 <span id="miniRadio">Ninguna radio seleccionada</span>
 </div>
 
 <script>
 
-let current=null;
+const player = document.getElementById("player");
+const title = document.getElementById("radioTitle");
 
+let currentRadio = null;
+let playing = false;
+
+/* RADIO */
 function playRadio(url,name,id){
 
-const audio=document.getElementById("audio");
+const btn = document.querySelector("#"+id+" .play");
 
-if(current===id){
-audio.pause();
-audio.src="";
-current=null;
-document.getElementById("miniText").innerText="Ninguna radio activa";
-document.getElementById("title").innerText="Selecciona una radio";
+if(playing && currentRadio === id){
+player.pause();
+player.src = "";
+player.load();
+title.innerText = "Radio detenida";
 document.getElementById(id).classList.remove("active");
+btn.innerHTML = "▶";
+playing = false;
+currentRadio = null;
+document.getElementById("miniRadio").innerText = "Ninguna radio seleccionada";
 return;
 }
 
-audio.pause();
-audio.src=url;
-audio.load();
+player.pause();
+player.src = url;
+player.load();
 
-audio.play().catch(e=>{
-console.log("error audio",e);
+player.play().catch(err=>{
+console.log("Error audio:", err);
 });
 
-current=id;
+title.innerText = "🔴 EN VIVO: " + name;
+document.getElementById("miniRadio").innerText = name;
+document.title = "🔴 " + name + " en Vivo";
 
-document.querySelectorAll(".radio").forEach(r=>r.classList.remove("active"));
+document.querySelectorAll(".radio").forEach(r=>{
+r.classList.remove("active");
+});
+
+document.querySelectorAll(".play").forEach(b=>{
+b.innerHTML = "▶";
+});
+
 document.getElementById(id).classList.add("active");
+btn.innerHTML = "⏹";
 
-document.getElementById("title").innerText="🔴 En vivo: "+name;
-document.getElementById("miniText").innerText=name;
+currentRadio = id;
+playing = true;
+}
 
+/* DARK MODE */
+const darkBtn = document.getElementById("darkBtn");
+
+if(localStorage.getItem("theme")==="dark"){
+document.body.classList.add("dark");
+}
+
+darkBtn.onclick = () => {
+document.body.classList.toggle("dark");
+
+localStorage.setItem(
+"theme",
+document.body.classList.contains("dark") ? "dark" : "light"
+);
+};
+
+/* PWA */
+if('serviceWorker' in navigator){
+window.addEventListener("load", () => {
+navigator.serviceWorker.register('./sw.js')
+.catch(err => console.log("SW error", err));
+});
 }
 
 </script>

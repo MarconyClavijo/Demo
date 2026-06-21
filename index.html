@@ -8,9 +8,6 @@
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
-<link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#ff0000">
-
 <style>
 
 body{
@@ -21,7 +18,7 @@ text-align:center;
 transition:.3s;
 }
 
-/* HEADER */
+/* HEADER ORIGINAL */
 .header{
 padding:20px;
 }
@@ -39,7 +36,7 @@ filter:drop-shadow(0 0 20px rgba(255,120,0,.5));
 100%{transform:translateY(0);}
 }
 
-/* GRID BONITO */
+/* GRID ORIGINAL */
 .radios{
 display:grid;
 grid-template-columns:repeat(2,1fr);
@@ -49,7 +46,7 @@ max-width:900px;
 margin:auto;
 }
 
-/* CARD PRO */
+/* CARD ORIGINAL */
 .radio{
 background:white;
 border-radius:15px;
@@ -57,146 +54,186 @@ overflow:hidden;
 box-shadow:0 4px 12px rgba(0,0,0,.15);
 transition:.3s;
 cursor:pointer;
-padding:10px;
 }
 
 .radio:hover{
 transform:scale(1.05);
 }
 
-.radio img{
-width:80px;
-height:80px;
+.radio-top{
+height:130px;
+display:flex;
+align-items:center;
+justify-content:center;
+position:relative;
+}
+
+.radio-top img{
+width:85px;
 object-fit:contain;
 }
 
+/* PLAY */
+.play{
+position:absolute;
+bottom:-25px;
+background:linear-gradient(45deg,#ff00cc,#6a00ff);
+width:50px;
+height:50px;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+color:white;
+font-size:22px;
+box-shadow:0 5px 15px rgba(0,0,0,.4);
+}
+
+/* NAME */
 .radio-name{
-margin-top:5px;
+padding:35px 10px 15px;
 font-weight:600;
 }
 
-.play{
-font-size:22px;
-margin-top:5px;
-color:#ff004c;
-}
-
+/* ACTIVE */
 .active{
-box-shadow:0 0 20px #ff004c;
+box-shadow:0 0 25px #ff0000;
 transform:scale(1.05);
 }
 
 /* PLAYER */
 .player{
-margin:20px;
+margin:25px;
 }
 
 audio{
-width:90%;
+width:300px;
 }
 
 /* MINI PLAYER */
-#mini{
+#miniPlayer{
 position:fixed;
-bottom:10px;
-left:10px;
-right:10px;
+bottom:15px;
+left:15px;
+right:15px;
 background:#111;
 color:#fff;
 padding:12px;
-border-radius:12px;
-font-weight:bold;
+border-radius:15px;
+z-index:9999;
+font-weight:600;
 }
 
 /* DARK MODE */
 .dark{
-background:#111;
-color:#fff;
+background:#121212;
+color:white;
 }
 
 .dark .radio{
-background:#1e1e1e;
-color:#fff;
+background:#1f1f1f;
 }
 
 </style>
+
 </head>
 
 <body>
 
+<!-- HEADER -->
 <div class="header">
 <img src="https://imgfz.com/i/eR5Xw2K.png">
 </div>
 
+<!-- RADIOS -->
 <div class="radios">
 
-<div class="radio" id="r1" onclick="playRadio('https://sonic.globalstream.pro/8108/stream','Stereo M','r1')">
+<!-- STEREO M -->
+<div class="radio" id="r1"
+onclick="playRadio('https://sonic.globalstream.pro/8108/stream','Stereo M','r1')">
+<div class="radio-top" style="background:#ffd400">
 <img src="https://i.postimg.cc/L8bjb6K5/1687464033296.png">
+<div class="play">▶</div>
+</div>
 <div class="radio-name">Stereo M</div>
-<div class="play">▶</div>
 </div>
 
-<div class="radio" id="r2" onclick="playRadio('https://radiostreaming.pro/8310/stream','La Patrona','r2')">
-<img src="https://image2url.com/r2/default/images/1773782144520.png">
-<div class="radio-name">La Patrona</div>
+<!-- LA PATRONA (FIX LOGO) -->
+<div class="radio" id="r2"
+onclick="playRadio('https://radiostreaming.pro/8310/stream','Radio La Patrona','r2')">
+<div class="radio-top" style="background:#ff2e8a">
+<img src="https://image2url.com/r2/default/images/1773782144520-db83b536-4765-45ec-b761-f51c5ee811ed.png">
 <div class="play">▶</div>
 </div>
+<div class="radio-name">Radio La Patrona</div>
+</div>
 
-<div class="radio" id="r3" onclick="playRadio('https://radiostreaming.pro/8238/stream','La Tremenda','r3')">
+<!-- LA TREMENDA -->
+<div class="radio" id="r3"
+onclick="playRadio('https://radiostreaming.pro/8238/stream','La Tremenda','r3')">
+<div class="radio-top" style="background:#ff3d00">
 <img src="https://imgfz.com/i/h7TrEm5.png">
+<div class="play">▶</div>
+</div>
 <div class="radio-name">La Tremenda</div>
-<div class="play">▶</div>
 </div>
 
-<div class="radio" id="r4" onclick="playRadio('https://radiostreaming.pro/8234/stream','Stereo L','r4')">
+<!-- STEREO L -->
+<div class="radio" id="r4"
+onclick="playRadio('https://radiostreaming.pro/8234/stream','Stereo L','r4')">
+<div class="radio-top" style="background:#0f8f73">
 <img src="https://imgfz.com/i/pFgX2fl.png">
-<div class="radio-name">Stereo L</div>
 <div class="play">▶</div>
 </div>
+<div class="radio-name">Stereo L</div>
+</div>
 
 </div>
 
+<!-- PLAYER -->
 <div class="player">
 <h3 id="title">Selecciona una radio</h3>
 <audio id="audio" controls></audio>
 </div>
 
-<div id="mini">🎧 Ninguna radio activa</div>
+<!-- MINI PLAYER -->
+<div id="miniPlayer">
+🎧 <span id="miniText">Ninguna radio activa</span>
+</div>
 
 <script>
 
-let current = null;
+let current=null;
 
 function playRadio(url,name,id){
 
-const audio = document.getElementById("audio");
-const title = document.getElementById("title");
+const audio=document.getElementById("audio");
 
-if(current === id){
+if(current===id){
 audio.pause();
-audio.src = "";
-current = null;
-title.innerText = "Selecciona una radio";
-document.getElementById("mini").innerText = "🎧 Ninguna radio activa";
+audio.src="";
+current=null;
+document.getElementById("miniText").innerText="Ninguna radio activa";
+document.getElementById("title").innerText="Selecciona una radio";
 document.getElementById(id).classList.remove("active");
 return;
 }
 
 audio.pause();
-audio.src = url;
+audio.src=url;
 audio.load();
 
 audio.play().catch(e=>{
-console.log("Autoplay bloqueado", e);
+console.log("error audio",e);
 });
 
-current = id;
+current=id;
 
 document.querySelectorAll(".radio").forEach(r=>r.classList.remove("active"));
 document.getElementById(id).classList.add("active");
 
-title.innerText = "🔴 En vivo: " + name;
-document.getElementById("mini").innerText = "🎧 " + name;
+document.getElementById("title").innerText="🔴 En vivo: "+name;
+document.getElementById("miniText").innerText=name;
 
 }
 

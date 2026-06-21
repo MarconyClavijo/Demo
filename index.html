@@ -2,236 +2,331 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Radio Stereo M 101.5 FM</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet"/>
+<title>Corporación Marcony | Radios en Vivo</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+<!-- PWA -->
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#ff0000">
 
 <style>
 
-:root{
---rojo:#e60000;
---amarillo:#ffd700;
---negro:#111;
---blanco:#fff;
---celeste:#0088cc;
---gris:#1c1c1c;
-}
-
 body{
 margin:0;
-font-family:'Raleway',sans-serif;
-background:linear-gradient(135deg,#0088cc,#e60000);
-color:var(--blanco);
-}
-
-/* HEADER CORPORATIVO */
-header{
-position:sticky;
-top:0;
-background:rgba(255,215,0,0.95);
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:10px 20px;
-z-index:1000;
-}
-
-.logo{
-width:80px;
-animation:float 3s infinite ease-in-out;
-}
-
-.menu a{
-margin:0 10px;
-text-decoration:none;
-color:#111;
-font-weight:bold;
-}
-
-/* HERO */
-.hero{
+font-family:'Poppins',sans-serif;
+background:#f2f2f2;
 text-align:center;
-padding:30px 15px;
+transition:.3s;
 }
 
-.hero h1{
-font-size:32px;
-margin:10px 0;
-}
-
-.hero p{
-opacity:0.9;
-}
-
-/* PLAYER APP STYLE */
-.player{
-background:rgba(255,255,255,0.12);
-backdrop-filter:blur(10px);
-margin:20px auto;
-max-width:420px;
-padding:25px;
-border-radius:20px;
-text-align:center;
-box-shadow:0 0 20px rgba(0,0,0,0.4);
-}
-
-.onair{
-color:#ff3b3b;
-font-weight:bold;
-animation:blink 1s infinite;
-margin-bottom:10px;
-}
-
-.play-btn{
-width:80px;
-height:80px;
-border-radius:50%;
-border:none;
-font-size:30px;
-cursor:pointer;
-background:var(--amarillo);
-color:#000;
-margin:15px 0;
-box-shadow:0 0 15px rgba(0,0,0,0.5);
-}
-
-/* TARJETAS */
-.cards{
-display:flex;
-flex-wrap:wrap;
-justify-content:center;
-gap:15px;
+/* HEADER */
+.header{
 padding:20px;
 }
 
-.card{
-background:#fff;
-color:#000;
-padding:15px;
-border-radius:15px;
-width:220px;
-text-align:center;
-box-shadow:0 0 10px rgba(0,0,0,0.3);
+.header img{
+width:320px;
+max-width:90%;
+animation:float 4s ease-in-out infinite;
+filter:drop-shadow(0 0 20px rgba(255,120,0,.5));
 }
 
-.card a{
-display:block;
+@keyframes float{
+0%{transform:translateY(0);}
+50%{transform:translateY(-8px);}
+100%{transform:translateY(0);}
+}
+
+/* BOTON DARK */
+#darkBtn{
+padding:10px 18px;
+border:none;
+border-radius:25px;
+cursor:pointer;
+font-weight:bold;
 margin-top:10px;
-background:var(--rojo);
+background:#111;
 color:#fff;
-padding:8px;
-border-radius:10px;
-text-decoration:none;
+}
+
+/* GRID */
+.radios{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:20px;
+padding:20px;
+max-width:900px;
+margin:auto;
+}
+
+@media(min-width:768px){
+.radios{grid-template-columns:repeat(3,1fr);}
+}
+
+/* CARD */
+.radio{
+background:white;
+border-radius:15px;
+overflow:hidden;
+box-shadow:0 4px 12px rgba(0,0,0,.15);
+transition:.3s;
+cursor:pointer;
+}
+
+.radio:hover{
+transform:scale(1.05);
+}
+
+.radio-top{
+height:130px;
+display:flex;
+align-items:center;
+justify-content:center;
+position:relative;
+}
+
+.radio-top img{
+width:80px;
+}
+
+/* PLAY */
+.play{
+position:absolute;
+bottom:-25px;
+background:linear-gradient(45deg,#ff00cc,#6a00ff);
+width:50px;
+height:50px;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+color:white;
+font-size:22px;
+}
+
+/* NAME */
+.radio-name{
+padding:35px 10px 15px;
+font-weight:600;
+}
+
+/* ACTIVE */
+.active{
+box-shadow:0 0 25px #ff0000;
+transform:scale(1.05);
+}
+
+/* PLAYER */
+.player{
+margin:25px;
+}
+
+audio{
+width:300px;
+}
+
+/* ADS */
+.ads{
+margin:40px auto;
+max-width:600px;
+background:linear-gradient(90deg,#ff0000,#ff7300);
+padding:25px;
+border-radius:20px;
+color:white;
 }
 
 /* FOOTER */
 footer{
-text-align:center;
-padding:15px;
-background:#111;
-color:#ccc;
 margin-top:20px;
+padding:15px;
+font-size:13px;
+opacity:.7;
 }
 
-@keyframes blink{
-50%{opacity:0}
+/* MINI PLAYER */
+#miniPlayer{
+position:fixed;
+bottom:15px;
+left:15px;
+right:15px;
+background:#111;
+color:#fff;
+padding:12px;
+border-radius:15px;
+z-index:9999;
+display:flex;
+justify-content:center;
+font-weight:600;
 }
 
-@keyframes float{
-50%{transform:translateY(-6px)}
+/* DARK MODE */
+.dark{
+background:#121212;
+color:white;
 }
 
-@media(max-width:600px){
-.menu{display:none;}
+.dark .radio{
+background:#1f1f1f;
+}
+
+.dark .ads{
+background:linear-gradient(90deg,#222,#444);
 }
 
 </style>
+
 </head>
 
 <body>
 
-<header>
-<img src="https://i.postimg.cc/L8bjb6K5/1687464033296.png" class="logo">
+<!-- HEADER -->
+<div class="header">
+<img src="http://imgfz.com/i/I5PvAlr.png">
+<br>
+<button id="darkBtn">🌙 Modo Oscuro</button>
+</div>
 
-<nav class="menu">
-<a href="#">Inicio</a>
-<a href="#">Programación</a>
-<a href="#">Locutores</a>
-<a href="#">Contacto</a>
-</nav>
-</header>
+<!-- RADIOS -->
+<div class="radios">
 
-<section class="hero">
-<h1>Radio Stereo M 101.5 FM</h1>
-<p>La radio que te acompaña todo el día 🎧</p>
-</section>
+<!-- STEREO M -->
+<div class="radio" id="r1"
+onclick="playRadio('https://sonic.globalstream.pro/8108/stream','Stereo M','r1')">
+
+<div class="radio-top" style="background:#ffd400">
+<img src="https://i.postimg.cc/L8bjb6K5/1687464033296.png">
+<div class="play">▶</div>
+</div>
+<div class="radio-name">Stereo M</div>
+</div>
+
+<!-- LA PATRONA -->
+<div class="radio" id="r5"
+onclick="playRadio('https://radiostreaming.pro/8310/stream','Radio La Patrona','r5')">
+
+<div class="radio-top" style="background:#ff2e8a">
+<img src="https://image2url.com/r2/default/images/1773782144520-db83b536-4765-45ec-b761-f51c5ee811ed.png">
+<div class="play">▶</div>
+</div>
+<div class="radio-name">Radio La Patrona</div>
+</div>
+
+<!-- LA TREMENDA -->
+<div class="radio" id="r3"
+onclick="playRadio('https://radiostreaming.pro/8238/stream','La Tremenda','r3')">
+
+<div class="radio-top" style="background:#ff3d00">
+<img src="https://imgfz.com/i/h7TrEm5.png">
+<div class="play">▶</div>
+</div>
+<div class="radio-name">La Tremenda</div>
+</div>
+
+<!-- STEREO L -->
+<div class="radio" id="r6"
+onclick="playRadio('https://radiostreaming.pro/8234/stream','Stereo L','r6')">
+
+<div class="radio-top" style="background:#0f8f73">
+<img src="http://imgfz.com/i/6oIiqQc.png">
+<div class="play">▶</div>
+</div>
+<div class="radio-name">Stereo L</div>
+</div>
+
+</div>
 
 <!-- PLAYER -->
 <div class="player">
-
-<div class="onair">🔴 EN VIVO</div>
-
-<button class="play-btn" onclick="toggleRadio()">▶</button>
-
-<audio id="radio"></audio>
-
-<div id="song">Cargando canción...</div>
-
+<h3 id="radioTitle">Selecciona una radio</h3>
+<audio controls id="player"></audio>
 </div>
 
-<!-- TARJETAS -->
-<div class="cards">
-
-<div class="card">
-<h3>📲 App</h3>
-<p>Escúchanos desde tu celular</p>
-<a href="#">Descargar</a>
-</div>
-
-<div class="card">
-<h3>📘 Facebook</h3>
-<p>Síguenos en redes</p>
-<a href="https://www.facebook.com/share/1Dib9eQUFD/">Ir</a>
-</div>
-
-<div class="card">
-<h3>📢 Publicidad</h3>
-<p>Promociona tu negocio</p>
-<a href="https://wa.me/51942883375">Contactar</a>
-</div>
-
+<!-- ADS -->
+<div class="ads">
+<h3>📢 Publicidad en nuestras radios</h3>
+<p>Promociona tu negocio en Corporación Marcony</p>
+<a href="https://wa.me/51942883375" target="_blank">💬 WhatsApp</a>
 </div>
 
 <footer>
-© Radio Stereo M 101.5 FM - Todos los derechos reservados
+© 2026 Corporación Marcony
 </footer>
+
+<!-- MINI PLAYER -->
+<div id="miniPlayer">
+🎧 <span id="miniRadio">Ninguna radio seleccionada</span>
+</div>
 
 <script>
 
-const stream = "https://sonic.globalstream.pro/8108/stream";
-const audio = document.getElementById("radio");
-let playing = false;
+const player = document.getElementById("player")
+const title = document.getElementById("radioTitle")
 
-function toggleRadio(){
+let currentRadio = null
+let playing = false
 
-if(!playing){
-audio.src = stream;
-audio.play();
-playing = true;
-document.querySelector(".play-btn").innerHTML="⏸";
-}else{
-audio.pause();
-playing = false;
-document.querySelector(".play-btn").innerHTML="▶";
+function playRadio(url,name,id){
+
+const btn = document.querySelector("#"+id+" .play")
+
+if(playing && currentRadio === id){
+player.pause()
+player.src=""
+title.innerText="Radio detenida"
+document.getElementById(id).classList.remove("active")
+btn.innerHTML="▶"
+playing=false
+currentRadio=null
+return
 }
 
+player.src=url
+player.play()
+
+title.innerText="🔴 EN VIVO: "+name
+document.getElementById("miniRadio").innerText=name
+document.title="🔴 "+name+" en Vivo"
+
+document.querySelectorAll(".radio").forEach(r=>{
+r.classList.remove("active")
+})
+
+document.querySelectorAll(".play").forEach(b=>{
+b.innerHTML="▶"
+})
+
+document.getElementById(id).classList.add("active")
+btn.innerHTML="⏹"
+
+currentRadio=id
+playing=true
+
 }
 
-// metadata simple (puedes mejorar con Sonic después)
-setInterval(()=>{
-document.getElementById("song").innerText="🎵 En transmisión en vivo...";
-},3000);
+// DARK MODE
+const darkBtn=document.getElementById("darkBtn")
+
+if(localStorage.getItem("theme")==="dark"){
+document.body.classList.add("dark")
+}
+
+darkBtn.onclick=()=>{
+document.body.classList.toggle("dark")
+
+localStorage.setItem(
+"theme",
+document.body.classList.contains("dark")
+?"dark":"light"
+)
+}
+
+// PWA SERVICE WORKER
+if('serviceWorker' in navigator){
+navigator.serviceWorker.register('sw.js')
+}
 
 </script>
 

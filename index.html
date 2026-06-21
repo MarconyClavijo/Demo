@@ -6,173 +6,337 @@
 
 <title>Corporación Marcony | Radios en Vivo</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#ff0000">
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<!-- PWA -->
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#ff0000">
 
 <style>
+
 body{
 margin:0;
-font-family:Poppins;
+font-family:'Poppins',sans-serif;
 background:#f2f2f2;
 text-align:center;
 transition:.3s;
 }
 
 /* HEADER */
+.header{
+padding:20px;
+}
+
 .header img{
-width:300px;
+width:320px;
 max-width:90%;
-margin-top:15px;
+animation:float 4s ease-in-out infinite;
+filter:drop-shadow(0 0 20px rgba(255,120,0,.5));
+}
+
+@keyframes float{
+0%{transform:translateY(0);}
+50%{transform:translateY(-8px);}
+100%{transform:translateY(0);}
+}
+
+/* BOTON DARK */
+#darkBtn{
+padding:10px 18px;
+border:none;
+border-radius:25px;
+cursor:pointer;
+font-weight:bold;
+margin-top:10px;
+background:#111;
+color:#fff;
 }
 
 /* GRID */
 .radios{
 display:grid;
 grid-template-columns:repeat(2,1fr);
-gap:15px;
-padding:15px;
+gap:20px;
+padding:20px;
 max-width:900px;
 margin:auto;
 }
 
+@media(min-width:768px){
+.radios{grid-template-columns:repeat(3,1fr);}
+}
+
+/* CARD */
 .radio{
-background:#fff;
+background:white;
 border-radius:15px;
-padding:10px;
+overflow:hidden;
+box-shadow:0 4px 12px rgba(0,0,0,.15);
+transition:.3s;
 cursor:pointer;
-transition:.2s;
-box-shadow:0 3px 10px rgba(0,0,0,.1);
 }
 
-.radio:hover{transform:scale(1.03);}
-.active{box-shadow:0 0 15px red;}
+.radio:hover{
+transform:scale(1.05);
+}
 
-.radio img{
+.radio-top{
+height:130px;
+display:flex;
+align-items:center;
+justify-content:center;
+position:relative;
+}
+
+.radio-top img{
 width:80px;
-height:80px;
-object-fit:contain;
 }
 
+/* PLAY */
 .play{
-font-size:20px;
-margin-top:5px;
+position:absolute;
+bottom:-25px;
+background:linear-gradient(45deg,#ff00cc,#6a00ff);
+width:50px;
+height:50px;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+color:white;
+font-size:22px;
+}
+
+/* NAME */
+.radio-name{
+padding:35px 10px 15px;
+font-weight:600;
+}
+
+/* ACTIVE */
+.active{
+box-shadow:0 0 25px #ff0000;
+transform:scale(1.05);
 }
 
 /* PLAYER */
 .player{
-margin:15px;
+margin:25px;
 }
 
 audio{
-width:90%;
+width:300px;
+}
+
+/* ADS */
+.ads{
+margin:40px auto;
+max-width:600px;
+background:linear-gradient(90deg,#ff0000,#ff7300);
+padding:25px;
+border-radius:20px;
+color:white;
+}
+
+/* FOOTER */
+footer{
+margin-top:20px;
+padding:15px;
+font-size:13px;
+opacity:.7;
 }
 
 /* MINI PLAYER */
-#mini{
+#miniPlayer{
 position:fixed;
-bottom:10px;
-left:10px;
-right:10px;
+bottom:15px;
+left:15px;
+right:15px;
 background:#111;
 color:#fff;
-padding:10px;
-border-radius:12px;
+padding:12px;
+border-radius:15px;
+z-index:9999;
+display:flex;
+justify-content:center;
+font-weight:600;
 }
 
-/* DARK */
+/* DARK MODE */
 .dark{
-background:#111;
-color:#fff;
+background:#121212;
+color:white;
 }
 
 .dark .radio{
 background:#1f1f1f;
-color:#fff;
+}
+
+.dark .ads{
+background:linear-gradient(90deg,#222,#444);
 }
 
 </style>
+
 </head>
 
 <body>
 
+<!-- HEADER -->
 <div class="header">
 <img src="https://imgfz.com/i/eR5Xw2K.png">
+<br>
+<button id="darkBtn">🌙 Modo Oscuro</button>
 </div>
 
+<!-- RADIOS -->
 <div class="radios">
 
-<div class="radio" onclick="playRadio('https://sonic.globalstream.pro/8108/stream','Stereo M','r1')" id="r1">
+<!-- STEREO M -->
+<div class="radio" id="r1"
+onclick="playRadio('https://sonic.globalstream.pro/8108/stream','Stereo M','r1')">
+
+<div class="radio-top" style="background:#ffd400">
 <img src="https://i.postimg.cc/L8bjb6K5/1687464033296.png">
-<div>Stereo M</div>
 <div class="play">▶</div>
 </div>
-
-<div class="radio" onclick="playRadio('https://radiostreaming.pro/8310/stream','La Patrona','r2')" id="r2">
-<img src="https://image2url.com/r2/default/images/1773782144520-db83b536.png">
-<div>La Patrona</div>
-<div class="play">▶</div>
+<div class="radio-name">Stereo M</div>
 </div>
 
-<div class="radio" onclick="playRadio('https://radiostreaming.pro/8238/stream','La Tremenda','r3')" id="r3">
+<!-- LA PATRONA -->
+<div class="radio" id="r5"
+onclick="playRadio('https://radiostreaming.pro/8310/stream','Radio La Patrona','r5')">
+
+<div class="radio-top" style="background:#ff2e8a">
+<img src="https://image2url.com/r2/default/images/1773782144520-db83b536-4765-45ec-b761-f51c5ee811ed.png">
+<div class="play">▶</div>
+</div>
+<div class="radio-name">Radio La Patrona</div>
+</div>
+
+<!-- LA TREMENDA -->
+<div class="radio" id="r3"
+onclick="playRadio('https://radiostreaming.pro/8238/stream','La Tremenda','r3')">
+
+<div class="radio-top" style="background:#ff3d00">
 <img src="https://imgfz.com/i/h7TrEm5.png">
-<div>La Tremenda</div>
 <div class="play">▶</div>
 </div>
+<div class="radio-name">La Tremenda</div>
+</div>
 
-<div class="radio" onclick="playRadio('https://radiostreaming.pro/8234/stream','Stereo L','r4')" id="r4">
+<!-- STEREO L -->
+<div class="radio" id="r6"
+onclick="playRadio('https://radiostreaming.pro/8234/stream','Stereo L','r6')">
+
+<div class="radio-top" style="background:#0f8f73">
 <img src="https://imgfz.com/i/pFgX2fl.png">
-<div>Stereo L</div>
 <div class="play">▶</div>
 </div>
+<div class="radio-name">Stereo L</div>
+</div>
 
 </div>
 
+<!-- PLAYER -->
 <div class="player">
-<h3 id="title">Selecciona una radio</h3>
-<audio id="audio" controls></audio>
+<h3 id="radioTitle">Selecciona una radio</h3>
+<audio controls id="player"></audio>
 </div>
 
-<div id="mini">🎧 Ninguna radio activa</div>
+<!-- ADS -->
+<div class="ads">
+<h3>📢 Publicidad en nuestras radios</h3>
+<p>Promociona tu negocio en Corporación Marcony</p>
+<a href="https://wa.me/51942883375" target="_blank">💬 WhatsApp</a>
+</div>
+
+<footer>
+© 2026 Corporación Marcony
+</footer>
+
+<!-- MINI PLAYER -->
+<div id="miniPlayer">
+🎧 <span id="miniRadio">Ninguna radio seleccionada</span>
+</div>
 
 <script>
 
-let current = null;
+const player = document.getElementById("player")
+const title = document.getElementById("radioTitle")
+
+let currentRadio = null
+let playing = false
 
 function playRadio(url,name,id){
 
-const audio = document.getElementById("audio");
-const title = document.getElementById("title");
+const btn = document.querySelector("#"+id+" .play")
 
-if(current === id){
-audio.pause();
-audio.src = "";
-current = null;
-title.innerText = "Selecciona una radio";
-document.getElementById("mini").innerText = "🎧 Ninguna radio activa";
-document.getElementById(id).classList.remove("active");
-return;
+if(playing && currentRadio === id){
+player.pause()
+player.src=""
+title.innerText="Radio detenida"
+document.getElementById(id).classList.remove("active")
+btn.innerHTML="▶"
+playing=false
+currentRadio=null
+return
 }
 
-audio.pause();
-audio.src = url;
-audio.load();
+player.src=url
+player.play()
 
-audio.play().catch(e=>{
-console.log("Autoplay bloqueado",e);
-});
+title.innerText="🔴 EN VIVO: "+name
+document.getElementById("miniRadio").innerText=name
+document.title="🔴 "+name+" en Vivo"
 
-current = id;
+document.querySelectorAll(".radio").forEach(r=>{
+r.classList.remove("active")
+})
 
-document.querySelectorAll(".radio").forEach(r=>r.classList.remove("active"));
-document.getElementById(id).classList.add("active");
+document.querySelectorAll(".play").forEach(b=>{
+b.innerHTML="▶"
+})
 
-title.innerText = "🔴 En vivo: " + name;
-document.getElementById("mini").innerText = "🎧 " + name;
+document.getElementById(id).classList.add("active")
+btn.innerHTML="⏹"
+
+currentRadio=id
+playing=true
+
 }
 
+// DARK MODE
+const darkBtn=document.getElementById("darkBtn")
+
+if(localStorage.getItem("theme")==="dark"){
+document.body.classList.add("dark")
+}
+
+darkBtn.onclick=()=>{
+document.body.classList.toggle("dark")
+
+localStorage.setItem(
+"theme",
+document.body.classList.contains("dark")
+?"dark":"light"
+)
+}
+
+// PWA SERVICE WORKER
+if('serviceWorker' in navigator){
+navigator.serviceWorker.register('sw.js')
+}
+
+<script>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('./sw.js')
+    .then(() => console.log("SW registrado"))
+    .catch(err => console.log("Error SW:", err));
+}
 </script>
-
 </body>
 </html>

@@ -175,12 +175,71 @@ background:#1f1f1f;
 background:linear-gradient(90deg,#222,#444);
 }
 
+/* ===== SPLASH PRO ===== */
+.splash{
+position:fixed;
+inset:0;
+background:linear-gradient(135deg,#ff0000,#ff7300,#111);
+display:flex;
+align-items:center;
+justify-content:center;
+flex-direction:column;
+z-index:99999;
+animation:hideSplash 3s ease forwards;
+}
+
+.splash-logo{
+width:180px;
+height:180px;
+border-radius:30px;
+background:white;
+display:flex;
+align-items:center;
+justify-content:center;
+box-shadow:0 0 40px rgba(0,0,0,.4);
+animation:logoIn 1.2s ease;
+}
+
+.splash-logo img{
+width:120px;
+animation:floatLogo 2s ease-in-out infinite;
+}
+
+.splash-text{
+margin-top:15px;
+color:white;
+font-weight:600;
+}
+
+@keyframes logoIn{
+0%{transform:scale(0.3);opacity:0;}
+100%{transform:scale(1);opacity:1;}
+}
+
+@keyframes floatLogo{
+0%{transform:translateY(0);}
+50%{transform:translateY(-8px);}
+100%{transform:translateY(0);}
+}
+
+@keyframes hideSplash{
+0%{opacity:1;}
+80%{opacity:1;}
+100%{opacity:0;visibility:hidden;}
+}
+
 </style>
 
 </head>
 
 <body>
 
+<div class="splash">
+  <div class="splash-logo">
+    <img src="https://imgfz.com/i/eR5Xw2K.png">
+  </div>
+  <div class="splash-text">Corporación Marcony</div>
+</div>
 <!-- HEADER -->
 <div class="header">
 <img src="https://imgfz.com/i/eR5Xw2K.png">
